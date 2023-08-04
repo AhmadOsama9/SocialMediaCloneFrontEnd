@@ -1,0 +1,33 @@
+.joined-communities {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.joined-communities .h2 {
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+
+.joined-communities .community-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.joined-communities .community-info .span {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.joined-communities .community-info .bttn {
+    padding: 0.7rem 1rem;
+    border: 0.1rem solid #ccc;
+    border-radius: 0.5rem;
+    background-color: #434343;
+    color: #fff;
+}
+

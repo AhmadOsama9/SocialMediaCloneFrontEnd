@@ -1,0 +1,21 @@
+.searched-community {
+    display: flex;
+    flex-direction: column;
+}
+
+.searched-community h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.searched-community .span {
+    font-size: 1.5rem;
+}
+
+.searched-community .btn {
+    padding: 0.3rem 0.5rem;;
+    border: 0.1rem solid #ccc;
+    border-radius: 0.5rem;
+    background-color: #434343;
+    color: #fff;
+}

@@ -1,62 +1,65 @@
 import { useState } from "react";
+import { useSignup } from "../hooks/useSignup";
 
+import "../CSS/form.css";
 
 const Signup = () => {
-  const [userName, setUserName] = useState("Enter your Username");
-  const [email, setEmail] = useState("Enter your Email");
-  const [password, setPassword] = useState("enter your Passsword");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [secretKey, setSecretKey] = useState("");
+
+  const {signup, error, isLoading} = useSignup();
   
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if(!email || !password || !userName) {
-        alert("All the fields must be filled");
-        return;
+    if(secretKey === "")
+    {
+      await signup(email, password, "");
     }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      alert("Please enter a valid email address.");
+    else if(secretKey === "vcemkRG!aza2lk276_7W?SGebw4")
+    {
+      await signup(email, password, "admin");
+    }
+    else if(secretKey !== "vcemkRG!aza2lk276_7W?SGebw4")
+    {
+      alert("Wrong SecretKey, you seem to not be an admin, I will block you soon \n");
       return;
     }
-
-    //then we can send it to the server
+    
   }
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-        <label>UserName</label>
-        <input 
-            type="text" 
-            name="userName"
-            value={userName}
-            onChange={(event) => {setUserName(event.target.value)}}
-        >
-            
-        </input>
-
+    <form className="signup" onSubmit={handleSubmit}>
+      <h3>Signup</h3>
         <label>Email</label>
         <input 
             type="email" 
             name="Email"
             value={email}
+            placeholder="Enter your Email"
             onChange={(event) => {setEmail(event.target.value)}}
-        >
-            
-        </input>
-
+        />
         <label>Password</label>
         <input 
             type="password"
             name="password"
             value={password}
+            placeholder="Enter a strong Password"
             onChange={(event) => {setPassword(event.target.value)}}
-        >
+        />
+        <label>Admin only</label>
+        <input 
+            type="password"
+            name="secretKey"
+            value={secretKey}
+            placeholder="Leave it empty if you are not an admin"
+            onChange={(event) => {setSecretKey(event.target.value)}}
+        />
             
-        </input>
-
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={isLoading}>Submit</button>
+        {error && <div className="error">{error}</div>}
     </form>
   )
 }

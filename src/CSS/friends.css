@@ -1,0 +1,27 @@
+.friends {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.friends .friend {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.friends .friend span {
+    font-size: 1.5rem;
+}
+
+.friends .friend button {
+    padding: 0.7rem 1rem;
+    border: 0.1rem solid #ccc;
+    border-radius: 0.5rem;
+    background-color: #434343;
+    color: #fff;
+}
+
+.friends .friend button:hover {
+    background-color: #5a5a5a;
+}

@@ -1,46 +1,45 @@
 import { useState } from "react";
+import { useLogin } from "../hooks/useLogin";
 
+import "../CSS/form.css";
 
 const Login = () => {
-  const [email, setEmail] = useState("Enter your Email");
-  const [password, setPassword] = useState("enter your Passsword");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefualt();
+  const {login, error, isLoading} = useLogin();
 
-    if(!email || !password) {
-        alert("All the fields must be filled");
-        return;
-    }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
+    await login(email, password);
     
-
-    //then we can send it to the server
   }
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="login" onSubmit={handleSubmit}>
+        <h3>Login</h3>
+
         <label>Email</label>
         <input 
             type="text" 
             name="Email"
             value={email}
+            placeholder="Enter your Email"
             onChange={(event) => {setEmail(event.target.value)}}
-        >
-            
-        </input>
+        />
 
         <label>Password</label>
         <input 
             type="password"
             name="password"
             value={password}
+            placeholder="Enter your password"
             onChange={(event) => {setPassword(event.target.value)}}
-        >
+        />
             
-        </input>
-
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={isLoading}>Submit</button>
+        {error && <div className="error">{ error }</div>}
     </form>
   )
 }

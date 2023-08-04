@@ -22,7 +22,7 @@ export const AuthContextProvider = ({ children }) => {
 
     useEffect(() => {
         const checkUserAuth = async () => {
-            const user = JSON.parse.localStorage.getItem("user");
+            const user = JSON.parse(localStorage.getItem("user"));
 
             if(user) {
                 dispatch({ type: actions.login, payload: user});
