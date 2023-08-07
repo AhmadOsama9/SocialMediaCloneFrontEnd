@@ -19,7 +19,6 @@ export const useSignup = () => {
         const json = await response.json();
 
         if(!response.ok) {
-            setIsLoading(false);
             setError(json.error);
         }
         if(response.ok) {
@@ -27,7 +26,7 @@ export const useSignup = () => {
                 email: json.email,
                 token: json.token,
                 role: json.role,
-                userId: json.uesrId,
+                userId: json.userId,
             };
 
             localStorage.setItem("user", JSON.stringify(user));
@@ -36,6 +35,7 @@ export const useSignup = () => {
 
             console.log("Signup Successfully");
         }
+        setIsLoading(false);
     }
 
     return { signup, isLoading, error};

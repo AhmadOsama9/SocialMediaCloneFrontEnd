@@ -5,6 +5,7 @@ import SearchCommunity from "../helperComponent/SearchCommunity";
 import SearchUser from "../helperComponent/SearchUser";
 import ShowAllCommunities from "../helperComponent/ShowAllCommunities";
 import CreateCommunity from "../helperComponent/CreateCommunity";
+import CreatePost from "../helperComponent/CreatePost";
 
 import "../CSS/loggedinUser.css";
 
@@ -49,6 +50,8 @@ const LoggedinUser = () => {
           <button onClick={() => handleSectionToggle("showAllCommunities")}>Show All Communities</button>
 
           <button onClick={() => handleSectionToggle("createCommunity")}>Create Community</button>
+          
+          <button onClick={() => handleSectionToggle("createPost")}>Create Post</button>
         </div>
       ) : (
         <div className="active-section-wrapper">
@@ -69,6 +72,9 @@ const LoggedinUser = () => {
           )}
           {activeSection === "createCommunity" && (
             <CreateCommunity />
+          )}
+          {activeSection === "createPost" && (
+            <CreatePost />
           )}
         </div>
       )}

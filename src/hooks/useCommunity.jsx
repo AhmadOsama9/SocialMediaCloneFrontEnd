@@ -92,7 +92,7 @@ export const useCommunity = () => {
         const json = await response.json();
 
         if (response.ok) {
-            getMembershipRequests();
+            getMembershipRequests(communityId);
         } else {
             setError(json.error);
         }
@@ -114,7 +114,7 @@ export const useCommunity = () => {
         const json = await response.json();
 
         if (response.ok) {
-            getMembershipRequests();
+            getMembershipRequests(communityId);
         } else {
             setError(json.error);
         }
@@ -153,7 +153,7 @@ export const useCommunity = () => {
         const json = await response.json();
 
         if (response.ok) {
-            alert("The user has been removed Succesfully");
+            getMembershipRequests(communityId);
         } else {
             setError(json.error);
         }

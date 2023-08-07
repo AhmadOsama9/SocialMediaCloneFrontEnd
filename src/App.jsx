@@ -7,6 +7,8 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import LoggedinUser from "./pages/LoggedinUser";
 import Friends from "./helperComponent/friends";
+import UserPosts from "./helperComponent/UserPosts";
+
 
 //hooks
 import { useAuthContext } from "./hooks/useAuthContext";
@@ -30,6 +32,7 @@ function App() {
         <Route path="/Receivedrequests" element={!user? <Home /> : <ShowReceivedRequests />} />
         <Route path="/Chats" element={!user? <Home /> : <ShowChats />} />
         <Route path="/friends" element={!user? <Home />: <Friends />} />
+        <Route path="/posts" element={!user? <Home />: <UserPosts />} />
         <Route path="*" element={<Navigate to="/" />} /> 
       </Routes>
     </Browser>

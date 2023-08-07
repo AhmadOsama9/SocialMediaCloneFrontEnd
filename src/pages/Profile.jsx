@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useProfileInfo } from '../hooks/useProfile';
 import { useProfileContext } from "../hooks/useProfileContext";
 
@@ -9,8 +9,7 @@ import "../CSS/profile.css";
 const Profile = () => {
   const { isLoading, error, updateNickname, updateAge, updateGender, updateBio } = useProfileInfo();
   const { profile } = useProfileContext();
-  const { posts, postLoading, postError } = usePost();
-  const [noPosts, setNoPosts] = useState(false);
+
 
   // Separate state and handlers for each attribute
   const [isNicknameEditing, setIsNicknameEditing] = useState(false);
@@ -30,8 +29,7 @@ const Profile = () => {
     setAge(profile.age);
     setGender(profile.gender);
     setBio(profile.bio);
-    setNoPosts(posts.length === 0);
-  }, [profile, posts]);
+  }, [profile]);
 
   const handleUpdateNickname = async () => {
     await updateNickname(nickname);
@@ -61,13 +59,6 @@ const Profile = () => {
     return <p>Error: {error}</p>;
   }
 
-  if (postLoading) {
-    return <p>Loading Posts</p>
-  }
-
-  if (postError) {
-    return <p>Error in posts: {error}</p>
-  }
 
   return (
     <div className="profile">
@@ -126,18 +117,6 @@ const Profile = () => {
           )}
         </div>
       </div>
-      {!noPosts && <div className="posts">
-        {posts.map((post, index) => (
-          <div
-            key={index}
-            classname="post"
-          >
-            <p>{post._id}</p>
-          </div>
-        ))}
-      </div>
-      }
-      {noPosts && <h4>You didn't create any posts</h4>}
     </div>
   );
 };

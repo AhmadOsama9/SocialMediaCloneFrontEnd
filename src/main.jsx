@@ -6,6 +6,7 @@ import { ProfileContextProvider } from './context/ProfileContext.jsx'
 import { ChatProvider } from './context/chatContext.jsx'
 import { ReceivedRequestsProvider } from './context/ReceivedRequestsContext.jsx'
 import { CommunityRelationProvider } from './context/communityRelation.jsx'
+import { UserPostsContextProvider } from './context/UserPostsContext.jsx'
 
 import './index.css'
 
@@ -16,7 +17,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <ChatProvider>
           <ReceivedRequestsProvider>
             <CommunityRelationProvider>
-              <App />
+              <UserPostsContextProvider>
+                <App />
+              </UserPostsContextProvider>
             </CommunityRelationProvider>
           </ReceivedRequestsProvider>
         </ChatProvider>

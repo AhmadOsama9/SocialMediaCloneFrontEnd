@@ -76,7 +76,7 @@ const CommunityProfile = ({ community }) => {
                     <button onClick={handleLeaveCommunity}>Leave Community</button>
                     {/*Here I can make a component to show the members and the posts */}
                     <button onClick={() => setShowMembers(prv => !prv)}>Show Members</button>
-                    {showMembers &&
+                    {showMembers && 
                       members.map((member) => (
                         <div key={member.userId} className="members">
                           <span>Name: {member.nickname}</span>
