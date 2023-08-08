@@ -3,27 +3,25 @@ import { useUserPostsContext } from "../context/UserPostsContext";
 import { usePost } from "../hooks/usePost";
 
 
-const UserPosts = () => {
-    const { userPosts } = useUserPostsContext();
-    const { getCreatedPosts, postLoading, postError, deletePost, updatePost } = usePost();
+const OtherUserPosts = (otherUserId) => {
+    const [otherUserPosts, setOtherUserPosts] = useState([]);
+    const { getOtherUserCreatedPosts, postLoading, postError, } = usePost();
+
+    //don't forgot that you should initalize and modify the reaction and the comments 
+    //from the database
 
     const [showReactions, setShowReactions] = useState({});
     const [showComments, setShowComments] = useState({});
-    const [showUpdate, setShowUpdate] = useState({});
-
-    const [editedHeaders, setEditedHeaders] = useState({});
-    const [editedContents, setEditedContents] = useState({});
+    const [addReaction, setAddReaction] = useState({});
+    const [addComment, setAddComment] = useState({});
+    const [reactions, setReactions] = useState({});
+    const [comments, setComments] = useState({});
 
     useEffect(() => {
-        getCreatedPosts();
+        const result = getOtherUserCreatedPosts(otherUserId);
+        setOtherUserPosts(result);
     }, [])
 
-    const handleUpdate = (post) => {
-        setShowUpdate(prvState => ({...prvState, [post.postId]: true}));
-        setEditedHeaders(prvState => ({...prvState, [post.postId]: post.header}));
-        setEditedContents(prvState => ({...prvState, [post.postId]: post.content}));
-
-    }
 
     const handleShowReactions = (post) => {
         setShowReactions(prvState => ({...prvState, [post.postId]: true}));
@@ -33,16 +31,13 @@ const UserPosts = () => {
         setShowComments(prvState => ({...prvState, [post.postId]: true}));
     }
 
-    const handleCallUpdate = async (post) => {
-        if (editedHeaders[post.postId] !== post.header || editedContents[post.postId] !== post.content) {
-            await updatePost(post.postId, editedHeaders[post.postId], editedContents[post.postId]);
-        } else {
-            alert("There's nothing to be udpated");
-        }
-        setShowUpdate(prvState => ({...prvState, [post.postId]: false}));
+    const handleToggleReaction = (post) => {
+        setAddReaction(prvState => ({...prvState, [post.postId]: true}));
     }
 
-
+    const handleAddComment = (post) => {
+        setAddComment(prvState => ({ ...prvState, [post.postId]: true}));
+    }
 
     if (postLoading) {
         return <h3>Loading...</h3>;
@@ -57,17 +52,35 @@ const UserPosts = () => {
     }
     return (
         <div>
-            {userPosts.map((post) => (
+            {otherUserPosts.map((post) => (
                 <div>
                     <button onClick={() => handleUpdate(post)}>Update</button>
                     <button onClick={() => deletePost(post.postId)}>Delete</button>
-                    {!showUpdate[post.postId] && (
                     <div>
                         <h3>Creator: {post.nickname}</h3>
                         <h4>Header: {post.header}</h4>
                         <p>Content: {post.content}</p>
                         <button onClick={() => handleShowReactions(post)}>Reactions</button>
                         <button onClick={() => handleShowComments(post)}>Comments</button>
+                        <button onClick={() => handleToggleReaction(post)}>React</button>
+                        {addReaction[post.postId] && (
+                            <select value={reactions[post.postId]} onChange={(e) => setReactions(prvState => ({ ...prvState, [post.postId]: e.target.value}))}>
+                                <option value="">Select Reaction</option>
+                                <option value="like">Like</option>
+                                <option value="love">Love</option>
+                                <option value="angry">Angry</option>
+                                <option value="sad">Sad</option>
+                                <option value="care">Care</option>
+                            </select>
+                        )}
+                        <button onClick={() => handleAddComment(post)}>Add Comment</button>
+                        {addComment[post.postId] && (
+                            <textarea
+                              placehoder="Enter your comment"
+                              value={comments[post.postId]}
+                              onChange={(e) => setComments(prvState => ({ ...prvState, [post.postId]: e.target.value}))}
+                            />
+                        )}
                         {showReactions[post.postId] && (
                             <div>
                                 {post.reactions.length > 0 ? (
@@ -98,21 +111,6 @@ const UserPosts = () => {
                             </div>
                         )}
                     </div>
-                    )}
-                    {showUpdate[post.postId] && (
-                        <div>
-                            <input 
-                              type="text"
-                              value={editedHeaders[post.postId]}
-                              onChange={(e) => setEditedHeaders(prvState => ({ ...prvState, [post.postId]: e.target.value}))}
-                            />
-                            <textarea
-                              value={editedContents[post.postId]}
-                              onChange={(e) => setEditedContents(prvState => ({ ...prvState, [post.postId]: e.target.value}))}
-                            />
-                            <button onClick={() => handleCallUpdate(post)}>Save</button>
-                        </div>
-                    )}
                 </div>
             ))}
         </div>
@@ -121,4 +119,4 @@ const UserPosts = () => {
 }
 
 
-export default UserPosts;
+export default OtherUserPosts;

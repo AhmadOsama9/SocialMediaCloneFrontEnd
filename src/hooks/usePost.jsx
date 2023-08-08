@@ -28,6 +28,25 @@ export const usePost = () => {
         setPostLoading(false);
     }
 
+    const getOtherUserCreatedPosts = async (otherUserId) => {
+        setPostError(null);
+        setPostLoading(true);
+        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/getposts?userId=${otherUserId}`, {
+            method: "GET",
+            headers: {"Content-Type": "application/json"},
+        })
+        const json = await response.json();
+        let results = [];
+
+        if (!response.ok) {
+            setPostError(json.error);
+        } else {
+            results = json;
+        }
+        setPostLoading(false);
+        return results;
+    } 
+
     const createPost = async (header, content) => {
         setPostError(null);
         setPostLoading(true);
@@ -84,6 +103,6 @@ export const usePost = () => {
 
     
 
-    return { getCreatedPosts, postLoading, postError, createPost, deletePost, updatePost };
+    return { getCreatedPosts, postLoading, postError, createPost, deletePost, updatePost, getOtherUserCreatedPosts };
 
 }
