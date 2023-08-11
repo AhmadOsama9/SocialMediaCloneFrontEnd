@@ -1,43 +1,202 @@
 import { useState, useEffect } from "react";
-import { useUserPostsContext } from "../context/UserPostsContext";
+import { useOtherUserPostsContext } from "../context/OtherUserPosts";
 import { usePost } from "../hooks/usePost";
+import { useGetUserInfo } from "../hooks/useGetUserInfo";
 
 
-const OtherUserPosts = (otherUserId) => {
+const OtherUserPosts = ({ otherUser }) => {
     const [otherUserPosts, setOtherUserPosts] = useState([]);
-    const { getOtherUserCreatedPosts, postLoading, postError, } = usePost();
+    const { getOtherUserCreatedPosts, postLoading, postError, getPostReactions, getPostComments, getPostSharesCount, addReaction, updateReaction, deleteReaction, addComment, updateComment, deleteComment, addShare, removeShare} = usePost();
+    const {reactions, setReactions, comments, setComments } = useOtherUserPostsContext();
 
-    //don't forgot that you should initalize and modify the reaction and the comments 
-    //from the database
+    const userString = localStorage.getItem("user");
+    const userId = JSON.parse(userString).userId;
+    const [userNickname, setUserNickname] = useState("");
+
+    const { getUserNickname } = useGetUserInfo();
+
+    const getNickname = async () => {
+        const nickname = await getUserNickname(userId);
+        setUserNickname(nickname);
+    }
 
     const [showReactions, setShowReactions] = useState({});
     const [showComments, setShowComments] = useState({});
-    const [addReaction, setAddReaction] = useState({});
-    const [addComment, setAddComment] = useState({});
-    const [reactions, setReactions] = useState({});
-    const [comments, setComments] = useState({});
+    const [showAddReaction, setShowAddReaction] = useState({});
+    const [showAddComment, setShowAddComment] = useState({});
+    const [addingReaction, setAddingReaction] = useState({});
+    const [addingComment, setAddingComment] = useState({});
+    const [showUpdateComment, setShowUpdateComment] = useState({});
+
+    const [addingShare, setAddingShare] = useState({});
+
+    const [updatedCommentContent, setUpdatedCommentContent] = useState("");
 
     useEffect(() => {
-        const result = getOtherUserCreatedPosts(otherUserId);
-        setOtherUserPosts(result);
-    }, [])
+        const fetchOtherUserPosts = async () => {
+          const result = await getOtherUserCreatedPosts(otherUser.user);
+          setOtherUserPosts(result);
+      
+          for (const post of result) {
+            const reactions = await getPostReactions(post.postId);
+            setAddingReaction(prvState => ({ ...prvState, [post.postId]: reactions }));
+
+            const comments = await getPostComments(post.postId);
+            setAddingComment(prvState => ({ ...prvState, [post.postId]: comments }));
+
+            const results = await getPostSharesCount(post.postId);
+            setAddingShare(prvState => ({ ...prvState, [post.postId]: results }));
+          }
+        }
+      
+        fetchOtherUserPosts();
+        getNickname();
+    }, [otherUser.user]);
 
 
     const handleShowReactions = (post) => {
-        setShowReactions(prvState => ({...prvState, [post.postId]: true}));
+        setShowReactions(prvState => ({...prvState, [post.postId]: !prvState[post.postId] }));
     }
 
     const handleShowComments = (post) => {
-        setShowComments(prvState => ({...prvState, [post.postId]: true}));
+        setShowComments(prvState => ({...prvState, [post.postId]: !prvState[post.postId] }));
     }
 
+    const handleShowUpdateComment = (comment) => {
+        setShowUpdateComment(prvState => ({...prvState, [comment.commentId]: true}));
+        setUpdatedCommentContent(comment.content);
+    }
+
+
     const handleToggleReaction = (post) => {
-        setAddReaction(prvState => ({...prvState, [post.postId]: true}));
+        setShowAddReaction(prvState => ({...prvState, [post.postId]: !prvState[post.postId]}));
     }
 
     const handleAddComment = (post) => {
-        setAddComment(prvState => ({ ...prvState, [post.postId]: true}));
+        setShowAddComment(prvState => ({ ...prvState, [post.postId]: !prvState[post.postId]}));
     }
+
+
+    const handleAddReactionToPost = async (postId, e) => {
+        const existingReactions = addingReaction[postId] || [];
+
+        const userReaction = existingReactions.find(reaction => reaction.nickname === userNickname);
+
+        if (userReaction) {
+            if (e.target.value === userReaction.reaction) {
+                return;
+            } else if (e.target.value === "") {
+                await deleteReaction(userNickname, postId);
+                if (!postError) {
+                    setAddingReaction(prvState => ({
+                        ...prvState,
+                        [postId]: prvState[postId].filter(reaction => reaction.nickname !== userNickname)
+                    }));
+                }
+            } else {
+                await updateReaction(userNickname, postId, e.target.value);
+                if (!postError) {
+                    setAddingReaction(prvState => ({
+                        ...prvState,
+                        [postId]: prvState[postId].map(reaction =>
+                            reaction.nickname === userNickname
+                                ? { ...reaction, reaction: e.target.value }
+                                : reaction
+                        )
+                    }));
+                }
+            }
+        }
+        else if (e.target.value === "" && !userReaction) {
+            alert("You didn't react to remove");
+        } else {
+            await addReaction(userNickname, postId, e.target.value);
+            if (!postError) {
+                setAddingReaction(prvState => ({
+                    ...prvState,
+                    [postId]: [...(prvState[postId] || []), { nickname: userNickname, reaction: e.target.value }]
+                }));
+            }
+        }
+        console.log("The Reactions are: ", addingReaction);
+    };
+    
+
+    const handleAddCommentToPost = async (postId, e) => {
+        const commentId = await addComment(postId, e.target.value);
+        if (!postError) {
+            setAddingComment(prvState => ({ ...prvState, [post.postId]: [...(prvState[post.postId] || []), { nickname: userNickname, content: e.target.value, commentId: commentId}]}))
+        }
+    }
+
+    const handleUpdateComment = async (postId, commentId) => {
+        const existingComment = addingComment[postId]?.find(comment => comment.commentId === commentId);
+    
+        if (!existingComment) {
+            return;
+        }
+    
+        if (existingComment.content === updatedCommentContent) {
+            alert("No Changes to be saved");
+            return;
+        }
+    
+        await updateComment(postId, updatedCommentContent, commentId);
+        if (!postError) {
+            setAddingComment(prvState => ({
+                ...prvState,
+                [postId]: prvState[postId].map(comment =>
+                    comment.commentId === commentId
+                        ? { ...comment, content: updatedCommentContent }
+                        : comment
+                )
+            }));
+        }
+
+        setUpdatedCommentContent("");
+    };
+    
+
+    const handleDeleteComment = async (postId, commentId) => {
+        await deleteComment(postId, commentId);
+        if (!postError) {
+            setAddingComment(prvState => ({ ...prvState, [post.postId]: [...(prvState[post.postId] || []), { nickname: userNickname, content: e.target.value, commentId: commentId}]}))
+        }
+    }
+
+
+    const handleToggleShare = async (postId) => {
+        const post = otherUserPosts.find(post => post.postId === postId);
+        const currentUserId = userId;
+    
+        if (!post) {
+            console.log("Post not found");
+            return;
+        }
+    
+        const userShares = addingShare[postId] || [];
+    
+        const userIndex = userShares.indexOf(userId);
+    
+        if (userIndex !== -1) {
+            await removeShare(postId);
+            if (!postError) {
+                setAddingShare(prvState => ({
+                    ...prvState,
+                    [postId]: prvState[postId].filter(userId => userId !== currentUserId)
+                }));
+            }
+        } else {
+            await addShare(postId);
+            if (!postError) {
+                setAddingShare(prvState => ({
+                    ...prvState,
+                    [postId]: [...(prvState[postId] || []), {nickname: userNickname, reaction: e.target.value}]
+                }));
+            }
+        }
+    };
+    
 
     if (postLoading) {
         return <h3>Loading...</h3>;
@@ -47,44 +206,50 @@ const OtherUserPosts = (otherUserId) => {
         return <h3>Error: {postError}</h3>;
     }
 
-    if (userPosts.length === 0) {
-        return <h3>You have no Posts</h3>;
+    if (otherUserPosts.length === 0) {
+        return <h3>The User have no Posts</h3>;
     }
     return (
         <div>
             {otherUserPosts.map((post) => (
                 <div>
-                    <button onClick={() => handleUpdate(post)}>Update</button>
-                    <button onClick={() => deletePost(post.postId)}>Delete</button>
                     <div>
                         <h3>Creator: {post.nickname}</h3>
                         <h4>Header: {post.header}</h4>
                         <p>Content: {post.content}</p>
                         <button onClick={() => handleShowReactions(post)}>Reactions</button>
+                        <span>
+                            {addingReaction[post.postId] ? addingReaction[post.postId].length : 0}
+                        </span>
+
                         <button onClick={() => handleShowComments(post)}>Comments</button>
+                        <span> {addingComment[post.postId] ? addingComment[post.postId].length: 0}</span>
+                        <button onClick={() => handleToggleShare(post.postId)}>Share</button>
+                        <span> {addingShare[post.postId] ? addingShare[post.postId].length : 0}</span>
                         <button onClick={() => handleToggleReaction(post)}>React</button>
-                        {addReaction[post.postId] && (
-                            <select value={reactions[post.postId]} onChange={(e) => setReactions(prvState => ({ ...prvState, [post.postId]: e.target.value}))}>
+                        {showAddReaction[post.postId] && (
+                            <select value={reactions[post.postId]} onChange={(e) => handleAddReactionToPost(post.postId, e)}>
                                 <option value="">Select Reaction</option>
                                 <option value="like">Like</option>
                                 <option value="love">Love</option>
                                 <option value="angry">Angry</option>
                                 <option value="sad">Sad</option>
                                 <option value="care">Care</option>
+                                <option value="">Delete</option>
                             </select>
                         )}
-                        <button onClick={() => handleAddComment(post)}>Add Comment</button>
-                        {addComment[post.postId] && (
+                        <button onClick={() => handleAddComment(post)}>Comment</button>
+                        {showAddComment[post.postId] && (
                             <textarea
                               placehoder="Enter your comment"
                               value={comments[post.postId]}
-                              onChange={(e) => setComments(prvState => ({ ...prvState, [post.postId]: e.target.value}))}
+                              onChange={(e) => handleAddCommentToPost(post.postId, e)}
                             />
                         )}
                         {showReactions[post.postId] && (
                             <div>
                                 {post.reactions.length > 0 ? (
-                                    post.reactions.map((reaction) => (
+                                    addingReaction[post.postId].map((reaction) => (
                                         <div>
                                             <h5>owner: {reaction.nickname}</h5>
                                             <h5>Reaction: {reaction.reaction}</h5>
@@ -98,11 +263,27 @@ const OtherUserPosts = (otherUserId) => {
                         {showComments[post.postId] && (
                             <div>
                                 {post.comments.length > 0 ? (
-                                    post.comments.map((comment) => (
+                                    addingComment[post.postId].map((comment) => (
                                         <div>
                                             <h5>onwner: {comment.nickname}</h5>
                                             <h5>content: {comment.content}</h5>
                                             <h5>CreatedAt: {comment.createdAt}</h5>
+                                            {comment.nickname === userNickname && (
+                                                <div>
+                                                    <button onClick={() => handleShowUpdateComment(comment)}>Update</button>
+                                                    {showUpdateComment[comment.commentId] && (  
+                                                        <div>
+                                                            <textare
+                                                            placeholder="Enter your updated comment"
+                                                            value={updatedCommentContent}
+                                                            onChange={(e) => setUpdatedCommentContent(e.target.value)}
+                                                            />
+                                                            <button onClick={() => handleUpdateComment(post.postId, comment.commentId)}>save</button>
+                                                        </div>
+                                                    )}
+                                                    <button onClick={() => handleDeleteComment(post.postId, comment.commentId)}>Delete</button>
+                                                </div>
+                                            )}
                                         </div>
                                     ))
                                 ) : (

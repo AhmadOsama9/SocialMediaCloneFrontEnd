@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRequest } from "../hooks/useRequest";
 import { useChat } from "../hooks/useChat";
+import OtherUserPosts from "../helperComponent/OtherUserPosts";
 
 import "../CSS/OtherUserProfile.css";
 import { useReceivedRequestsContext } from "../context/ReceivedRequestsContext";
@@ -164,6 +165,7 @@ const OtherUserProfile = ({ otherUser, relation }) => {
           </div>
           <div>
               <h3>Posts</h3>
+              <OtherUserPosts otherUser={otherUser}/>
           </div>
         </div>
       )}

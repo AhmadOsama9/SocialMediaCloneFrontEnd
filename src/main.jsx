@@ -9,6 +9,7 @@ import { CommunityRelationProvider } from './context/communityRelation.jsx'
 import { UserPostsContextProvider } from './context/UserPostsContext.jsx'
 
 import './index.css'
+import { OtherUserPostsContextProvider } from './context/OtherUserPosts.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -18,7 +19,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <ReceivedRequestsProvider>
             <CommunityRelationProvider>
               <UserPostsContextProvider>
-                <App />
+                <OtherUserPostsContextProvider>
+                  <App />
+                </OtherUserPostsContextProvider>
               </UserPostsContextProvider>
             </CommunityRelationProvider>
           </ReceivedRequestsProvider>
