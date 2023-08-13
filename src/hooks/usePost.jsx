@@ -50,6 +50,26 @@ export const usePost = () => {
         return results;
     } 
 
+    const getCommunityPosts = async (communityId) => {
+        setPostError(null);
+        setPostLoading(true);
+        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/community/getcreatedposts?communityId=${communityId}`, {
+            method: "GET",
+            headers: {"Content-Type": "application/json"},
+        })
+
+        const json = await response.json();
+        let results = [];
+
+        if (!response.ok) {
+            setPostError(json.error);
+        } else {
+            results = json;
+        }
+        setPostLoading(false);
+        return results;
+    }
+
     const createPost = async (header, content) => {
         setPostError(null);
         setPostLoading(true);
@@ -68,10 +88,47 @@ export const usePost = () => {
         setPostLoading(false);
     }
 
+    const addPost = async (header, content, communityId) => {
+        setPostError(null);
+        setPostLoading(true);
+        const response = await fetch("https://merngymprojectbackend.onrender.com/api/post/add", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({header, content, owner: userId, communityId})
+        });
+        
+        const json = await response.json();
+        if (!response.ok) {
+            setPostError(json.error);
+        } else {
+            alert(json.message);
+        }
+        setPostLoading(false);
+    }
+
     const deletePost = async (postId) => {
         setPostError(null);
         setPostLoading(true);
         const response = await fetch("https://merngymprojectbackend.onrender.com/api/post/deleteuserpost", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({postId})
+        });
+        const json = await response.json();
+        if (!response.ok) {
+            setPostError(json.error);
+        } else {
+            alert(json.message);
+            getCreatedPosts();
+        }
+
+        setPostLoading(false);
+    }
+
+    const deleteCommunityPost = async (postId) => {
+        setPostError(null);
+        setPostLoading(true);
+        const response = await fetch("https://merngymprojectbackend.onrender.com/api/post/deletecommunitypost", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({postId})
@@ -150,7 +207,7 @@ export const usePost = () => {
         setPostError(null);
         setPostLoading(true);
 
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/post/comment/get?postId=${postId}`, {
+        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/post/share/get?postId=${postId}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         });
@@ -231,10 +288,11 @@ export const usePost = () => {
         const json = await response.json();
         if (!response.ok) {
             setPostError(json.error);
+            setPostLoading(false);
         } else {
+            setPostLoading(false);
             return json.commentId;
         }
-        setPostLoading(false);
     }
     const updateComment = async (content, commentId) => {
         setPostError(null);
@@ -314,6 +372,6 @@ export const usePost = () => {
 
     
 
-    return { getCreatedPosts, postLoading, postError, createPost, deletePost, updatePost, getOtherUserCreatedPosts, getPostReactions, getPostComments,getPostSharesCount, addReaction, updateReaction, deleteReaction, addComment, updateComment, deleteComment, addShare, removeShare };
+    return { getCreatedPosts, getCommunityPosts, postLoading, postError, createPost, addPost, deletePost, deleteCommunityPost, updatePost, getOtherUserCreatedPosts, getPostReactions, getPostComments,getPostSharesCount, addReaction, updateReaction, deleteReaction, addComment, updateComment, deleteComment, addShare, removeShare, };
 
 }

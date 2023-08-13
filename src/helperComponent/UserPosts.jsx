@@ -42,8 +42,6 @@ const UserPosts = () => {
         setShowUpdate(prvState => ({...prvState, [post.postId]: false}));
     }
 
-
-
     if (postLoading) {
         return <h3>Loading...</h3>;
     }

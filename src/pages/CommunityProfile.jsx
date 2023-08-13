@@ -3,6 +3,9 @@ import { useCommunity } from "../hooks/useCommunity";
 import { useCommunityRelationContext } from "../context/communityRelation";
 import { useSearchUser } from "../hooks/useSearchUser";
 import OtherUserProfile from "./OtherUserProfile";
+import CreateCommunityPost from "../helperComponent/CreateCommunityPost";
+import CommunityPosts from "../helperComponent/CommunityPosts";
+import { useCreateCommunityContext } from "../context/createCommunityContext";
 
 
 const CommunityProfile = ({ community }) => {
@@ -15,6 +18,8 @@ const CommunityProfile = ({ community }) => {
     const [showRequests, setShowRequests] = useState(false);
     const [showProfile, setShowProfile] = useState(false);
     const [user, setUser] = useState(null);
+    const [otherRelation, setOtherRelation] = useState("");
+    const {createPost, setCreatePost} = useCreateCommunityContext();
 
     useEffect(() => {
       getCommunityRelation(communityId);
@@ -34,15 +39,26 @@ const CommunityProfile = ({ community }) => {
       leaveCommunity(communityId);
     }
 
-    const handleShowProfileCallback = (nickname) => {
-      handleShowProfile(nickname);
+    const handleShowProfileCallback = (nickname, relation) => {
+      handleShowProfile(nickname, relation);
     };
 
-    const handleShowProfile = async (nickname) => {
+    const handleShowProfile = async (nickname, relation) => {
       const returnedUser = await searchUserAndReturn(nickname)
       setUser(returnedUser);
+      setOtherRelation(relation);
       setShowProfile(prv => !prv);
 
+    }
+
+    const handleBackToCommunity = () => {
+      setUser(null);
+      setOtherRelation(null);
+      setShowProfile(prv => !prv);
+    }
+
+    const handleToggleCreatePost = () => {
+      setCreatePost(prv => !prv)
     }
 
     const handleDeleteCommunity = () => {
@@ -58,70 +74,86 @@ const CommunityProfile = ({ community }) => {
     }
 
     return (
-        <div className="community-profile">
-            <div className="community-info">
-                <span>Name: {community.name}</span>
-                <span>Description: {community.description}</span>
-                {relation === "None" && (
-                    <button onClick={handleSendJoinRequest}>Send Join Request</button>
-                )}
-                {relation === "Pending" && 
-                  <div>
-                    <p>waiting for the admin to accept your request</p>
-                    <button onClick={handleCancelRequest}>Cancel Request</button>
-                  </div>
-                }
-                {relation === "member" && 
-                  <div>
-                    <button onClick={handleLeaveCommunity}>Leave Community</button>
-                    {/*Here I can make a component to show the members and the posts */}
-                    <button onClick={() => setShowMembers(prv => !prv)}>Show Members</button>
-                    {showMembers && 
-                      members.map((member) => (
-                        <div key={member.userId} className="members">
-                          <span>Name: {member.nickname}</span>
-                          <span>State: {member.relation}</span>
-                          <button onClick={() => handleShowProfileCallback(request.nickname)}>Show Profile</button>
-                          {showProfile && <OtherUserProfile otherUser={user} relation="None"/>}
-                        </div>
-                      ))
-                    }
-                  </div>
-                }
-                {relation === "admin" && 
-                   <div>
-                    <button onClick={handleLeaveCommunity}>Leave Community</button>
-                    {/*Here I can make a component to show the members and the posts
-                      but with stuff only related to the admin */}
-                    <button onClick={() => setShowMembers(prv => !prv)}>Show Members</button>
-                    <button onClick={() => setShowRequests(prv => !prv)}>Show Requests</button>
-                    <button onClick={handleDeleteCommunity}>Delete Community</button>
-                    {showMembers &&
-                      members.map((member) => (
-                        <div key={member.userId} className="members">
-                          <span>Name: {member.nickname}</span>
-                          <span>State: {member.relation}</span>
-                          <button onClick={() => handleShowProfileCallback(request.nickname)}>Show Profile</button>
-                          <button onClick={() => removeMember(member.userId, communityId)}>Remove from community</button>
-                          {showProfile && <OtherUserProfile otherUser={user} relation="None"/>}
-                        </div>
-                      ))
-                    }
-                    {showRequests &&
-                      membershipRequests.map((request) => (
-                        <div key={request.userId} className="members">
-                          <span>Nickname: {request.nickname}</span>
-                          <button onClick={() => handleShowProfileCallback(request.nickname)}>Show Profile</button>
-                          <button onClick={() => declineJoinRequest(request.userId, communityId)}>Decline</button>
-                          <button onClick={() => acceptJoinRequest(request.userId, communityId)}>Accept</button>
-                          {showProfile && <OtherUserProfile otherUser={user} relation="None"/>}
-                        </div>
-                      ))
-                    }
-                  </div>
-                }
-            </div>
-        </div>
+      <div>
+        {showProfile && (
+          <div>
+            <button onClick={handleBackToCommunity}>Back to Community</button>
+            <OtherUserProfile otherUser={user} relation={otherRelation} />
+          </div>
+        )}
+        {!showProfile && (
+          <div className="community-profile">
+              <div className="community-info">
+                  <span>Name: {community.name}</span>
+                  <span>Description: {community.description}</span>
+                  {relation === "None" && (
+                      <button onClick={handleSendJoinRequest}>Send Join Request</button>
+                  )}
+                  {relation === "Pending" && 
+                    <div>
+                      <p>waiting for the admin to accept your request</p>
+                      <button onClick={handleCancelRequest}>Cancel Request</button>
+                    </div>
+                  }
+                  {relation === "member" && 
+                    <div>
+                      <button onClick={handleLeaveCommunity}>Leave Community</button>
+                      <button onClick={handleToggleCreatePost}>Create Post</button>
+                      {/*Here I can make a component to show the members and the posts */}
+                      <button onClick={() => setShowMembers(prv => !prv)}>Show Members</button>
+                      {showMembers && 
+                        members.map((member) => (
+                          <div key={member.userId} className="members">
+                            <span>Name: {member.nickname}</span>
+                            <span>State: {member.relation}</span>
+                            <button onClick={() => handleShowProfileCallback(member.nickname, member.relation)}>Show Profile</button>
+                          </div>
+                        ))
+                      }
+                    </div>
+                  }
+                  {relation === "admin" && 
+                    <div>
+                      <button onClick={handleLeaveCommunity}>Leave Community</button>
+                      <button onClick={handleToggleCreatePost}>Create Post</button>
+                      {/*Here I can make a component to show the members and the posts
+                        but with stuff only related to the admin */}
+                      <button onClick={() => setShowMembers(prv => !prv)}>Show Members</button>
+                      <button onClick={() => setShowRequests(prv => !prv)}>Show Requests</button>
+                      <button onClick={handleDeleteCommunity}>Delete Community</button>
+                      {showMembers &&
+                        members.map((member) => (
+                          <div key={member.userId} className="members">
+                            <span>Name: {member.nickname}</span>
+                            <span>State: {member.relation}</span>
+                            <button onClick={() => handleShowProfileCallback(member.nickname, member.relation)}>Show Profile</button>
+                            <button onClick={() => removeMember(member.userId, communityId)}>Remove from community</button>
+                          </div>
+                        ))
+                      }
+                      {showRequests &&
+                        membershipRequests.map((request) => (
+                          <div key={request.userId} className="members">
+                            <span>Nickname: {request.nickname}</span>
+                            <button onClick={() => handleShowProfileCallback(request.nickname, request.relation)}>Show Profile</button>
+                            <button onClick={() => declineJoinRequest(request.userId, communityId)}>Decline</button>
+                            <button onClick={() => acceptJoinRequest(request.userId, communityId)}>Accept</button>
+                          </div>
+                        ))
+                      }
+                    </div>
+                  }
+              </div>
+              {createPost && (
+                <CreateCommunityPost communityId={communityId} seCreatePost={setCreatePost} />
+              )}
+              <div>
+                <h3>Posts</h3>
+                <CommunityPosts communityId={communityId} />
+              </div>
+          </div>
+        )}
+      </div>
     );   
 
 }
