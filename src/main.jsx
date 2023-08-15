@@ -7,7 +7,7 @@ import { ChatProvider } from './context/chatContext.jsx'
 import { ReceivedRequestsProvider } from './context/ReceivedRequestsContext.jsx'
 import { CommunityRelationProvider } from './context/communityRelation.jsx'
 import { UserPostsContextProvider } from './context/UserPostsContext.jsx'
-import { CreateCommunityContextProvider } from './context/createCommunityContext.jsx'
+import { CreateCommunityPostContextProvider } from './context/createCommunityPostContext.jsx'
 
 import './index.css'
 import { OtherUserPostsContextProvider } from './context/OtherUserPosts.jsx'
@@ -21,9 +21,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <CommunityRelationProvider>
               <UserPostsContextProvider>
                 <OtherUserPostsContextProvider>
-                  <CreateCommunityContextProvider>
+                  <CreateCommunityPostContextProvider>
                     <App />
-                  </CreateCommunityContextProvider>
+                  </CreateCommunityPostContextProvider>
                 </OtherUserPostsContextProvider>
               </UserPostsContextProvider>
             </CommunityRelationProvider>

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { usePost } from "../hooks/usePost";
-import { useCreateCommunityContext } from "../context/createCommunityContext";
+import { useCreateCommunityPostContext } from "../context/createCommunityPostContext";
 
 
-const CreateCommunityPost = ({ communityId}) => {
+const CreateCommunityPost = ({ communityId }) => {
     const [header, setHeader] = useState("");
     const [content, setContent] = useState("");
-    const { setCreatePost } = useCreateCommunityContext();
+    const { setCreatePost } = useCreateCommunityPostContext();
 
     const { addPost, postLoading, postError } = usePost(); 
 

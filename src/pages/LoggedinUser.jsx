@@ -6,6 +6,8 @@ import SearchUser from "../helperComponent/SearchUser";
 import ShowAllCommunities from "../helperComponent/ShowAllCommunities";
 import CreateCommunity from "../helperComponent/CreateCommunity";
 import CreatePost from "../helperComponent/CreatePost";
+import CreatePage from "../helperComponent/CreatePage";
+import SearchedPage from "../helperComponent/searchedPage";
 
 import "../CSS/loggedinUser.css";
 
@@ -13,6 +15,7 @@ const LoggedinUser = () => {
   const [activeSection, setActiveSection] = useState("");
   const [searchUser, setSearchUser] = useState("");
   const [searchCommunity, setSearchCommunity] = useState("");
+  const [searchPage, setSearchPage] = useState("");
 
   const handleSectionToggle = (section) => {
     setActiveSection((prevSection) => (prevSection === section ? "" : section));
@@ -47,15 +50,25 @@ const LoggedinUser = () => {
             />
             <button onClick={() => handleSectionToggle("searchCommunity")}>Search Community</button>
           </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Search for a page"
+              value={searchPage}
+              onChange={(e) => setSearchPage(e.target.value)}
+            />
+            <button onClick={() => handleSectionToggle("searchPage")}>Search Page</button>
+          </div>
           <button onClick={() => handleSectionToggle("showAllCommunities")}>Show All Communities</button>
 
           <button onClick={() => handleSectionToggle("createCommunity")}>Create Community</button>
           
           <button onClick={() => handleSectionToggle("createPost")}>Create Post</button>
+
+          <button onClick={() => handleSectionToggle("createPage")}>Create Page</button>
         </div>
       ) : (
         <div className="active-section-wrapper">
-          {/* Button to close active section */}
           <button onClick={handleClearActiveSection} className="close-btn">Close Section</button>
 
           {activeSection === "communities" && (
@@ -75,6 +88,12 @@ const LoggedinUser = () => {
           )}
           {activeSection === "createPost" && (
             <CreatePost />
+          )}
+          {activeSection === "createPage" && (
+            <CreatePage />
+          )}
+          {activeSection === "searchPage" && (
+            <SearchedPage name={searchPage} />
           )}
         </div>
       )}

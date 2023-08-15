@@ -5,7 +5,7 @@ import { useSearchUser } from "../hooks/useSearchUser";
 import OtherUserProfile from "./OtherUserProfile";
 import CreateCommunityPost from "../helperComponent/CreateCommunityPost";
 import CommunityPosts from "../helperComponent/CommunityPosts";
-import { useCreateCommunityContext } from "../context/createCommunityContext";
+import { useCreateCommunityPostContext } from "../context/createCommunityPostContext";
 
 
 const CommunityProfile = ({ community }) => {
@@ -19,7 +19,7 @@ const CommunityProfile = ({ community }) => {
     const [showProfile, setShowProfile] = useState(false);
     const [user, setUser] = useState(null);
     const [otherRelation, setOtherRelation] = useState("");
-    const {createPost, setCreatePost} = useCreateCommunityContext();
+    const {createPost, setCreatePost} = useCreateCommunityPostContext();
 
     useEffect(() => {
       getCommunityRelation(communityId);

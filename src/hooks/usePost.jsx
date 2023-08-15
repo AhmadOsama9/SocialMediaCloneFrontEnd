@@ -106,6 +106,24 @@ export const usePost = () => {
         setPostLoading(false);
     }
 
+    const createPagePost = async (pageName, header, content) => {
+        setPostError(null);
+        setPostLoading(true);
+        const response = await fetch("https://merngymprojectbackend.onrender.com/api/post/createpagepost", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({pageName, header, content})
+        });
+        
+        const json = await response.json();
+        if (!response.ok) {
+            setPostError(json.error);
+        } else {
+            alert(json.message);
+        }
+        setPostLoading(false);
+    }
+
     const deletePost = async (postId) => {
         setPostError(null);
         setPostLoading(true);
@@ -139,6 +157,25 @@ export const usePost = () => {
         } else {
             alert(json.message);
             getCreatedPosts();
+        }
+
+        setPostLoading(false);
+    }
+
+    const deletePagePost = async (pageName, postId) => {
+        setPostError(null);
+        setPostLoading(true);
+        const response = await fetch("https://merngymprojectbackend.onrender.com/api/post/deletepagepost", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ pageName, postId })
+        });
+
+        const json = await response.json();
+        if (!response.ok) {
+            setPostError(json.error);
+        } else {
+            alert(json.message);
         }
 
         setPostLoading(false);
@@ -372,6 +409,6 @@ export const usePost = () => {
 
     
 
-    return { getCreatedPosts, getCommunityPosts, postLoading, postError, createPost, addPost, deletePost, deleteCommunityPost, updatePost, getOtherUserCreatedPosts, getPostReactions, getPostComments,getPostSharesCount, addReaction, updateReaction, deleteReaction, addComment, updateComment, deleteComment, addShare, removeShare, };
+    return { getCreatedPosts, getCommunityPosts, postLoading, postError, createPost, addPost, createPagePost, deletePost, deleteCommunityPost, deletePagePost, updatePost, getOtherUserCreatedPosts, getPostReactions, getPostComments,getPostSharesCount, addReaction, updateReaction, deleteReaction, addComment, updateComment, deleteComment, addShare, removeShare, };
 
 }

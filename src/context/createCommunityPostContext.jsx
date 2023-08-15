@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 
 const CreateCommunityContext = createContext();
 
-export const useCreateCommunityContext = () => {
+export const useCreateCommunityPostContext = () => {
     const context = useContext(CreateCommunityContext);
     if (!context) {
         throw Error("Cannot use CreateCommunityContext outside of it's provider");
@@ -10,7 +10,7 @@ export const useCreateCommunityContext = () => {
     return context;
 }
 
-export const CreateCommunityContextProvider = ({ children }) => {
+export const CreateCommunityPostContextProvider = ({ children }) => {
     const [createPost, setCreatePost] = useState(false);
 
     return (
