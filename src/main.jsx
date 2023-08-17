@@ -8,6 +8,7 @@ import { ReceivedRequestsProvider } from './context/ReceivedRequestsContext.jsx'
 import { CommunityRelationProvider } from './context/communityRelation.jsx'
 import { UserPostsContextProvider } from './context/UserPostsContext.jsx'
 import { CreateCommunityPostContextProvider } from './context/createCommunityPostContext.jsx'
+import { CreatePagePostContextProvider } from './context/CreatePagePostContext.jsx'
 
 import './index.css'
 import { OtherUserPostsContextProvider } from './context/OtherUserPosts.jsx'
@@ -22,7 +23,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               <UserPostsContextProvider>
                 <OtherUserPostsContextProvider>
                   <CreateCommunityPostContextProvider>
-                    <App />
+                    <CreatePagePostContextProvider>
+                      <App />
+                    </CreatePagePostContextProvider>
                   </CreateCommunityPostContextProvider>
                 </OtherUserPostsContextProvider>
               </UserPostsContextProvider>

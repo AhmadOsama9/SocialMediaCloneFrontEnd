@@ -111,7 +111,7 @@ export const usePage = () => {
     setPageError(null);
     setPageLoading(true);
     const response = await fetch("https://merngymprojectbackend.onrender.com/api/page/addlike", {
-      method: "GET",
+      method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({name, userId})
     });
@@ -132,7 +132,7 @@ export const usePage = () => {
     setPageError(null);
     setPageLoading(true);
     const response = await fetch("https://merngymprojectbackend.onrender.com/api/page/removelike", {
-      method: "GET",
+      method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({name, userId})
     });

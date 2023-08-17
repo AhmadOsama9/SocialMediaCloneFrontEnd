@@ -70,6 +70,27 @@ export const usePost = () => {
         return results;
     }
 
+    const getPagePosts = async (name) => {
+        setPostError(null);
+        setPostLoading(null);
+
+        const response = await fetech(`https://merngymprojectbackend.onrender.com/api/page/posts?name=${name}`, {
+            method: "GET",
+            headers: {"Content-Type": "application/json"},
+        });
+        const json = await response.json();
+        let results = [];
+
+        if (!response.ok) {
+            setPostError(json.error);
+        } else {
+            results = json;
+        }
+        setPostLoading(false)
+        return results;
+
+    }
+
     const createPost = async (header, content) => {
         setPostError(null);
         setPostLoading(true);
@@ -409,6 +430,6 @@ export const usePost = () => {
 
     
 
-    return { getCreatedPosts, getCommunityPosts, postLoading, postError, createPost, addPost, createPagePost, deletePost, deleteCommunityPost, deletePagePost, updatePost, getOtherUserCreatedPosts, getPostReactions, getPostComments,getPostSharesCount, addReaction, updateReaction, deleteReaction, addComment, updateComment, deleteComment, addShare, removeShare, };
+    return { getCreatedPosts, getCommunityPosts, postLoading, postError, createPost, addPost, createPagePost, deletePost, deleteCommunityPost, deletePagePost, updatePost, getOtherUserCreatedPosts, getPostReactions, getPostComments,getPostSharesCount, addReaction, updateReaction, deleteReaction, addComment, updateComment, deleteComment, addShare, removeShare, getPagePosts };
 
 }

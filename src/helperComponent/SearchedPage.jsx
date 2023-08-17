@@ -7,9 +7,12 @@ const SearchedPage = ({ name }) => {
   const [showPage, setShowPage] = useState(false);
 
   useEffect(() => {
-    searchPage(name);
+    const search = async () => {
+      await searchPage(name);
+    }
+
+    search();
   }, []);
-  
 
   if (pageLoading) {
     return <h3>Loading...</h3>
@@ -21,12 +24,18 @@ const SearchedPage = ({ name }) => {
 
   return (
     <div>
-      <h3>Searched Page</h3>
-      <span>name: {page.name}</span>
-      <span>description: {page.description}</span>
-      <button onClick={() => setShowPage(prv => !prv)}>Show Page</button>
+      {!showPage && (
+       <div>
+        <h3>Searched Page</h3>
+        <span>name: {page && page.name}</span>
+        <span>description: {page && page.description}</span>
+        <button onClick={() => setShowPage(prv => !prv)}>Show Page</button>
 
-      {showPage && <PageProfile  page={page}/>}
+       </div>
+      )}
+      {showPage && (
+        <PageProfile  page={page}/>
+      )}
     </div>
   )
 }

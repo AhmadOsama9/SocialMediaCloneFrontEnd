@@ -1,15 +1,21 @@
 import { useState, useEffect } from "react";
 import { usePage } from "../hooks/usePage";
+import { useCreatePagePostContext } from "../context/CreatePagePostContext";
+import CreatePagePost from "../helperComponent/CreatePagePost";
+import PagePosts from "../helperComponent/PagePosts";
+
 
 const PageProfile = ({ page }) => {
   const [isAdmin, setIsAdmin] = useState(null);
   const [pageLikers, setPageLikers] = useState({});
   const [isLiked, setIsLiked] = useState(false);
+  const [deleted, setDeleted] = useState(false);
+  const { createPost, setCreatePost } = useCreatePagePostContext();
 
   const userString = localStorage.getItem("user");
   const userId = JSON.parse(userString).userId;
 
-  const { getPageAdmin, pageError, pageLoading, getPageLikers, addLike, removeLike } = usePage();
+  const { getPageAdmin, pageError, pageLoading, getPageLikers, addLike, removeLike, deletePage } = usePage();
 
   useEffect(() => {
     const asyncFunction = async () => {
@@ -47,6 +53,17 @@ const PageProfile = ({ page }) => {
         setIsLiked(true);
     }
   }
+
+  const handleDeletePage = async () => {
+    deletePage(page.name);
+    if (!pageError) {
+      setDeleted(true);
+    }
+  }
+
+  const handleToggleCreatePost = () => {
+    setCreatePost(prv => !prv);
+  }
   
 
   if (pageLoading) {
@@ -57,6 +74,10 @@ const PageProfile = ({ page }) => {
     return <h3>Error: {pageError}</h3>;
   }
 
+  if (deleted) {
+    return <h3>The page has been deleted</h3>;
+  }
+
   return (
     <div>
         <h3>Searched Page</h3>
@@ -64,6 +85,19 @@ const PageProfile = ({ page }) => {
         <span>Description: {page.description}</span>
         <span>Likes: {pageLikers.length > 0 ? pageLikers.length : 0}</span>
         <button onClick={handleToggleLike}>{isLiked ? "Liked": "Like"}</button>
+        {isAdmin && (
+          <div>
+            <button onClick={handleDeletePage}>Delete</button>
+
+            <button onClick={handleToggleCreatePost}>Create Post</button>
+            {createPost && (
+              <CreatePagePost pageName={page.name} />
+            )}
+          </div>
+        )}
+        
+        <PagePosts pageName={page.name} />
+
     </div>
   )
 }

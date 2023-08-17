@@ -145,7 +145,7 @@ const CommunityProfile = ({ community }) => {
                   }
               </div>
               {createPost && (
-                <CreateCommunityPost communityId={communityId} seCreatePost={setCreatePost} />
+                <CreateCommunityPost communityId={communityId} />
               )}
               <div>
                 <h3>Posts</h3>
