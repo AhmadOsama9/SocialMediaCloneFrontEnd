@@ -3,9 +3,9 @@ import { useUserPostsContext } from "../context/UserPostsContext";
 import { usePost } from "../hooks/usePost";
 
 
-const UserPosts = () => {
-    const { userPosts } = useUserPostsContext();
-    const { getCreatedPosts, postLoading, postError, deletePost, updatePost, getPostReactions, getPostComments, getPostSharesCount } = usePost();
+const UserSharedPosts = () => {
+    const { sharedPosts } = useUserPostsContext();
+    const { getSharedPosts, postLoading, postError, deletePost, updatePost, getPostReactions, getPostComments, getPostSharesCount } = usePost();
 
     const [showReactions, setShowReactions] = useState({});
     const [showComments, setShowComments] = useState({});
@@ -20,9 +20,9 @@ const UserPosts = () => {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            await getCreatedPosts();
+            await getSharedPosts();
 
-            for (const post of userPosts) {
+            for (const post of sharedPosts) {
                 const reactions = await getPostReactions(post.postId);
                 setReactions(reactions);
 
@@ -69,12 +69,12 @@ const UserPosts = () => {
         return <h3>Error: {postError}</h3>;
     }
 
-    if (userPosts.length === 0) {
+    if (sharedPosts.length === 0) {
         return <h3>You have no Posts</h3>;
     }
     return (
         <div>
-            {userPosts.map((post) => (
+            {sharedPosts.map((post) => (
                 <div>
                     <button onClick={() => handleUpdate(post)}>Update</button>
                     <button onClick={() => deletePost(post.postId)}>Delete</button>
@@ -142,4 +142,4 @@ const UserPosts = () => {
 }
 
 
-export default UserPosts;
+export default UserSharedPosts;

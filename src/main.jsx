@@ -9,6 +9,7 @@ import { CommunityRelationProvider } from './context/communityRelation.jsx'
 import { UserPostsContextProvider } from './context/UserPostsContext.jsx'
 import { CreateCommunityPostContextProvider } from './context/createCommunityPostContext.jsx'
 import { CreatePagePostContextProvider } from './context/CreatePagePostContext.jsx'
+import { ActiveSectionContextProvider } from './context/ActiveSectionContext.jsx'
 
 import './index.css'
 import { OtherUserPostsContextProvider } from './context/OtherUserPosts.jsx'
@@ -24,7 +25,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <OtherUserPostsContextProvider>
                   <CreateCommunityPostContextProvider>
                     <CreatePagePostContextProvider>
-                      <App />
+                      <ActiveSectionContextProvider>
+                        <App />
+                      </ActiveSectionContextProvider>
                     </CreatePagePostContextProvider>
                   </CreateCommunityPostContextProvider>
                 </OtherUserPostsContextProvider>

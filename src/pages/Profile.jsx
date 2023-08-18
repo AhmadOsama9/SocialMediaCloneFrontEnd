@@ -2,16 +2,21 @@ import { useState, useEffect } from 'react';
 import { useProfileInfo } from '../hooks/useProfile';
 import { useProfileContext } from "../hooks/useProfileContext";
 
-import { usePost } from '../hooks/usePost';
+import UserPosts from '../helperComponent/UserPosts';
+import UserSharedPosts from '../helperComponent/UserSharedPosts';
 
 import "../CSS/profile.css";
 
 const Profile = () => {
   const { isLoading, error, updateNickname, updateAge, updateGender, updateBio } = useProfileInfo();
   const { profile } = useProfileContext();
+  
+  const [activePostsType, setActivePostsType] = useState("");
 
+  const handlePostsTypeToggle = (section) => {
+    setActivePostsType(prvType => (prvType === section ? "" : section));
+  }
 
-  // Separate state and handlers for each attribute
   const [isNicknameEditing, setIsNicknameEditing] = useState(false);
   const [nickname, setNickname] = useState(profile.nickname);
 
@@ -116,6 +121,18 @@ const Profile = () => {
             <button onClick={() => setIsBioEditing(true)}>Edit</button>
           )}
         </div>
+      </div>
+      <div>
+        <button onClick={() => handlePostsTypeToggle("UserPosts")}>Posts</button>
+        <button onClick={() => handlePostsTypeToggle("SharedPosts")}>SharedPosts</button>
+      </div>
+      <div>
+        {activePostsType === "UserPosts" && (
+          <UserPosts />
+        )}
+        {activePostsType === "SharedPosts" && (
+          <UserSharedPosts />
+        )}
       </div>
     </div>
   );

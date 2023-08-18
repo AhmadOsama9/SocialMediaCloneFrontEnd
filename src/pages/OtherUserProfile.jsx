@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useRequest } from "../hooks/useRequest";
 import { useChat } from "../hooks/useChat";
 import OtherUserPosts from "../helperComponent/OtherUserPosts";
+import OtherUserSharedPosts from "../helperComponent/OtherUserSharedPosts";
 
 import "../CSS/OtherUserProfile.css";
 import { useReceivedRequestsContext } from "../context/ReceivedRequestsContext";
@@ -21,6 +22,13 @@ const OtherUserProfile = ({ otherUser, relation }) => {
   const userId = JSON.parse(userString).userId;
 
   const otherUserId = otherUser.user;
+
+  
+  const [activePostsType, setActivePostsType] = useState("");
+
+  const handlePostsTypeToggle = (section) => {
+    setActivePostsType(prvType => (prvType === section ? "" : section));
+  }
 
   useEffect(() => {
     getFriendRelationshipStatus(userId, otherUserId);
@@ -163,10 +171,6 @@ const OtherUserProfile = ({ otherUser, relation }) => {
             {relationshipStatus === "Friends" && <button onClick={handleRemoveFriend}>Remove Friend</button>}
             <button onClick={handleShowChat}>Send Message</button>
           </div>
-          <div>
-              <h3>Posts</h3>
-              <OtherUserPosts otherUser={otherUser}/>
-          </div>
         </div>
       )}
       {showChat && (
@@ -192,6 +196,18 @@ const OtherUserProfile = ({ otherUser, relation }) => {
           </div>
         </>
       )}
+      <div>
+        <button onClick={() => handlePostsTypeToggle("UserPosts")}>Posts</button>
+        <button onClick={() => handlePostsTypeToggle("SharedPosts")}>SharedPosts</button>
+      </div>
+      <div>
+        {activePostsType === "UserPosts" && (
+          <OtherUserPosts />
+        )}
+        {activePostsType === "SharedPosts" && (
+          <OtherUserSharedPosts />
+        )}
+      </div>
   </div>
   );
 };

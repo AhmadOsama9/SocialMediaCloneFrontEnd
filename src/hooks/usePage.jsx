@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useActiveSectionContext } from "../context/ActiveSectionContext";
 
 export const usePage = () => {
   const [pageError, setPageError] = useState(null);
   const [pageLoading, setPageLoading] = useState(false);
   const [page, setPage] = useState(null);
+
+  const { setActiveSection } = useActiveSectionContext();
 
   const userString = localStorage.getItem("user");
   const userId = JSON.parse(userString).userId;
@@ -22,6 +25,7 @@ export const usePage = () => {
         setPageError(json.error);
     } else {
         alert(json.message);
+        setActiveSection("");
     }
 
     setPageLoading(false);

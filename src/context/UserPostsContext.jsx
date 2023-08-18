@@ -12,9 +12,10 @@ export const useUserPostsContext = () => {
 
 export const UserPostsContextProvider = ({ children }) => {
     const [userPosts, setUserPosts] = useState([]);
+    const [sharedPosts, setSharedPosts] = useState([]);
 
     return (
-        <UserPostsContext.Provider value={{ userPosts, setUserPosts }}>
+        <UserPostsContext.Provider value={{ userPosts, setUserPosts, sharedPosts, setSharedPosts }}>
             {children}
         </UserPostsContext.Provider>
     );

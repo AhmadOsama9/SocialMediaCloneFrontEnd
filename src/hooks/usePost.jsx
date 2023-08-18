@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { useUserPostsContext } from "../context/UserPostsContext";
 import { useOtherUserPostsContext } from "../context/OtherUserPosts";
-
+import { useActiveSectionContext } from "../context/ActiveSectionContext";
 
 export const usePost = () => {
     const { reactions, setReactions, comments, setComments} = useOtherUserPostsContext();
+    const { setActiveSection } = useActiveSectionContext();
 
     const [postError, setPostError] = useState(null);
     const [postLoading, setPostLoading] = useState(null);
     
-    const { setUserPosts } = useUserPostsContext();
+    const { setUserPosts, setSharedPosts } = useUserPostsContext();
 
     const userString = localStorage.getItem("user");
     const userId = JSON.parse(userString).userId;
@@ -31,6 +32,24 @@ export const usePost = () => {
         setPostLoading(false);
     }
 
+    const getSharedPosts = async () => {
+        setPostError(null);
+        setPostLoading(true);
+        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/getsharedposts?userId=${userId}`, {
+            method: "GET",
+            headers: {"Content-Type": "application/json"},
+        })
+        const json = await response.json();
+
+        if (!response.ok) {
+            setPostError(json.error);
+        } else {
+            setSharedPosts(json);
+        }
+        setPostLoading(false);
+
+    }
+
     const getOtherUserCreatedPosts = async (otherUserId) => {
         setPostError(null);
         setPostLoading(true);
@@ -49,6 +68,24 @@ export const usePost = () => {
         setPostLoading(false);
         return results;
     } 
+    const getOtherUserSharedPosts = async (otherUserId) => {
+        setPostError(null);
+        setPostLoading(true);
+        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/getsharedposts?userId=${otherUserId}`, {
+            method: "GET",
+            headers: {"Content-Type": "application/json"},
+        })
+        const json = await response.json();
+
+        if (!response.ok) {
+            setPostError(json.error);
+            setPostLoading(false);
+        } else {
+            setPostLoading(false);
+            return json;
+        }
+    } 
+
 
     const getCommunityPosts = async (communityId) => {
         setPostError(null);
@@ -74,7 +111,7 @@ export const usePost = () => {
         setPostError(null);
         setPostLoading(null);
 
-        const response = await fetech(`https://merngymprojectbackend.onrender.com/api/page/posts?name=${name}`, {
+        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/page/posts?name=${name}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         });
@@ -105,6 +142,7 @@ export const usePost = () => {
             setPostError(json.error);
         } else {
             alert(json.message);
+            setActiveSection("");
         }
         setPostLoading(false);
     }
@@ -430,6 +468,6 @@ export const usePost = () => {
 
     
 
-    return { getCreatedPosts, getCommunityPosts, postLoading, postError, createPost, addPost, createPagePost, deletePost, deleteCommunityPost, deletePagePost, updatePost, getOtherUserCreatedPosts, getPostReactions, getPostComments,getPostSharesCount, addReaction, updateReaction, deleteReaction, addComment, updateComment, deleteComment, addShare, removeShare, getPagePosts };
+    return { getCreatedPosts, getSharedPosts, getCommunityPosts, postLoading, postError, createPost, addPost, createPagePost, deletePost, deleteCommunityPost, deletePagePost, updatePost, getOtherUserCreatedPosts, getOtherUserSharedPosts, getPostReactions, getPostComments,getPostSharesCount, addReaction, updateReaction, deleteReaction, addComment, updateComment, deleteComment, addShare, removeShare, getPagePosts };
 
 }

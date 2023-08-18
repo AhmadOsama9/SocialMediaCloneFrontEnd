@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaSearch } from "react-icons/fa";
 import Friends from "../helperComponent/friends";
 import ShowJoinedCommunities from "../helperComponent/ShowJoinedCommunities";
 import SearchCommunity from "../helperComponent/SearchCommunity";
@@ -8,57 +9,60 @@ import CreateCommunity from "../helperComponent/CreateCommunity";
 import CreatePost from "../helperComponent/CreatePost";
 import CreatePage from "../helperComponent/CreatePage";
 import SearchedPage from "../helperComponent/searchedPage";
+import { useActiveSectionContext } from "../context/ActiveSectionContext";
 
 import "../CSS/loggedinUser.css";
 
 const LoggedinUser = () => {
-  const [activeSection, setActiveSection] = useState("");
-  const [searchUser, setSearchUser] = useState("");
-  const [searchCommunity, setSearchCommunity] = useState("");
-  const [searchPage, setSearchPage] = useState("");
+  const {activeSection, setActiveSection} = useActiveSectionContext();
+
+  const [searchText, setSearchText] = useState("");
+  const [searchType, setSearchType] = useState("");
 
   const handleSectionToggle = (section) => {
     setActiveSection((prevSection) => (prevSection === section ? "" : section));
   };
 
+  const handleSearchIconClick = () => {
+    if (searchType === "user") {
+      handleSectionToggle("searchUser");
+    } else if (searchType === "community") {
+      handleSectionToggle("searchCommunity");
+    } else if (searchType === "page") {
+      handleSectionToggle("searchPage");
+    } else {
+      handleSectionToggle("");
+    }
+  }
+
   const handleClearActiveSection = () => {
-    setActiveSection("");
-    setSearchUser("");
-    setSearchCommunity("");
+    setSearchText("");
   }
 
   return (
     <div className="loggedin-user">
       {!activeSection ? (
         <div className="loggedin-user-choices">
-          <button onClick={() => handleSectionToggle("communities")}>Joined Communities</button>
           <div className="search">
             <input
               type="text"
               placeholder="Search for a user by nickname"
-              value={searchUser}
-              onChange={(e) => setSearchUser(e.target.value)}
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
             />
-            <button onClick={() => handleSectionToggle("searchUser")}>Search User</button>
+            <select
+              value={searchType}
+              onChange={(e) => setSearchType(e.target.value)}
+            >
+              <option value="user">User</option>
+              <option value="community">Community</option>
+              <option value="page">Page</option>
+            </select>
+            <button onClick={() => handleSearchIconClick}><FaSearch /></button>
           </div>
-          <div className="search">
-            <input
-              type="text"
-              placeholder="Search for a community by name"
-              value={searchCommunity}
-              onChange={(e) => setSearchCommunity(e.target.value)}
-            />
-            <button onClick={() => handleSectionToggle("searchCommunity")}>Search Community</button>
-          </div>
-          <div>
-            <input
-              type="text"
-              placeholder="Search for a page"
-              value={searchPage}
-              onChange={(e) => setSearchPage(e.target.value)}
-            />
-            <button onClick={() => handleSectionToggle("searchPage")}>Search Page</button>
-          </div>
+
+          <button onClick={() => handleSectionToggle("communities")}>Joined Communities</button>
+
           <button onClick={() => handleSectionToggle("showAllCommunities")}>Show All Communities</button>
 
           <button onClick={() => handleSectionToggle("createCommunity")}>Create Community</button>
@@ -75,10 +79,13 @@ const LoggedinUser = () => {
             <ShowJoinedCommunities />
           )}
           {activeSection === "searchUser" && (
-            <SearchUser nickname={searchUser} />
+            <SearchUser nickname={searchText} />
           )}
           {activeSection === "searchCommunity" && (
-            <SearchCommunity name={searchCommunity} />
+            <SearchCommunity name={searchText} />
+          )}
+          {activeSection === "searchPage" && (
+            <SearchedPage name={searchText} />
           )}
           {activeSection === "showAllCommunities" && (
             <ShowAllCommunities />
@@ -92,9 +99,7 @@ const LoggedinUser = () => {
           {activeSection === "createPage" && (
             <CreatePage />
           )}
-          {activeSection === "searchPage" && (
-            <SearchedPage name={searchPage} />
-          )}
+
         </div>
       )}
     </div>
