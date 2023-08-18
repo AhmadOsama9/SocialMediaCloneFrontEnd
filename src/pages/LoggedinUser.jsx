@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import Friends from "../helperComponent/friends";
 import ShowJoinedCommunities from "../helperComponent/ShowJoinedCommunities";
 import SearchCommunity from "../helperComponent/SearchCommunity";
 import SearchUser from "../helperComponent/SearchUser";
@@ -17,7 +16,7 @@ const LoggedinUser = () => {
   const {activeSection, setActiveSection} = useActiveSectionContext();
 
   const [searchText, setSearchText] = useState("");
-  const [searchType, setSearchType] = useState("");
+  const [searchType, setSearchType] = useState("user");
 
   const handleSectionToggle = (section) => {
     setActiveSection((prevSection) => (prevSection === section ? "" : section));
@@ -31,12 +30,12 @@ const LoggedinUser = () => {
     } else if (searchType === "page") {
       handleSectionToggle("searchPage");
     } else {
-      handleSectionToggle("");
+      handleSectionToggle("")
     }
   }
 
   const handleClearActiveSection = () => {
-    setSearchText("");
+    handleSectionToggle("");
   }
 
   return (
@@ -58,7 +57,7 @@ const LoggedinUser = () => {
               <option value="community">Community</option>
               <option value="page">Page</option>
             </select>
-            <button onClick={() => handleSearchIconClick}><FaSearch /></button>
+            <button onClick={handleSearchIconClick}><FaSearch /></button>
           </div>
 
           <button onClick={() => handleSectionToggle("communities")}>Joined Communities</button>

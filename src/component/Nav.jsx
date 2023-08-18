@@ -1,18 +1,21 @@
-import { NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom";
+import { FaHome, FaUser, FaEnvelope, FaComments, FaUserFriends } from "react-icons/fa";
 import { useAuthContext } from "../hooks/useAuthContext";
 
+import "../CSS/navbar.css";
+
 const Nav = () => {
-  const {user} = useAuthContext();
+  const { user } = useAuthContext();
 
   return (
-    <>
-    <NavLink to="/" className="nav">Home</NavLink>
-    {user && <NavLink to="/profile" className="nav">Profile</NavLink>}
-    {user && <NavLink to="/receivedrequests" className="nav">Received Requests</NavLink>}
-    {user && <NavLink to="/chats" className="nav">Chats</NavLink>}
-    {user && <NavLink to="/friends" className="nav">Friends</NavLink>}
-    </>
-  )
-}
+    <div className="nav-bar">
+      <NavLink to="/" className="nav"> <FaHome /> </NavLink>  
+      {user && <NavLink to="/profile" className="nav"> <FaUser /> </NavLink>}
+      {user && <NavLink to="/receivedrequests" className="nav"> <FaEnvelope /> </NavLink>}
+      {user && <NavLink to="/chats" className="nav"> <FaComments /> </NavLink>}
+      {user && <NavLink to="/friends" className="nav"> <FaUserFriends /> </NavLink>}
+    </div>
+  );
+};
 
-export default Nav
+export default Nav;
