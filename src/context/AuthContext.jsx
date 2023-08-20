@@ -1,6 +1,9 @@
 import { createContext, useReducer, useEffect } from "react";
-import { actions } from "./authAction";
 
+export const actions = {
+    login: "LOGIN", 
+    logout: "LOGOUT"
+}
 
 export const AuthContext = createContext();
 
@@ -23,6 +26,8 @@ export const AuthContextProvider = ({ children }) => {
     useEffect(() => {
         const checkUserAuth = async () => {
             const user = JSON.parse(localStorage.getItem("user"));
+
+            //Here I must check that the Token is valid somehow
 
             if(user) {
                 dispatch({ type: actions.login, payload: user});

@@ -7,8 +7,6 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import LoggedinUser from "./pages/LoggedinUser";
 import Friends from "./helperComponent/friends";
-import UserPosts from "./helperComponent/UserPosts";
-
 
 //hooks
 import { useAuthContext } from "./hooks/useAuthContext";
