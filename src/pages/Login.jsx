@@ -7,20 +7,13 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const {login, error, isLoading} = useLogin();
+  const {login, googleLogin, error, isLoading} = useLogin();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     await login(email, password);
     
-  }
-
-  const googleAuth = () => {
-    window.open(
-      "https://merngymprojectbackend.onrender.com/api/user/google/callback",
-      "_self"
-    );
   }
 
   return (
@@ -49,7 +42,7 @@ const Login = () => {
           {error && <div className="error">{ error }</div>}
         </div>
 
-        <button onClick={googleAuth}>Login With Google</button>
+        <button onClick={googleLogin}>Login With Google</button>
 
 
     </form>

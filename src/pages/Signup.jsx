@@ -8,7 +8,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [secretKey, setSecretKey] = useState("");
 
-  const {signup, error, isLoading} = useSignup();
+  const {signup, googleSignup, error, isLoading} = useSignup();
   
 
   const handleSubmit = async (event) => {
@@ -31,36 +31,39 @@ const Signup = () => {
   }
 
   return (
-    <form className="signup" onSubmit={handleSubmit}>
-      <h3>Signup</h3>
-        <label>Email</label>
-        <input 
-            type="email" 
-            name="Email"
-            value={email}
-            placeholder="Enter your Email"
-            onChange={(event) => {setEmail(event.target.value)}}
-        />
-        <label>Password</label>
-        <input 
-            type="password"
-            name="password"
-            value={password}
-            placeholder="Enter a strong Password"
-            onChange={(event) => {setPassword(event.target.value)}}
-        />
-        <label>Admin only</label>
-        <input 
-            type="password"
-            name="secretKey"
-            value={secretKey}
-            placeholder="Leave it empty if you are not an admin"
-            onChange={(event) => {setSecretKey(event.target.value)}}
-        />
-            
-        <button type="submit" disabled={isLoading}>Submit</button>
-        {error && <div className="error">{error}</div>}
-    </form>
+    <div>
+      <form className="signup" onSubmit={handleSubmit}>
+        <h3>Signup</h3>
+          <label>Email</label>
+          <input 
+              type="email" 
+              name="Email"
+              value={email}
+              placeholder="Enter your Email"
+              onChange={(event) => {setEmail(event.target.value)}}
+          />
+          <label>Password</label>
+          <input 
+              type="password"
+              name="password"
+              value={password}
+              placeholder="Enter a strong Password"
+              onChange={(event) => {setPassword(event.target.value)}}
+          />
+          <label>Admin only</label>
+          <input 
+              type="password"
+              name="secretKey"
+              value={secretKey}
+              placeholder="Leave it empty if you are not an admin"
+              onChange={(event) => {setSecretKey(event.target.value)}}
+          />
+              
+          <button type="submit" disabled={isLoading}>Submit</button>
+          {error && <div className="error">{error}</div>}
+      </form>
+      <button onClick={googleSignup}>Signup with Google</button>
+    </div>
   )
 }
 

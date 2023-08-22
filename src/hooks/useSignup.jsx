@@ -37,7 +37,36 @@ export const useSignup = () => {
         }
         setIsLoading(false);
     }
+    const googleSignup = async () => {
+        setIsLoading(true);
+        setError(null);
 
-    return { signup, isLoading, error};
+        const response = await fetch("https://merngymprojectbackend.onrender.com/api/user/auth/google/signup", {
+            method: "GET",
+            headers: {"Content-Type": "application/json"},
+        })
+        const json = await response.json();
+
+        if(!response.ok) {
+            setError(json.error);
+        }
+        if(response.ok) {
+            const user = {
+                email: json.email,
+                token: json.token,
+                role: json.role,
+                userId: json.userId,
+            };
+
+            localStorage.setItem("user", JSON.stringify(user));
+            dispatch({type: actions.login, payload: json});
+            setIsLoading(false);
+
+            console.log("Signup Successfully");
+        }
+        setIsLoading(false);
+    }
+
+    return { signup, googleSignup, isLoading, error};
 
 }
