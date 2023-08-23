@@ -61,6 +61,7 @@ const Signup = () => {
               
           <button type="submit" disabled={isLoading}>Submit</button>
           {error && <div className="error">{error}</div>}
+
       </form>
       <button onClick={googleSignup}>Signup with Google</button>
     </div>
