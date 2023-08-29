@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { usePage } from '../hooks/usePage'
 import PageProfile from "../pages/PageProfile";
+import Loader from "../helperComponent/Loader";
+
 
 const SearchedPage = ({ name }) => {
   const { searchPage, pageError, pageLoading, page} = usePage();
@@ -15,7 +17,7 @@ const SearchedPage = ({ name }) => {
   }, []);
 
   if (pageLoading) {
-    return <h3>Loading...</h3>
+    return <Loader />;
   }
 
   if (pageError) {

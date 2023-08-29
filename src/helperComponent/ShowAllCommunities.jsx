@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useShowCommunities } from '../hooks/useShowCommunities';
 import CommunityProfile from "../pages/CommunityProfile";
+import Loader from "../helperComponent/Loader";
+
 
 const ShowAllCommunities = () => {
   const { isLoading, error, communities, showCommunities } = useShowCommunities(); 
@@ -20,7 +22,7 @@ const ShowAllCommunities = () => {
   }
 
   if (isLoading) {
-    return <h3>Loading</h3>;
+    return <Loader />;
   }
   if (error) {
     return <h3>Error: {error}</h3>;

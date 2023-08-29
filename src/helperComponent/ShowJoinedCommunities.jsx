@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useShowJoinedCommunities } from '../hooks/useShowJoinedCommunities';
 import CommunityProfile from '../pages/CommunityProfile';
+import Loader from "../helperComponent/Loader";
+
 
 import "../CSS/showCommunities.css";
 
@@ -14,7 +16,7 @@ const ShowJoinedCommunities = () => {
   }, []);
 
   if ( isLoading ) {
-    return (<h3>Loading</h3>);
+    return <Loader />;
   }
   if (error) {
     return (<h3>Error: {error}</h3>);

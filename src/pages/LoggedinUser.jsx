@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { FaSearch } from "react-icons/fa";
+
 import ShowJoinedCommunities from "../helperComponent/ShowJoinedCommunities";
 import SearchCommunity from "../helperComponent/SearchCommunity";
 import SearchUser from "../helperComponent/SearchUser";
@@ -7,8 +6,13 @@ import ShowAllCommunities from "../helperComponent/ShowAllCommunities";
 import CreateCommunity from "../helperComponent/CreateCommunity";
 import CreatePost from "../helperComponent/CreatePost";
 import CreatePage from "../helperComponent/CreatePage";
-import SearchedPage from "../helperComponent/searchedPage";
+import SearchedPage from "../helperComponent/SearchedPage";
 import { useActiveSectionContext } from "../context/ActiveSectionContext";
+
+
+import { useState } from "react";
+import { FaSearch, FaUsers } from "react-icons/fa";
+import { IoIosGlobe } from "react-icons/io";
 
 import "../CSS/loggedinUser.css";
 
@@ -17,12 +21,14 @@ const LoggedinUser = () => {
 
   const [searchText, setSearchText] = useState("");
   const [searchType, setSearchType] = useState("user");
+  const [showSearch, setShowSearch] = useState(null);
 
   const handleSectionToggle = (section) => {
     setActiveSection((prevSection) => (prevSection === section ? "" : section));
   };
 
   const handleSearchIconClick = () => {
+    setShowSearch(prv => !prv);
     if (searchType === "user") {
       handleSectionToggle("searchUser");
     } else if (searchType === "community") {
@@ -38,31 +44,40 @@ const LoggedinUser = () => {
     handleSectionToggle("");
   }
 
+  const handleShowSearch = () => {
+    setShowSearch(prv => !prv);
+  }
+
   return (
     <div className="loggedin-user">
       {!activeSection ? (
         <div className="loggedin-user-choices">
-          <div className="search">
-            <input
-              type="text"
-              placeholder="Search for a user by nickname"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
-            <select
-              value={searchType}
-              onChange={(e) => setSearchType(e.target.value)}
-            >
-              <option value="user">User</option>
-              <option value="community">Community</option>
-              <option value="page">Page</option>
-            </select>
-            <button onClick={handleSearchIconClick}><FaSearch /></button>
-          </div>
+          {!showSearch && <button onClick={handleShowSearch} className="search-icon"><FaSearch /></button> }
+          {showSearch && (  
+            <div className="search">
+              <div className="search-input-container">
+                <input
+                  type="text"
+                  placeholder="Search for a user by nickname"
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                />
+                <select
+                  value={searchType}
+                  onChange={(e) => setSearchType(e.target.value)}
+                >
+                  <option value="user">User</option>
+                  <option value="community">Community</option>
+                  <option value="page">Page</option>
+                </select>
+              <button onClick={handleSearchIconClick} className="search-icon"><FaSearch /></button>
+              </div>
+            </div>
+          )}
 
-          <button onClick={() => handleSectionToggle("communities")}>Joined Communities</button>
+          <button onClick={() => handleSectionToggle("communities")}><FaUsers /> Joined Communities</button>
 
-          <button onClick={() => handleSectionToggle("showAllCommunities")}>Show All Communities</button>
+          <button onClick={() => handleSectionToggle("showAllCommunities")}><IoIosGlobe /> Show All Communities</button>
 
           <button onClick={() => handleSectionToggle("createCommunity")}>Create Community</button>
           

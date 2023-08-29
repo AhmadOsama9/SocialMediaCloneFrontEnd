@@ -6,6 +6,8 @@ import OtherUserProfile from "./OtherUserProfile";
 import CreateCommunityPost from "../helperComponent/CreateCommunityPost";
 import CommunityPosts from "../helperComponent/CommunityPosts";
 import { useCreateCommunityPostContext } from "../context/createCommunityPostContext";
+import Loader from "../helperComponent/Loader";
+
 
 
 const CommunityProfile = ({ community }) => {
@@ -66,7 +68,7 @@ const CommunityProfile = ({ community }) => {
     }
 
     if (isLoading) {
-        return <h3>Loading</h3>
+        return <Loader />;
     }
 
     if (error) {

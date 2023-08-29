@@ -9,11 +9,11 @@ const Nav = () => {
 
   return (
     <div className="nav-bar">
-      <NavLink to="/" className="nav"> <FaHome /> </NavLink>  
-      {user && <NavLink to="/profile" className="nav"> <FaUser /> </NavLink>}
-      {user && <NavLink to="/receivedrequests" className="nav"> <FaEnvelope /> </NavLink>}
-      {user && <NavLink to="/chats" className="nav"> <FaComments /> </NavLink>}
-      {user && <NavLink to="/friends" className="nav"> <FaUserFriends /> </NavLink>}
+      <NavLink to="/" className="nav-icon"> <FaHome /> </NavLink>  
+      {user && <NavLink to="/profile" className="nav-icon"> <FaUser /> </NavLink>}
+      {user && <NavLink to="/receivedrequests" className="nav-icon"> <FaEnvelope /> </NavLink>}
+      {user && <NavLink to="/chats" className="nav-icon"> <FaComments /> </NavLink>}
+      {user && <NavLink to="/friends" className="nav-icon"> <FaUserFriends /> </NavLink>}
     </div>
   );
 };

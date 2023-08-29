@@ -3,6 +3,8 @@ import { useShowFriends } from '../hooks/useShowFriends';
 
 
 import OtherUserProfile from '../pages/OtherUserProfile';
+import Loader from "../helperComponent/Loader";
+
 
 import "../CSS/friends.css";
 
@@ -42,7 +44,7 @@ const Friends = () => {
 
 
   if ( isLoading ) {
-    return (<h3>Loading</h3>);
+    return <Loader />;
   }
   if (error) {
     return (<h3>Error: {error}</h3>);

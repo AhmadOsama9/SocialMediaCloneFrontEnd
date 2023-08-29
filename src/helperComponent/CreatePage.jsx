@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { usePage } from "../hooks/usePage";
+import Loader from "../helperComponent/Loader";
+
 
 const CreatePage = () => {
   const { createPage, pageError, pageLoading } = usePage();
@@ -8,7 +10,7 @@ const CreatePage = () => {
   const [description, setDescription] = useState("");
 
   if (pageLoading) {
-    return <h3>Loading...</h3>
+    return <Loader />;
   }
 
   if (pageError) {

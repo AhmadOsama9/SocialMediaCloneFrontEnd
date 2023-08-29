@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSearchCommunity } from "../hooks/useSearchCommunity";
 import CommunityProfile from "../pages/CommunityProfile";
+import Loader from "../helperComponent/Loader";
+
 
 
 import "../CSS/searchCommunity.css";
@@ -15,7 +17,7 @@ const SearchCommunity = ({ name }) => {
 
 
   if (isLoading || (!community && !error)) {
-    return <h3>Loading</h3>;
+    return <Loader />;
   }
 
   if (error) {

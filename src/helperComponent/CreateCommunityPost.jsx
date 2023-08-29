@@ -11,7 +11,7 @@ const CreateCommunityPost = ({ communityId }) => {
     const { addPost, postLoading, postError } = usePost(); 
 
     if (postLoading) {
-        return <h3>Loading...</h3>
+        return <Loader />;
     }
 
     if (postError) {

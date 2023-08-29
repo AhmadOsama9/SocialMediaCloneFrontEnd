@@ -3,6 +3,8 @@ import { usePage } from "../hooks/usePage";
 import { useCreatePagePostContext } from "../context/CreatePagePostContext";
 import CreatePagePost from "../helperComponent/CreatePagePost";
 import PagePosts from "../helperComponent/PagePosts";
+import Loader from "../helperComponent/Loader";
+
 
 
 const PageProfile = ({ page }) => {
@@ -67,7 +69,7 @@ const PageProfile = ({ page }) => {
   
 
   if (pageLoading) {
-    return <h3>Loading...</h3>;
+    return <Loader />;
   }
 
   if (pageError) {

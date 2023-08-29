@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { usePost } from '../hooks/usePost';
+import Loader from "../helperComponent/Loader";
+
 
 const CreatePost = () => {
   const [header, setHeader] = useState("");
@@ -8,7 +10,7 @@ const CreatePost = () => {
   const { createPost, postLoading, postError } = usePost();
   
   if (postLoading) {
-    return <h3>Loading...</h3>;
+    return <Loader />;
   }
 
   if (postError) {

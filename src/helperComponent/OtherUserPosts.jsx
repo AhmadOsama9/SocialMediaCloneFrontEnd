@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useOtherUserPostsContext } from "../context/OtherUserPosts";
 import { usePost } from "../hooks/usePost";
 import { useGetUserInfo } from "../hooks/useGetUserInfo";
+import Loader from "../helperComponent/Loader";
+
 
 
 const OtherUserPosts = ({ otherUser }) => {
@@ -208,7 +210,7 @@ const OtherUserPosts = ({ otherUser }) => {
     
 
     if (postLoading) {
-        return <h3>Loading...</h3>;
+        return <Loader />;
     }
 
     if (postError) {

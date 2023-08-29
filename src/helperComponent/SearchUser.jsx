@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useSearchUser } from "../hooks/useSearchUser";
 
 import OtherUserProfile from "../pages/OtherUserProfile";
+import Loader from "../helperComponent/Loader";
+
 
 import "../CSS/searchuser.css";
 
@@ -18,7 +20,7 @@ const SearchUser = ({ nickname }) => {
   }, [])
 
   if (isLoading || (!user && !error)) {
-    return <h3>Loading</h3>;
+    return <Loader />;
   }
 
   if (error) {

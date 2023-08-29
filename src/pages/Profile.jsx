@@ -4,6 +4,8 @@ import { useProfileContext } from "../hooks/useProfileContext";
 
 import UserPosts from '../helperComponent/UserPosts';
 import UserSharedPosts from '../helperComponent/UserSharedPosts';
+import Loader from "../helperComponent/Loader";
+
 
 import "../CSS/profile.css";
 
@@ -57,7 +59,7 @@ const Profile = () => {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   if (error) {

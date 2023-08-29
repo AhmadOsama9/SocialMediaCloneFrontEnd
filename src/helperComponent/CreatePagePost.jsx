@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { usePost } from "../hooks/usePost";
 import { useCreatePagePostContext } from "../context/CreatePagePostContext";
+import Loader from "../helperComponent/Loader";
+
 
 const CreatePagePost = ({ pageName }) => {
     const [header, setHeader] = useState("");
@@ -10,7 +12,7 @@ const CreatePagePost = ({ pageName }) => {
     const { createPagePost, postLoading, postError } = usePost(); 
 
     if (postLoading) {
-        return <h3>Loading...</h3>
+        return <Loader />;
     }
 
     if (postError) {

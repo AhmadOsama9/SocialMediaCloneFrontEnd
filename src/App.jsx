@@ -2,7 +2,6 @@ import { BrowserRouter as Browser, Routes, Route, Navigate} from "react-router-d
 
 
 import Header from "./component/Header";
-import About from "./pages/About";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
@@ -28,7 +27,6 @@ function App() {
       <Header />
       <Routes>
         <Route index element={!user? <Home /> : <LoggedinUser />} />
-        <Route path='/About' element={<About />} />
         <Route path="/Signup" element={!user ?  <Signup /> : <Navigate to="/" />} />
         <Route path="/Login" element={!user ?  <Login /> : <Navigate to="/" />} />
         <Route path="/profile" element={<Profile /> } />

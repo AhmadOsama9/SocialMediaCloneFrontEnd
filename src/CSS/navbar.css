@@ -5,13 +5,12 @@
     gap: 1rem;
 }
 
-.nav-bar .nav {
+.nav-bar .nav-icon {
     font-size: 1.5rem;
+    color: var(--first-primary-color)
 }
 
-.nav-bar .nav.active{
-    background-color: #ebebeb;
-    color: #434343;
-    border-radius: 0.7rem;
-    border: 0.1rem solid #fff;
+.nav-bar .nav-icon.active{
+    color: var(--third-primary-color);
 }
+

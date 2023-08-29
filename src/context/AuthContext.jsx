@@ -1,4 +1,6 @@
 import { createContext, useReducer, useEffect, useState } from "react";
+import Loader from "../helperComponent/Loader";
+
 
 export const actions = {
     login: "LOGIN",
@@ -63,7 +65,7 @@ export const AuthContextProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={{ ...state, dispatch }}>
-            {isLoading ? <h3>Loading...</h3> : error ? <h3>Error: {error}</h3> : children}
+            {isLoading ? <Loader /> : error ? <h3>Error: {error}</h3> : children}
         </AuthContext.Provider>
     );
 };

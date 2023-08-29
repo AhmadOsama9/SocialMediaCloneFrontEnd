@@ -3,6 +3,8 @@ import { useRequest } from "../hooks/useRequest";
 import { useChat } from "../hooks/useChat";
 import OtherUserPosts from "../helperComponent/OtherUserPosts";
 import OtherUserSharedPosts from "../helperComponent/OtherUserSharedPosts";
+import Loader from "../helperComponent/Loader";
+
 
 import "../CSS/OtherUserProfile.css";
 import { useReceivedRequestsContext } from "../context/ReceivedRequestsContext";
@@ -138,7 +140,7 @@ const OtherUserProfile = ({ otherUser, relation }) => {
   }; 
   
   if (isLoading) {
-    return <h3>Loading</h3>;
+    return <Loader />;
   }
 
   if(error) {

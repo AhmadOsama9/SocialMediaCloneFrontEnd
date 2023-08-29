@@ -1,5 +1,7 @@
 import {useState } from 'react'
 import { useCommunity } from '../hooks/useCommunity'
+import Loader from "../helperComponent/Loader";
+
 
 import "../CSS/createCommunity.css";
 
@@ -9,7 +11,7 @@ const CreateCommunity = () => {
   const [description, setDescription] = useState("");
 
   if (isLoading) {
-    return <h3>Loading...</h3>;
+    return <Loader />;
   }
 
   if (error) {

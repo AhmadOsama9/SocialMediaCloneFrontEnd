@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useOtherUserPostsContext } from "../context/OtherUserPosts";
 import { usePost } from "../hooks/usePost";
 import { useGetUserInfo } from "../hooks/useGetUserInfo";
+import Loader from "../helperComponent/Loader";
+
 
 
 const CommunityPosts = ({ communityId }) => {
@@ -227,7 +229,7 @@ const CommunityPosts = ({ communityId }) => {
     
 
     if (postLoading) {
-        return <h3>Loading...</h3>;
+        return <Loader />;
     }
 
     if (postError) {

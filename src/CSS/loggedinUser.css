@@ -2,54 +2,102 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
+    padding: 2rem;
 }
 
 .loggedin-user-choices {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .loggedin-user-choices .search {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0.5rem;
-    gap: 0.5rem;
+    margin: 1rem;
+    gap: 1rem;
 }
 
 .loggedin-user-choices button {
-    padding: 1rem 1.5rem;
-    background-color: #333;
+    padding: 1rem 2rem;
+    background-color: var(--first-primary-color);
     color: #fff;
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .loggedin-user-choices button:hover {
-    background-color: #555;
-}
-
-.loggedin-user-choices input {
-    padding: 1rem 2rem;
+    background-color: var(--second-primary-color);
 }
 
 .active-section-wrapper {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
 }
 
 .active-section-wrapper .close-btn {
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1.5rem;
     border: 0.1rem solid #ccc;
     border-radius: 0.5rem;
-    background-color: #434343;
+    background-color: var(--first-danger-color);
     color: #fff;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease-in-out;
     margin-bottom: 1rem;
 }
+
+.active-section-wrapper .close-btn:hover {
+    background-color: var(--second-danger-color);
+}
+
+.loggedin-user-choices .search-icon:hover {
+	animation: funny-icon 0.4s ease-in-out;
+}
+
+
+@keyframes funny-icon {
+	0% {
+		scale: 1;
+	}
+
+	50% {
+		scale: 0.8;
+		transform-origin: bottom;
+		transform: rotate(-15deg);
+	}
+
+	100% {
+		scale: 1;
+	}
+}
+
+
+.loggedin-user-choices .search-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    border: 0.1rem solid #0056b3;
+    transition: all 0.3s;
+}
+
+.loggedin-user-choices .search-input-container input,
+.loggedin-user-choices .search-input-container select,
+.loggedin-user-choices .search-input-container .search-icon{
+  outline: none;
+  border: none;
+  flex: 1;
+  padding: 0.5rem 1rem;
+}
+
+

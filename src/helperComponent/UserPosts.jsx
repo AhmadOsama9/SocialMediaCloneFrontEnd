@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useUserPostsContext } from "../context/UserPostsContext";
 import { usePost } from "../hooks/usePost";
+import Loader from "../helperComponent/Loader";
+
 
 
 const UserPosts = () => {
@@ -62,7 +64,7 @@ const UserPosts = () => {
     }
 
     if (postLoading) {
-        return <h3>Loading...</h3>;
+        return <Loader />;
     }
 
     if (postError) {

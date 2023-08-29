@@ -30,3 +30,9 @@ header .logo {
 .logout button {
     border-radius: 0.3rem;
 }
+
+@media only screen and (max-width: 420px) {
+    .logout span { 
+        display: none;
+    }
+}

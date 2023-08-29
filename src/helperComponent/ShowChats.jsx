@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useChat } from "../hooks/useChat";
+import Loader from "../helperComponent/Loader";
+
 
 import "../CSS/showchats.css";
 
@@ -25,7 +27,7 @@ const ShowChats = () => {
     }
 
     if (isLoading) {
-        return <h3>Loading</h3>;
+        return <Loader />;
     }
     
     if (error) {

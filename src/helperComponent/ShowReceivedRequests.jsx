@@ -3,6 +3,8 @@ import { useRequest } from "../hooks/useRequest";
 
 import OtherUserProfile from "../pages/OtherUserProfile";
 import { useReceivedRequestsContext } from "../context/ReceivedRequestsContext";
+import Loader from "../helperComponent/Loader";
+
 
 
 const ShowReceivedRequests = () => {
@@ -13,7 +15,7 @@ const ShowReceivedRequests = () => {
 
 
   if (isLoading) {
-    return <h3>Loading</h3>
+    return <Loader />;
   }
 
   if (error) {
