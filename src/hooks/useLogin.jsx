@@ -40,36 +40,9 @@ export const useLogin = () => {
             console.log("LoggedIn Successfully");
         }
     } 
-    const googleLogin = async (email, password) => {
-        setIsLoading(true);
-        setError(null);
-
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/user/auth/google/login", {
-            method: "GET",
-            headers: {"Content-Type": "application/json"},
-        })
-
-        const json = await response.json();
-
-        if(!response.ok) {
-            setIsLoading(false);
-            setError(json.error);
-        }
-
-        if(response.ok) {
-            const user = {
-                email: json.email,
-                token: json.token,
-                role: json.role,
-                userId: json.userId,
-            };
-
-            localStorage.setItem("user", JSON.stringify(user));
-            dispatch({type: actions.login, payload: json});
-            setIsLoading(false);
-
-            console.log("LoggedIn Successfully");
-        }
+    const googleLogin = async () => {
+        window.location.href = "https://merngymprojectbackend.onrender.com/api/user/auth/google/login";
+        
     } 
 
     return { login, googleLogin, isLoading, error};

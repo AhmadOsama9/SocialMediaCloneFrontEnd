@@ -1,4 +1,6 @@
 import { BrowserRouter as Browser, Routes, Route, Navigate} from "react-router-dom";
+
+
 import Header from "./component/Header";
 import About from "./pages/About";
 import Home from "./pages/Home";
@@ -6,7 +8,10 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import LoggedinUser from "./pages/LoggedinUser";
-import Friends from "./helperComponent/friends";
+import Friends from "./helperComponent/Friends";
+
+import GoogleSignupCallback from "./component/GoogleSignupCallBack";
+import GoogleLoginCallback from "./component/GoogleLoginCallback";
 
 //hooks
 import { useAuthContext } from "./hooks/useAuthContext";
@@ -30,6 +35,8 @@ function App() {
         <Route path="/Receivedrequests" element={!user? <Home /> : <ShowReceivedRequests />} />
         <Route path="/Chats" element={!user? <Home /> : <ShowChats />} />
         <Route path="/friends" element={!user? <Home />: <Friends />} />
+        <Route path="/signupcallback" element={!user? <GoogleSignupCallback /> : <LoggedinUser />} />
+        <Route path="/logincallback" element={!user? <GoogleLoginCallback /> : <LoggedinUser />} />
         <Route path="*" element={<Navigate to="/" />} /> 
       </Routes>
     </Browser>

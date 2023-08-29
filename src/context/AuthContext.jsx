@@ -1,48 +1,69 @@
-import { createContext, useReducer, useEffect } from "react";
+import { createContext, useReducer, useEffect, useState } from "react";
 
 export const actions = {
-    login: "LOGIN", 
-    logout: "LOGOUT"
-}
+    login: "LOGIN",
+    logout: "LOGOUT",
+};
 
 export const AuthContext = createContext();
 
 export const authReducer = (state, action) => {
     switch (action.type) {
-        case "LOGIN":
-            return { user: action.payload};
-        case "LOGOUT":
-            return { user: null};
+        case actions.login:
+            return { user: action.payload };
+        case actions.logout:
+            return { user: null };
         default:
             return state;
     }
-}
+};
+
+const validateToken = async (userId, token) => {
+    const response = await fetch(
+        `https://merngymprojectbackend.onrender.com/api/user/checkToken?userId=${userId}&token=${token}`,
+        {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        }
+    );
+
+    return response.ok;
+};
 
 export const AuthContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(authReducer, {
-        user: null
-    })
+        user: null,
+    });
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         const checkUserAuth = async () => {
             const user = JSON.parse(localStorage.getItem("user"));
 
-            //Here I must check that the Token is valid somehow
+            if (user) {
+                setIsLoading(true);
+                const validToken = await validateToken(user.userId, user.token);
+                setIsLoading(false);
 
-            if(user) {
-                dispatch({ type: actions.login, payload: user});
+                if (validToken) {
+                    dispatch({ type: actions.login, payload: user });
+                }
+                if (!validToken) {
+
+                }
             }
-        }
+        };
 
         checkUserAuth();
-    }, [])
+    }, []);
 
     console.log("AuthContext state ", state);
 
     return (
-        <AuthContext.Provider value={{...state, dispatch}}>
-            { children }
+        <AuthContext.Provider value={{ ...state, dispatch }}>
+            {isLoading ? <h3>Loading...</h3> : error ? <h3>Error: {error}</h3> : children}
         </AuthContext.Provider>
     );
-
-}
+};
