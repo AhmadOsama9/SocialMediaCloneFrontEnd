@@ -16,7 +16,7 @@ const CreatePagePost = ({ pageName }) => {
     }
 
     if (postError) {
-        return <h3>Error: {postError}</h3>
+        return <h3 className=".error">Error: {postError}</h3>
     }
 
     const handleAddPost = () => {

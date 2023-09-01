@@ -6,11 +6,13 @@ import UserPosts from '../helperComponent/UserPosts';
 import UserSharedPosts from '../helperComponent/UserSharedPosts';
 import Loader from "../helperComponent/Loader";
 
+import { avatar1, avatar2, avatar3, avatar4 } from "../assets/avatar";
+
 
 import "../CSS/profile.css";
 
 const Profile = () => {
-  const { isLoading, error, updateNickname, updateAge, updateGender, updateBio } = useProfileInfo();
+  const { isLoading, error, updateNickname, updateAge, updateGender, updateBio, updateImage } = useProfileInfo();
   const { profile } = useProfileContext();
   
   const [activePostsType, setActivePostsType] = useState("");
@@ -31,11 +33,16 @@ const Profile = () => {
   const [isBioEditing, setIsBioEditing] = useState(false);
   const [bio, setBio] = useState(profile.bio);
 
+  const [selectedAvatar, setSelectedAvatar] = useState(profile.image);
+
+  const [showAvatarSelection, setShowAvatarSelection] = useState(false);
+
   useEffect(() => {
     setNickname(profile.nickname);
     setAge(profile.age);
     setGender(profile.gender);
     setBio(profile.bio);
+    setSelectedAvatar(profile.image);
   }, [profile]);
 
   const handleUpdateNickname = async () => {
@@ -58,19 +65,92 @@ const Profile = () => {
     setIsBioEditing(false);
   };
 
+  const handleUpdateAvatar = async (avatarNum) => {
+    setSelectedAvatar(avatarNum);
+    setShowAvatarSelection(false);
+    await updateImage(avatarNum);
+  }
+
+
   if (isLoading) {
     return <Loader />;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <h3 className="error">Error: {error}</h3>;
   }
 
 
   return (
     <div className="profile">
       <h3>Profile Page</h3>
-      <div>
+        {showAvatarSelection ? (
+          <div className="avatar-selection">
+            <h3>Select your Avatar:</h3>
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  name="avatar"
+                  value="1"
+                  onClick={() => handleUpdateAvatar(1)}
+                />
+                <img src={avatar1} alt="Avatar 1" className="avatar-image"/>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="avatar"
+                  value="2"
+                  onClick={() => handleUpdateAvatar(2)}
+                />
+                <img src={avatar2} alt="Avatar 2" className="avatar-image"/>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="avatar"
+                  value="3"
+                  onClick={() => handleUpdateAvatar(3)}
+                />
+                <img src={avatar3} alt="Avatar 3" className="avatar-image"/>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="avatar"
+                  value="4"
+                  onClick={() => handleUpdateAvatar(4)}
+                />
+                <img src={avatar4} alt="Avatar 4" className="avatar-image"/>
+              </label>
+              
+            </div>
+          </div>
+        ) : (
+          <div className="selected-avatar">
+            <img
+              src={
+                selectedAvatar === "1"
+                  ? avatar1
+                  : selectedAvatar === "2"
+                  ? avatar2
+                  : selectedAvatar === "3"
+                  ? avatar3
+                  : selectedAvatar === "4"
+                  ? avatar4
+                  : null
+              }
+              alt={`Avatar ${selectedAvatar}`}
+              className="selected-avatar-image"
+            />
+            <button onClick={() => setShowAvatarSelection(true)}
+            >
+              Update Avatar
+            </button>
+          </div>
+        )}
+      <div className="profile-info">
         <div key="nickname" className="profile-attribute">
           <label>Nickname:</label>
           {isNicknameEditing ? (

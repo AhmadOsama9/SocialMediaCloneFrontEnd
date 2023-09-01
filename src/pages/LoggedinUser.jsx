@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import ShowJoinedCommunities from "../helperComponent/ShowJoinedCommunities";
 import SearchCommunity from "../helperComponent/SearchCommunity";
@@ -10,7 +12,6 @@ import SearchedPage from "../helperComponent/SearchedPage";
 import { useActiveSectionContext } from "../context/ActiveSectionContext";
 
 
-import { useState } from "react";
 import { FaSearch, FaUsers } from "react-icons/fa";
 import { IoIosGlobe } from "react-icons/io";
 
@@ -18,6 +19,7 @@ import "../CSS/loggedinUser.css";
 
 const LoggedinUser = () => {
   const {activeSection, setActiveSection} = useActiveSectionContext();
+  const navigate = useNavigate();
 
   const [searchText, setSearchText] = useState("");
   const [searchType, setSearchType] = useState("user");

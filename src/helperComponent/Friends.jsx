@@ -47,7 +47,7 @@ const Friends = () => {
     return <Loader />;
   }
   if (error) {
-    return (<h3>Error: {error}</h3>);
+    return (<h3 className=".error">Error: {error}</h3>);
   }
 
   if (friends.length === 0) {

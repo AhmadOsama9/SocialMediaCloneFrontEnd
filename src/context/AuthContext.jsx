@@ -20,14 +20,12 @@ export const authReducer = (state, action) => {
     }
 };
 
-const validateToken = async (userId, token) => {
-    const response = await fetch(
-        `https://merngymprojectbackend.onrender.com/api/user/checkToken?userId=${userId}&token=${token}`,
-        {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-        }
-    );
+const validateToken = async (userId, token, email, role) => {
+    const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/checkuserinfo`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({userId, email, role, token})
+    });
 
     return response.ok;
 };
@@ -46,14 +44,16 @@ export const AuthContextProvider = ({ children }) => {
 
             if (user) {
                 setIsLoading(true);
-                const validToken = await validateToken(user.userId, user.token);
+                if (!user.email || !user.role || !user.token || !user.userId) {
+                    setError("Invalid user Data");
+                    setIsLoading(false);
+                    return;
+                }
+                const validToken = await validateToken(user.userId, user.token, user.email, user.role);
                 setIsLoading(false);
 
                 if (validToken) {
                     dispatch({ type: actions.login, payload: user });
-                }
-                if (!validToken) {
-
                 }
             }
         };

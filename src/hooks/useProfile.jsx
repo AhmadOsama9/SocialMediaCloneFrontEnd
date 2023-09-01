@@ -77,6 +77,8 @@ export const useProfileInfo = () => {
     fetchProfileData();
   }, [user.userId, dispatch]);
 
+  
+
   return {
     error,
     isLoading,

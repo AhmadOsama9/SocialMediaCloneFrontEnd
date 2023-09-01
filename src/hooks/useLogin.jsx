@@ -41,7 +41,7 @@ export const useLogin = () => {
         }
     } 
     const googleLogin = async () => {
-        window.location.href = "https://merngymprojectbackend.onrender.com/api/user/auth/google/login";
+        window.location.href = "https://merngymprojectbackend.onrender.com/api/user/auth/google/";
         
     } 
 

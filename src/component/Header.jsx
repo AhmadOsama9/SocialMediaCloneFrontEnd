@@ -1,4 +1,3 @@
-import AuthNav from "./AuthNav";
 import Nav from "./Nav";
 
 import { useLogout } from "../hooks/useLogout";
@@ -23,7 +22,6 @@ const Header = () => {
         <nav>
             <h1 className="logo">Logo</h1>
             <Nav />
-            {!user && <AuthNav />}
             {user && (
               <div className="logout">
                 <span className="email">{user.email}</span>

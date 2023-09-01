@@ -42,4 +42,10 @@ html {
     font-size: 18px;
   }
 }
+
+.error {
+  color: #da2535;
+  margin-top: 8px;
+}
+
  

@@ -37,11 +37,6 @@ export const useSignup = () => {
         }
         setIsLoading(false);
     }
-    const googleSignup = async () => {
-        window.location.href = "https://merngymprojectbackend.onrender.com/api/user/auth/google/signup";
-    }
-
-
-    return { signup, googleSignup, isLoading, error};
+    return { signup, isLoading, error};
 
 }

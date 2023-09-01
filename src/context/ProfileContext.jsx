@@ -5,7 +5,7 @@ const initialState = {
     age: 0,
     gender: "",
     bio: "",
-    image: null,
+    image: "0",
 };
 
 const profileReducer = (state, action) => {

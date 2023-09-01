@@ -27,8 +27,6 @@ function App() {
       <Header />
       <Routes>
         <Route index element={!user? <Home /> : <LoggedinUser />} />
-        <Route path="/Signup" element={!user ?  <Signup /> : <Navigate to="/" />} />
-        <Route path="/Login" element={!user ?  <Login /> : <Navigate to="/" />} />
         <Route path="/profile" element={<Profile /> } />
         <Route path="/Receivedrequests" element={!user? <Home /> : <ShowReceivedRequests />} />
         <Route path="/Chats" element={!user? <Home /> : <ShowChats />} />

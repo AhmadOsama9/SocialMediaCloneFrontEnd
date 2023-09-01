@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { actions } from '../context/AuthContext';
+import Loader from '../helperComponent/Loader';
 
 function GoogleSignupCallback() {
   const [userInfoIsLoading, setUserInfoIsLoading] = useState(null);
@@ -17,6 +18,14 @@ function GoogleSignupCallback() {
     const token = queryParams.get("token");
     const userId = queryParams.get("userId");
 
+    const error = queryParams.get("error");
+
+    if (error) {
+      setUserInfoError(error);
+      return;
+    }
+
+
     if (!email || !role || !token || !userId) {
       console.error("There's missing information");
       setFailed(true);
@@ -27,56 +36,28 @@ function GoogleSignupCallback() {
     setUserInfoError(null);
     setFailed(false);
 
-    const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/userinfo?userId=${userId}`, {
-        method: "GET",
+    const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/checkuserinfo`, {
+        method: "POST",
         headers: {"Content-Type": "application/json"},
-    })
-    const json = await response.json();
+        body: JSON.stringify({userId, email, role, token})
+    });
 
     if(!response.ok) {
-        setUserInfoError(json.error);
-        setFailed(true);
+        setUserInfoError("The user Data is invalid");
     }
 
     if(response.ok) {
         const userInfo = {
-            email: json.email,
-            token: json.token,
-            role: json.role,
-            userId: json.userId,
+            email: email,
+            token: token,
+            role: role,
+            userId: userId,
         };
-        setUser(userInfo);
-        console.log("The userinfo is: ", userInfo);
-        setUserInfoIsLoading(false);
-
-    
-    
-      try {
-
-        if (token !== userInfo.token) {
-          console.error("The token is not valid");
-
-          setFailed(true);
-          return;
-        }
-        if (email !== userInfo.email) {
-          console.error("The email is not the same");
-          setFailed(true);
-          return;
-        }
-        if (role !== userInfo.role) {
-          console.error("Your role is not valid");
-          setFailed(true);
-          return;
-        }
 
         localStorage.setItem("user", JSON.stringify(userInfo));
-      dispatch({type: actions.login, payload: userInfo});
-      } catch (error) {
-        console.error("Error fetching user info:", error);
-        setFailed(true);
+        dispatch({type: actions.login, payload: userInfo});
       }
-    };
+      setUserInfoIsLoading(false);
   }
 
 
@@ -88,10 +69,10 @@ function GoogleSignupCallback() {
   }, []);
 
   if (userInfoError) {
-    return <h3>Error: {userInfoError}</h3>;
+    return <h3 className="error">Error: {userInfoError}</h3>;
   }
   if (userInfoIsLoading) {
-    return <h3>Loading...</h3>
+    return <Loader />
   }
 
   if (failed) {

@@ -19,7 +19,7 @@ const ShowReceivedRequests = () => {
   }
 
   if (error) {
-    return <h3>Error: {error}</h3>;
+    return <h3 className=".error">Error: {error}</h3>;
   }
 
   if (pendingRequests.length === 0) {
