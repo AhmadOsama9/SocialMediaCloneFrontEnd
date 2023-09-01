@@ -93,7 +93,7 @@ const Profile = () => {
                   type="radio"
                   name="avatar"
                   value="1"
-                  onClick={() => handleUpdateAvatar(1)}
+                  onClick={() => handleUpdateAvatar("1")}
                 />
                 <img src={avatar1} alt="Avatar 1" className="avatar-image"/>
               </label>
@@ -102,7 +102,7 @@ const Profile = () => {
                   type="radio"
                   name="avatar"
                   value="2"
-                  onClick={() => handleUpdateAvatar(2)}
+                  onClick={() => handleUpdateAvatar("2")}
                 />
                 <img src={avatar2} alt="Avatar 2" className="avatar-image"/>
               </label>
@@ -111,7 +111,7 @@ const Profile = () => {
                   type="radio"
                   name="avatar"
                   value="3"
-                  onClick={() => handleUpdateAvatar(3)}
+                  onClick={() => handleUpdateAvatar("3")}
                 />
                 <img src={avatar3} alt="Avatar 3" className="avatar-image"/>
               </label>
@@ -120,7 +120,7 @@ const Profile = () => {
                   type="radio"
                   name="avatar"
                   value="4"
-                  onClick={() => handleUpdateAvatar(4)}
+                  onClick={() => handleUpdateAvatar("4")}
                 />
                 <img src={avatar4} alt="Avatar 4" className="avatar-image"/>
               </label>

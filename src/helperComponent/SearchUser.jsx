@@ -34,6 +34,7 @@ const SearchUser = ({ nickname }) => {
   return (
     <div className="searched-user">
       <h3 className="h3">Searched User</h3>
+      <span className="selected-avatar"></span>
       <span className="span">Nickname: {user.nickname}</span>
       <button onClick={() => setShowUserProfile(prv => !prv)}  className="btn">Show Profile</button>
 
