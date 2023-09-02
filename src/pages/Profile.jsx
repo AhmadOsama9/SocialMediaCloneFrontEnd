@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import { useProfileInfo } from '../hooks/useProfile';
 import { useProfileContext } from "../hooks/useProfileContext";
 
-import UserPosts from '../helperComponent/UserPosts';
-import UserSharedPosts from '../helperComponent/UserSharedPosts';
 import Loader from "../helperComponent/Loader";
 
 import { avatar1, avatar2, avatar3, avatar4 } from "../assets/avatar";
@@ -15,11 +13,7 @@ const Profile = () => {
   const { isLoading, error, updateNickname, updateAge, updateGender, updateBio, updateImage } = useProfileInfo();
   const { profile } = useProfileContext();
   
-  const [activePostsType, setActivePostsType] = useState("");
 
-  const handlePostsTypeToggle = (section) => {
-    setActivePostsType(prvType => (prvType === section ? "" : section));
-  }
 
   const [isNicknameEditing, setIsNicknameEditing] = useState(false);
   const [nickname, setNickname] = useState(profile.nickname);
@@ -203,18 +197,6 @@ const Profile = () => {
             <button onClick={() => setIsBioEditing(true)}>Edit</button>
           )}
         </div>
-      </div>
-      <div>
-        <button onClick={() => handlePostsTypeToggle("UserPosts")}>Posts</button>
-        <button onClick={() => handlePostsTypeToggle("SharedPosts")}>SharedPosts</button>
-      </div>
-      <div>
-        {activePostsType === "UserPosts" && (
-          <UserPosts />
-        )}
-        {activePostsType === "SharedPosts" && (
-          <UserSharedPosts />
-        )}
       </div>
     </div>
   );

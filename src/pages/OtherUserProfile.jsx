@@ -5,6 +5,8 @@ import OtherUserPosts from "../helperComponent/OtherUserPosts";
 import OtherUserSharedPosts from "../helperComponent/OtherUserSharedPosts";
 import Loader from "../helperComponent/Loader";
 
+import { avatar1, avatar2, avatar3, avatar4 } from "../assets/avatar";
+
 
 import "../CSS/OtherUserProfile.css";
 import { useReceivedRequestsContext } from "../context/ReceivedRequestsContext";
@@ -152,6 +154,23 @@ const OtherUserProfile = ({ otherUser, relation }) => {
       {!showChat &&(
         <div>
           <div className="user-info">
+            <span  className="selected-avatar">
+              <img
+                src={
+                  otherUser.image === "1"
+                    ? avatar1
+                    : otherUser.image === "2"
+                    ? avatar2
+                    : otherUser.image === "3"
+                    ? avatar3
+                    : otherUser.image === "4"
+                    ? avatar4
+                    : null
+                }
+                alt={`Avatar}`}
+                className="selected-avatar-image"
+              />
+            </span>
             <span>Nickname: {otherUser.nickname}</span>
             <span>Age: {otherUser.age}</span>
             <span>gender: {otherUser.gender}</span>
@@ -177,7 +196,7 @@ const OtherUserProfile = ({ otherUser, relation }) => {
       )}
       {showChat && (
         <>
-          <button onClick={handleCloseChat}>X</button>
+          <button className="close-button" onClick={handleCloseChat}></button>
           <div className="chat-container">
               {messages.map((msg, index) => (
               <div
@@ -198,10 +217,12 @@ const OtherUserProfile = ({ otherUser, relation }) => {
           </div>
         </>
       )}
-      <div>
-        <button onClick={() => handlePostsTypeToggle("UserPosts")}>Posts</button>
-        <button onClick={() => handlePostsTypeToggle("SharedPosts")}>SharedPosts</button>
-      </div>
+      {!showChat && (
+        <div>
+          <button onClick={() => handlePostsTypeToggle("UserPosts")}>Posts</button>
+          <button onClick={() => handlePostsTypeToggle("SharedPosts")}>SharedPosts</button>
+        </div>
+      )}
       <div>
         {activePostsType === "UserPosts" && (
           <OtherUserPosts />

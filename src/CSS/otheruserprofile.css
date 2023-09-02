@@ -1,73 +1,138 @@
+/* OtherUserProfile.css */
+
+/* Container for the entire profile */
 .other-user-profile {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
-    border: 0.1rem solid #ccc;
-    border-radius: 0.3rem;
-}
-
-
-.other-user-profile .chat-container {
-    display: flex;
-    flex-direction: column;
-    margin-top: 0.7rem;
-    border: 0.1rem solid #ccc;
-    border-radius: 0.7rem;
-    overflow-y: auto;
-    max-height: 60vh;
-}
-
-
-.other-user-profile .chat-container .chat-message.outgoing {
-    background-color: #d0e2ff;
-    align-self: flex-end;
-    font-size: 1.3rem;
-}
-
-.other-user-profile .chat-container .chat-message.incoming {
-    background-color: #f0f0f0;
-    align-self: flex-start;
-    font-size: 1.3rem;
-}
-
-.other-user-profile .message-input input{
-    flex: 1;
-    padding: 0.7rem;
-    border: 0.1rem solid #ccc;
-    border-radius: 0.2rem;
-    margin-right: 0.7rem;
-}
-
-.other-user-profile .message-input button {
-    margin-right: 0.7rem;
-    padding: 0.7rem 1.3rem;
-    border: none;
-    background-color: #434343;
-    color: #fff;
-    border-radius: 0.3rem;
-    cursor: pointer;
-}
-
-.other-user-profile button {
-    margin: 0.5rem;
-    padding: 0.3rem 0.7rem;
-    border: none;
-    border-radius: 0.5rem;
-    background-color: #434343;
-    color: #fff;
-    cursor: pointer;
-}
-
-.other-user-profile .user-info {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.7rem;
-}
-
-.other-user-profile .user-info span {
-    font-size: 1.3rem;
+    margin: 2rem;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* User information section */
+  .user-info {
+    text-align: left;
+    max-width: 400px;
+    padding: 1rem;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+  }
+  
+  .user-info span {
+    display: block;
+    margin-bottom: 0.5rem;
     font-weight: bold;
+  }
+  
+  .user-info button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .user-info button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Received friend request section */
+  .received {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  /* Chat section */
+  .chat-container {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-bottom: 1rem;
+  }
+  
+  .chat-message {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border-radius: 5px;
+  }
+  
+  .chat-message.incoming {
+    background-color: #f2f2f2;
+  }
+  
+  .message-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .message-input input[type="text"] {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .message-input button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .message-input button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Close chat button */
+  .other-user-profile .close-button {
+    position: relative;
+    top: 0rem;
+    right: 0.7rem;
+    width: 2rem;
+    height: 3rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+ .other-user-profile .close-button::before,
+ .other-user-profile .close-button::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  top: 5px;
+  left: 14px;
+  background-color: #333;
 }
 
-
+.other-user-profile .close-button::before {
+    transform: rotate(45deg);
+  }
+  
+ .other-user-profile .close-button::after {
+    transform: rotate(-45deg);
+  }
+  
+  button.close-button:hover {
+    color: #ff0000;
+  }
+  

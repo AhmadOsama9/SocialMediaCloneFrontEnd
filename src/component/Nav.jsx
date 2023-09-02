@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { FaHome, FaUser, FaEnvelope, FaComments, FaUserFriends } from "react-icons/fa";
+import { FaHome, FaUser, FaEnvelope, FaComments, FaUserFriends, FaLayerGroup } from "react-icons/fa"; 
 import { useAuthContext } from "../hooks/useAuthContext";
 
 import "../CSS/navbar.css";
@@ -9,6 +9,7 @@ const Nav = () => {
 
   return (
     <div className="nav-bar">
+      {user && <NavLink to="/feed" className="nav-icon"> <FaLayerGroup /> </NavLink>} 
       <NavLink to="/" className="nav-icon"> <FaHome /> </NavLink>  
       {user && <NavLink to="/profile" className="nav-icon"> <FaUser /> </NavLink>}
       {user && <NavLink to="/receivedrequests" className="nav-icon"> <FaEnvelope /> </NavLink>}
