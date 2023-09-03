@@ -218,7 +218,7 @@ const FeedPosts = () => {
     }
 
     if (feedPosts.length === 0) {
-        return <h3>The User have no Posts</h3>;
+        return <h3>There's no Posts on your feed</h3>;
     }
     return (
         <div>
