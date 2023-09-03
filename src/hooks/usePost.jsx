@@ -109,7 +109,7 @@ export const usePost = () => {
 
     const getPagePosts = async (name) => {
         setPostError(null);
-        setPostLoading(null);
+        setPostLoading(true);
 
         const response = await fetch(`https://merngymprojectbackend.onrender.com/api/page/posts?name=${name}`, {
             method: "GET",
@@ -127,6 +127,26 @@ export const usePost = () => {
         return results;
 
     }
+    const getFeedPosts = async (currentPageNumber) => {
+        setPostError(null);
+        setPostLoading(true);
+
+        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/getfeedposts?userId=${userId}&page=${currentPageNumber}`, {
+            method: "GET",
+            headers: {"Content-Type": "applicationn/json"}
+        });
+        const json = await response.json();
+        let results = [];
+
+        if (!response.ok) {
+            setPostError(json.error);
+        } else {
+            results = json;
+        }
+        setPostLoading(false);
+        return results;
+    }
+
 
     const createPost = async (header, content) => {
         setPostError(null);
@@ -468,6 +488,6 @@ export const usePost = () => {
 
     
 
-    return { getCreatedPosts, getSharedPosts, getCommunityPosts, postLoading, postError, createPost, addPost, createPagePost, deletePost, deleteCommunityPost, deletePagePost, updatePost, getOtherUserCreatedPosts, getOtherUserSharedPosts, getPostReactions, getPostComments,getPostSharesCount, addReaction, updateReaction, deleteReaction, addComment, updateComment, deleteComment, addShare, removeShare, getPagePosts };
+    return { getCreatedPosts, getSharedPosts, getCommunityPosts, postLoading, postError, createPost, addPost, createPagePost, deletePost, deleteCommunityPost, deletePagePost, updatePost, getOtherUserCreatedPosts, getOtherUserSharedPosts, getPostReactions, getPostComments,getPostSharesCount, addReaction, updateReaction, deleteReaction, addComment, updateComment, deleteComment, addShare, removeShare, getPagePosts, getFeedPosts };
 
 }

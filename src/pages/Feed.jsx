@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import UserPosts from '../helperComponent/UserPosts';
 import UserSharedPosts from '../helperComponent/UserSharedPosts';
+import FeedPosts from "../helperComponent/FeedPosts";
 
 const Feed = () => {
 
@@ -25,6 +26,9 @@ const Feed = () => {
         )}
         {activePostsType === "SharedPosts" && (
           <UserSharedPosts />
+        )}
+        {!activePostsType === "UserPosts" && !activePostsType === "SharedPosts" && (
+          <FeedPosts />
         )}
       </div>
 
