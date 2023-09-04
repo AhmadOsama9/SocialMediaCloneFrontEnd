@@ -111,16 +111,32 @@ html {
 }
 
 /* Button count */
-.post-button-count {
-  font-size: 0.8rem;
-  margin-left: 0.3125rem;
+.post .post-count {
+  font-size: 0.9rem;
+  margin-right: 0.3125rem;
   color: #555;
 }
 
+.post .post-count .span {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #434343;
+  
+}
+
+.post .post-content .content {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #434343;
+}
+
 /* Select Dropdown */
-.post-select {
-  padding: 0.3125rem;
+.post .post-select {
+  padding: 0.3rem;
   font-size: 0.9rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
 }
 
 /* Comment Section */

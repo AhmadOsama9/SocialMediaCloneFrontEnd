@@ -78,18 +78,18 @@ const UserSharedPosts = () => {
         <div>
             {sharedPosts.map((post) => (
                 <div className="post">
-                    <button onClick={() => handleUpdate(post)}>Update</button>
-                    <button onClick={() => deletePost(post.postId)}>Delete</button>
+                    <button className="post-button" onClick={() => handleUpdate(post)}>Update</button>
+                    <button className="post-button" onClick={() => deletePost(post.postId)}>Delete</button>
                     {!showUpdate[post.postId] && (
                         <div>
                         <h3 className="post-creator">Creator: {post.nickname}</h3>
                         <h4 className="post-header">Header: {post.header}</h4>
-                        <p className="post-content">Content: {post.content}</p>
+                        <p className="post-content"><span className="content">Content: </span>{post.content}</p>
                         <button onClick={() => handleShowReactions(post)} className="post-button">Reactions</button>
                         <span className="post-count">{reactions.length > 0 ? reactions.length : 0}</span>
                         <button onClick={() => handleShowComments(post)} className="post-button">Comments</button>
                         <span className="post-count">{comments.length > 0 ? comments.length : 0}</span>
-                        <span className="post-count">Shares {shares.length > 0 ? shares.length : 0}</span>
+                        <span className="post-count"><span className="span">Shares</span> {shares.length > 0 ? shares.length : 0}</span>
 
                         {showReactions[post.postId] && (
                             <div className="post-reactions">

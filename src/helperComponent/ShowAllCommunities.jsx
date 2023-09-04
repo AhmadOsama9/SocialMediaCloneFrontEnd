@@ -34,10 +34,10 @@ const ShowAllCommunities = () => {
   }
 
   return (
-    <div>
+    <div className="all-Communities">
       {community._id ? ( 
         <div>
-          <button onClick={handleCloseShowCommunity}>Close</button>
+          <button className="close" onClick={handleCloseShowCommunity}>Close</button>
           <CommunityProfile community={community} />
         </div>
       ) : (

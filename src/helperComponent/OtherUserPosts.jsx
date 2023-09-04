@@ -227,7 +227,7 @@ const OtherUserPosts = ({ otherUser }) => {
                     <div className="post-header">
                         <h3 className="post-creator">Creator: {post.nickname}</h3>
                         <h4 className="post-header-text">Header: {post.header}</h4>
-                        <p className="post-content">Content: {post.content}</p>
+                        <p className="post-content"><span className="content">Content: </span> {post.content}</p>
                     </div>
                     <div className="post-buttons">
                         <div className="basic-buttons">
