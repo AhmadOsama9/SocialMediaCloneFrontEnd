@@ -5,20 +5,23 @@ import UserPosts from '../helperComponent/UserPosts';
 import UserSharedPosts from '../helperComponent/UserSharedPosts';
 import FeedPosts from "../helperComponent/FeedPosts";
 
+import "../CSS/feed.css";
+
 const Feed = () => {
 
-  const [activePostsType, setActivePostsType] = useState("");
+  const [activePostsType, setActivePostsType] = useState("Feed");
 
   const handlePostsTypeToggle = (section) => {
-      setActivePostsType(prvType => (prvType === section ? "" : section));
+    setActivePostsType(prvType => (prvType === section ? "" : section));
   }
-    
+
   return (
     <div className="feed">
-      <h3>Your feed</h3>
-      <div>
+      <h3 className="h3">Your feed</h3>
+      <div className="toggle-buttons">
         <button onClick={() => handlePostsTypeToggle("UserPosts")}>Posts</button>
         <button onClick={() => handlePostsTypeToggle("SharedPosts")}>SharedPosts</button>
+        <button onClick={() => handlePostsTypeToggle("Feed")}>Feed</button>
       </div>
       <div>
         {activePostsType === "UserPosts" && (
@@ -27,7 +30,7 @@ const Feed = () => {
         {activePostsType === "SharedPosts" && (
           <UserSharedPosts />
         )}
-        {!activePostsType === "UserPosts" && !activePostsType === "SharedPosts" && (
+        {activePostsType === "Feed" && (
           <FeedPosts />
         )}
       </div>

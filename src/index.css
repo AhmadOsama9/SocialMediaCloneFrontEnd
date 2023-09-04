@@ -48,4 +48,202 @@ html {
   margin-top: 8px;
 }
 
+
+/*Post styles */
+/* Style for the whole post */
+.post {
+  border: 1px solid #ddd;
+  background-color: #fff;
+  margin: 1rem;
+  padding: 1.25rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+/* Header Section */
+.post-header {
+  margin-bottom: 1rem;
+}
+
+/* Creator's name */
+.post-creator {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Header text */
+.post-header-text {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Content Section */
+.post-content {
+  font-size: 1rem;
+  color: #444;
+}
+
+/* Button Section */
+.post-buttons {
+  margin-top: 1rem;
+}
+
+/* Common styles for buttons */
+.post-buttons .basic-buttons {
+  display: flex;
+}
+.post-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  margin-right: 0.3rem;
+  margin-left: 0.3rem;
+  font-size: 0.7rem;
+  border-radius: 1rem;
+  transition: background-color 0.2s;
+}
+
+/* Button hover effect */
+.post-button:hover {
+  background-color: #0056b3;
+}
+
+/* Button count */
+.post-button-count {
+  font-size: 0.8rem;
+  margin-left: 0.3125rem;
+  color: #555;
+}
+
+/* Select Dropdown */
+.post-select {
+  padding: 0.3125rem;
+  font-size: 0.9rem;
+}
+
+/* Comment Section */
+.post-comment {
+  margin-top: 1.25rem;
+}
+
+/* Textarea for comments */
+.post-comment-textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+}
+
+/* Comment button */
+.post-comment-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.625rem 1.25rem;
+  cursor: pointer;
+  margin-top: 0.3125rem;
+  font-size: 0.8rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+/* Comment button hover effect */
+.post-comment-button:hover {
+  background-color: #0056b3;
+}
+
+/* Reactions Section */
+.post-reactions {
+  margin-top: 1.25rem;
+}
+
+/* Reaction block */
+.post-reaction {
+  margin-bottom: 0.625rem;
+}
+
+/* Reaction owner's name */
+.post-reaction-owner {
+  font-weight: bold;
+}
+
+/* Reaction text */
+.post-reaction-text {
+  color: #333;
+}
+
+/* Comments Section */
+.post-comments {
+  margin-top: 1.25rem;
+}
+
+/* Comment block */
+.post-comment {
+  margin-bottom: 1.25rem;
+}
+
+/* Comment owner's name */
+.post-comment-owner {
+  font-weight: bold;
+}
+
+/* Comment content */
+.post-comment-content {
+  color: #444;
+}
+
+/* CreatedAt */
+.post-comment-createdat {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+/* Comment Actions */
+.post-comment-actions {
+  margin-top: 0.625rem;
+}
+
+/* Action button */
+.post-comment-action-button {
+  background-color: #d9534f;
+  color: #fff;
+  border: none;
+  padding: 0.625rem 1.25rem;
+  cursor: pointer;
+  margin-right: 1rem;
+  font-size: 0.8rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+/* Action button hover effect */
+.post-comment-action-button:hover {
+  background-color: #c9302c;
+}
+
+/* Update textarea */
+.post-comment-update-textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+  margin-top: 0.3125rem;
+}
+
+/* Update button */
+.post-comment-update-button {
+  background-color: #5bc0de;
+  color: #fff;
+  border: none;
+  padding: 0.625rem 1.25rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  border-radius: 0.25rem;
+}
+
+
  

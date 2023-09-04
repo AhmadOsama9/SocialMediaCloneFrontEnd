@@ -1,0 +1,23 @@
+.feed .toggle-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.feed .toggle-buttons button {
+    padding: 0.3rem 0.5rem;
+    border: 0.1rem solid #ccc;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    transition: 0.3s ease-in-out;
+}
+
+.feed .toggle-buttons button:hover {
+    color: var(--first-primary-color);
+    transform: scale(1.1);
+}
+
+.feed .h3 {
+    padding: 0.3rem 0.7rem;
+    font-size: 1.3rem;
+}

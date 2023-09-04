@@ -77,66 +77,67 @@ const UserPosts = () => {
     return (
         <div>
             {userPosts.map((post) => (
-                <div>
-                    <button onClick={() => handleUpdate(post)}>Update</button>
-                    <button onClick={() => deletePost(post.postId)}>Delete</button>
+                <div className="post">
+                    <button className="post-button" onClick={() => handleUpdate(post)}>Update</button>
+                    <button className="post-button" onClick={() => deletePost(post.postId)}>Delete</button>
                     {!showUpdate[post.postId] && (
-                    <div>
-                        <h3>Creator: {post.nickname}</h3>
-                        <h4>Header: {post.header}</h4>
-                        <p>Content: {post.content}</p>
-                        <button onClick={() => handleShowReactions(post)}>Reactions</button>
-                        <span> {reactions.length > 0 ?  reactions.length : 0}</span>
-                        <button onClick={() => handleShowComments(post)}>Comments</button>
-                        <span> {comments.length > 0 ?  comments.length : 0}</span>
-                        <span> Shares {shares.length > 0 ? shares.length : 0}</span>
+                        <div>
+                        <h3 className="post-creator">Creator: {post.nickname}</h3>
+                        <h4 className="post-header">Header: {post.header}</h4>
+                        <p className="post-content">Content: {post.content}</p>
+                        <button onClick={() => handleShowReactions(post)} className="post-button">Reactions</button>
+                        <span className="post-count">{reactions.length > 0 ? reactions.length : 0}</span>
+                        <button onClick={() => handleShowComments(post)} className="post-button">Comments</button>
+                        <span className="post-count">{comments.length > 0 ? comments.length : 0}</span>
+                        <span className="post-count">Shares {shares.length > 0 ? shares.length : 0}</span>
 
                         {showReactions[post.postId] && (
-                            <div>
-                                {reactions > 0 ? (
-                                    post.reactions.map((reaction) => (
-                                        <div>
-                                            <h5>owner: {reaction.nickname}</h5>
-                                            <h5>Reaction: {reaction.reaction}</h5>
-                                        </div>
-                                    ))
-                                ) : (
-                                    <p>No Reactions</p>
-                                )}
+                            <div className="post-reactions">
+                            {reactions > 0 ? (
+                                post.reactions.map((reaction) => (
+                                <div key={reaction.nickname}>
+                                    <h5>owner: {reaction.nickname}</h5>
+                                    <h5>Reaction: {reaction.reaction}</h5>
+                                </div>
+                                ))
+                            ) : (
+                                <p>No Reactions</p>
+                            )}
                             </div>
                         )}
                         {showComments[post.postId] && (
-                            <div>
-                                {comments > 0 ? (
-                                    post.comments.map((comment) => (
-                                        <div>
-                                            <h5>onwner: {comment.nickname}</h5>
-                                            <h5>content: {comment.content}</h5>
-                                            <h5>CreatedAt: {comment.createdAt}</h5>
-                                        </div>
-                                    ))
-                                ) : (
-                                    <p>No Comments</p>
-                                )}
+                            <div className="post-comments">
+                            {comments > 0 ? (
+                                post.comments.map((comment) => (
+                                <div key={comment.commentId}>
+                                    <h5>owner: {comment.nickname}</h5>
+                                    <h5>content: {comment.content}</h5>
+                                    <h5>CreatedAt: {comment.createdAt}</h5>
+                                </div>
+                                ))
+                            ) : (
+                                <p>No Comments</p>
+                            )}
                             </div>
                         )}
-                    </div>
+                        </div>
                     )}
                     {showUpdate[post.postId] && (
                         <div>
-                            <input 
-                              type="text"
-                              value={editedHeaders[post.postId]}
-                              onChange={(e) => setEditedHeaders(prvState => ({ ...prvState, [post.postId]: e.target.value}))}
-                            />
-                            <textarea
-                              value={editedContents[post.postId]}
-                              onChange={(e) => setEditedContents(prvState => ({ ...prvState, [post.postId]: e.target.value}))}
-                            />
-                            <button onClick={() => handleCallUpdate(post)}>Save</button>
+                        <input 
+                            type="text"
+                            value={editedHeaders[post.postId]}
+                            onChange={(e) => setEditedHeaders(prvState => ({ ...prvState, [post.postId]: e.target.value}))}
+                        />
+                        <textarea
+                            value={editedContents[post.postId]}
+                            onChange={(e) => setEditedContents(prvState => ({ ...prvState, [post.postId]: e.target.value}))}
+                        />
+                        <button onClick={() => handleCallUpdate(post)} className="post-button">Save</button>
                         </div>
                     )}
                 </div>
+
             ))}
         </div>
     );

@@ -3,6 +3,7 @@ import { useShowCommunities } from '../hooks/useShowCommunities';
 import CommunityProfile from "../pages/CommunityProfile";
 import Loader from "../helperComponent/Loader";
 
+import "../CSS/allCommunities.css";
 
 const ShowAllCommunities = () => {
   const { isLoading, error, communities, showCommunities } = useShowCommunities(); 
@@ -40,13 +41,13 @@ const ShowAllCommunities = () => {
           <CommunityProfile community={community} />
         </div>
       ) : (
-        <div className="communities">
-          <h2>Communities</h2>
+        <div className="communities-container">
+          <h2 className="communities-title">Communities</h2>
           {communities.map((community) => (
-            <div key={community._id}>
-              <span>Name: {community.name}</span>
-              <span>Description: {community.description}</span>
-              <button onClick={() => handleShowCommunity(community)}>Show Community</button>
+            <div key={community._id} className="community-card">
+              <span className="community-name"><span className="span">Name: </span> {community.name}</span>
+              <span className="community-description"><span className="span">Description: </span> {community.description}</span>
+              <button className="show-community-button" onClick={() => handleShowCommunity(community)}>Show Community</button>
             </div>
           ))}
         </div>
