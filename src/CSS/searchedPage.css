@@ -1,0 +1,37 @@
+.searched-page {
+    margin-top: 1.25rem;
+}
+  
+.page-preview {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+}
+  
+.page-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.625rem;
+}
+  
+.page-name,
+.page-description {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.625rem;
+}
+  
+.show-page-button {
+    font-size: 1rem;
+    padding: 0.3125rem 0.625rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+  
+.show-page-button:hover {
+    background-color: #0056b3;
+}
+  

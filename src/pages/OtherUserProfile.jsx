@@ -219,16 +219,16 @@ const OtherUserProfile = ({ otherUser, relation }) => {
       )}
       {!showChat && (
         <div>
-          <button onClick={() => handlePostsTypeToggle("UserPosts")}>Posts</button>
-          <button onClick={() => handlePostsTypeToggle("SharedPosts")}>SharedPosts</button>
+          <button className="switch-button" onClick={() => handlePostsTypeToggle("UserPosts")}>Posts</button>
+          <button className="switch-button" onClick={() => handlePostsTypeToggle("SharedPosts")}>SharedPosts</button>
         </div>
       )}
       <div>
         {activePostsType === "UserPosts" && (
-          <OtherUserPosts />
+          <OtherUserPosts otherUser={otherUser}/>
         )}
         {activePostsType === "SharedPosts" && (
-          <OtherUserSharedPosts />
+          <OtherUserSharedPosts otherUser={otherUser}/>
         )}
       </div>
   </div>

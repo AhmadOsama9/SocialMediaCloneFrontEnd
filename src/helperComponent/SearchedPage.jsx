@@ -3,6 +3,7 @@ import { usePage } from '../hooks/usePage'
 import PageProfile from "../pages/PageProfile";
 import Loader from "../helperComponent/Loader";
 
+import "../CSS/searchedPage.css";
 
 const SearchedPage = ({ name }) => {
   const { searchPage, pageError, pageLoading, page} = usePage();
@@ -25,20 +26,18 @@ const SearchedPage = ({ name }) => {
   }
 
   return (
-    <div>
-      {!showPage && (
-       <div>
-        <h3>Searched Page</h3>
-        <span>name: {page && page.name}</span>
-        <span>description: {page && page.description}</span>
-        <button onClick={() => setShowPage(prv => !prv)}>Show Page</button>
+    <div className="searched-page">
+    {!showPage && (
+      <div className="page-preview">
+        <h3 className="page-title">Searched Page</h3>
+        <span className="page-name">Name: {page && page.name}</span>
+        <span className="page-description">Description: {page && page.description}</span>
+        <button onClick={() => setShowPage(prv => !prv)} className="show-page-button">Show Page</button>
+      </div>
+    )}
+    {showPage && <PageProfile page={page} />}
+  </div>
 
-       </div>
-      )}
-      {showPage && (
-        <PageProfile  page={page}/>
-      )}
-    </div>
   )
 }
 

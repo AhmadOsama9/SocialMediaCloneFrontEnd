@@ -5,7 +5,7 @@ import CreatePagePost from "../helperComponent/CreatePagePost";
 import PagePosts from "../helperComponent/PagePosts";
 import Loader from "../helperComponent/Loader";
 
-
+import "../CSS/pageProfile.css";
 
 const PageProfile = ({ page }) => {
   const [isAdmin, setIsAdmin] = useState(null);
@@ -81,26 +81,24 @@ const PageProfile = ({ page }) => {
   }
 
   return (
-    <div>
-        <h3>Searched Page</h3>
-        <span>name: {page.name}</span>
-        <span>Description: {page.description}</span>
-        <span>Likes: {pageLikers.length > 0 ? pageLikers.length : 0}</span>
-        <button onClick={handleToggleLike}>{isLiked ? "Liked": "Like"}</button>
-        {isAdmin && (
-          <div>
-            <button onClick={handleDeletePage}>Delete</button>
-
-            <button onClick={handleToggleCreatePost}>Create Post</button>
-            {createPost && (
-              <CreatePagePost pageName={page.name} />
-            )}
-          </div>
-        )}
-        
-        <PagePosts pageName={page.name} />
-
+    <div className="page-profile">
+      <h3>Searched Page</h3>
+      <span className="page-name"><span className="span">Name: </span> {page.name}</span>
+      <span className="page-description"><span className="span">Description: </span>{page.description}</span>
+      <span className="page-likes">Likes: {pageLikers.length > 0 ? pageLikers.length : 0}</span>
+      <button onClick={handleToggleLike} className={`like-button ${isLiked ? "liked" : ""}`}>
+        {isLiked ? "Liked" : "Like"}
+      </button>
+      {isAdmin && (
+        <div className="admin-actions">
+          <button onClick={handleDeletePage} className="delete-button">Delete</button>
+          <button onClick={handleToggleCreatePost} className="create-post-button">Create Post</button>
+          {createPost && <CreatePagePost pageName={page.name} />}
+        </div>
+      )}
+      <PagePosts pageName={page.name} />
     </div>
+
   )
 }
 

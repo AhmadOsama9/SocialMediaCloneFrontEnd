@@ -81,6 +81,10 @@ const LoggedinUser = () => {
 
           <button onClick={() => handleSectionToggle("showAllCommunities")}><IoIosGlobe /> Show All Communities</button>
 
+          <button onClick={() => handleSectionToggle("Pages")}><IoIosGlobe />Your Pages</button>
+          
+          <button onClick={() => handleSectionToggle("YourCommunities")}><IoIosGlobe /> Show All Communities</button>
+
           <button onClick={() => handleSectionToggle("createCommunity")}>Create Community</button>
           
           <button onClick={() => handleSectionToggle("createPost")}>Create Post</button>
@@ -114,6 +118,12 @@ const LoggedinUser = () => {
           )}
           {activeSection === "createPage" && (
             <CreatePage />
+          )}
+          {activeSection === "Pages" && (
+            
+          )}
+          {activeSection === "YourCommunities" && (
+
           )}
 
         </div>

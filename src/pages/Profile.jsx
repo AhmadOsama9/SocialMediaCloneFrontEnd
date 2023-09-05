@@ -172,7 +172,7 @@ const Profile = () => {
           )}
         </div>
         <div key="gender" className="profile-attribute">
-          <label>Gender:</label>
+          <label>Gender(male - female):</label>
           {isGenderEditing ? (
             <input type="text" value={gender} onChange={(e) => setGender(e.target.value)} />
           ) : (

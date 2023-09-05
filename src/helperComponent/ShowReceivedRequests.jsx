@@ -5,7 +5,7 @@ import OtherUserProfile from "../pages/OtherUserProfile";
 import { useReceivedRequestsContext } from "../context/ReceivedRequestsContext";
 import Loader from "../helperComponent/Loader";
 
-
+import "../Css/ShowReceivedRequests.css";
 
 const ShowReceivedRequests = () => {
   const { isLoading, error, acceptRequest, declineRequest } = useRequest();
@@ -27,19 +27,19 @@ const ShowReceivedRequests = () => {
   }
 
   return (
-    <div>
-        <h3>ShowPendingRequests</h3>
-        {pendingRequests.map((request) => (
-            <div key={request.user}>
-                <span>Nickname: {request.nickname} </span>
-                <button onClick={() => acceptRequest(request.user)}>Accept</button>
-                <button onClick={() => declineRequest(request.user)}>Decline</button>
-                <button onClick={() => setShowProfile(prv => !prv)}>Show Profile</button>
-                {showProfile && <OtherUserProfile otherUser={request} />}
-                
-            </div>
-        ))}
-    </div>
+    <div className="show-pending-requests">
+    <h3 className="section-title">Show Pending Requests</h3>
+    {pendingRequests.map((request) => (
+      <div key={request.user} className="request-item">
+        <span className="user-nickname">Nickname: {request.nickname}</span>
+        <button onClick={() => acceptRequest(request.user)} className="accept-button">Accept</button>
+        <button onClick={() => declineRequest(request.user)} className="decline-button">Decline</button>
+        <button onClick={() => setShowProfile(prv => !prv)} className="show-profile-button">Show Profile</button>
+        {showProfile && <OtherUserProfile otherUser={request} />}
+      </div>
+    ))}
+  </div>
+
   )
 }
 

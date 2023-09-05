@@ -1,0 +1,58 @@
+.page-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 1.25rem;
+}
+
+.page-profile .span {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #434343;
+}
+  
+.page-name,
+.page-description,
+.page-likes {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.625rem;
+}
+  
+.like-button {
+    font-size: 1.125rem;
+    padding: 0.3125rem 0.625rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+  
+.like-button.liked {
+    background-color: #dc3545;
+}
+  
+.admin-actions {
+    margin-top: 1rem;
+}
+  
+.delete-button,
+.create-post-button {
+    font-size: 1rem;
+    padding: 0.3125rem 0.625rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    margin-right: 0.625rem;
+    transition: background-color 0.3s ease-in-out;
+}
+  
+.delete-button:hover,
+.create-post-button:hover {
+    background-color: #0056b3;
+}
+  
