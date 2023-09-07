@@ -10,7 +10,7 @@ import { avatar1, avatar2, avatar3, avatar4 } from "../assets/avatar";
 import "../CSS/profile.css";
 
 const Profile = () => {
-  const { isLoading, error, updateNickname, updateAge, updateGender, updateBio, updateImage } = useProfileInfo();
+  const { isLoading, error, updateNickname, updateAge, updateGender, updateBio, updateImage, checkPassword } = useProfileInfo();
   const { profile } = useProfileContext();
   
 
@@ -26,6 +26,10 @@ const Profile = () => {
 
   const [isBioEditing, setIsBioEditing] = useState(false);
   const [bio, setBio] = useState(profile.bio);
+
+  const [oldPassword, setOldPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [isPasswordEditing, setIsPasswordEditing] = useState(false); 
 
   const [selectedAvatar, setSelectedAvatar] = useState(profile.image);
 
@@ -63,6 +67,10 @@ const Profile = () => {
     setSelectedAvatar(avatarNum);
     setShowAvatarSelection(false);
     await updateImage(avatarNum);
+  }
+
+  const handleCheckOldPassword = async () => {
+
   }
 
 
@@ -195,6 +203,22 @@ const Profile = () => {
             <button onClick={handleUpdateBio}>Save</button>
           ) : (
             <button onClick={() => setIsBioEditing(true)}>Edit</button>
+          )}
+        </div>
+        <div key="password" className="profile-attribute">
+          <label>Password:</label>
+          {isPasswordEditing ? (
+            <div>
+              <label>Enter the old password</label>
+              <input value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
+            </div>
+          ) : (
+            <span>***********</span>
+          )}
+          {isPasswordEditing ? (
+            <button onClick={handleCheckOldPassword}>check</button>
+          ) : (
+            <button onClick={() => setIsPasswordEditing(true)}>Edit</button>
           )}
         </div>
       </div>

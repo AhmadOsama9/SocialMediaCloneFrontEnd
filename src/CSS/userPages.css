@@ -1,4 +1,4 @@
-.joined-communities {
+.user-pages {
     margin-top: 1.25rem;
 }
   
@@ -7,15 +7,15 @@
     margin-bottom: 0.625rem;
 }
   
-.community-info {
+.page-info {
     padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 0.25rem;
     margin-bottom: 0.625rem;
 }
   
-.community-name,
-.community-description {
+.page-name,
+.page-description {
     display: block;
     font-size: 1rem;
     margin-bottom: 0.625rem;

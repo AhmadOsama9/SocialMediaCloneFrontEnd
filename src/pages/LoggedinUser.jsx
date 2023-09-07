@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import ShowJoinedCommunities from "../helperComponent/ShowJoinedCommunities";
+import YourCommunities from "../helperComponent/YourCommunities";
+import UserPages from "../helperComponent/UserPages";
 import SearchCommunity from "../helperComponent/SearchCommunity";
 import SearchUser from "../helperComponent/SearchUser";
 import ShowAllCommunities from "../helperComponent/ShowAllCommunities";
@@ -81,9 +83,9 @@ const LoggedinUser = () => {
 
           <button onClick={() => handleSectionToggle("showAllCommunities")}><IoIosGlobe /> Show All Communities</button>
 
+          <button onClick={() => handleSectionToggle("YourCommunities")}><IoIosGlobe /> Your Communities</button>
+
           <button onClick={() => handleSectionToggle("Pages")}><IoIosGlobe />Your Pages</button>
-          
-          <button onClick={() => handleSectionToggle("YourCommunities")}><IoIosGlobe /> Show All Communities</button>
 
           <button onClick={() => handleSectionToggle("createCommunity")}>Create Community</button>
           
@@ -110,6 +112,12 @@ const LoggedinUser = () => {
           {activeSection === "showAllCommunities" && (
             <ShowAllCommunities />
           )}
+          {activeSection === "YourCommunities" && (
+            <YourCommunities />
+          )}
+          {activeSection === "Pages" && (
+            <UserPages />
+          )}
           {activeSection === "createCommunity" && (
             <CreateCommunity />
           )}
@@ -119,12 +127,8 @@ const LoggedinUser = () => {
           {activeSection === "createPage" && (
             <CreatePage />
           )}
-          {activeSection === "Pages" && (
-            
-          )}
-          {activeSection === "YourCommunities" && (
-
-          )}
+          
+          
 
         </div>
       )}

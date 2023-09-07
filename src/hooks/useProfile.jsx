@@ -37,6 +37,23 @@ export const useProfileInfo = () => {
       dispatch({ type: actions[field], payload: json });
     }
   };
+  const checkPassword = async (password) => {
+    setIsLoading(true);
+    setError(null);
+
+    const userId = user.userId;
+
+    const response = await fetch(
+      `https://merngymprojectbackend.onrender.com/api/user/checkpassword`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, password }),
+      }
+    );
+
+    return response.ok;
+  };
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -87,5 +104,6 @@ export const useProfileInfo = () => {
     updateGender: (gender) => updateProfileField("gender", gender),
     updateBio: (bio) => updateProfileField("bio", bio),
     updateImage: (image) => updateProfileField("image", image),
+    checkPassword,
   };
 };

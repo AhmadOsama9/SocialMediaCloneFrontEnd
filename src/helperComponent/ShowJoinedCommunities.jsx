@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useShowJoinedCommunities } from '../hooks/useShowJoinedCommunities';
+import { useShowCommunities } from '../hooks/showCommunities';
 import CommunityProfile from '../pages/CommunityProfile';
 import Loader from "../helperComponent/Loader";
 
@@ -7,7 +7,7 @@ import Loader from "../helperComponent/Loader";
 import "../CSS/showCommunities.css";
 
 const ShowJoinedCommunities = () => {
-  const { isLoading, error, communities, showJoinedCommunities } = useShowJoinedCommunities();
+  const { isLoading, error, communities, showJoinedCommunities } = useShowCommunities();
   const [showCommunityProfile, setShowCommunityProfile] = useState(false); 
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const ShowJoinedCommunities = () => {
     return <Loader />;
   }
   if (error) {
-    return (<h3 className=".error">Error: {error}</h3>);
+    return (<h3 className="error">Error: {error}</h3>);
   }
 
   if (communities.length === 0) {
@@ -28,17 +28,19 @@ const ShowJoinedCommunities = () => {
 
   return (
     <div className="joined-communities">
-      <h2 className="h2">Communities</h2>
+      <h2 className="section-title">Communities</h2>
       {communities.map((community) => (
         <div className="community-info" key={community._id}>
-            <span className="span">Name: {community.name}</span>
-            <span className="span">Desciption: {community.description}</span>
-            <button className="bttn" onClick={() => setShowCommunityProfile(prv => !prv)}>Show Communitiy</button>
-          
-            {showCommunityProfile && <CommunityProfile community={community} />}
+          <span className="community-name">Name: {community.name}</span>
+          <span className="community-description">Description: {community.description}</span>
+          <button onClick={() => setShowCommunityProfile(prv => !prv)} className="toggle-button">
+            {showCommunityProfile ? "Go back" : "Show Community"}
+          </button>
+          {showCommunityProfile && <CommunityProfile community={community} />}
         </div>
       ))}
-    </div>
+</div>
+
   )
 }
 
