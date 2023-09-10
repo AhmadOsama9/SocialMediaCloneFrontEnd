@@ -6,12 +6,13 @@ import Loader from "../helperComponent/Loader";
 const ForgotPassword = () => {
 
   const { error, isLoading, forgotPassword} = useForgotPassword();
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("ahmedosamaaaa975@gmail.com");
+  const [showOTP, setShowOTP] = useState(true);
 
   const handleForgotPassword = async () => {
     const checkEmail = await forgotPassword(email);
     if (checkEmail) {
-      return <OTP email={email}/>
+      setShowOTP(true);
     }
   }
 
@@ -25,14 +26,23 @@ const ForgotPassword = () => {
 
   return (
     <div>
-      <h3>Forgot Passwrod</h3>
-      <label>Email</label>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <button onClick={handleForgotPassword}>Send OTP</button>
+      {!showOTP && 
+      (<div>
+        <h3>Forgot Passwrod</h3>
+        <label>Email</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <button onClick={handleForgotPassword}>Send OTP</button>
+      </div>
+      )}
+      {showOTP && (
+        <div>
+          <OTP email={email}/>
+        </div>
+      )}
     </div>
   )
 }

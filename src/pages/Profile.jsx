@@ -10,7 +10,7 @@ import { avatar1, avatar2, avatar3, avatar4 } from "../assets/avatar";
 import "../CSS/profile.css";
 
 const Profile = () => {
-  const { isLoading, error, updateNickname, updateAge, updateGender, updateBio, updateImage, checkPassword } = useProfileInfo();
+  const { isLoading, error, updateNickname, updateAge, updateGender, updateBio, updateImage, checkPassword, updatePassword } = useProfileInfo();
   const { profile } = useProfileContext();
   
 
@@ -29,7 +29,8 @@ const Profile = () => {
 
   const [oldPassword, setOldPassword] = useState("");
   const [password, setPassword] = useState("");
-  const [isPasswordEditing, setIsPasswordEditing] = useState(false); 
+  const [isPasswordEditing, setIsPasswordEditing] = useState(false);
+  const [isNewPasswordEditing, setIsNewPasswordEditing] = useState(false);
 
   const [selectedAvatar, setSelectedAvatar] = useState(profile.image);
 
@@ -70,7 +71,23 @@ const Profile = () => {
   }
 
   const handleCheckOldPassword = async () => {
+    setIsPasswordEditing(false);
+    const match = await checkPassword(oldPassword);
+    if (match) {
+      setIsNewPasswordEditing(true);
+    }
+  }
 
+  const handleSaveNewPassword = async () => {
+      const update = await updatePassword(password);
+      if (update) {
+        alert("The password has been updated");
+      }
+  }
+
+  const handleCancelUpdatePassword = () => {
+    setIsNewPasswordEditing(false);
+    setIsPasswordEditing(false);
   }
 
 
@@ -211,14 +228,24 @@ const Profile = () => {
             <div>
               <label>Enter the old password</label>
               <input value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
+              <button onClick={handleCheckOldPassword}>Check</button>
             </div>
           ) : (
-            <span>***********</span>
-          )}
-          {isPasswordEditing ? (
-            <button onClick={handleCheckOldPassword}>check</button>
-          ) : (
-            <button onClick={() => setIsPasswordEditing(true)}>Edit</button>
+            <>
+              {isNewPasswordEditing ? (
+                <div>
+                  <label>Enter the new password</label>
+                  <input value={password} onChange={(e) => setPassword(e.target.value)} />
+                  <button onClick={handleSaveNewPassword}>Save</button>
+                  <button onClick={handleCancelUpdatePassword}>Cancel</button>
+                </div>
+              ) : (
+                <>
+                  <span>***********</span>
+                  <button onClick={() => setIsPasswordEditing(true)}>Edit</button>
+                </>
+              )}
+            </>
           )}
         </div>
       </div>

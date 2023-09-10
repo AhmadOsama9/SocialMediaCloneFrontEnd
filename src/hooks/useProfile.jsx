@@ -37,6 +37,7 @@ export const useProfileInfo = () => {
       dispatch({ type: actions[field], payload: json });
     }
   };
+  
   const checkPassword = async (password) => {
     setIsLoading(true);
     setError(null);
@@ -51,6 +52,32 @@ export const useProfileInfo = () => {
         body: JSON.stringify({ userId, password }),
       }
     );
+    setIsLoading(false);
+    if (!response.ok) {
+      const json = await response.json();
+      setError(json.error);
+    }
+    return response.ok;
+  };
+  const updatePassword = async (newPassword) => {
+    setIsLoading(true);
+    setError(null);
+
+    const userId = user.userId;
+
+    const response = await fetch(
+      `https://merngymprojectbackend.onrender.com/api/user/updatepassword`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, newPassword }),
+      }
+    );
+    setIsLoading(false);
+    if (!response.ok) {
+      const json = await response.json();
+      setError(json.error);
+    }
 
     return response.ok;
   };
@@ -105,5 +132,6 @@ export const useProfileInfo = () => {
     updateBio: (bio) => updateProfileField("bio", bio),
     updateImage: (image) => updateProfileField("image", image),
     checkPassword,
+    updatePassword,
   };
 };
