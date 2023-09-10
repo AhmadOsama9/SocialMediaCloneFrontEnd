@@ -8,8 +8,8 @@ const OTP = ({ email }) => {
   
 
   const handleValidateOTP = async () => {
-    const response = validateOTP(email, OTP);
-    if (response.ok) {
+    const valid = validateOTP(email, OTP);
+    if (valid) {
         const json = await response.json(); 
         return <h3>Your current Password is: {json.password}</h3>
     } 

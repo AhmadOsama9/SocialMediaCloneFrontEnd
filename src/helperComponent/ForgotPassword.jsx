@@ -6,8 +6,8 @@ import Loader from "../helperComponent/Loader";
 const ForgotPassword = () => {
 
   const { error, isLoading, forgotPassword} = useForgotPassword();
-  const [email, setEmail] = useState("ahmedosamaaaa975@gmail.com");
-  const [showOTP, setShowOTP] = useState(true);
+  const [email, setEmail] = useState("");
+  const [showOTP, setShowOTP] = useState(false);
 
   const handleForgotPassword = async () => {
     const checkEmail = await forgotPassword(email);

@@ -38,7 +38,7 @@ export const useForgotPassword = () => {
         setError(json.error);
     }
     setIsLoading(false);
-    return response;
+    return response.ok;
 
   }
 

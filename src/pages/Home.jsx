@@ -8,7 +8,7 @@ import { useForgotPasswordContext } from "../context/ForgotPasswordContext";
 
 const Home = () => {
   const [activeSection, setActiveSection] = useState("login");
-  const { showForgotPassword } = useForgotPasswordContext();
+  const { showForgotPassword, setShowForgotPassword } = useForgotPasswordContext();
   
   const handleSectionChange = (section) => {
     setActiveSection(section);
@@ -34,6 +34,7 @@ const Home = () => {
           )}
       </div>) : (
         <div>
+          <button onClick={() => setShowForgotPassword(false)}>Cancel</button>
           <ForgotPassword />
         </div>
       )}
