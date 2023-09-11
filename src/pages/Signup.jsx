@@ -14,12 +14,13 @@ const Signup = () => {
   const [showvalidateOTP, setShowValidateOTP] = useState(false);
   const [OTP, setOTP] = useState("");
   const [showSignupForm, setShowSignupForm] = useState(false);
+  const [sendError, setSendError] = useState(false);
 
   const handleSentOTP = async () => {
     const sent = await createAndSendOTP(email);
     setShowValidateOTP(true)
     if (!sent) {
-      return <h3 className="error">Error: {error}</h3>
+      setSendError(true);
     }
   }
 
@@ -53,6 +54,9 @@ const Signup = () => {
     return <Loader />;
   }
   if (error === "That email is already registered") {
+    return <h3 className="error">Error: {error}</h3>
+  }
+  if (sendError) {
     return <h3 className="error">Error: {error}</h3>
   }
 

@@ -48,7 +48,7 @@ const Login = () => {
           <button onClick={googleLogin} className="google-button"><FaGoogle className="google-icon" /> Login With Google</button>
         </div>
         <hr />
-        <span className="forgot-password" onClick={() => setShowForgotPassword(true)}>forgot password</span>
+        <span className="forgot-password-span" onClick={() => setShowForgotPassword(true)}>forgot password</span>
       </div>
     </div>
   )

@@ -7,8 +7,8 @@ section {
 
 .loader {
     position: relative;
-    width: 5rem;
-    height: 5rem;
+    width: 4rem;
+    height: 4rem;
     border-radius: 50%;
     display: inline-block;
     vertical-align: middle;
@@ -30,10 +30,10 @@ section {
     position: absolute;
     border: 0.5rem solid var(--second-primary-color);
     border-radius: 50%;
-    width: 3rem;
-    height: 3rem;
-    left: calc(50% - 20px);
-    top: calc(50% - 20px);
+    width: 2rem;
+    height: 2rem;
+    left: calc(50% - 1rem);
+    top: calc(50% - 1rem);
     border-right: 0;
     border-top-color: transparent;
     -webkit-animation: loader-inner 1s cubic-bezier(.42, .61, .58, .41) infinite;

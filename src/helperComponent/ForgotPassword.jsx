@@ -19,7 +19,7 @@ const ForgotPassword = () => {
   }
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
 
   if (error) {

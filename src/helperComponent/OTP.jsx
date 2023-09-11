@@ -1,23 +1,20 @@
 import { useState } from "react";
 import { useForgotPassword } from "../hooks/useForgotPassword";
-import { Loader } from "three";
-
+import Loader from "./Loader";
 
 const OTP = ({ email }) => {
-  const { error, isLoading, validateOTP, newPassword } = useForgotPassword();
+  const { error, isLoading, validateOTP, otpError } = useForgotPassword();
   const [OTP, setOTP] = useState(""); 
   const [showPassword, setShowPassword] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
   
 
   const handleValidateOTP = async () => {
-    const valid = validateOTP(email, OTP);
-    if (valid) {
+    const valid = await validateOTP(email, OTP);
+    if (typeof valid === "string") { 
+      setNewPassword(valid);
       setShowPassword(true);
     } 
-  }
-
-  if (error) {
-    return <h3 className="error">Error: {error}</h3>
   }
 
   if (isLoading) {
@@ -26,6 +23,10 @@ const OTP = ({ email }) => {
 
   if (showPassword) {
     return <h3>Your current Password is: {newPassword}</h3>;
+  }
+
+  if (error) {
+    return <h3 className="error">Error: {error}</h3>
   }
  
   return (
@@ -40,6 +41,7 @@ const OTP = ({ email }) => {
         className="otp-input"
       />
       <button onClick={handleValidateOTP} className="otp-button">Validate</button>
+      {otpError && <div className="error">{otpError}</div>}
     </div>
 
   )

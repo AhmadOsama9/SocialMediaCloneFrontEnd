@@ -339,7 +339,7 @@ const FeedPosts = () => {
 
             ))}
             {hasMorePosts && (
-            <button onClick={loadMore}>Load More</button>
+            <button onClick={loadMore} className="load-more-btn">Load More</button>
             )}
         </div>
     );

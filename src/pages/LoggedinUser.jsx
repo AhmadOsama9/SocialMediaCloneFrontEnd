@@ -14,7 +14,8 @@ import SearchedPage from "../helperComponent/SearchedPage";
 import { useActiveSectionContext } from "../context/ActiveSectionContext";
 
 
-import { FaSearch, FaUsers } from "react-icons/fa";
+
+import { FaSearch, FaUsers, FaGlobe, FaPages } from "react-icons/fa";
 import { IoIosGlobe } from "react-icons/io";
 
 import "../CSS/loggedinUser.css";
@@ -83,9 +84,9 @@ const LoggedinUser = () => {
 
           <button onClick={() => handleSectionToggle("showAllCommunities")}><IoIosGlobe /> Show All Communities</button>
 
-          <button onClick={() => handleSectionToggle("YourCommunities")}><IoIosGlobe /> Your Communities</button>
+          <button onClick={() => handleSectionToggle("YourCommunities")}><FaGlobe /> Your Communities</button>
 
-          <button onClick={() => handleSectionToggle("Pages")}><IoIosGlobe />Your Pages</button>
+          <button onClick={() => handleSectionToggle("Pages")}><FaPages />Your Pages</button>
 
           <button onClick={() => handleSectionToggle("createCommunity")}>Create Community</button>
           

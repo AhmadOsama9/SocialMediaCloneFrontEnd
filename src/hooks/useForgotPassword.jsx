@@ -2,8 +2,8 @@ import { useState } from "react";
 
 export const useForgotPassword = () => {
   const [error, setError] = useState(null);
+  const [otpError, setOtpError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
-  const [newPassword, setNewPassword] = useState(""); 
 
   const forgotPassword = async (email) => {
     setIsLoading(true);
@@ -37,15 +37,15 @@ export const useForgotPassword = () => {
     const json = await response.json();
 
     if (!response.ok) {
-        setError(json.error);
-    } else {
-      setNewPassword(json.password);
+        setOtpError(json.error);
+        setIsLoading(false);
+        return false;
     }
     setIsLoading(false);
  
-    return response.ok;
+    return json.password;
 
   }
 
-  return { error, isLoading, forgotPassword, validateOTP, newPassword};
+  return { error, isLoading, forgotPassword, validateOTP, otpError};
 }
