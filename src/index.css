@@ -91,6 +91,7 @@ html {
 /* Common styles for buttons */
 .post-buttons .basic-buttons {
   display: flex;
+  margin-bottom: 0.5rem;
 }
 .post-button {
   background-color: #007bff;

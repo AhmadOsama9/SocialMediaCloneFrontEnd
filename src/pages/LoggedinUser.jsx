@@ -15,7 +15,7 @@ import { useActiveSectionContext } from "../context/ActiveSectionContext";
 
 
 
-import { FaSearch, FaUsers, FaGlobe, FaPages } from "react-icons/fa";
+import { FaSearch, FaUsers, FaGlobe, FaUserCircle } from "react-icons/fa";
 import { IoIosGlobe } from "react-icons/io";
 
 import "../CSS/loggedinUser.css";
@@ -86,7 +86,7 @@ const LoggedinUser = () => {
 
           <button onClick={() => handleSectionToggle("YourCommunities")}><FaGlobe /> Your Communities</button>
 
-          <button onClick={() => handleSectionToggle("Pages")}><FaPages />Your Pages</button>
+          <button onClick={() => handleSectionToggle("Pages")}><FaUserCircle /> Your Pages</button>
 
           <button onClick={() => handleSectionToggle("createCommunity")}>Create Community</button>
           
