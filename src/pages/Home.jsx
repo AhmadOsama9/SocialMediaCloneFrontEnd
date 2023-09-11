@@ -34,7 +34,7 @@ const Home = () => {
           )}
       </div>) : (
         <div>
-          <button onClick={() => setShowForgotPassword(false)}>Cancel</button>
+          <button className="cancel-button" onClick={() => setShowForgotPassword(false)}>Cancel</button>
           <ForgotPassword />
         </div>
       )}

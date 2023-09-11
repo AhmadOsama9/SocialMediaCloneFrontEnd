@@ -92,7 +92,7 @@ const PageProfile = ({ page }) => {
       {isAdmin && (
         <div className="admin-actions">
           <button onClick={handleDeletePage} className="delete-button">Delete</button>
-          <button onClick={handleToggleCreatePost} className="create-post-button">Create Post</button>
+          <button onClick={handleToggleCreatePost} className="create-post-button2">Create Post</button>
           {createPost && <CreatePagePost pageName={page.name} />}
         </div>
       )}

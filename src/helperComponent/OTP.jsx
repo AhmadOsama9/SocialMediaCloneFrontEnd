@@ -2,16 +2,17 @@ import { useState } from "react";
 import { useForgotPassword } from "../hooks/useForgotPassword";
 import { Loader } from "three";
 
+
 const OTP = ({ email }) => {
-  const { error, isLoading, validateOTP } = useForgotPassword();
+  const { error, isLoading, validateOTP, newPassword } = useForgotPassword();
   const [OTP, setOTP] = useState(""); 
+  const [showPassword, setShowPassword] = useState(false);
   
 
   const handleValidateOTP = async () => {
     const valid = validateOTP(email, OTP);
     if (valid) {
-        const json = await response.json(); 
-        return <h3>Your current Password is: {json.password}</h3>
+      setShowPassword(true);
     } 
   }
 
@@ -22,19 +23,25 @@ const OTP = ({ email }) => {
   if (isLoading) {
     return <Loader />
   }
+
+  if (showPassword) {
+    return <h3>Your current Password is: {newPassword}</h3>;
+  }
  
   return (
-    <div>
-        <h3>The OTP has been sent</h3>
-        <h4>NOTE::It'll expire in 5 minutes</h4>
-        <label>Enter OTP</label>
-        <input 
-          type="text"
-          value={OTP}
-          onChange={(e) => setOTP(e.target.value)}
-        />
-        <button onClick={handleValidateOTP}>Validate</button>
+    <div className="otp-container">
+      <h3 className="otp-heading">The OTP has been sent</h3>
+      <h4 className="otp-note">NOTE: It'll expire in 5 minutes</h4>
+      <label className="otp-label">Enter OTP</label>
+      <input
+        type="text"
+        value={OTP}
+        onChange={(e) => setOTP(e.target.value)}
+        className="otp-input"
+      />
+      <button onClick={handleValidateOTP} className="otp-button">Validate</button>
     </div>
+
   )
 }
 

@@ -3,6 +3,7 @@ import { useState } from "react";
 export const useForgotPassword = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
+  const [newPassword, setNewPassword] = useState(""); 
 
   const forgotPassword = async (email) => {
     setIsLoading(true);
@@ -33,14 +34,18 @@ export const useForgotPassword = () => {
         body: JSON.stringify({email, otp}),
     })
 
+    const json = await response.json();
+
     if (!response.ok) {
-        const json = await response.json();
         setError(json.error);
+    } else {
+      setNewPassword(json.password);
     }
     setIsLoading(false);
+ 
     return response.ok;
 
   }
 
-  return { error, isLoading, forgotPassword, validateOTP};
+  return { error, isLoading, forgotPassword, validateOTP, newPassword};
 }

@@ -118,7 +118,7 @@ const CommunityProfile = ({ community }) => {
               {relation === "admin" && 
                 <div>
                   <button onClick={handleLeaveCommunity} className="leave-button">Leave Community</button>
-                  <button onClick={handleToggleCreatePost} className="create-post-button">Create Post</button>
+                  <button onClick={handleToggleCreatePost} className="create-community-post-button">Create Post</button>
                   <button onClick={() => setShowMembers(prev => !prev)} className="show-members-button">Show Members</button>
                   <button onClick={() => setShowRequests(prev => !prev)} className="show-requests-button">Show Requests</button>
                   <button onClick={handleDeleteCommunity} className="delete-community-button">Delete Community</button>

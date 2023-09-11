@@ -3,6 +3,7 @@ import { usePost } from "../hooks/usePost";
 import { useCreatePagePostContext } from "../context/CreatePagePostContext";
 import Loader from "../helperComponent/Loader";
 
+import "../CSS/createPagePost.css";
 
 const CreatePagePost = ({ pageName }) => {
     const [header, setHeader] = useState("");
@@ -29,30 +30,33 @@ const CreatePagePost = ({ pageName }) => {
     }
 
     return (
-        <div className="create-post">
-            <h2>Create Post</h2>
-            <div>
-                <label className="label">Header</label>
-                <input 
-                  type="text"
-                  placeholder="Enter the header of the post"
-                  value={header}
-                  onChange={(e) => setHeader(e.target.value)}
-                  className="input"
+        <div className="create-post-container">
+            <h2 className="create-post-title">Create Post</h2>
+            <div className="create-post-input">
+                <label className="create-post-label">Header</label>
+                <input
+                type="text"
+                placeholder="Enter the header of the post"
+                value={header}
+                onChange={(e) => setHeader(e.target.value)}
+                className="create-post-input-field"
                 />
             </div>
-            <div>
-                <label className="label">Content</label>
+            <div className="create-post-input">
+                <label className="create-post-label">Content</label>
                 <textarea
-                  type="text"
-                  placeholder="Enter the content of the post"
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                  className="textarea"
+                type="text"
+                placeholder="Enter the content of the post"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                className="create-post-textarea"
                 />
             </div>
-            <button onClick={handleAddPost}>Create Post</button>
+            <button onClick={handleAddPost} className="create-post-button">
+                Create Post
+            </button>
         </div>
+
     )
 }
 

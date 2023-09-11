@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { usePost } from '../hooks/usePost';
 import Loader from "../helperComponent/Loader";
 
+import "../CSS/createPost.css";
 
 const CreatePost = () => {
   const [header, setHeader] = useState("");
@@ -20,9 +21,9 @@ const CreatePost = () => {
   return (
     <div className="create-post">
       <h2>Create Post</h2>
-      <div>
+      <div className="input-container">
         <label className="label">Header</label>
-        <input 
+        <input
           type="text"
           placeholder="Enter the header of the post"
           value={header}
@@ -30,7 +31,7 @@ const CreatePost = () => {
           className="input"
         />
       </div>
-      <div>
+      <div className="input-container">
         <label className="label">Content</label>
         <textarea
           type="text"
@@ -40,8 +41,11 @@ const CreatePost = () => {
           className="textarea"
         />
       </div>
-      <button onClick={() => createPost(header, content)}>create post</button>
+      <button onClick={() => createPost(header, content)} className="create-button">
+        Create Post
+      </button>
     </div>
+
   )
 }
 

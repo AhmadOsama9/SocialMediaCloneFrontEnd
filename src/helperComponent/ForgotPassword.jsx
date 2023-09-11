@@ -3,6 +3,8 @@ import { useForgotPassword } from "../hooks/useForgotPassword";
 import OTP from "./OTP";
 import Loader from "../helperComponent/Loader";
 
+import "../CSS/forgotPassword.css";
+
 const ForgotPassword = () => {
 
   const { error, isLoading, forgotPassword} = useForgotPassword();
@@ -25,25 +27,28 @@ const ForgotPassword = () => {
   }
 
   return (
-    <div>
-      {!showOTP && 
-      (<div>
-        <h3>Forgot Passwrod</h3>
-        <label>Email</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <button onClick={handleForgotPassword}>Send OTP</button>
-      </div>
-      )}
-      {showOTP && (
+    <div className="forgot-password">
+      {!showOTP ? (
         <div>
-          <OTP email={email}/>
+          <h3>Forgot Password</h3>
+          <label className="label">Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="input"
+          />
+          <button onClick={handleForgotPassword} className="send-button">
+            Send OTP
+          </button>
+        </div>
+      ) : (
+        <div>
+          <OTP email={email} />
         </div>
       )}
-    </div>
+  </div>
+
   )
 }
 

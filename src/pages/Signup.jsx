@@ -96,18 +96,20 @@ const Signup = () => {
       </div>
       )}
       {(showvalidateOTP && (
-        <div>
-          <h3>The OTP has been sent</h3>
-          <h4>NOTE::It'll expire in 5 minutes</h4>
-          <label>Enter OTP</label>
-          <input 
+        <div className="otp-container">
+          <h3 className="otp-heading">The OTP has been sent</h3>
+          <h4 className="otp-note">NOTE: It'll expire in 5 minutes</h4>
+          <label className="otp-label">Enter OTP</label>
+          <input
             type="text"
             value={OTP}
             onChange={(e) => setOTP(e.target.value)}
+            className="otp-input"
           />
-          <button onClick={handleValidateOTP}>Validate</button>
+          <button onClick={handleValidateOTP} className="otp-button">Validate</button>
           {error && <div className="error">{error}</div>}
-        </div>
+      </div>
+      
       ))}
       {showSignupForm && (
         <div>
