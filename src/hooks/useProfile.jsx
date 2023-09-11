@@ -52,11 +52,12 @@ export const useProfileInfo = () => {
         body: JSON.stringify({ userId, password }),
       }
     );
-    setIsLoading(false);
     if (!response.ok) {
       const json = await response.json();
       setError(json.error);
     }
+
+    setIsLoading(false);
     return response.ok;
   };
   const updatePassword = async (newPassword) => {
@@ -73,12 +74,11 @@ export const useProfileInfo = () => {
         body: JSON.stringify({ userId, newPassword }),
       }
     );
-    setIsLoading(false);
     if (!response.ok) {
       const json = await response.json();
       setError(json.error);
     }
-
+    setIsLoading(false);
     return response.ok;
   };
 

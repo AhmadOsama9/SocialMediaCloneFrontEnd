@@ -31,12 +31,46 @@ export const useSignup = () => {
 
             localStorage.setItem("user", JSON.stringify(user));
             dispatch({type: actions.login, payload: json});
-            setIsLoading(false);
-
-            console.log("Signup Successfully");
         }
         setIsLoading(false);
     }
-    return { signup, isLoading, error};
+    const createAndSendOTP = async (email) => {
+        setIsLoading(true);
+        setError(null);
+
+        const response = await fetch("https://merngymprojectbackend.onrender.com/api/otp/sendotp", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({email})
+        })
+        const json = await response.json();
+
+        if(!response.ok) {
+            setError(json.error);
+        }
+        setIsLoading(false);
+        return response.ok;
+    }
+
+    const validateOTP = async (email, otp) => {
+        setIsLoading(true);
+        setError(null);
+
+        const response = await fetch("https://merngymprojectbackend.onrender.com/api/otp/validateotp", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({email, otp})
+        })
+        const json = await response.json();
+
+        if(!response.ok) {
+            setError(json.error);
+        }
+        setIsLoading(false);
+        return response.ok;
+    }
+
+
+    return { signup, isLoading, error, createAndSendOTP, validateOTP};
 
 }

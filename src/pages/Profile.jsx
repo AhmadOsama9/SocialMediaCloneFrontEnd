@@ -12,8 +12,6 @@ import "../CSS/profile.css";
 const Profile = () => {
   const { isLoading, error, updateNickname, updateAge, updateGender, updateBio, updateImage, checkPassword, updatePassword } = useProfileInfo();
   const { profile } = useProfileContext();
-  
-
 
   const [isNicknameEditing, setIsNicknameEditing] = useState(false);
   const [nickname, setNickname] = useState(profile.nickname);
@@ -82,6 +80,7 @@ const Profile = () => {
       const update = await updatePassword(password);
       if (update) {
         alert("The password has been updated");
+        setIsNewPasswordEditing(false);
       }
   }
 
@@ -249,6 +248,7 @@ const Profile = () => {
           )}
         </div>
       </div>
+      {error && <h4 className="error">Error: {error}</h4>}
     </div>
   );
 };

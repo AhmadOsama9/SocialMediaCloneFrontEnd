@@ -25,8 +25,8 @@ const OTP = ({ email }) => {
  
   return (
     <div>
-        <h5>The OTP has been sent</h5>
-        <h6>NOTE::It'll expire in 5 minutes</h6>
+        <h3>The OTP has been sent</h3>
+        <h4>NOTE::It'll expire in 5 minutes</h4>
         <label>Enter OTP</label>
         <input 
           type="text"
