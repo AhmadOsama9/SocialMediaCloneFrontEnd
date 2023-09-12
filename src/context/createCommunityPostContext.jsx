@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-const CreateCommunityPostContext = createContext();
+export const CreateCommunityPostContext = createContext();
 
 export const useCreateCommunityPostContext = () => {
     const context = useContext(CreateCommunityPostContext);
