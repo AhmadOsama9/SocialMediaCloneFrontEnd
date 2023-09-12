@@ -11,7 +11,7 @@ export const useCommunityRelationContext = () => {
     return context;
 }
 
-export const CommunityRelationProvider = ({ children }) => {
+export const CommunityRelationContextProvider = ({ children }) => {
     const [relation, setRelation] = useState("None");
     const [membershipRequests, setMembershipRequests] = useState([]);
     const [members, setMembers] = useState([]);

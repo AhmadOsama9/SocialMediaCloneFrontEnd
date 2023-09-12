@@ -5,7 +5,7 @@ import { AuthContextProvider } from './context/AuthContext.jsx'
 import { ProfileContextProvider } from './context/ProfileContext.jsx'
 import { ChatContextProvider } from './context/ChatContext.jsx'
 import { ReceivedRequestsProvider } from './context/ReceivedRequestsContext.jsx'
-import { CommunityRelationProvider } from './context/CommunityRelation.jsx'
+import { CommunityRelationContextProvider } from './context/CommunityRelation.jsx'
 import { UserPostsContextProvider } from './context/UserPostsContext.jsx'
 import { CreateCommunityPostContextProvider } from './context/CreateCommunityPostContext.jsx'
 import { CreatePagePostContextProvider } from './context/CreatePagePostContext.jsx'
@@ -21,7 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <ProfileContextProvider>
         <ChatContextProvider>
           <ReceivedRequestsProvider>
-            <CommunityRelationProvider>
+            <CommunityRelationContextProvider>
               <UserPostsContextProvider>
                 <OtherUserPostsContextProvider>
                   <CreateCommunityPostContextProvider>
@@ -35,7 +35,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                   </CreateCommunityPostContextProvider>
                 </OtherUserPostsContextProvider>
               </UserPostsContextProvider>
-            </CommunityRelationProvider>
+            </CommunityRelationContextProvider>
           </ReceivedRequestsProvider>
         </ChatContextProvider>
       </ProfileContextProvider>
