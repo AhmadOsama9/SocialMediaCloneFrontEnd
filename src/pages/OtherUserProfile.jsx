@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRequest } from "../hooks/useRequest";
 import { useChat } from "../hooks/useChat";
-import OtherUserPosts from "../helperComponent/OtherUserPosts";
+import OtherUserPosts from "../helperComponent/otherUserProfile";
 import OtherUserSharedPosts from "../helperComponent/OtherUserSharedPosts";
 import Loader from "../helperComponent/Loader";
 
