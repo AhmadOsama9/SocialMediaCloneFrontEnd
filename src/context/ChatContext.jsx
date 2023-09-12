@@ -12,7 +12,7 @@ export const useChatContext = () => {
     return context;
 }
 
-export const ChatProvider = ({ children }) => {
+export const ChatContextProvider = ({ children }) => {
     const [messages, setMessages] = useState([]);
 
     const addMessage = (message) => {

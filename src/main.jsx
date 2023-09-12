@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { AuthContextProvider } from './context/AuthContext.jsx'
 import { ProfileContextProvider } from './context/ProfileContext.jsx'
-import { ChatProvider } from './context/chatContext.jsx'
+import { ChatContextProvider } from './context/chatContext.jsx'
 import { ReceivedRequestsProvider } from './context/ReceivedRequestsContext.jsx'
 import { CommunityRelationProvider } from './context/communityRelation.jsx'
 import { UserPostsContextProvider } from './context/UserPostsContext.jsx'
@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthContextProvider>
       <ProfileContextProvider>
-        <ChatProvider>
+        <ChatContextProvider>
           <ReceivedRequestsProvider>
             <CommunityRelationProvider>
               <UserPostsContextProvider>
@@ -37,7 +37,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               </UserPostsContextProvider>
             </CommunityRelationProvider>
           </ReceivedRequestsProvider>
-        </ChatProvider>
+        </ChatContextProvider>
       </ProfileContextProvider>
     </AuthContextProvider>
   </React.StrictMode>,
