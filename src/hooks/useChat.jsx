@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useChatContext } from "../context/chatContext";
+import { useChatContext } from "../context/ChatContext";
 
 export const useChat = () => {
   const [error, setError] = useState(null);
