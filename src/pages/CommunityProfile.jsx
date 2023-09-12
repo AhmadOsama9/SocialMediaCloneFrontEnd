@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useCommunity } from "../hooks/useCommunity";
-import { useCommunityRelationContext } from "../context/communityRelation";
+import { useCommunityRelationContext } from "../context/CommunityRelation";
 import { useSearchUser } from "../hooks/useSearchUser";
 import OtherUserProfile from "./OtherUserProfile";
 import CreateCommunityPost from "../helperComponent/CreateCommunityPost";
 import CommunityPosts from "../helperComponent/CommunityPosts";
-import { useCreateCommunityPostContext } from "../context/createCommunityPostContext";
+import { useCreateCommunityPostContext } from "../context/CreateCommunityPostContext";
 import Loader from "../helperComponent/Loader";
 
 import "../CSS/communityProfile.css";
