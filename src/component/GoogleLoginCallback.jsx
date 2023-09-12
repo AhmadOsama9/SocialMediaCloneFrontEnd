@@ -35,7 +35,7 @@ function GoogleLoginCallback() {
     setUserInfoIsLoading(true);
     setFailed(false);
 
-    const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/checkuserinfo`, {
+    const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/checkuserinfo`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({userId, email, role, token})
