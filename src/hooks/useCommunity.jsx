@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCommunityRelationContext } from "../context/CommunityRelation";
+import { useCommunityRelationContext } from "../context/CommunityRelationContext";
 
 
 export const useCommunity = () => {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useCommunity } from "../hooks/useCommunity";
-import { useCommunityRelationContext } from "../context/CommunityRelation";
+import { useCommunityRelationContext } from "../context/CommunityRelationContext";
 import { useSearchUser } from "../hooks/useSearchUser";
 import OtherUserProfile from "./OtherUserProfile";
 import CreateCommunityPost from "../helperComponent/CreateCommunityPost";
