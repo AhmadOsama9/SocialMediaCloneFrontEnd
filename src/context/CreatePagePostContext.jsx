@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-const CreatePagePostContext = createContext();
+export const CreatePagePostContext = createContext();
 
 export const useCreatePagePostContext = () => {
     const context = useContext(CreatePagePostContext);

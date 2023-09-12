@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-const CommunityRelationContext = createContext();
+export const CommunityRelationContext = createContext();
 
 export const useCommunityRelationContext = () => {
     const context = useContext(CommunityRelationContext);

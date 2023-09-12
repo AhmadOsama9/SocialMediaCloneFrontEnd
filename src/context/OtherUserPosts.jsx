@@ -1,6 +1,6 @@
 import { createContext, useContext, useState} from "react";
 
-const OtherUserPostsContext = createContext();
+export const OtherUserPostsContext = createContext();
 
 export const useOtherUserPostsContext = () => {
     const context = useContext(OtherUserPostsContext);

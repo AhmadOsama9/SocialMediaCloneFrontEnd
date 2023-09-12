@@ -1,6 +1,6 @@
 import { createContext, useContext, useState} from "react";
 
-const ForgotPasswordContext = createContext();
+export const ForgotPasswordContext = createContext();
 
 export const useForgotPasswordContext = () => {
     const context = useContext(ForgotPasswordContext);

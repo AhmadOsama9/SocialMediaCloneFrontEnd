@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-const ActiveSectionContext = createContext();
+export const ActiveSectionContext = createContext();
 
 export const useActiveSectionContext = () => {
     const context = useContext(ActiveSectionContext);

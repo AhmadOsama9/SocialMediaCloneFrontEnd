@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-const ReceivedRequestsContext = createContext();
+export const ReceivedRequestsContext = createContext();
 
 export const useReceivedRequestsContext = () => {
     const context = useContext(ReceivedRequestsContext);
