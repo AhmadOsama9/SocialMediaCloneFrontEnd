@@ -3,7 +3,7 @@
 export const useGetUserInfo = () => {
     
     const getUserNickname = async (userId) => {
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/getnickname?userId=${userId}`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getnickname?userId=${userId}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"}
         });

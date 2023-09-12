@@ -35,7 +35,7 @@ const Signup = () => {
       {
         await signup(email, password, "admin");
       }
-      else if(secretKey !== "vcemkRG!aza2lk276_7W?SGebw4")
+      else if(secretKey !== process.env.SECRET_KEY)
       {
         alert("Wrong Secret Key \n");
         return;

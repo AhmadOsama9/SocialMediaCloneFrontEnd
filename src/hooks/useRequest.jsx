@@ -17,7 +17,7 @@ export const useRequest = () => {
   const getPendingRequests = async () => {
     setIsLoading(true);
     setError(null);
-    const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/receivedrequests?userId=${userId}`, {
+    const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/receivedrequests?userId=${userId}`, {
       method: "GET",
       headers: {"Content-Type": "application/json",},
     })
@@ -33,7 +33,7 @@ export const useRequest = () => {
   const acceptRequest = async (otherUserId) => {
     setIsLoading(true);
     setError(null);
-    const response = await fetch("https://merngymprojectbackend.onrender.com/api/user/acceptrequest", {
+    const response = await fetch("https://socialmediaclonebackend.onrender.com/api/user/acceptrequest", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +56,7 @@ export const useRequest = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("https://merngymprojectbackend.onrender.com/api/user/decline", {
+    const response = await fetch("https://socialmediaclonebackend.onrender.com/api/user/decline", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

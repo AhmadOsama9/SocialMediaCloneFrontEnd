@@ -17,7 +17,7 @@ export const useProfileInfo = () => {
     const userId = user.userId;
 
     const response = await fetch(
-      `https://merngymprojectbackend.onrender.com/api/user/updateprofile/${field}`,
+      `https://socialmediaclonebackend.onrender.com/api/user/updateprofile/${field}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -45,7 +45,7 @@ export const useProfileInfo = () => {
     const userId = user.userId;
 
     const response = await fetch(
-      `https://merngymprojectbackend.onrender.com/api/user/checkpassword`,
+      `https://socialmediaclonebackend.onrender.com/api/user/checkpassword`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -67,7 +67,7 @@ export const useProfileInfo = () => {
     const userId = user.userId;
 
     const response = await fetch(
-      `https://merngymprojectbackend.onrender.com/api/user/updatepassword`,
+      `https://socialmediaclonebackend.onrender.com/api/user/updatepassword`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -90,7 +90,7 @@ export const useProfileInfo = () => {
         const userId = user.userId;
 
         try {
-            const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/getprofileinfo?userId=${userId}`, {
+            const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getprofileinfo?userId=${userId}`, {
               method: "GET",
               headers: { "Content-Type": "application/json" },
             });

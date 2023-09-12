@@ -15,7 +15,7 @@ export const useCommunity = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/community/relation?userId=${currentUserId}&communityId=${communityId}`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/community/relation?userId=${currentUserId}&communityId=${communityId}`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -37,7 +37,7 @@ export const useCommunity = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/community/sendrequest", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/community/sendrequest", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export const useCommunity = () => {
         setIsLoading(true);
         setError(null);
         
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/community/cancelrequest", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/community/cancelrequest", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -81,7 +81,7 @@ export const useCommunity = () => {
         setIsLoading(true);
         setError(null);
         
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/community/acceptrequest", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/community/acceptrequest", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -103,7 +103,7 @@ export const useCommunity = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/community/declinerequest", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/community/declinerequest", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -125,7 +125,7 @@ export const useCommunity = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/community/getmembers?communityId=${communityId}`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/community/getmembers?communityId=${communityId}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         })
@@ -144,7 +144,7 @@ export const useCommunity = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/community/removemember", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/community/removemember", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ userId, communityId }),
@@ -164,7 +164,7 @@ export const useCommunity = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/community/delete", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/community/delete", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ userId: currentUserId, communityId }),
@@ -184,7 +184,7 @@ export const useCommunity = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/community/getmembershiprequests?communityId=${communityId}`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/community/getmembershiprequests?communityId=${communityId}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         });
@@ -203,7 +203,7 @@ export const useCommunity = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/community/leave?userId=${currentUserId}&communityId=${communityId}`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/community/leave?userId=${currentUserId}&communityId=${communityId}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"}
         });
@@ -222,7 +222,7 @@ export const useCommunity = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/community/create", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/community/create", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ name, description, userId: currentUserId })

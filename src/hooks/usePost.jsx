@@ -18,7 +18,7 @@ export const usePost = () => {
     const getCreatedPosts = async () => {
         setPostError(null);
         setPostLoading(true);
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/getposts?userId=${userId}`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getposts?userId=${userId}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         })
@@ -35,7 +35,7 @@ export const usePost = () => {
     const getSharedPosts = async () => {
         setPostError(null);
         setPostLoading(true);
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/getsharedposts?userId=${userId}`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getsharedposts?userId=${userId}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         })
@@ -53,7 +53,7 @@ export const usePost = () => {
     const getOtherUserCreatedPosts = async (otherUserId) => {
         setPostError(null);
         setPostLoading(true);
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/getposts?userId=${otherUserId}`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getposts?userId=${otherUserId}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         })
@@ -71,7 +71,7 @@ export const usePost = () => {
     const getOtherUserSharedPosts = async (otherUserId) => {
         setPostError(null);
         setPostLoading(true);
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/getsharedposts?userId=${otherUserId}`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getsharedposts?userId=${otherUserId}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         })
@@ -90,7 +90,7 @@ export const usePost = () => {
     const getCommunityPosts = async (communityId) => {
         setPostError(null);
         setPostLoading(true);
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/community/getcreatedposts?communityId=${communityId}`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/community/getcreatedposts?communityId=${communityId}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         })
@@ -111,7 +111,7 @@ export const usePost = () => {
         setPostError(null);
         setPostLoading(true);
 
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/page/posts?name=${name}`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/page/posts?name=${name}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         });
@@ -131,7 +131,7 @@ export const usePost = () => {
         setPostError(null);
         setPostLoading(true);
 
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/getfeedposts?userId=${userId}&page=${currentPageNumber}`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getfeedposts?userId=${userId}&page=${currentPageNumber}`, {
             method: "GET",
             headers: {"Content-Type": "applicationn/json"}
         });
@@ -151,7 +151,7 @@ export const usePost = () => {
     const createPost = async (header, content) => {
         setPostError(null);
         setPostLoading(true);
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/post/create", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/post/create", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({header, content, owner: userId}),
@@ -170,7 +170,7 @@ export const usePost = () => {
     const addPost = async (header, content, communityId) => {
         setPostError(null);
         setPostLoading(true);
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/post/add", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/post/add", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({header, content, owner: userId, communityId})
@@ -188,7 +188,7 @@ export const usePost = () => {
     const createPagePost = async (pageName, header, content) => {
         setPostError(null);
         setPostLoading(true);
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/post/createpagepost", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/post/createpagepost", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({pageName, header, content})
@@ -206,7 +206,7 @@ export const usePost = () => {
     const deletePost = async (postId) => {
         setPostError(null);
         setPostLoading(true);
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/post/deleteuserpost", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/post/deleteuserpost", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({postId})
@@ -225,7 +225,7 @@ export const usePost = () => {
     const deleteCommunityPost = async (postId) => {
         setPostError(null);
         setPostLoading(true);
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/post/deletecommunitypost", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/post/deletecommunitypost", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({postId})
@@ -244,7 +244,7 @@ export const usePost = () => {
     const deletePagePost = async (pageName, postId) => {
         setPostError(null);
         setPostLoading(true);
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/post/deletepagepost", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/post/deletepagepost", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ pageName, postId })
@@ -263,7 +263,7 @@ export const usePost = () => {
     const updatePost = async (postId, header, content) => {
         setPostError(null);
         setPostLoading(true);
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/post/update", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/post/update", {
             method: "POST", 
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({postId, header, content})
@@ -283,7 +283,7 @@ export const usePost = () => {
         setPostError(null);
         setPostLoading(true);
         
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/post/reaction/get?postId=${postId}`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/post/reaction/get?postId=${postId}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"}
         });
@@ -303,7 +303,7 @@ export const usePost = () => {
         setPostError(null);
         setPostLoading(true);
 
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/post/comment/get?postId=${postId}`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/post/comment/get?postId=${postId}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         });
@@ -323,7 +323,7 @@ export const usePost = () => {
         setPostError(null);
         setPostLoading(true);
 
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/post/share/get?postId=${postId}`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/post/share/get?postId=${postId}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         });
@@ -342,7 +342,7 @@ export const usePost = () => {
         setPostError(null);
         setPostLoading(true);
         
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/post/reaction/add", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/post/reaction/add", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({nickname: userNickname, postId, reactionType})
@@ -360,7 +360,7 @@ export const usePost = () => {
         setPostError(null);
         setPostLoading(true);
         
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/post/reaction/update", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/post/reaction/update", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({nickname: userNickname, postId, reactionType})
@@ -378,7 +378,7 @@ export const usePost = () => {
         setPostError(null);
         setPostLoading(true);
         
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/post/reaction/remove", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/post/reaction/remove", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({nickname: userNickname, postId})
@@ -396,7 +396,7 @@ export const usePost = () => {
         setPostError(null);
         setPostLoading(true);
 
-        const response = await  fetch("https://merngymprojectbackend.onrender.com/api/post/comment/add", {
+        const response = await  fetch("https://socialmediaclonebackend.onrender.com/api/post/comment/add", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({userId, postId, content})
@@ -414,7 +414,7 @@ export const usePost = () => {
         setPostError(null);
         setPostLoading(true);
 
-        const response = await  fetch("https://merngymprojectbackend.onrender.com/api/post/comment/update", {
+        const response = await  fetch("https://socialmediaclonebackend.onrender.com/api/post/comment/update", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({content, commentId})
@@ -431,7 +431,7 @@ export const usePost = () => {
         setPostError(null);
         setPostLoading(true);
 
-        const response = await  fetch("https://merngymprojectbackend.onrender.com/api/post/comment/remove", {
+        const response = await  fetch("https://socialmediaclonebackend.onrender.com/api/post/comment/remove", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({postId, commentId})
@@ -449,7 +449,7 @@ export const usePost = () => {
         setPostError(null);
         setPostLoading(true);
 
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/post/share/add", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/post/share/add", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({userId, postId})
@@ -469,7 +469,7 @@ export const usePost = () => {
         setPostError(null);
         setPostLoading(true);
 
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/post/share/remove", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/post/share/remove", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({userId, postId})

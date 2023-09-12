@@ -13,7 +13,7 @@ export const useShowFriends = () => {
         setIsLoading(true);
         setError(null);
         
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/getallfriends?userId=${userId}`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getallfriends?userId=${userId}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         })

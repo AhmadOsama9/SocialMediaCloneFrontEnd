@@ -11,7 +11,7 @@ export const useSignup = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/user/signup", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/user/signup", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({email, password, role})
@@ -38,7 +38,7 @@ export const useSignup = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/otp/sendotp", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/otp/sendotp", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({email})
@@ -56,7 +56,7 @@ export const useSignup = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch("https://merngymprojectbackend.onrender.com/api/otp/validateotp", {
+        const response = await fetch("https://socialmediaclonebackend.onrender.com/api/otp/validateotp", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({email, otp})

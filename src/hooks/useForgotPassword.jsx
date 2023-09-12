@@ -9,7 +9,7 @@ export const useForgotPassword = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch ('https://merngymprojectbackend.onrender.com/api/user/forgotPassword', {
+    const response = await fetch ('https://socialmediaclonebackend.onrender.com/api/user/forgotPassword', {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({email}),
@@ -28,7 +28,7 @@ export const useForgotPassword = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch ('https://merngymprojectbackend.onrender.com/api/user/validateotp', {
+    const response = await fetch ('https://socialmediaclonebackend.onrender.com/api/user/validateotp', {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({email, otp}),

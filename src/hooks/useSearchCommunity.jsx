@@ -9,7 +9,7 @@ export const useSearchCommunity = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch(`https://merngymprojectbackend.onrender.com/api/community/search?name=${name}`, {
+    const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/community/search?name=${name}`, {
         method: "GET",
         headers: {"Content-Type": "application/json"},
     })

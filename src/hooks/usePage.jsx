@@ -14,7 +14,7 @@ export const usePage = () => {
   const createPage = async (name, description) => {
     setPageError(null);
     setPageLoading(true);
-    const response = await fetch("https://merngymprojectbackend.onrender.com/api/page/create", {
+    const response = await fetch("https://socialmediaclonebackend.onrender.com/api/page/create", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({name, description, userId})
@@ -37,7 +37,7 @@ export const usePage = () => {
   const searchPage = async (name) => {
     setPageError(null);
     setPageLoading(true);
-    const response = await fetch(`https://merngymprojectbackend.onrender.com/api/page/getpage?name=${name}`, {
+    const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/page/getpage?name=${name}`, {
       method: "GET",
       headers: {"Content-Type": "application/json"},
     });
@@ -56,7 +56,7 @@ export const usePage = () => {
   const getPageAdmin = async (name) => {
     setPageError(null);
     setPageLoading(true);
-    const response = await fetch(`https://merngymprojectbackend.onrender.com/api/page/getpageadmin?name=${name}`, {
+    const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/page/getpageadmin?name=${name}`, {
       method: "GET",
       headers: {"Content-Type": "application/json"},
     });
@@ -74,7 +74,7 @@ export const usePage = () => {
   const getPageLikers = async (name) => {
     setPageError(null);
     setPageLoading(true);
-    const response = await fetch(`https://merngymprojectbackend.onrender.com/api/page/pagelikers?name=${name}`, {
+    const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/page/pagelikers?name=${name}`, {
       method: "GET",
       headers: {"Content-Type": "application/json"},
     });
@@ -93,7 +93,7 @@ export const usePage = () => {
   const deletePage = async (name) => {
     setPageError(null);
     setPageLoading(true);
-    const response = await fetch("https://merngymprojectbackend.onrender.com/api/page/delete", {
+    const response = await fetch("https://socialmediaclonebackend.onrender.com/api/page/delete", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: json.stringify({name})
@@ -114,7 +114,7 @@ export const usePage = () => {
   const addLike = async (name) => {
     setPageError(null);
     setPageLoading(true);
-    const response = await fetch("https://merngymprojectbackend.onrender.com/api/page/addlike", {
+    const response = await fetch("https://socialmediaclonebackend.onrender.com/api/page/addlike", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({name, userId})
@@ -135,7 +135,7 @@ export const usePage = () => {
   const removeLike = async (name) => {
     setPageError(null);
     setPageLoading(true);
-    const response = await fetch("https://merngymprojectbackend.onrender.com/api/page/removelike", {
+    const response = await fetch("https://socialmediaclonebackend.onrender.com/api/page/removelike", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({name, userId})

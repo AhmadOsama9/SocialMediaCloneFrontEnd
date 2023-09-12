@@ -42,7 +42,7 @@ const OtherUserProfile = ({ otherUser, relation }) => {
       setIsLoading(true);
       setError(null);
 
-      const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/getrelation?userId=${userId}&otherUserId=${otherUserId}`, {
+      const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getrelation?userId=${userId}&otherUserId=${otherUserId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +64,7 @@ const OtherUserProfile = ({ otherUser, relation }) => {
       setIsLoading(true);
       setError(null);
 
-      const response = await fetch("https://merngymprojectbackend.onrender.com/api/user/sendrequest", {
+      const response = await fetch("https://socialmediaclonebackend.onrender.com/api/user/sendrequest", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -88,7 +88,7 @@ const OtherUserProfile = ({ otherUser, relation }) => {
       setIsLoading(true);
       setError(null);
 
-      const response = await fetch("https://merngymprojectbackend.onrender.com/api/user/remove", {
+      const response = await fetch("https://socialmediaclonebackend.onrender.com/api/user/remove", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -111,7 +111,7 @@ const OtherUserProfile = ({ otherUser, relation }) => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("https://merngymprojectbackend.onrender.com/api/user/cancelrequest", {
+    const response = await fetch("https://socialmediaclonebackend.onrender.com/api/user/cancelrequest", {
       method: "Post",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({ userId, otherUserId}),

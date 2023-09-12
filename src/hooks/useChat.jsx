@@ -17,7 +17,7 @@ export const useChat = () => {
   const sendMessage = async (otherUserId, content) => {
     setError(null);
 
-    const response = await fetch("https://merngymprojectbackend.onrender.com/api/chat/send", {
+    const response = await fetch("https://socialmediaclonebackend.onrender.com/api/chat/send", {
       method: "Post",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({ userId, otherUserId, content})
@@ -38,7 +38,7 @@ export const useChat = () => {
   const sendMessageByChatId = async (chatId, content) => {
     setError(null);
 
-    const response = await fetch("https://merngymprojectbackend.onrender.com/api/chat/sendbychatid", {
+    const response = await fetch("https://socialmediaclonebackend.onrender.com/api/chat/sendbychatid", {
       method: "Post",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({ userId, chatId, content})
@@ -61,7 +61,7 @@ export const useChat = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch(`https://merngymprojectbackend.onrender.com/api/chat/getchats?userId=${userId}`, {
+    const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/chat/getchats?userId=${userId}`, {
         method: "GET",
         headers: {
         "Content-Type": "application/json",
@@ -82,7 +82,7 @@ export const useChat = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("https://merngymprojectbackend.onrender.com/api/chat/getmessages", {
+    const response = await fetch("https://socialmediaclonebackend.onrender.com/api/chat/getmessages", {
       method: "Post",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({ userId, otherUserId}),
@@ -107,7 +107,7 @@ export const useChat = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch(`https://merngymprojectbackend.onrender.com/api/chat/getchatmessagesbychatid?chatId=${chatId}`, {
+    const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/chat/getchatmessagesbychatid?chatId=${chatId}`, {
         method: "GET",
         headers: {
         "Content-Type": "application/json",

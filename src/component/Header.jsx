@@ -3,7 +3,7 @@ import Nav from "./Nav";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import "../CSS/header.css";
 
@@ -20,7 +20,9 @@ const Header = () => {
   return (
     <header>
         <nav>
-            <h1 className="logo">SMC</h1>
+          <Link className="logo" to="/">
+            <h1>SMC</h1>
+          </Link>
             <Nav />
             {user && (
               <div className="logout">

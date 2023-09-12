@@ -3,6 +3,7 @@ header {
     padding: 0.3rem;
     margin-bottom: 1rem;
 }
+
 header nav {
     display: flex;
     justify-content: end;
@@ -11,14 +12,12 @@ header nav {
     gap: 1rem;
 }
 
-header nav h1 {
-    margin-right: auto;
-}
-
 header .logo {
-    font-size: 2rem;
+    font-size: 1.3rem;
     font-weight: bold;
-    
+    margin-right: auto;
+    text-decoration: none;
+    color: var(--first-primary-color);
 }
 
 .logout {

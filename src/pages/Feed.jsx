@@ -19,9 +19,24 @@ const Feed = () => {
     <div className="feed">
       <h3 className="h3">Your feed</h3>
       <div className="toggle-buttons">
-        <button onClick={() => handlePostsTypeToggle("UserPosts")}>Posts</button>
-        <button onClick={() => handlePostsTypeToggle("SharedPosts")}>SharedPosts</button>
-        <button onClick={() => handlePostsTypeToggle("Feed")}>Feed</button>
+        <button
+          className={activePostsType === "UserPosts" ? "active" : ""}
+          onClick={() => handlePostsTypeToggle("UserPosts")}
+        >
+          Posts
+        </button>
+        <button
+          className={activePostsType === "SharedPosts" ? "active" : ""}
+          onClick={() => handlePostsTypeToggle("SharedPosts")}
+        >
+          SharedPosts
+        </button>
+        <button
+          className={activePostsType === "Feed" ? "active" : ""}
+          onClick={() => handlePostsTypeToggle("Feed")}
+        >
+          Feed
+        </button>
       </div>
       <div>
         {activePostsType === "UserPosts" && (

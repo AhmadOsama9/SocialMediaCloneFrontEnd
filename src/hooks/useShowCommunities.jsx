@@ -9,7 +9,7 @@ export const useShowCommunities = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/community/getall`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/community/getall`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         })

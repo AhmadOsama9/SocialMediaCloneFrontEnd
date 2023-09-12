@@ -12,7 +12,7 @@ export const useUserPages = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/getuserpages?userId=${userId}`, {
+    const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getuserpages?userId=${userId}`, {
         method: "GET",
         headers: {"Content-Type": "application/json"},
     })

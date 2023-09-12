@@ -13,7 +13,7 @@ export const useShowCommunities = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/getjoinedcommunities?userId=${userId}`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getjoinedcommunities?userId=${userId}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         })
@@ -32,7 +32,7 @@ export const useShowCommunities = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/getusercommunities?userId=${userId}`, {
+        const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getusercommunities?userId=${userId}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         })

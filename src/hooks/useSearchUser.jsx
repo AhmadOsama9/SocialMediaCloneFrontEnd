@@ -9,7 +9,7 @@ export const useSearchUser = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/getprofilebynickname?nickname=${nickname}`, {
+    const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getprofilebynickname?nickname=${nickname}`, {
         method: "GET",
         headers: {"Content-Type": "application/json"},
     })
@@ -28,7 +28,7 @@ export const useSearchUser = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch(`https://merngymprojectbackend.onrender.com/api/user/getprofilebynickname?nickname=${nickname}`, {
+    const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getprofilebynickname?nickname=${nickname}`, {
         method: "GET",
         headers: {"Content-Type": "application/json"},
     })
