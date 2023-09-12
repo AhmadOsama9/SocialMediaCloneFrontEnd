@@ -112,7 +112,6 @@ const UserSharedPosts = () => {
                                 <div key={comment.commentId}>
                                     <h5>owner: {comment.nickname}</h5>
                                     <h5>content: {comment.content}</h5>
-                                    <h5>CreatedAt: {comment.createdAt}</h5>
                                 </div>
                                 ))
                             ) : (

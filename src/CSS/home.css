@@ -21,10 +21,12 @@
   outline: none;
   border: none;
   font-size: 1.5rem;
+  border-radius: 1rem;
+  padding: 0.3rem 0.7rem;
 }
 
 .group {
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
 }
 
 .group label {

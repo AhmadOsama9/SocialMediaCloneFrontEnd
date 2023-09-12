@@ -3,7 +3,7 @@ import { useUserPostsContext } from "../context/UserPostsContext";
 import { usePost } from "../hooks/usePost";
 import Loader from "../helperComponent/Loader";
 
-
+import "../CSS/updatePost.css";
 
 const UserPosts = () => {
     const { userPosts } = useUserPostsContext();
@@ -112,7 +112,6 @@ const UserPosts = () => {
                                 <div key={comment.commentId}>
                                     <h5>owner: {comment.nickname}</h5>
                                     <h5>content: {comment.content}</h5>
-                                    <h5>CreatedAt: {comment.createdAt}</h5>
                                 </div>
                                 ))
                             ) : (
@@ -123,18 +122,21 @@ const UserPosts = () => {
                         </div>
                     )}
                     {showUpdate[post.postId] && (
-                        <div>
+                        <div className="edit-post-container">
                         <input 
                             type="text"
                             value={editedHeaders[post.postId]}
-                            onChange={(e) => setEditedHeaders(prvState => ({ ...prvState, [post.postId]: e.target.value}))}
+                            onChange={(e) => setEditedHeaders(prevState => ({ ...prevState, [post.postId]: e.target.value }))}
+                            className="edit-post-input"
                         />
                         <textarea
                             value={editedContents[post.postId]}
-                            onChange={(e) => setEditedContents(prvState => ({ ...prvState, [post.postId]: e.target.value}))}
+                            onChange={(e) => setEditedContents(prevState => ({ ...prevState, [post.postId]: e.target.value }))}
+                            className="edit-post-textarea"
                         />
-                        <button onClick={() => handleCallUpdate(post)} className="post-button">Save</button>
-                        </div>
+                        <button onClick={() => handleCallUpdate(post)} className="edit-post-button">Save</button>
+                    </div>
+                    
                     )}
                 </div>
 

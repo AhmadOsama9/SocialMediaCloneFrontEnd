@@ -195,8 +195,8 @@ const OtherUserProfile = ({ otherUser, relation }) => {
         </div>
       )}
       {showChat && (
-        <>
-          <button className="close-button" onClick={handleCloseChat}></button>
+        <div className="chat">
+          <button className="close-button" onClick={handleCloseChat}>X</button>
           <div className="chat-container">
               {messages.map((msg, index) => (
               <div
@@ -215,7 +215,7 @@ const OtherUserProfile = ({ otherUser, relation }) => {
               />
               <button onClick={handleSendMessage}>Send</button>
           </div>
-        </>
+        </div>
       )}
       {!showChat && (
         <div>

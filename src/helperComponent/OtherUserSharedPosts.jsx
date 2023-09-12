@@ -218,7 +218,7 @@ const OtherUserSharedPosts = ({ otherUser }) => {
     }
 
     if (otherUserSharedPosts.length === 0) {
-        return <h3>The User have no Posts</h3>;
+        return <h3>The User have no Shared Posts</h3>;
     }
     return (
         <div>
@@ -294,7 +294,6 @@ const OtherUserSharedPosts = ({ otherUser }) => {
                             <div className="post-comment" key={comment.commentId}>
                                 <h5 className="post-comment-owner">Owner: {comment.nickname}</h5>
                                 <h5 className="post-comment-content">Content: {comment.content}</h5>
-                                <h5 className="post-comment-createdat">CreatedAt: {comment.createdAt}</h5>
                                 {comment.nickname === userNickname && (
                                 <div className="post-comment-actions">
                                     <button className="post-comment-action-button" onClick={() => handleShowUpdateComment(comment)}>Update</button>

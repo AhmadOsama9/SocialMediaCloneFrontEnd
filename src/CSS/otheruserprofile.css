@@ -29,12 +29,12 @@
 }
   
 .user-info button {
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    padding: 0.3rem 0.7rem;
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 1rem;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -97,41 +97,6 @@
   
 .message-input button:hover {
     background-color: #0056b3;
-}
-  
-  /* Close chat button */
-.other-user-profile .close-button {
-    position: relative;
-    top: 0rem;
-    right: 0.7rem;
-    width: 2rem;
-    height: 3rem;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-.other-user-profile .close-button::before,
-.other-user-profile .close-button::after {
-  content: '';
-  position: absolute;
-  width: 2px;
-  height: 20px;
-  top: 5px;
-  left: 14px;
-  background-color: #333;
-}
-
-.other-user-profile .close-button::before {
-    transform: rotate(45deg);
-}
-  
-.other-user-profile .close-button::after {
-    transform: rotate(-45deg);
-}
-  
-  button.close-button:hover {
-    color: #ff0000;
 }
   
 
