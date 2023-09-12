@@ -8,7 +8,7 @@ import LoggedinUser from "./pages/LoggedinUser";
 import Friends from "./helperComponent/Friends";
 import Feed from "./pages/Feed";
 
-import GoogleSignupCallback from "./component/GoogleSignupCallBack";
+import GoogleSignupCallback from "./component/GoogleSignupCallback";
 import GoogleLoginCallback from "./component/GoogleLoginCallback";
 
 //hooks
