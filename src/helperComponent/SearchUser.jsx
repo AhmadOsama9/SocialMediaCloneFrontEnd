@@ -8,7 +8,7 @@ import Loader from "../helperComponent/Loader";
 import { avatar1, avatar2, avatar3, avatar4 } from "../assets/avatar";
 
 
-import "../CSS/searchuser.css";
+import "../CSS/searchUser.css";
 
 const SearchUser = ({ nickname }) => {
   const { isLoading, error, user, searchUser } = useSearchUser();
