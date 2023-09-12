@@ -2,7 +2,7 @@ import { useState } from "react";
 import { usePost } from "../hooks/usePost";
 import { useCreateCommunityPostContext } from "../context/CreateCommunityPostContext";
 
-import "../Css/CreateCommunityPost.css";
+import "../Css/createCommunityPost.css";
 
 const CreateCommunityPost = ({ communityId }) => {
     const [header, setHeader] = useState("");
