@@ -5,7 +5,7 @@ import OtherUserProfile from "../pages/OtherUserProfile";
 import { useReceivedRequestsContext } from "../context/ReceivedRequestsContext";
 import Loader from "../helperComponent/Loader";
 
-import "../Css/ShowReceivedRequests.css";
+import "../CSS/ShowReceivedRequests.css";
 
 const ShowReceivedRequests = () => {
   const { isLoading, error, acceptRequest, declineRequest } = useRequest();
