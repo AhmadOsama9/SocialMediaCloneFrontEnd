@@ -5,7 +5,7 @@ import { useSearchUser } from "../hooks/useSearchUser";
 import OtherUserProfile from "./OtherUserProfile";
 import CreateCommunityPost from "../helperComponent/CreateCommunityPost";
 import CommunityPosts from "../helperComponent/CommunityPosts";
-import { useCreateCommunityPostContext } from "../context/CreateCommunityPostContext";
+import { useCreateCommunityPostContext } from "../context/createCommunityPostContext";
 import Loader from "../helperComponent/Loader";
 
 import "../CSS/communityProfile.css";

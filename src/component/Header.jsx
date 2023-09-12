@@ -20,7 +20,7 @@ const Header = () => {
   return (
     <header>
         <nav>
-            <h1 className="logo">Logo</h1>
+            <h1 className="logo">SMC</h1>
             <Nav />
             {user && (
               <div className="logout">

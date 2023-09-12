@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { usePost } from "../hooks/usePost";
-import { useCreateCommunityPostContext } from "../context/CreateCommunityPostContext";
+import { useCreateCommunityPostContext } from "../context/createCommunityPostContext";
 
 import "../Css/createCommunityPost.css";
 
