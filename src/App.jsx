@@ -26,7 +26,7 @@ function App() {
       <Header />
       <Routes>
         <Route index element={!user? <Home /> : <LoggedinUser />} />
-        <Route path="/profile" element={<Profile /> } />
+        <Route path="/profile" element={!user ? <Home /> : <Profile /> } />
         <Route path="/Receivedrequests" element={!user? <Home /> : <ShowReceivedRequests />} />
         <Route path="/Chats" element={!user? <Home /> : <ShowChats />} />
         <Route path="/friends" element={!user? <Home />: <Friends />} />
