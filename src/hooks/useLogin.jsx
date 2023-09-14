@@ -41,7 +41,7 @@ export const useLogin = () => {
         }
     } 
     const googleLogin = async () => {
-        window.location.href = "https://socialmediaclonebackend.onrender.com/api/user/auth/google/";
+        window.location.href = "https://socialmediaclonebackend.onrender.com/api/user/auth/google";
         
     } 
 

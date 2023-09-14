@@ -103,6 +103,7 @@ const Signup = () => {
         <div className="otp-container">
           <h3 className="otp-heading">The OTP has been sent</h3>
           <h4 className="otp-note">NOTE: It'll expire in 5 minutes</h4>
+          <h4 className="otp-note">Also double check the spam</h4>
           <label className="otp-label">Enter OTP</label>
           <input
             type="text"
