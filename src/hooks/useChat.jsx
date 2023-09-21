@@ -6,6 +6,7 @@ export const useChat = () => {
   const [isLoading, setIsLoading] = useState(null);
   const [chats, setChats] = useState([]);
   const { messages, addMessage, setMessages } = useChatContext();
+  const [chatId, setChatId] = useState("");
 
   const userString = localStorage.getItem("user");
   const userId = JSON.parse(userString).userId;
@@ -97,10 +98,9 @@ export const useChat = () => {
       }));
 
       setMessages(formattedMessages);
-    } else {
-      setError(data.error);
     }
     setIsLoading(false);
+    
   }
 
   const getChatMessageByChatId = async (chatId) => {
@@ -129,5 +129,5 @@ export const useChat = () => {
     setIsLoading(false);
   }
 
-  return { sendMessage, sendMessageByChatId, getChats, getChatMessages, getChatMessageByChatId, isLoading, error, messages, chats};
+  return { sendMessage, sendMessageByChatId, getChats, getChatMessages, getChatMessageByChatId, isLoading, error, messages, chats, chatId};
 }
