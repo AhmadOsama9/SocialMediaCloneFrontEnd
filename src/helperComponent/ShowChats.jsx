@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useChat } from "../hooks/useChat";
 import Loader from "../helperComponent/Loader";
-import socketIOClient from "socket.io-client";
+import io from "socket.io-client";
 
 
 import "../CSS/showchats.css";
@@ -16,7 +16,7 @@ const ShowChats = () => {
     const userString = localStorage.getItem("user");
     const userId = JSON.parse(userString).userId;
 
-    const socket = socketIOClient("https://socialmediaclonebackend.onrender.com");
+    const socket = io("https://socialmediaclonebackend.onrender.com");
 
     useEffect(() => {
         socket.on("connect", () => {
