@@ -38,6 +38,7 @@ export const useChat = () => {
   }
   const sendMessageByChatId = async (chatId, content) => {
     setChatError(null);
+    console.log("The context is : ", content);
 
     const response = await fetch("https://socialmediaclonebackend.onrender.com/api/chat/sendbychatid", {
       method: "Post",
