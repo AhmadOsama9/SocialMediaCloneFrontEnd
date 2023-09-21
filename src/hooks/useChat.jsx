@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useChatContext } from "../context/ChatContext";
 
 export const useChat = () => {
-  const [error, setError] = useState(null);
+  const [chatError, setChatError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const [chats, setChats] = useState([]);
   const { messages, addMessage, setMessages } = useChatContext();
@@ -16,7 +16,7 @@ export const useChat = () => {
   }, [])
 
   const sendMessage = async (otherUserId, content) => {
-    setError(null);
+    setChatError(null);
 
     const response = await fetch("https://socialmediaclonebackend.onrender.com/api/chat/send", {
       method: "Post",
@@ -32,12 +32,12 @@ export const useChat = () => {
       }
       addMessage(newMessage);
     } else {
-      setError(data.error);
+      setChatError(data.error);
     }
 
   }
   const sendMessageByChatId = async (chatId, content) => {
-    setError(null);
+    setChatError(null);
 
     const response = await fetch("https://socialmediaclonebackend.onrender.com/api/chat/sendbychatid", {
       method: "Post",
@@ -54,13 +54,13 @@ export const useChat = () => {
       }
       addMessage(newMessage);
     } else {
-      setError(data.error);
+      setChatError(data.error);
     }
   }
 
   const getChats = async () => {
     setIsLoading(true);
-    setError(null);
+    setChatError(null);
 
     const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/chat/getchats?userId=${userId}`, {
         method: "GET",
@@ -74,14 +74,14 @@ export const useChat = () => {
     if (response.ok) {
         setChats(data);
     } else {
-        setError(data.error);
+        setChatError(data.error);
     }
     setIsLoading(false);
   }
 
   const getChatMessages = async (otherUserId) => {
     setIsLoading(true);
-    setError(null);
+    setChatError(null);
 
     const response = await fetch("https://socialmediaclonebackend.onrender.com/api/chat/getmessages", {
       method: "Post",
@@ -92,12 +92,16 @@ export const useChat = () => {
     const data = await response.json();
 
     if (response.ok) {
-      const formattedMessages = data.map((message) => ({
+      const formattedMessages = data.messages.map((message) => ({
         sender: message.sender,
         content: message.content,
       }));
 
       setMessages(formattedMessages);
+      setChatId(data.chatId);
+    }
+    else {
+      setChatError(data.error);
     }
     setIsLoading(false);
     
@@ -105,7 +109,7 @@ export const useChat = () => {
 
   const getChatMessageByChatId = async (chatId) => {
     setIsLoading(true);
-    setError(null);
+    setChatError(null);
 
     const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/chat/getchatmessagesbychatid?chatId=${chatId}`, {
         method: "GET",
@@ -124,10 +128,10 @@ export const useChat = () => {
 
         setMessages(formattedMessages);
     } else {
-        setError(data.error);
+        setChatError(data.error);
     }
     setIsLoading(false);
   }
 
-  return { sendMessage, sendMessageByChatId, getChats, getChatMessages, getChatMessageByChatId, isLoading, error, messages, chats, chatId};
+  return { sendMessage, sendMessageByChatId, getChats, getChatMessages, getChatMessageByChatId, isLoading, chatError, messages, chats, chatId, setMessages};
 }

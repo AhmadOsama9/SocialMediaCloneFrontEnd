@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useChat } from "../hooks/useChat";
 import Loader from "../helperComponent/Loader";
+import io from "socket.io-client";
 
 
 import "../CSS/showchats.css";
 
 
 const ShowChats = () => {
-    const { isLoading, error, chats, getChatMessageByChatId, sendMessageByChatId, messages } = useChat();
+    const { isLoading, chatError, chats, getChatMessageByChatId, sendMessageByChatId, messages, setMessages } = useChat();
     const [ showChat, setShowChat ] = useState(false);
     const [ newMessage, setNewMessage] = useState("");
     const [ chatId, setChatId] = useState()
@@ -15,22 +16,52 @@ const ShowChats = () => {
     const userString = localStorage.getItem("user");
     const userId = JSON.parse(userString).userId;
 
+    const socket = io("https://socialmediaclonebackend.onrender.com");
+
+    useEffect(() => {
+        socket.on("connect", () => {
+            console.log("Connected to WebSocket Server");
+        })
+
+        socket.on("chat-message", (message) => {
+           setMessages(prvState => [...prvState, message]); 
+        })
+
+        return () => {
+            socket.disconnect();
+        }
+    }, [])
+
     const handleSendMessage = async () => {
-        sendMessageByChatId(chatId, newMessage);
+        // Emit a "chat-message" event to the server
+        socket.emit("chat-message", {
+        chatId,
+        message: newMessage,
+        userId,
+        });
+
         setNewMessage("");
     }
 
     const handleShowChat = async (chatId) => {
+        socket.emit("join-chat", chatId);
+
         getChatMessageByChatId(chatId);
         setShowChat(prv => !prv);
         setChatId(chatId);
+    }
+
+    const handleCloseChat = () => {
+        socket.emit("leave-chat", chatId);
+        setShowChat(false);
+        setChatId(null);
     }
 
     if (isLoading) {
         return <Loader />;
     }
     
-    if (error) {
+    if (chatError) {
         return <h3 className=".error">Error: {error}</h3>;
     }
 
@@ -53,7 +84,7 @@ const ShowChats = () => {
             )}
             {showChat && (
                 <div className="chat">
-                <button onClick={() => setShowChat(prv => !prv)}>X</button>
+                <button onClick={handleCloseChat}>X</button>
                 <div className="chat-container">
                     {messages.map((msg, index) => (
                     <div

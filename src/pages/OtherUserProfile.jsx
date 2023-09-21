@@ -18,7 +18,7 @@ const OtherUserProfile = ({ otherUser, relation }) => {
   const { relationshipStatus, setRelationshipStatus } = useReceivedRequestsContext();
   const [showChat, setShowChat] = useState(false);
 
-  const { messages, sendMessage, getChatMessages } = useChat();
+  const { messages, chatId, sendMessageByChatId, getChatMessages, chatError } = useChat();
 
   const [newMessage, setNewMessage] = useState("");
 
@@ -137,7 +137,7 @@ const OtherUserProfile = ({ otherUser, relation }) => {
   }
 
   const handleSendMessage = () => {
-    sendMessage(otherUserId, newMessage);
+    sendMessageByChatId(chatId);
     setNewMessage("");
   }; 
   
@@ -146,7 +146,11 @@ const OtherUserProfile = ({ otherUser, relation }) => {
   }
 
   if(error) {
-    return <h3>Error: {error}</h3>;
+    return <h3 className="error">Error: {error}</h3>;
+  }
+
+  if (chatError) {
+    return <h3 className="error">Error: {chatError}</h3>
   }
 
   return (
