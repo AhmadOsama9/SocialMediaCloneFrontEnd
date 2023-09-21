@@ -137,7 +137,7 @@ const OtherUserProfile = ({ otherUser, relation }) => {
   }
 
   const handleSendMessage = () => {
-    sendMessageByChatId(chatId);
+    sendMessageByChatId(chatId, newMessage);
     setNewMessage("");
   }; 
   
