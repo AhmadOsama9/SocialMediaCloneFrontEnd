@@ -19,9 +19,6 @@ const ShowChats = () => {
     const socket = io("https://socialmediaclonebackend.onrender.com");
 
     useEffect(() => {
-        socket.on("connect", () => {
-            console.log("Connected to WebSocket Server");
-        })
 
         socket.on("chat-message", (message) => {
            setMessages(prvState => [...prvState, message]); 
