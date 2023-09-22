@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useChat } from "../hooks/useChat";
 import Loader from "../helperComponent/Loader";
-import { useSocketContext } from "../context/SocketContext";
+import io from "socket.io-client";
 
 
 import "../CSS/showchats.css";
@@ -16,10 +16,10 @@ const ShowChats = () => {
     const userString = localStorage.getItem("user");
     const userId = JSON.parse(userString).userId;
 
-    const { socket } = useSocketContext();
-
+    const socket = io("https://socialmediaclonebackend.onrender.com");
 
     useEffect(() => {
+
 
         socket.on("chat-message", (message) => {
            setMessages(prvState => [...prvState, message]); 
