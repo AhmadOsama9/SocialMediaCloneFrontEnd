@@ -6,7 +6,6 @@ import socket from "./socket";
 
 import "../CSS/showchats.css";
 
-
 const ShowChats = () => {
     const { isLoading, chatError, chats, getChatMessageByChatId, sendMessageByChatId, messages, setMessages } = useChat();
     const [ showChat, setShowChat ] = useState(false);
@@ -119,7 +118,7 @@ const ShowChats = () => {
             {showChat && (
                 <div className="chat">
                 <button onClick={handleCloseChat}>X</button>
-                <div className="chat-container">
+                <div ref={chatContainerRef} className="chat-container">
                     {messages.map((msg, index) => (
                     <div
                         key={index}
