@@ -39,7 +39,9 @@ const ShowChats = () => {
 
     useEffect(() => {
         if (chatContainerRef.current) {
-            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+            setTimeout(() => {
+                chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+            }, 0);
         }
     }, [messages]);
 
