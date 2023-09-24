@@ -14,7 +14,6 @@ const ShowChats = () => {
     const [ chatId, setChatId] = useState();
 
     const socketRef = useRef(null);
-    const [hasChatMessageListener, setHasChatMessageListener] = useState(false); 
 
     const userString = localStorage.getItem("user");
     const userId = JSON.parse(userString).userId;
@@ -30,20 +29,22 @@ const ShowChats = () => {
         socketRef.current.on("chat-message", (message) => {
             setMessages(prvState => [...prvState, message]); 
         })
-        
+
         return () => {
             if (socketRef.current) 
                 socket.disconnect();
         }
-    }, [setMessages])
+    }, [])
 
     const handleSendMessage = async () => {
         const socket = socketRef.current;
 
         if (socket) {
+            const message = {sender: userId, content: newMessage}
         // Emit a "chat-message" event to the server
             const data = {chatId, message: newMessage, userId};
             socket.emit("chat-message", data);
+
 
             setNewMessage("");
         }
