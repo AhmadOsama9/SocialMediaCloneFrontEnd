@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useChat } from "../hooks/useChat";
 import Loader from "../helperComponent/Loader";
 import io from "socket.io-client";
 import socket from "./socket";
-
 
 import "../CSS/showchats.css";
 
@@ -12,7 +11,10 @@ const ShowChats = () => {
     const { isLoading, chatError, chats, getChatMessageByChatId, sendMessageByChatId, messages, setMessages } = useChat();
     const [ showChat, setShowChat ] = useState(false);
     const [ newMessage, setNewMessage] = useState("");
-    const [ chatId, setChatId] = useState()
+    const [ chatId, setChatId] = useState();
+
+    const socketRef = useRef(null);
+    const [hasChatMessageListener, setHasChatMessageListener] = useState(false); 
 
     const userString = localStorage.getItem("user");
     const userId = JSON.parse(userString).userId;
@@ -20,39 +22,62 @@ const ShowChats = () => {
 
     useEffect(() => {
 
-
-        socket.on("chat-message", (message) => {
-           setMessages(prvState => [...prvState, message]); 
-        })
-
-        return () => {
-            socket.disconnect();
+        if (!socketRef.current) {
+            const socket = io("https://socialmediaclonebackend.onrender.com");
+            socketRef.current = socket;
         }
-    }, [])
+        
+        socketRef.current.on("chat-message", (message) => {
+            setMessages(prvState => [...prvState, message]); 
+        })
+        
+        return () => {
+            if (socketRef.current) 
+                socket.disconnect();
+        }
+    }, [setMessages])
 
     const handleSendMessage = async () => {
-        // Emit a "chat-message" event to the server
-        socket.emit("chat-message", {
-        chatId,
-        message: newMessage,
-        userId,
-        });
+        const socket = socketRef.current;
 
-        setNewMessage("");
+        if (socket) {
+        // Emit a "chat-message" event to the server
+            const data = {chatId, message: newMessage, userId};
+            socket.emit("chat-message", data);
+
+            setNewMessage("");
+        }
+        else {
+            alert("The socket is null");
+        }
     }
 
     const handleShowChat = async (chatId) => {
-        socket.emit("join-chat", chatId);
+        const socket = socketRef.current;
 
-        getChatMessageByChatId(chatId);
-        setShowChat(prv => !prv);
-        setChatId(chatId);
+        if (socket) {
+            socket.emit("join-chat", chatId);
+
+            getChatMessageByChatId(chatId);
+            setShowChat(prv => !prv);
+            setChatId(chatId);
+        }
+        else {
+            alert("The socket is null");
+        }
     }
 
     const handleCloseChat = () => {
-        socket.emit("leave-chat", chatId);
-        setShowChat(false);
-        setChatId(null);
+        const socket = socketRef.current;
+
+        if (socket) {
+            socket.emit("leave-chat", chatId);
+            setShowChat(false);
+            setChatId(null);
+        }
+        else {
+            alert("The socket is null");
+        }
     }
 
     if (isLoading) {
@@ -60,7 +85,7 @@ const ShowChats = () => {
     }
     
     if (chatError) {
-        return <h3 className=".error">Error: {error}</h3>;
+        return <h3 className="error">Error: {error}</h3>;
     }
 
     if (chats.length === 0) {
@@ -73,7 +98,7 @@ const ShowChats = () => {
                 <div className="chats">
                     <h3>Chats</h3>
                     {chats.map((chat) => (
-                        <div className="chat-info">
+                        <div className="chat-info" key={chat.chatId}>
                             <span>Nickname: {chat.otherUserNickname}</span>
                             <button onClick={() => handleShowChat(chat.chatId)}>Open Chat</button>
                         </div>
