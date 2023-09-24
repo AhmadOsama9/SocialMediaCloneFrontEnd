@@ -18,6 +18,7 @@ const ShowChats = () => {
     const userString = localStorage.getItem("user");
     const userId = JSON.parse(userString).userId;
 
+    const chatContainerRef = useRef(null);
 
     useEffect(() => {
 
@@ -36,6 +37,12 @@ const ShowChats = () => {
         }
     }, [])
 
+    useEffect(() => {
+        if (chatContainerRef.current) {
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        }
+    }, [messages]);
+
     const handleSendMessage = async () => {
         const socket = socketRef.current;
 
@@ -45,6 +52,7 @@ const ShowChats = () => {
             const data = {chatId, message: newMessage, userId};
             socket.emit("chat-message", data);
 
+            setMessages(prvState => [...prvState, message]);
 
             setNewMessage("");
         }
