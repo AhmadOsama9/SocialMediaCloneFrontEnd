@@ -38,7 +38,7 @@ const FeedPosts = () => {
     }
 
     const handleCommunityNameClicking = async (communityName) => {
-        await searchCommunity();
+        await searchCommunity(communityName);
         setCommunityNameClicked(true);
     }
 

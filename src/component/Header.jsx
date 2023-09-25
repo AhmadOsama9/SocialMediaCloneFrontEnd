@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Nav from "./Nav";
 
 import { useLogout } from "../hooks/useLogout";
@@ -11,6 +12,25 @@ const Header = () => {
   const { user } = useAuthContext();
   const { logout } = useLogout();
   const navigate = useNavigate();
+  const [userNickname, setUserNickname] = useState("");
+  const getNickname = async () => {
+    if (user && user.userId) {
+      const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getnickname?userId=${user.userId}`, {
+        method: "GET",
+        headers: {"Content-Type": "application/json"},
+      });
+  
+      const json = await response.json();
+  
+      if (response.ok) {
+        setUserNickname(json.nickname);
+      }
+    }
+  };
+  
+  useEffect(() => {
+    getNickname();
+  }, [])
 
   const handleClick = () => {
     logout();
@@ -26,7 +46,7 @@ const Header = () => {
             <Nav />
             {user && (
               <div className="logout">
-                <span className="email">{user.email}</span>
+                <span className="email">{userNickname}</span>
                 <button onClick={handleClick}>Logout</button>
               </div>
             )}
