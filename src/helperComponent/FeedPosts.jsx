@@ -209,7 +209,7 @@ const FeedPosts = () => {
 
 
     const handleToggleShare = async (postId) => {
-        const post = otherUserPosts.find(post => post.postId === postId);
+        const post = feedPosts.find(post => post.postId === postId);
         const currentUserId = userId;
         
         if (!post) {
