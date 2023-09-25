@@ -2,7 +2,13 @@ import { useState, useEffect } from "react";
 import { useOtherUserPostsContext } from "../context/OtherUserPosts";
 import { usePost } from "../hooks/usePost";
 import { useGetUserInfo } from "../hooks/useGetUserInfo";
+import { useSearchUser } from "../hooks/useSearchUser";
+import OtherUserProfile from "../pages/OtherUserProfile";
+
 import Loader from "../helperComponent/Loader";
+
+import { avatar1, avatar2, avatar3, avatar4 } from "../assets/avatar";
+
 
 
 
@@ -10,6 +16,8 @@ const CommunityPosts = ({ communityId }) => {
     const [communityPosts, setcommunityPosts] = useState([]);
     const { getCommunityPosts , postLoading, postError, getPostReactions, getPostComments, getPostSharesCount, addReaction, updateReaction, deleteReaction, addComment, updateComment, deleteComment, addShare, removeShare, deleteCommunityPost, updatePost} = usePost();
     const {reactions, setReactions, comments, setComments } = useOtherUserPostsContext();
+    const { isLoading, error, user, searchUserAndReturn } = useSearchUser();
+
 
     const userString = localStorage.getItem("user");
     const userId = JSON.parse(userString).userId;
@@ -20,6 +28,15 @@ const CommunityPosts = ({ communityId }) => {
     const [showPostUpdate, setShowUpdate] = useState({});
     const [editedHeaders, setEditedHeaders] = useState({});
     const [editedContents, setEditedContents] = useState({});
+
+    const [userClicked, setUserClicked] = useState(false);
+    const [searchedUser, setSearchedUser] = useState(null);
+
+    const handleNicknameClicking = async (nickname) => {
+        const user = await searchUserAndReturn(nickname);
+        setSearchedUser(user);
+        setUserClicked(true);
+    }
 
     const handleUpdatePost = (post) => {
         setShowUpdate(prvState => ({...prvState, [post.postId]: true}));
@@ -241,105 +258,135 @@ const CommunityPosts = ({ communityId }) => {
     }
     return (
         <div>
-            {communityPosts.map((post) => (
-              <div className="post">
-              <div className="post-header">
-                  <h3 className="post-creator">Creator: {post.nickname}</h3>
-                  <h4 className="post-header-text">Header: {post.header}</h4>
-                  <p className="post-content"><span className="content">Content: </span> {post.content}</p>
-              </div>
-              <div className="post-buttons">
-                  <div className="basic-buttons">
-                      <button className="post-button" onClick={() => handleShowReactions(post)}>Reactions</button>
-                      <span className="post-button-count">
-                      {addingReaction[post.postId] ? addingReaction[post.postId].length : 0}
-                      </span>
+            {!userClicked && (
+                <div>
+                {communityPosts.map((post) => (
+                    <div className="post">
+                        <div className="post-header">
+                            <div className="post-first-row">
+                                <span  className="post-selected-avatar">
+                                    <img
+                                        src={
+                                        post.avatar === "1"
+                                            ? avatar1
+                                            : post.avatar === "2"
+                                            ? avatar2
+                                            : post.avatar === "3"
+                                            ? avatar3
+                                            : post.avatar === "4"
+                                            ? avatar4
+                                            : null
+                                        }
+                                        alt={`Avatar}`}
+                                        className="selected-avatar-image"
+                                    />
+                                </span>
+                                <h3 className="post-creator clickable" onClick={() => handleNicknameClicking(post.nickname)}>{post.nickname}</h3>
+                                <span className="post-created">
+                                    {post.createdAt}
+                                </span>
+                            </div>
+                            <h4 className="post-header-text">Header: {post.header}</h4>
+                            <p className="post-content"><span className="content">Content: </span> {post.content}</p>
+                        </div>
+                        <div className="post-buttons">
+                            <div className="basic-buttons">
+                                <button className="post-button" onClick={() => handleShowReactions(post)}>Reactions</button>
+                                <span className="post-button-count">
+                                {addingReaction[post.postId] ? addingReaction[post.postId].length : 0}
+                                </span>
 
-                      <button className="post-button" onClick={() => handleShowComments(post)}>Comments</button>
-                      <span className="post-button-count">
-                      {addingComment[post.postId] ? addingComment[post.postId].length : 0}
-                      </span>
+                                <button className="post-button" onClick={() => handleShowComments(post)}>Comments</button>
+                                <span className="post-button-count">
+                                {addingComment[post.postId] ? addingComment[post.postId].length : 0}
+                                </span>
 
-                      <button className="post-button" onClick={() => handleToggleShare(post.postId)}>Share</button>
-                      <span className="post-button-count">
-                      {addingShare[post.postId] ? addingShare[post.postId].length : 0}
-                      </span>
-                  </div>
+                                <button className="post-button" onClick={() => handleToggleShare(post.postId)}>Share</button>
+                                <span className="post-button-count">
+                                {addingShare[post.postId] ? addingShare[post.postId].length : 0}
+                                </span>
+                            </div>
 
-                  <button className="post-button" onClick={() => handleToggleReaction(post)}>React</button>
-                  {showAddReaction[post.postId] && (
-                  <select className="post-select" value={reactions[post.postId]} onChange={(e) => handleAddReactionToPost(post.postId, e)}>
-                      <option value="select">Select Reaction</option>
-                      <option value="like">Like</option>
-                      <option value="love">Love</option>
-                      <option value="angry">Angry</option>
-                      <option value="sad">Sad</option>
-                      <option value="care">Care</option>
-                      <option value="">Delete</option>
-                  </select>
-                  )}
+                            <button className="post-button" onClick={() => handleToggleReaction(post)}>React</button>
+                            {showAddReaction[post.postId] && (
+                            <select className="post-select" value={reactions[post.postId]} onChange={(e) => handleAddReactionToPost(post.postId, e)}>
+                                <option value="select">Select Reaction</option>
+                                <option value="like">Like</option>
+                                <option value="love">Love</option>
+                                <option value="angry">Angry</option>
+                                <option value="sad">Sad</option>
+                                <option value="care">Care</option>
+                                <option value="">Delete</option>
+                            </select>
+                            )}
 
-                  <button className="post-button" onClick={() => handleAddComment(post)}>Comment</button>
-                  {showAddComment[post.postId] && (
-                  <div className="post-comment">
-                      <textarea
-                      className="post-comment-textarea"
-                      placeholder="Enter your comment"
-                      value={typeComment}
-                      onChange={(e) => setTypeComment(e.target.value)}
-                      />
-                      <button className="post-comment-button" onClick={() => handleAddCommentToPost(post.postId)}>Comment</button>
-                  </div>
-                  )}
-              </div>
-              {showReactions[post.postId] && (
-                  <div className="post-reactions">
-                  {addingReaction[post.postId] && addingReaction[post.postId].length > 0 ? (
-                      addingReaction[post.postId].map((reaction) => (
-                      <div className="post-reaction" key={reaction.nickname}>
-                          <h5 className="post-reaction-owner">Owner: {reaction.nickname}</h5>
-                          <h5 className="post-reaction-text">Reaction: {reaction.reaction}</h5>
-                      </div>
-                      ))
-                  ) : (
-                      <p className="post-no-reactions">No Reactions</p>
-                  )}
-                  </div>
-              )}
-              {showComments[post.postId] && (
-                  <div className="post-comments">
-                  {addingComment[post.postId] && addingComment[post.postId].length > 0 ? (
-                      addingComment[post.postId].map((comment) => (
-                      <div className="post-comment" key={comment.commentId}>
-                          <h5 className="post-comment-owner">Owner: {comment.nickname}</h5>
-                          <h5 className="post-comment-content">Content: {comment.content}</h5>
-                          <h5 className="post-comment-createdat">CreatedAt: {comment.createdAt}</h5>
-                          {comment.nickname === userNickname && (
-                          <div className="post-comment-actions">
-                              <button className="post-comment-action-button" onClick={() => handleShowUpdateComment(comment)}>Update</button>
-                              {showUpdateComment[comment.commentId] && (
-                              <div className="post-comment-update">
-                                  <textarea
-                                  className="post-comment-update-textarea"
-                                  placeholder="Enter your updated comment"
-                                  value={updatedCommentContent}
-                                  onChange={(e) => setUpdatedCommentContent(e.target.value)}
-                                  />
-                                  <button className="post-comment-update-button" onClick={() => handleUpdateComment(post.postId, comment.commentId)}>Save</button>
-                              </div>
-                              )}
-                              <button className="post-comment-action-button" onClick={() => handleDeleteComment(post.postId, comment.commentId)}>Delete</button>
-                          </div>
-                          )}
-                      </div>
-                      ))
-                  ) : (
-                      <p className="post-no-comments">No Comments</p>
-                  )}
-                  </div>
-              )}
-              </div>
-            ))}
+                            <button className="post-button" onClick={() => handleAddComment(post)}>Comment</button>
+                            {showAddComment[post.postId] && (
+                            <div className="post-comment">
+                                <textarea
+                                className="post-comment-textarea"
+                                placeholder="Enter your comment"
+                                value={typeComment}
+                                onChange={(e) => setTypeComment(e.target.value)}
+                                />
+                                <button className="post-comment-button" onClick={() => handleAddCommentToPost(post.postId)}>Comment</button>
+                            </div>
+                            )}
+                        </div>
+                        {showReactions[post.postId] && (
+                            <div className="post-reactions">
+                            {addingReaction[post.postId] && addingReaction[post.postId].length > 0 ? (
+                                addingReaction[post.postId].map((reaction) => (
+                                <div className="post-reaction" key={reaction.nickname}>
+                                    <h5 className="post-reaction-owner">Owner: {reaction.nickname}</h5>
+                                    <h5 className="post-reaction-text">Reaction: {reaction.reaction}</h5>
+                                </div>
+                                ))
+                            ) : (
+                                <p className="post-no-reactions">No Reactions</p>
+                            )}
+                            </div>
+                        )}
+                        {showComments[post.postId] && (
+                            <div className="post-comments">
+                            {addingComment[post.postId] && addingComment[post.postId].length > 0 ? (
+                                addingComment[post.postId].map((comment) => (
+                                <div className="post-comment" key={comment.commentId}>
+                                    <h5 className="post-comment-owner">Owner: {comment.nickname}</h5>
+                                    <h5 className="post-comment-content">Content: {comment.content}</h5>
+                                    <h5 className="post-comment-createdat">CreatedAt: {comment.createdAt}</h5>
+                                    {comment.nickname === userNickname && (
+                                    <div className="post-comment-actions">
+                                        <button className="post-comment-action-button" onClick={() => handleShowUpdateComment(comment)}>Update</button>
+                                        {showUpdateComment[comment.commentId] && (
+                                        <div className="post-comment-update">
+                                            <textarea
+                                            className="post-comment-update-textarea"
+                                            placeholder="Enter your updated comment"
+                                            value={updatedCommentContent}
+                                            onChange={(e) => setUpdatedCommentContent(e.target.value)}
+                                            />
+                                            <button className="post-comment-update-button" onClick={() => handleUpdateComment(post.postId, comment.commentId)}>Save</button>
+                                        </div>
+                                        )}
+                                        <button className="post-comment-action-button" onClick={() => handleDeleteComment(post.postId, comment.commentId)}>Delete</button>
+                                    </div>
+                                    )}
+                                </div>
+                                ))
+                            ) : (
+                                <p className="post-no-comments">No Comments</p>
+                            )}
+                            </div>
+                        )}
+                        </div>
+
+                ))}
+            </div>
+            )}
+            {userClicked && (
+                <OtherUserProfile otherUser={searchedUser} relation="None"/>
+            )}
         </div>
     );
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRequest } from "../hooks/useRequest";
 import { useChat } from "../hooks/useChat";
-import OtherUserPosts from "../helperComponent/otherUserProfile";
+import OtherUserProfilePosts from "../helperComponent/otherUserProfilePosts";
 import OtherUserSharedPosts from "../helperComponent/OtherUserSharedPosts";
 import Loader from "../helperComponent/Loader";
 
@@ -229,7 +229,7 @@ const OtherUserProfile = ({ otherUser, relation }) => {
       )}
       <div>
         {activePostsType === "UserPosts" && (
-          <OtherUserPosts otherUser={otherUser}/>
+          <OtherUserProfilePosts otherUser={otherUser}/>
         )}
         {activePostsType === "SharedPosts" && (
           <OtherUserSharedPosts otherUser={otherUser}/>

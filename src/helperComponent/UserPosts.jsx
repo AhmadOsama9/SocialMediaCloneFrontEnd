@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { useUserPostsContext } from "../context/UserPostsContext";
 import { usePost } from "../hooks/usePost";
+
 import Loader from "../helperComponent/Loader";
 
+import { avatar1, avatar2, avatar3, avatar4 } from "../assets/avatar";
+
 import "../CSS/updatePost.css";
+
 
 const UserPosts = () => {
     const { userPosts } = useUserPostsContext();
@@ -81,10 +85,34 @@ const UserPosts = () => {
                     <button className="post-button" onClick={() => handleUpdate(post)}>Update</button>
                     <button className="post-button" onClick={() => deletePost(post.postId)}>Delete</button>
                     {!showUpdate[post.postId] && (
-                        <div>
-                        <h3 className="post-creator">Creator: {post.nickname}</h3>
-                        <h4 className="post-header">Header: {post.header}</h4>
+                    <div>
+                      <div className="post-header">
+                        <div className="post-first-row">
+                            <span  className="post-selected-avatar">
+                                <img
+                                    src={
+                                    post.avatar === "1"
+                                        ? avatar1
+                                        : post.avatar === "2"
+                                        ? avatar2
+                                        : post.avatar === "3"
+                                        ? avatar3
+                                        : post.avatar === "4"
+                                        ? avatar4
+                                        : null
+                                    }
+                                    alt={`Avatar}`}
+                                    className="selected-avatar-image"
+                                />
+                            </span>
+                            <h3 className="post-creator">{post.nickname}</h3>
+                            <span className="post-created">
+                                {post.createdAt}
+                            </span>
+                        </div>
+                        <h4 className="post-header-text">Header: {post.header}</h4>
                         <p className="post-content"><span className="content">Content: </span> {post.content}</p>
+                      </div>
                         <button onClick={() => handleShowReactions(post)} className="post-button">Reactions</button>
                         <span className="post-count">{reactions.length > 0 ? reactions.length : 0}</span>
                         <button onClick={() => handleShowComments(post)} className="post-button">Comments</button>

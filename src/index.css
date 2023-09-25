@@ -70,6 +70,12 @@ html {
   font-weight: bold;
 }
 
+.post .clickable {
+  color: #434343;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 /* Header text */
 .post-header-text {
   font-size: 1.1rem;
@@ -260,6 +266,26 @@ html {
   cursor: pointer;
   font-size: 0.8rem;
   border-radius: 0.25rem;
+}
+
+.selected-avatar-image {
+  margin-top: 0.3rem;
+  width: 5rem; 
+  height: 5rem;
+  border-radius: 50%; 
+  
+}
+
+.post-created {
+  font-size: 0.8rem;
+  color: #555;
+  margin-left: auto;
+}
+
+.post .post-first-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .load-more-btn {

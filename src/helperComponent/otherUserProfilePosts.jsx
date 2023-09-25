@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { useOtherUserPostsContext } from "../context/OtherUserPosts";
 import { usePost } from "../hooks/usePost";
 import { useGetUserInfo } from "../hooks/useGetUserInfo";
+
 import Loader from "./Loader";
 
+import { avatar1, avatar2, avatar3, avatar4 } from "../assets/avatar";
 
 
 const OtherUserPosts = ({ otherUser }) => {
@@ -225,10 +227,32 @@ const OtherUserPosts = ({ otherUser }) => {
             {otherUserPosts.map((post) => (
                 <div className="post">
                     <div className="post-header">
-                        <h3 className="post-creator">Creator: {post.nickname}</h3>
-                        <h4 className="post-header-text">Header: {post.header}</h4>
-                        <p className="post-content"><span className="content">Content: </span> {post.content}</p>
+                    <div className="post-first-row">
+                        <span  className="post-selected-avatar">
+                            <img
+                                src={
+                                post.avatar === "1"
+                                    ? avatar1
+                                    : post.avatar === "2"
+                                    ? avatar2
+                                    : post.avatar === "3"
+                                    ? avatar3
+                                    : post.avatar === "4"
+                                    ? avatar4
+                                    : null
+                                }
+                                alt={`Avatar}`}
+                                className="selected-avatar-image"
+                            />
+                        </span>
+                        <h3 className="post-creator">{post.nickname}</h3>
+                        <span className="post-created">
+                            {post.createdAt}
+                        </span>
                     </div>
+                    <h4 className="post-header-text">Header: {post.header}</h4>
+                    <p className="post-content"><span className="content">Content: </span> {post.content}</p>
+                </div>
                     <div className="post-buttons">
                         <div className="basic-buttons">
                             <button className="post-button" onClick={() => handleShowReactions(post)}>Reactions</button>
