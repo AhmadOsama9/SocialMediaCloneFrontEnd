@@ -4,10 +4,12 @@ import { usePost } from "../hooks/usePost";
 import { useGetUserInfo } from "../hooks/useGetUserInfo";
 import { useSearchUser } from "../hooks/useSearchUser";
 import OtherUserProfile from "../pages/OtherUserProfile";
+import { useSearchCommunity } from "../hooks/useSearchCommunity";
 
 import Loader from "../helperComponent/Loader";
 
 import { avatar1, avatar2, avatar3, avatar4 } from "../assets/avatar";
+import CommunityProfile from "../pages/CommunityProfile";
 
 
 const FeedPosts = () => {
@@ -16,17 +18,28 @@ const FeedPosts = () => {
     const {reactions, setReactions, comments, setComments } = useOtherUserPostsContext();
     const { isLoading, error, user, searchUserAndReturn } = useSearchUser();
 
+    const { community, searchCommunity } = useSearchCommunity();
+
+
     const userString = localStorage.getItem("user");
     const userId = JSON.parse(userString).userId;
     const [userNickname, setUserNickname] = useState("");
     const [userClicked, setUserClicked] = useState(false);
     const [postNickname, setPostNickname] = useState("");
     const [searchedUser, setSearchedUser] = useState(null);
+    const [communityNameClicked, setCommunityNameClicked] = useState(false);
+
+    
 
     const handleNicknameClicking = async (nickname) => {
         const user = await searchUserAndReturn(nickname);
         setSearchedUser(user);
         setUserClicked(true);
+    }
+
+    const handleCommunityNameClicking = async (communityName) => {
+        await searchCommunity();
+        setCommunityNameClicked(true);
     }
 
     const { getUserNickname } = useGetUserInfo();
@@ -253,7 +266,7 @@ const FeedPosts = () => {
     }
     return (
         <div>
-            {!userClicked && (
+            {!userClicked && !communityNameClicked && (
                 <div>
                 {feedPosts.map((post) => (
                     <div className="post">
@@ -281,6 +294,7 @@ const FeedPosts = () => {
                                     {post.createdAt}
                                 </span>
                             </div>
+                            {post.communityName && <h3 className="post-community clickable" onClick={() => handleCommunityNameClicking(post.communityName)}>Commuinty: {post.communityName}</h3>}
                             <h4 className="post-header-text">Header: {post.header}</h4>
                             <p className="post-content"><span className="content">Content: </span> {post.content}</p>
                         </div>
@@ -384,6 +398,9 @@ const FeedPosts = () => {
             )}
             {userClicked && (
                 <OtherUserProfile otherUser={searchedUser} relation="None"/>
+            )}
+            {communityNameClicked && (
+                <CommunityProfile community={community} />
             )}
         </div>
     );

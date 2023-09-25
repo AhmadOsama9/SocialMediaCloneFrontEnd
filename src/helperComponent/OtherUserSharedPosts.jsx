@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { useOtherUserPostsContext } from "../context/OtherUserPosts";
 import { usePost } from "../hooks/usePost";
 import { useGetUserInfo } from "../hooks/useGetUserInfo";
 import { useSearchUser } from "../hooks/useSearchUser";
 import OtherUserProfile from "../pages/OtherUserProfile";
+import CommunityProfile from "../pages/CommunityProfile";
 
 import Loader from "../helperComponent/Loader";
 
