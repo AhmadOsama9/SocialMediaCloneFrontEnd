@@ -193,7 +193,7 @@ const OtherUserSharedPosts = ({ otherUser }) => {
 
 
     const handleToggleShare = async (postId) => {
-        const post = otherUserPosts.find(post => post.postId === postId);
+        const post = otherUserSharedPosts.find(post => post.postId === postId);
         const currentUserId = userId;
         
         if (!post) {
@@ -288,7 +288,7 @@ const OtherUserSharedPosts = ({ otherUser }) => {
 
                             <button className="post-button" onClick={() => handleToggleReaction(post)}>React</button>
                             {showAddReaction[post.postId] && (
-                            <select className="post-select" value={reactions[post.postId]} onChange={(e) => handleAddReactionToPost(post.postId, e)}>
+                            <select className="post-select" onChange={(e) => handleAddReactionToPost(post.postId, e)}>
                                 <option value="select">Select Reaction</option>
                                 <option value="like">Like</option>
                                 <option value="love">Love</option>

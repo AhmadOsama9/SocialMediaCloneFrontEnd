@@ -14,14 +14,10 @@ import { avatar1, avatar2, avatar3, avatar4 } from "../assets/avatar";
 
 const UserSharedPosts = () => {
     const { sharedPosts } = useUserPostsContext();
-    const { getSharedPosts, postLoading, postError, deletePost, updatePost, getPostReactions, getPostComments, getPostSharesCount } = usePost();
+    const { getSharedPosts, postLoading, postError, deletePost, updatePost, getPostReactions, getPostComments, getPostSharesCount, addReaction, addComment, addShare, updateReaction, updateComment, deleteReaction, deleteComment, removeShare } = usePost();
     const { isLoading, error, user, searchUserAndReturn } = useSearchUser();
 
     const [showUpdate, setShowUpdate] = useState({});
-
-    const [reactions, setReactions] = useState({});
-    const [comments, setComments] = useState({});
-    const [shares, setShares] = useState({});
 
     const [editedHeaders, setEditedHeaders] = useState({});
     const [editedContents, setEditedContents] = useState({});
@@ -297,7 +293,7 @@ const UserSharedPosts = () => {
 
                             <button className="post-button" onClick={() => handleToggleReaction(post)}>React</button>
                             {showAddReaction[post.postId] && (
-                            <select className="post-select" value={reactions[post.postId]} onChange={(e) => handleAddReactionToPost(post.postId, e)}>
+                            <select className="post-select" onChange={(e) => handleAddReactionToPost(post.postId, e)}>
                                 <option value="select">Select Reaction</option>
                                 <option value="like">Like</option>
                                 <option value="love">Love</option>
