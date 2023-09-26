@@ -106,7 +106,7 @@ const ShowChats = () => {
     }
 
     const handleStopTyping = () => {
-        socket.emity("stop typing", chatId);
+        socket.emit("stop typing", chatId);
     }
 
     if (isLoading) {
