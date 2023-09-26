@@ -65,7 +65,7 @@ const ShowChats = () => {
             socket.emit("chat-message", data);
             socket.emit("stop typing", {chatId, userId});
 
-            // setMessages(prvState => [...prvState, message]);
+            setMessages(prvState => [...prvState, message]);
 
             setNewMessage("");
 
