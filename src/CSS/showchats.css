@@ -53,3 +53,7 @@
     cursor: pointer;
 }
 
+.chat .faded {
+    background-color: gray !important;
+    cursor: default !important;
+}

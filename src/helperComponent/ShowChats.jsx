@@ -149,7 +149,7 @@ const ShowChats = () => {
                 </div>
                 {otherUserTyping && <p>Other user is typing...</p>}
                 <div className="message-input">
-                <input
+                 <input
                     type="text"
                     value={newMessage}
                     onChange={(e) => {
@@ -161,7 +161,12 @@ const ShowChats = () => {
                         }
                     }}
                     />
-                    <button onClick={handleSendMessage}>Send</button>
+                    <button 
+                     onClick={handleSendMessage} disabled={!newMessage.trim()}
+                     className={`${newMessage.trim() === "" ? "faded": ""}`} 
+                    >
+                        Send
+                    </button>
                 </div>
               </div>
             )}
