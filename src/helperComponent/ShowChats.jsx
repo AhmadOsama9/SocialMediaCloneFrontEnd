@@ -148,6 +148,15 @@ const ShowChats = () => {
                         <p>{msg.content}</p>
                     </div>
                     ))}
+                    {otherUserTyping && 
+                    <div class="chat-bubble incoming">
+                        <div class="typing">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
+                    }
                 </div>
                 {otherUserTyping && <p>Other user is typing...</p>}
                 <div className="message-input">
