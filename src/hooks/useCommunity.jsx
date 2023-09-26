@@ -231,7 +231,8 @@ export const useCommunity = () => {
         const json = await response.json();
 
         if (response.ok) {
-            alert("The community has been created Successfully");
+            setIsLoading(false);
+            return json;
         } else {
             setError(json.error);
         }

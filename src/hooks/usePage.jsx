@@ -24,8 +24,8 @@ export const usePage = () => {
     if (!response.ok) {
         setPageError(json.error);
     } else {
-        alert(json.message);
-        setActiveSection("");
+        setPageLoading(false);
+        return json;
     }
 
     setPageLoading(false);

@@ -1,5 +1,7 @@
 import {useState } from 'react'
 import { useCommunity } from '../hooks/useCommunity'
+import CommunityProfile from '../pages/CommunityProfile';
+
 import Loader from "../helperComponent/Loader";
 
 
@@ -10,12 +12,25 @@ const CreateCommunity = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
+  const [showCommunity, setShowCommunity] = useState(false);
+  const [community, setCommunity] = useState(null);
+
+  const handleCreateCommunity = async () => {
+    const community = await createCommunity(name, description)
+    setCommunity(community);
+    setShowCommunity(true);
+  }
+
   if (isLoading) {
     return <Loader />;
   }
 
   if (error) {
     return <h3 className="error">Error: {error}</h3>
+  }
+
+  if (showCommunity) {
+    return <CommunityProfile community={community} />
   }
 
   return (
@@ -40,7 +55,7 @@ const CreateCommunity = () => {
             className="input"
             />
         </div>
-        <button onClick={() => createCommunity(name, description)} className="bttn">Create Community</button>
+        <button onClick={handleCreateCommunity} className="bttn">Create Community</button>
     </div>
   )
 }

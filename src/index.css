@@ -35,15 +35,27 @@ html {
     font-size: 12px;
   }
 }
-@media screen and((min-width: 481px) and (max-width: 800px) ) {
+@media screen and ((min-width: 481px) and (max-width: 768px) ) {
   html {
     font-size: 14px;
   }
 }
 
-@media screen and (min-width: 800px) {
+@media screen and ((min-width: 769px) and (max-width: 1024px)) {
   html {
     font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media screen and (min-width: 1201px) {
+  html {
+    font-size: 22px;
   }
 }
 
@@ -58,9 +70,27 @@ html {
 .post {
   border: 1px solid #ddd;
   background-color: #fff;
-  margin: 1rem;
+  margin: 1rem 2rem;
   padding: 1.25rem;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (min-width: 480px) {
+  .post {
+    margin: 1rem 3rem;
+  }
+}
+
+@media screen and (min-width: 481px) {
+  .post {
+    margin: 1rem 5rem;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .post {
+    margin: 2rem 7rem;
+  }
 }
 
 /* Header Section */

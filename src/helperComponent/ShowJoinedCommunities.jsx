@@ -9,11 +9,17 @@ import "../CSS/showCommunities.css";
 const ShowJoinedCommunities = () => {
   const { isLoading, error, communities, showJoinedCommunities } = useShowCommunities();
   const [showCommunityProfile, setShowCommunityProfile] = useState(false); 
+  const [community, setCommunity] = useState(null);
 
   useEffect(() => {
     showJoinedCommunities();
     
   }, []);
+
+  const handleShowCommunity = (community) => {
+    setCommunity(community);
+    setShowCommunityProfile(prv => !prv);
+  }
 
   if ( isLoading ) {
     return <Loader />;
@@ -29,16 +35,17 @@ const ShowJoinedCommunities = () => {
   return (
     <div className="joined-communities">
       <h2 className="section-title">Communities</h2>
-      {communities.map((community) => (
+      {!showCommunityProfile && communities.map((community) => (
         <div className="community-info" key={community._id}>
           <span className="community-name">Name: {community.name}</span>
           <span className="community-description">Description: {community.description}</span>
-          <button onClick={() => setShowCommunityProfile(prv => !prv)} className="toggle-button">
+          <button onClick={() => handleShowCommunity(community)} className="toggle-button">
             {showCommunityProfile ? "Go back" : "Show Community"}
           </button>
-          {showCommunityProfile && <CommunityProfile community={community} />}
         </div>
       ))}
+      {showCommunityProfile && <button className="toggle-button" onClick={() => setShowCommunityProfile(prv => !prv)}>Go back</button>}
+      {showCommunityProfile && <CommunityProfile community={community} />}
 </div>
 
   )

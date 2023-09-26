@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Nav from "./Nav";
 
 import { useLogout } from "../hooks/useLogout";
@@ -12,9 +12,13 @@ const Header = () => {
   const { user } = useAuthContext();
   const { logout } = useLogout();
   const navigate = useNavigate();
+
+
   const [userNickname, setUserNickname] = useState("");
+  const isNicknameFetched = useRef(false);
+
   const getNickname = async () => {
-    if (user && user.userId) {
+    if (user && user.userId && !isNicknameFetched.current) {
       const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getnickname?userId=${user.userId}`, {
         method: "GET",
         headers: {"Content-Type": "application/json"},
@@ -24,6 +28,7 @@ const Header = () => {
   
       if (response.ok) {
         setUserNickname(json.nickname);
+        isNicknameFetched.current = true;
       }
     }
   };

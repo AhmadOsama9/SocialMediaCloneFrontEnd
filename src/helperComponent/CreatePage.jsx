@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { usePage } from "../hooks/usePage";
+import PageProfile from "../pages/PageProfile";
 import Loader from "../helperComponent/Loader";
 
 import "../CSS/createPage.css";
@@ -9,6 +10,15 @@ const CreatePage = () => {
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  
+  const [page, setPage] = useState(null);
+  const [showPage, setShowPage] = useState(false);
+
+  const handleCreatePage = async () => {
+    const page = await createPage(name, description);
+    setPage(page);
+    setShowPage(true);
+  }
 
   if (pageLoading) {
     return <Loader />;
@@ -16,6 +26,10 @@ const CreatePage = () => {
 
   if (pageError) {
     return <h3 className="error">Error: {pageError}</h3>
+  }
+
+  if (showPage) {
+    return <PageProfile page={page} />
   }
 
   return (
@@ -39,7 +53,7 @@ const CreatePage = () => {
           className="input"
         />
       </div>
-      <button onClick={() => createPage(name, description)} className="create-button">
+      <button onClick={handleCreatePage} className="create-button">
         Create Page
       </button>
   </div>
