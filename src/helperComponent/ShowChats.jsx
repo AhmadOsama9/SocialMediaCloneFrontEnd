@@ -31,12 +31,14 @@ const ShowChats = () => {
             setMessages(prvState => [...prvState, message]); 
         })
 
-        socketRef.current.on("typing", () => {
+        socketRef.current.on("typing", (otherUserId) => {
+            if (otherUserId !== userId)
                 setOtherUserTyping(true);
         })        
 
-        socketRef.current.on("stop typing", () => {
-            setOtherUserTyping(false);
+        socketRef.current.on("stop typing", (otherUserId) => {
+            if (otherUserId !== userId)
+                setOtherUserTyping(false);
         })
 
         return () => {
