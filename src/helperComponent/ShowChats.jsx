@@ -32,12 +32,12 @@ const ShowChats = () => {
         })
 
         socketRef.current.on("typing", (otherUserId) => {
-           
+            if (otherUserId !== userId)
                 setOtherUserTyping(true);
         })        
 
         socketRef.current.on("stop typing", (otherUserId) => {
-           
+            if (otherUserId !== userId)
                 setOtherUserTyping(false);
         })
 
