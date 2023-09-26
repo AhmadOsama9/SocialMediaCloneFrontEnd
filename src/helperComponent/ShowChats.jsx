@@ -59,16 +59,16 @@ const ShowChats = () => {
         const socket = socketRef.current;
 
         if (socket) {
+
             const message = {sender: userId, content: newMessage}
-        // Emit a "chat-message" event to the server
             const data = {chatId, message: newMessage, userId};
             socket.emit("chat-message", data);
+            socket.emit("stop typing", {chatId, userId});
 
             setMessages(prvState => [...prvState, message]);
 
             setNewMessage("");
 
-            socket.emit("stop typing", chatId);
         }
         else {
             alert("The socket is null");
