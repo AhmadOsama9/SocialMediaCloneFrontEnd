@@ -32,7 +32,7 @@ const ShowChats = () => {
         })
 
         socketRef.current.on("typing", () => {
-            setOtherUserTyping(true);
+                setOtherUserTyping(true);
         })        
 
         socketRef.current.on("stop typing", () => {
@@ -102,11 +102,11 @@ const ShowChats = () => {
     }
 
     const handleTyping = () => {
-        socket.emit("typing", chatId);
+        socket.emit("typing", {chatId, userId});
     }
 
     const handleStopTyping = () => {
-        socket.emit("stop typing", chatId);
+        socket.emit("stop typing", {chatId, userId});
     }
 
     if (isLoading) {
