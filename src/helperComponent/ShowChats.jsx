@@ -18,6 +18,7 @@ const ShowChats = () => {
     const userId = JSON.parse(userString).userId;
 
     const chatContainerRef = useRef(null);
+    const [otherUserTyping, setOtherUserTyping] = useState(false);
 
     useEffect(() => {
 
@@ -28,6 +29,14 @@ const ShowChats = () => {
         
         socketRef.current.on("chat-message", (message) => {
             setMessages(prvState => [...prvState, message]); 
+        })
+
+        socketRef.current.on("typing", () => {
+            setOtherUserTyping(true);
+        })        
+
+        socketRef.current.on("stop typing", () => {
+            setOtherUserTyping(false);
         })
 
         return () => {
@@ -56,6 +65,8 @@ const ShowChats = () => {
             setMessages(prvState => [...prvState, message]);
 
             setNewMessage("");
+
+            socket.emit("stop typing", chatId);
         }
         else {
             alert("The socket is null");
@@ -88,6 +99,14 @@ const ShowChats = () => {
         else {
             alert("The socket is null");
         }
+    }
+
+    const handleTyping = () => {
+        socket.emit("typing", chatId);
+    }
+
+    const handleStopTyping = () => {
+        socket.emity("stop typing", chatId);
     }
 
     if (isLoading) {
@@ -128,11 +147,19 @@ const ShowChats = () => {
                     </div>
                     ))}
                 </div>
+                {otherUserTyping && <p>Other user is typing...</p>}
                 <div className="message-input">
-                    <input
+                <input
                     type="text"
                     value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
+                    onChange={(e) => {
+                        setNewMessage(e.target.value);
+                        if (e.target.value.trim() === "") {
+                        handleStopTyping();
+                        } else {
+                        handleTyping();
+                        }
+                    }}
                     />
                     <button onClick={handleSendMessage}>Send</button>
                 </div>
