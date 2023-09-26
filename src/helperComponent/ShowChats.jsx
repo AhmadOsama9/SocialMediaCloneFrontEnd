@@ -53,7 +53,7 @@ const ShowChats = () => {
                 chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
             }, 0);
         }
-    }, [messages]);
+    }, [messages, otherUserTyping]);
 
     const handleSendMessage = async () => {
         const socket = socketRef.current;
@@ -158,7 +158,6 @@ const ShowChats = () => {
                     </div>
                     }
                 </div>
-                {otherUserTyping && <p>Other user is typing...</p>}
                 <div className="message-input">
                  <input
                     type="text"

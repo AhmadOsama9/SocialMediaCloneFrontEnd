@@ -61,7 +61,7 @@
 
 /*Other User Typing Effect */
 .chat-bubble {
-    background-color:#E6F8F1;
+    background-color:transparent;
     padding:16px 28px;
     -webkit-border-radius: 20px;
     -webkit-border-bottom-left-radius: 2px;
@@ -78,7 +78,7 @@
   }
   .typing .dot {
     animation: mercuryTypingAnimation 1.8s infinite ease-in-out;
-    background-color: #6CAD96 ;
+    background-color: #6ca1ad ;
     border-radius: 50%;
     height: 7px;
     margin-right: 4px;
@@ -102,14 +102,14 @@
   @keyframes mercuryTypingAnimation {
     0% {
       transform: translateY(0px);
-      background-color:#6CAD96;
+      background-color:#6ca3ad;
     }
     28% {
       transform: translateY(-7px);
-      background-color:#9ECAB9;
+      background-color:#9ec0ca;
     }
     44% {
       transform: translateY(0px);
-      background-color: #B5D9CB;
+      background-color: #b5d1d9;
     }
   }
