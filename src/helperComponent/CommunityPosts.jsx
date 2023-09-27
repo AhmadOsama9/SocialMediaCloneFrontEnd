@@ -14,7 +14,7 @@ import { avatar1, avatar2, avatar3, avatar4 } from "../assets/avatar";
 
 const CommunityPosts = ({ communityId }) => {
     const [communityPosts, setcommunityPosts] = useState([]);
-    const { getCommunityPosts , postLoading, postError, getPostReactions, getPostComments, getPostSharesCount, addReaction, updateReaction, deleteReaction, addComment, updateComment, deleteComment, addShare, removeShare, deleteCommunityPost, updatePost} = usePost();
+    const { getCommunityPosts , postLoading, postError, addReaction, updateReaction, deleteReaction, addComment, updateComment, deleteComment, addShare, removeShare, deleteCommunityPost, updatePost} = usePost();
     const {reactions, setReactions, comments, setComments } = useOtherUserPostsContext();
     const { isLoading, error, user, searchUserAndReturn } = useSearchUser();
 
@@ -68,14 +68,11 @@ const CommunityPosts = ({ communityId }) => {
           setcommunityPosts(result);
       
           for (const post of result) {
-            const reactions = await getPostReactions(post.postId);
-            setAddingReaction(prvState => ({ ...prvState, [post.postId]: reactions }));
+            setAddingReaction(prvState => ({ ...prvState, [post.postId]: post.reactions }));
 
-            const comments = await getPostComments(post.postId);
-            setAddingComment(prvState => ({ ...prvState, [post.postId]: comments }));
+            setAddingComment(prvState => ({ ...prvState, [post.postId]: post.comments }));
 
-            const results = await getPostSharesCount(post.postId);
-            setAddingShare(prvState => ({ ...prvState, [post.postId]: results }));
+            setAddingShare(prvState => ({ ...prvState, [post.postId]: post.shares }));
           }
         }
       

@@ -60,6 +60,11 @@
     background-color: #fff;
     margin-bottom: 1rem;
 }
+
+.chat-container span{
+    display: flex;
+    flex-direction: end;
+}
   
 .chat-message {
     margin: 0.5rem 0;

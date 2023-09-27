@@ -14,7 +14,7 @@ import CommunityProfile from "../pages/CommunityProfile";
 
 const FeedPosts = () => {
     const [feedPosts, setFeedPosts] = useState([]);
-    const { getFeedPosts, postLoading, postError, getPostReactions, getPostComments, getPostSharesCount, addReaction, updateReaction, deleteReaction, addComment, updateComment, deleteComment, addShare, removeShare} = usePost();
+    const { getFeedPosts, postLoading, postError, addReaction, updateReaction, deleteReaction, addComment, updateComment, deleteComment, addShare, removeShare} = usePost();
     const {reactions, setReactions, comments, setComments } = useOtherUserPostsContext();
     const { isLoading, error, user, searchUserAndReturn } = useSearchUser();
 
@@ -84,14 +84,11 @@ const FeedPosts = () => {
           setFeedPosts(result);
       
           for (const post of result) {
-            const reactions = await getPostReactions(post.postId);
-            setAddingReaction(prvState => ({ ...prvState, [post.postId]: reactions }));
+            setAddingReaction(prvState => ({ ...prvState, [post.postId]: post.reactions }));
 
-            const comments = await getPostComments(post.postId);
-            setAddingComment(prvState => ({ ...prvState, [post.postId]: comments }));
+            setAddingComment(prvState => ({ ...prvState, [post.postId]: post.comments }));
 
-            const results = await getPostSharesCount(post.postId);
-            setAddingShare(prvState => ({ ...prvState, [post.postId]: results }));
+            setAddingShare(prvState => ({ ...prvState, [post.postId]: post.shares }));
           }
         }
         setUserClicked(false);

@@ -11,7 +11,7 @@ import "../CSS/updatePost.css";
 
 const UserPosts = () => {
     const { userPosts } = useUserPostsContext();
-    const { getCreatedPosts, postLoading, postError, deletePost, updatePost, getPostReactions, getPostComments, getPostSharesCount } = usePost();
+    const { getCreatedPosts, postLoading, postError, deletePost, updatePost, } = usePost();
 
     const [showReactions, setShowReactions] = useState({});
     const [showComments, setShowComments] = useState({});
@@ -29,14 +29,11 @@ const UserPosts = () => {
             await getCreatedPosts();
 
             for (const post of userPosts) {
-                const reactions = await getPostReactions(post.postId);
-                setReactions(reactions);
+                setReactions(post.reactions);
 
-                const comments = await getPostComments(post.postId);
-                setComments(comments);
+                setComments(post.comments);
 
-                const shares = await getPostSharesCount(post.postId);
-                setShares(shares);
+                setShares(post.shares);
             }
 
         }

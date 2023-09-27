@@ -51,7 +51,7 @@ const Header = () => {
             <Nav />
             {user && (
               <div className="logout">
-                <span className="email">{userNickname}</span>
+                <span className="nickname">somethingannoyingmighthappenlikethishere</span>
                 <button onClick={handleClick}>Logout</button>
               </div>
             )}

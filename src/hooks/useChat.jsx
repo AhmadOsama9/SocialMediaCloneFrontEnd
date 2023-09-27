@@ -96,7 +96,9 @@ export const useChat = () => {
       const formattedMessages = data.messages.map((message) => ({
         sender: message.sender,
         content: message.content,
+        createdAt: message.createdAt,
       }));
+      
 
       setMessages(formattedMessages);
       setChatId(data.chatId);
@@ -125,8 +127,8 @@ export const useChat = () => {
         const formattedMessages = data.map((message) => ({
             sender: message.sender,
             content: message.content,
+            createdAt: message.createdAt,
         }));
-
         setMessages(formattedMessages);
     } else {
         setChatError(data.error);

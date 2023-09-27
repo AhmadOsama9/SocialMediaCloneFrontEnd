@@ -21,6 +21,12 @@
     gap: 1rem;
 }
 
+@media screen and (max-width: 480px) {
+    .loggedin-user-choices .search input {
+        max-width: 10rem;
+    }
+}
+
 .loggedin-user-choices button {
     padding: 1rem 2rem;
     background-color: var(--first-primary-color);

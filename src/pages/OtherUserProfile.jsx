@@ -208,6 +208,7 @@ const OtherUserProfile = ({ otherUser, relation }) => {
                   className={`chat-message ${msg.sender === userId ? 'outgoing' : 'incoming'}`}
               >
                   <p>{msg.content}</p>
+                  {msg.createdAt && <span>{msg.createdAt}</span>}
               </div>
               ))}
           </div>

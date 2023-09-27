@@ -63,7 +63,7 @@ const LoggedinUser = () => {
               <div className="search-input-container">
                 <input
                   type="text"
-                  placeholder="Search for a user by nickname"
+                  placeholder="Enter a name"
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
                 />

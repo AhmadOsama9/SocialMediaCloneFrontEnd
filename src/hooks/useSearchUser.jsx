@@ -9,7 +9,7 @@ export const useSearchUser = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getprofilebyznickname?nickname=${nickname}`, {
+    const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getprofilebynickname?nickname=${nickname}`, {
         method: "GET",
         headers: {"Content-Type": "application/json"},
     })

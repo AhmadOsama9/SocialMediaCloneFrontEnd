@@ -7,7 +7,7 @@ import socket from "./socket";
 import "../CSS/showchats.css";
 
 const ShowChats = () => {
-    const { isLoading, chatError, chats, getChatMessageByChatId, sendMessageByChatId, messages, setMessages } = useChat();
+    const { isLoading, chatError, chats, getChatMessageByChatId, messages, setMessages } = useChat();
     const [ showChat, setShowChat ] = useState(false);
     const [ newMessage, setNewMessage] = useState("");
     const [ chatId, setChatId] = useState();
@@ -92,16 +92,19 @@ const ShowChats = () => {
 
     const handleCloseChat = () => {
         const socket = socketRef.current;
-
+    
         if (socket) {
+            if (newMessage.trim() !== "") {
+                socket.emit("stop typing", { chatId, userId });
+            }
             socket.emit("leave-chat", chatId);
             setShowChat(false);
             setChatId(null);
-        }
-        else {
+        } else {
             alert("The socket is null");
         }
     }
+    
 
     const handleTyping = () => {
         socket.emit("typing", {chatId, userId});
@@ -145,7 +148,12 @@ const ShowChats = () => {
                         key={index}
                         className={`chat-message ${msg.sender === userId ? 'outgoing' : 'incoming'}`}
                     >
+                      <div className="message-content">
                         <p>{msg.content}</p>
+                        {msg.createdAt && (
+                            <span className="message-timestamp">{msg.createdAt}</span>
+                        )}
+                      </div>
                     </div>
                     ))}
                     {otherUserTyping && 
