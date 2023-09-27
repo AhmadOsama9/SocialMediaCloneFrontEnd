@@ -81,13 +81,13 @@ const LoggedinUser = () => {
             </div>
           )}
 
-          <button onClick={() => handleSectionToggle("communities")}><GroupIcon /> Joined Communities</button>
+          <button onClick={() => handleSectionToggle("communities")}><GroupIcon  className="icon" /> Joined Communities</button>
 
-          <button onClick={() => handleSectionToggle("showAllCommunities")}><PublicIcon /> Show All Communities</button>
+          <button onClick={() => handleSectionToggle("showAllCommunities")}><PublicIcon className="icon" /> Show All Communities</button>
 
-          <button onClick={() => handleSectionToggle("YourCommunities")}><FaGlobe /> Your Communities</button>
+          <button onClick={() => handleSectionToggle("YourCommunities")}><FaGlobe className="icon" /> Your Communities</button>
 
-          <button onClick={() => handleSectionToggle("Pages")}><AccountCircleIcon /> Your Pages</button>
+          <button onClick={() => handleSectionToggle("Pages")}><AccountCircleIcon className="icon" /> Your Pages</button>
 
           <button onClick={() => handleSectionToggle("createCommunity")}>Create Community</button>
           

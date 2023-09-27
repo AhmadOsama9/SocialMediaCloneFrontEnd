@@ -5,6 +5,10 @@
     padding: 2rem;
 }
 
+.loggedin-user .icon {
+    font-size: 1.4rem;
+}
+
 .loggedin-user-choices {
     display: flex;
     flex-direction: column;
