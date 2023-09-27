@@ -23,7 +23,7 @@ const ShowReceivedRequests = () => {
   }
 
   if (pendingRequests.length === 0) {
-    return <h3>You have no pending requests</h3>
+    return <h3>You have no Friend Requests</h3>
   }
 
   return (

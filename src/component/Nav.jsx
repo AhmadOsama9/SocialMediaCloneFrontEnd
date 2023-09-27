@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { FaHome, FaUser, FaEnvelope, FaComments, FaUserFriends, FaLayerGroup } from "react-icons/fa"; 
+import { Home, Person, Email, Chat, Group, Layers, PersonAdd } from '@mui/icons-material';
 import { useAuthContext } from "../hooks/useAuthContext";
 
 import "../CSS/navbar.css";
@@ -9,12 +9,12 @@ const Nav = () => {
 
   return (
     <div className="nav-bar">
-      {user && <NavLink to="/feed" className="nav-icon"> <FaLayerGroup /> </NavLink>} 
-      <NavLink to="/" className="nav-icon"> <FaHome /> </NavLink>  
-      {user && <NavLink to="/profile" className="nav-icon"> <FaUser /> </NavLink>}
-      {user && <NavLink to="/receivedrequests" className="nav-icon"> <FaEnvelope /> </NavLink>}
-      {user && <NavLink to="/chats" className="nav-icon"> <FaComments /> </NavLink>}
-      {user && <NavLink to="/friends" className="nav-icon"> <FaUserFriends /> </NavLink>}
+      {user && <NavLink to="/feed" className="nav-icon"> <Layers /> </NavLink>} 
+      <NavLink to="/" className="nav-icon"> <Home /> </NavLink>  
+      {user && <NavLink to="/profile" className="nav-icon"> <Person /> </NavLink>}
+      {user && <NavLink to="/receivedrequests" className="nav-icon"> <PersonAdd /> </NavLink>}
+      {user && <NavLink to="/chats" className="nav-icon"> <Chat /> </NavLink>}
+      {user && <NavLink to="/friends" className="nav-icon"> <Group /> </NavLink>}
     </div>
   );
 };

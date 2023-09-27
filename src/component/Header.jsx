@@ -6,6 +6,8 @@ import { useAuthContext } from "../hooks/useAuthContext";
 
 import { useNavigate, Link } from "react-router-dom";
 
+import LogoutIcon from '@mui/icons-material/Logout';
+
 import "../CSS/header.css";
 
 const Header = () => {
@@ -52,7 +54,9 @@ const Header = () => {
             {user && (
               <div className="logout">
                 <span className="nickname">somethingannoyingmighthappenlikethishere</span>
-                <button onClick={handleClick}>Logout</button>
+                <div className="logout-btn">
+                  <button onClick={handleClick}><LogoutIcon  className="logout-icon"/>Logout</button>
+                </div>
               </div>
             )}
         </nav>

@@ -51,7 +51,7 @@ const Friends = () => {
   }
 
   if (friends.length === 0) {
-    return <h3>You have no friends</h3>
+    return <h3>You have no friends, Don't be sad, you'll be better insha'allah</h3>
   }
 
   return (
