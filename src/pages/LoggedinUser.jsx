@@ -15,7 +15,7 @@ import { useActiveSectionContext } from "../context/ActiveSectionContext";
 
 
 import { FaSearch, FaGlobe} from "react-icons/fa";
-import { Group as GroupIcon, Public as PublicIcon, Business as BusinessIcon, AccountCircle as AccountCircleIcon } from '@mui/icons-material';
+import { Group as GroupIcon, Public as PublicIcon, AccountCircle as AccountCircleIcon } from '@mui/icons-material';
 
 import { IoIosGlobe } from "react-icons/io";
 
