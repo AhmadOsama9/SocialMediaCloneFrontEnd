@@ -67,11 +67,11 @@
 }
   
 .form .google-button {
-  background: var(--button-bg);
+  background: var(--post-button-bg);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--button-text);
+  color: var(--post-button-text);
   border: none;
   border-radius: 0.3rem;
   padding: 0.7rem;
@@ -81,8 +81,8 @@
 }
   
 .form .google-button:hover {
-  background-color: var(--button-hover-bg);
-  color: var(--button-hover-text);
+  background-color: var(--post-button-hover-bg);
+  color: var(--post-button-hover-text);
 }
   
 .form .google-icon {

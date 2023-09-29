@@ -17,10 +17,10 @@
   --button-text: #FFFFFF; /* White text color for buttons */
   --button-hover-bg: #388E3C; /* A slightly darker shade of green for button hover background */
   --button-hover-text: #FFFFFF; /* White text color for button hover state */
-
-  --post-button-bg: #4A90E2; /* A shade of blue for the button background */
+  
+  --post-button-bg: #4285F4; /* Google blue */
   --post-button-text: #FFFFFF; /* White text color for buttons */
-  --post-button-hover-bg: #357ABD; /* A darker shade of blue for button hover background */
+  --post-button-hover-bg: #357AE8; /* Slightly darker blue for button hover background */
   --post-button-hover-text: #FFFFFF;
 
   /* Post and Card Backgrounds */
