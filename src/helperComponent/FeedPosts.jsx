@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useOtherUserPostsContext } from "../context/OtherUserPosts";
 import { usePost } from "../hooks/usePost";
-import { useGetUserInfo } from "../hooks/useGetUserInfo";
+import { useNicknameContext } from "../context/NicknameContext";
 import { useSearchUser } from "../hooks/useSearchUser";
 import OtherUserProfile from "../pages/OtherUserProfile";
 import { useSearchCommunity } from "../hooks/useSearchCommunity";
@@ -19,11 +19,11 @@ const FeedPosts = () => {
     const { isLoading, error, user, searchUserAndReturn } = useSearchUser();
 
     const { community, searchCommunity } = useSearchCommunity();
+    const { userNickname } = useNicknameContext();
 
 
     const userString = localStorage.getItem("user");
     const userId = JSON.parse(userString).userId;
-    const [userNickname, setUserNickname] = useState("");
     const [userClicked, setUserClicked] = useState(false);
     const [postNickname, setPostNickname] = useState("");
     const [searchedUser, setSearchedUser] = useState(null);
@@ -40,13 +40,6 @@ const FeedPosts = () => {
     const handleCommunityNameClicking = async (communityName) => {
         await searchCommunity(communityName);
         setCommunityNameClicked(true);
-    }
-
-    const { getUserNickname } = useGetUserInfo();
-
-    const getNickname = async () => {
-        const nickname = await getUserNickname(userId);
-        setUserNickname(nickname);
     }
 
     const [showReactions, setShowReactions] = useState({});
@@ -94,7 +87,6 @@ const FeedPosts = () => {
         setUserClicked(false);
         setPostNickname("");
         fetchOtherUserPosts();
-        getNickname();
     }, [userId]);
 
 

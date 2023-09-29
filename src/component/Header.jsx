@@ -3,6 +3,7 @@ import Nav from "./Nav";
 
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useNicknameContext } from "../context/NicknameContext";
 
 import { useNavigate, Link } from "react-router-dom";
 
@@ -16,7 +17,7 @@ const Header = () => {
   const navigate = useNavigate();
 
 
-  const [userNickname, setUserNickname] = useState("");
+  const { userNickname, setUserNickname } = useNicknameContext();
   const isNicknameFetched = useRef(false);
 
   const getNickname = async () => {
@@ -38,6 +39,7 @@ const Header = () => {
   useEffect(() => {
     getNickname();
   }, [])
+
 
   const handleClick = () => {
     logout();

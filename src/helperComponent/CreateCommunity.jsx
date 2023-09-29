@@ -16,6 +16,11 @@ const CreateCommunity = () => {
   const [community, setCommunity] = useState(null);
 
   const handleCreateCommunity = async () => {
+    if (!name || !description) {
+      alert("All info must be filled");
+      return;
+    }
+
     const community = await createCommunity(name, description)
     setCommunity(community);
     setShowCommunity(true);

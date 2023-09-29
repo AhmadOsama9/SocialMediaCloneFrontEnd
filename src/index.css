@@ -226,6 +226,12 @@ html {
   border: none;
   outline: none;
   background-color: transparent;
+  color: var(--text-on-post-bg);
+}
+
+.post .post-select option {
+  background-color: var(--post-content-bg);
+  color: var(--text-on-post-bg);
 }
 
 /* Comment Section */

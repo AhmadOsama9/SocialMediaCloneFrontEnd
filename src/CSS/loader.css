@@ -16,7 +16,7 @@ section {
 
 .loader .loader-outter {
     position: absolute;
-    border: 0.5rem solid var(--first-primary-color);
+    border: 0.5rem solid var(--post-button-bg);
     border-left-color: transparent;
     border-bottom: 0;
     width: 100%;
@@ -28,7 +28,7 @@ section {
 
 .loader .loader-inner {
     position: absolute;
-    border: 0.5rem solid var(--second-primary-color);
+    border: 0.5rem solid var(--post-button-hover-bg);
     border-radius: 50%;
     width: 2rem;
     height: 2rem;

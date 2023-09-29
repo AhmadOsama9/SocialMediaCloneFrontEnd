@@ -102,7 +102,7 @@ const CommunityProfile = ({ community }) => {
               {relation === "member" && 
                 <div>
                   <button onClick={handleLeaveCommunity} className="leave-button">Leave Community</button>
-                  <button onClick={handleToggleCreatePost} className="create-post-button">Create Post</button>
+                  <button onClick={handleToggleCreatePost} className="create-community-post-button">Create Post</button>
                   <button onClick={() => setShowMembers(prev => !prev)} className="show-members-button">Show Members</button>
                   {showMembers && 
                     members.map((member) => (

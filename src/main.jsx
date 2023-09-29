@@ -11,6 +11,7 @@ import { CreateCommunityPostContextProvider } from './context/createCommunityPos
 import { CreatePagePostContextProvider } from './context/CreatePagePostContext.jsx'
 import { ActiveSectionContextProvider } from './context/ActiveSectionContext.jsx'
 import { ForgotPasswordContextProvider } from './context/ForgotPasswordContext.jsx'
+import { NicknameContextProvider } from "./context/NicknameContext.jsx";
 
 import './index.css'
 import { OtherUserPostsContextProvider } from './context/OtherUserPosts.jsx'
@@ -28,7 +29,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     <CreatePagePostContextProvider>
                       <ActiveSectionContextProvider>
                         <ForgotPasswordContextProvider>
-                          <App />
+                          <NicknameContextProvider>
+                            <App />
+                          </NicknameContextProvider>
                         </ForgotPasswordContextProvider>
                       </ActiveSectionContextProvider>
                     </CreatePagePostContextProvider>

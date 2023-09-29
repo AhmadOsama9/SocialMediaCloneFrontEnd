@@ -15,6 +15,10 @@ const CreatePage = () => {
   const [showPage, setShowPage] = useState(false);
 
   const handleCreatePage = async () => {
+    if (!name || !description) {
+      alert("All info must be filled");
+      return;
+    }
     const page = await createPage(name, description);
     setPage(page);
     setShowPage(true);
