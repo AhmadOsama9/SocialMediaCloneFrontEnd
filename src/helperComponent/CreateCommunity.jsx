@@ -40,7 +40,7 @@ const CreateCommunity = () => {
 
   return (
     <div className="create-community">
-        <div>
+        <div className="input-container">
             <label className="label">Name </label>
             <input 
             type="text"
@@ -50,7 +50,7 @@ const CreateCommunity = () => {
             className="input"
             />
         </div>
-        <div>
+        <div className="input-container">
             <label className="label">Description </label>
             <input
             type="text"
