@@ -1,5 +1,5 @@
 header {
-    background-color: #fff;
+    background-color: var(--navbar-bg);
     padding: 0.3rem;
     margin-bottom: 1rem;
 }
@@ -17,7 +17,7 @@ header .logo {
     font-weight: bold;
     margin-right: auto;
     text-decoration: none;
-    color: var(--first-primary-color);
+    color: var(--text-on-main-bg);
 }
 
 .logout {
@@ -30,7 +30,7 @@ header .logo {
   box-sizing: border-box;
   appearance: none;
   background-color: transparent;
-  border: 2px solid red;
+  border: 0.15rem solid red;
   border-radius: 0.6em;
   color: red;
   cursor: pointer;
@@ -58,7 +58,7 @@ header .logo {
         overflow: hidden;
         text-overflow: ellipsis;
     
-        color: #333;
+        color: var(--secondary-title);
     }
 }
 
@@ -70,7 +70,7 @@ header .logo {
         overflow: hidden;
         text-overflow: ellipsis;
     
-        color: #333;
+        color: var(--secondary-title);
     }
 }
 
@@ -82,6 +82,6 @@ header .logo {
         overflow: hidden;
         text-overflow: ellipsis;
     
-        color: #333;
+        color: var(--secondary-title);
     }
 }

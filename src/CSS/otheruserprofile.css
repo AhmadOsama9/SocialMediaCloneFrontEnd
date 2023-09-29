@@ -5,10 +5,18 @@
     align-items: center;
     margin: 2rem;
     padding: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     border-radius: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 4px var(--border-color);
+}
+
+.other-user-profile .selected-other-user-avatar-image {
+    width: 5rem;
+    height: 5rem;
+    background-color: var(--secondary-title);
+    border-radius: 50%;
+    border: none;
 }
   
   /* User information section */
@@ -16,23 +24,25 @@
     text-align: left;
     max-width: 400px;
     padding: 1rem;
-    background-color: #fff;
-    border: 1px solid #e0e0e0;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     margin-bottom: 1rem;
+    color: var(--header-text);
 }
   
 .user-info span {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: bold;
+    color: var(--secondary-title);
 }
   
 .user-info button {
     margin: 0.5rem;
     padding: 0.3rem 0.7rem;
-    background-color: #007bff;
-    color: #fff;
+    background-color: var(--button-bg);
+    color: var(--button-text);
     border: none;
     border-radius: 1rem;
     cursor: pointer;
@@ -40,7 +50,8 @@
 }
   
 .user-info button:hover {
-    background-color: #0056b3;
+    background-color: var(--button-hover-bg);
+    color: var(--button-hover-text);
 }
   
   /* Received friend request section */
@@ -54,10 +65,10 @@
 .chat-container {
     max-height: 200px;
     overflow-y: auto;
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--border-color);
     padding: 1rem;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: var(--main-background);
     margin-bottom: 1rem;
 }
 
@@ -73,7 +84,13 @@
 }
   
 .chat-message.incoming {
-    background-color: #f2f2f2;
+    background-color: #252525 !important;
+    color: var(--header-text) !important;
+}
+
+.chat-message.outgoing {
+    background-color: #181818 !important;
+    color: var(--secondary-title) !important;
 }
   
 .message-input {
@@ -85,31 +102,26 @@
 .message-input input[type="text"] {
     flex: 1;
     padding: 0.5rem;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
+    background-color: var(--input-bg);
+    color: var(--input-text);
 }
   
 .message-input button {
     margin-left: 1rem;
     padding: 0.5rem 1rem;
-    background-color: #007bff;
-    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-}
-  
-.message-input button:hover {
-    background-color: #0056b3;
-}
-  
+}  
 
 .other-user-profile .switch-button {
   margin-left: 0.5rem;
   padding: 0.3rem 0.5rem;
-  background-color: #007bff;
-  color: #fff;
+  background-color: var(--button-bg);
+  color: var(--button-text);
   border: none;
   border-radius: 1rem;
   cursor: pointer;
@@ -117,6 +129,7 @@
 }
 
 .other-user-profile .switch-button:hover {
-  background-color: var(--second-primary-color);
+  background-color: var(--button-hover-bg);
+  color: var(--button-hover-text);
 }
   

@@ -251,7 +251,7 @@ const CommunityPosts = ({ communityId }) => {
     }
 
     if (communityPosts.length === 0) {
-        return <h3>The Community have no Posts</h3>;
+        return <h3>The Community has no Posts</h3>;
     }
     return (
         <div>

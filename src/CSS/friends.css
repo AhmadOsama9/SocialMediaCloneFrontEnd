@@ -4,6 +4,10 @@
     align-items: center;
 }
 
+.friends h2 {
+    color: var(--header-text);
+}
+
 .friends .friend {
     display: flex;
     flex-direction: column;
@@ -12,16 +16,18 @@
 
 .friends .friend span {
     font-size: 1.5rem;
+    color: var(--secondary-title);
 }
 
 .friends .friend button {
     padding: 0.7rem 1rem;
-    border: 0.1rem solid #ccc;
+    border: 0.1rem solid var(--border-color);
     border-radius: 0.5rem;
-    background-color: #434343;
-    color: #fff;
+    background-color: var(--button-bg);
+    color: var(--button-text);
 }
 
 .friends .friend button:hover {
-    background-color: #5a5a5a;
+    background-color: var(--button-hover-bg);
+    color: var(--button-hover-text);
 }

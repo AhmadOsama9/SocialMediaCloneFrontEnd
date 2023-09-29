@@ -7,10 +7,10 @@
 
 .nav-bar .nav-icon {
     font-size: 1.5rem;
-    color: var(--first-primary-color)
+    color: var(--navbar-link);
 }
 
 .nav-bar .nav-icon.active{
-    color: var(--third-primary-color);
+    color: var(--border-color);
 }
 

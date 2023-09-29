@@ -5,13 +5,13 @@
 
 .otp-heading {
     font-size: 1.5rem;
-    color: #333;
+    color: var(--header-text);
     margin-bottom: 0.625rem; 
 }
   
 .otp-note {
     font-size: 1rem;
-    color: #999;
+    color: var(--text-on-card-bg);
     margin-bottom: 0.625rem; 
 }
   
@@ -19,7 +19,7 @@
 .otp-label {
     display: block;
     font-size: 0.875rem; 
-    color: #333;
+    color: var(--secondary-title);
     margin-top: 0.3125rem; 
 }
   
@@ -27,15 +27,15 @@
     width: 100%;
     padding: 0.625rem; 
     font-size: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     border-radius: 0.25rem; 
     margin-top: 0.3125rem; 
 }
   
 
 .otp-button {
-    background-color: #007bff; 
-    color: #fff;
+    background-color: var(--button-bg); 
+    color: var(--button-text);
     padding: 0.625rem 1.25rem;
     font-size: 1.125rem;
     border: none;
@@ -45,6 +45,7 @@
 }
   
 .otp-button:hover {
-    background-color: #0056b3; 
+    background-color: var(--button-hover-bg);
+    color: var(--buttton-hover-text); 
 }
   

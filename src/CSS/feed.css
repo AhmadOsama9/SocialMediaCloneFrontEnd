@@ -6,21 +6,25 @@
 
 .feed .toggle-buttons button {
     padding: 0.3rem 0.5rem;
-    border: 0.1rem solid #ccc;
+    border: 0.1rem solid var(--border-color);
     border-radius: 0.5rem;
-    background-color: transparent;
+    background-color: var(--button-bg);
+    color: var(--button-text);
     transition: 0.3s ease-in-out;
+
 }
 
 .feed .toggle-buttons button:hover {
-    color: var(--first-primary-color);
+    background-color: var(--button-bg);
+    color: var(--button-text);
     transform: scale(1.1);
 }
 
 .feed .toggle-buttons .active {
-    color: var(--first-primary-color);
-    transform: scale(1.1);
-    box-shadow: 0rem 0rem 0.3rem 0.1rem #ccc;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    transform: scale(1.2);
+    box-shadow: 0rem 0rem 0.3rem 0.3rem var(--border-color);
 }
 
 .feed .h3 {

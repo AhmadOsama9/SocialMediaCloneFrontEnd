@@ -1,8 +1,8 @@
 .communities-container {
   margin: 1.25rem;
   padding: 1.25rem;
-  background-color: #f5f5f5;
-  border: 0.0625rem solid #ddd;
+  background-color: var(--card-bg);
+  border: 0.0625rem solid var(--border-color);
   border-radius: 0.3125rem;
   box-shadow: 0 0 0.15625rem rgba(0, 0, 0, 0.1);
 }
@@ -10,7 +10,7 @@
 .communities-title {
   font-size: 1.5rem;
   margin-bottom: 0.625rem;
-  color: #333;
+  color: var(--header-text);
 }
 
 .community-card {
@@ -18,33 +18,33 @@
   flex-direction: column;
   margin-bottom: 0.9375rem;
   padding: 0.625rem;
-  background-color: #fff;
-  border: 0.0625rem solid #ddd;
+  background-color: var(--card-bg);
+  border: 0.0625rem solid var(--border-color);
   border-radius: 0.3125rem;
-  box-shadow: 0 0 0.09375rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0.09375rem var(--border-color);
 }
 
 .community-card .span {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #434343;
+  color: var(--text-on-card-bg);
 }
 
 .community-name {
   font-size: 1.125rem;
   font-weight: bold;
-  color: #333;
+  color: var(--secondary-title);
 }
 
 .community-description {
   font-size: 0.875rem;
-  color: #777;
+  color: var(--text-on-card-bg);
 }
 
 .show-community-button {
   padding: 0.3125rem 0.625rem;
-  background-color: #007bff;
-  color: #fff;
+  background-color: var(--button-bg);
+  color: var(--button-text);
   border: none;
   border-radius: 1rem;
   cursor: pointer;
@@ -52,13 +52,14 @@
 }
 
 .show-community-button:hover {
-  background-color: #0056b3;
+  background-color: var(--button-hover-bg);
+  color: var(--button-hover-text);
 }
 
 .all-Communities .close {
   padding: 0.3rem 0.65rem;
-  background-color: #007bff;
-  color: #fff;
+  background-color: var(--post-button-bg) !important;
+  color: var(--button-text);
   border: none;
   border-radius: 1rem;
   cursor: pointer;
@@ -66,5 +67,12 @@
 }
 
 .all-Communities .close:hover {
-  background-color: #0056b3;
+  background-color:  var(--button-bg) !important;
+}
+
+.all-Communities .opened-community {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

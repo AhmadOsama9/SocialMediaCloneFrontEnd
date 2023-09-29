@@ -34,6 +34,7 @@ const CreatePage = () => {
 
   return (
     <div className="create-page">
+      <h3 className="title">Create Page</h3>
       <div className="input-container">
         <label className="label">Name</label>
         <input
@@ -49,6 +50,7 @@ const CreatePage = () => {
         <input
           type="text"
           value={description}
+          placeholder="Enter the description of the page"
           onChange={(e) => setDescription(e.target.value)}
           className="input"
         />

@@ -122,7 +122,9 @@ const CommunityProfile = ({ community }) => {
                   <button onClick={() => setShowMembers(prev => !prev)} className="show-members-button">Show Members</button>
                   <button onClick={() => setShowRequests(prev => !prev)} className="show-requests-button">Show Requests</button>
                   <button onClick={handleDeleteCommunity} className="delete-community-button">Delete Community</button>
-                  {showMembers &&
+                  {showMembers && (members.length === 0 ? (
+                    <div className="no-members">You have no members.</div>
+                  ) : (
                     members.map((member) => (
                       <div key={member.userId} className="members">
                         <span>Name: {member.nickname}</span>
@@ -131,8 +133,11 @@ const CommunityProfile = ({ community }) => {
                         <button onClick={() => removeMember(member.userId, communityId)} className="remove-member-button">Remove from community</button>
                       </div>
                     ))
-                  }
-                  {showRequests &&
+                  ))}
+
+                  {showRequests && (membershipRequests.length === 0 ? (
+                    <div className="no-requests">You have no requests.</div>
+                  ) : (
                     membershipRequests.map((request) => (
                       <div key={request.userId} className="members">
                         <span>Nickname: {request.nickname}</span>
@@ -141,7 +146,7 @@ const CommunityProfile = ({ community }) => {
                         <button onClick={() => acceptJoinRequest(request.userId, communityId)} className="accept-button">Accept</button>
                       </div>
                     ))
-                  }
+                  ))}
                 </div>
               }
             </div>

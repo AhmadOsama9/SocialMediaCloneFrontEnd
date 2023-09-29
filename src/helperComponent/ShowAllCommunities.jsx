@@ -36,7 +36,7 @@ const ShowAllCommunities = () => {
   return (
     <div className="all-Communities">
       {community._id ? ( 
-        <div>
+        <div className="opened-community">
           <button className="close" onClick={handleCloseShowCommunity}>Close</button>
           <CommunityProfile community={community} />
         </div>

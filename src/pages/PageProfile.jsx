@@ -82,7 +82,7 @@ const PageProfile = ({ page }) => {
 
   return (
     <div className="page-profile">
-      <h3>Searched Page</h3>
+      <h3>Page</h3>
       <span className="page-name"><span className="span">Name: </span> {page.name}</span>
       <span className="page-description"><span className="span">Description: </span>{page.description}</span>
       <span className="page-likes">Likes: {pageLikers.length > 0 ? pageLikers.length : 0}</span>

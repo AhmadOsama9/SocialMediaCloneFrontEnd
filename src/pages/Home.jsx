@@ -22,16 +22,12 @@ const Home = () => {
           <button className={activeSection === "login" ? "active-section" : ""} onClick={() => handleSectionChange("login")}>Login</button>
           <button className={activeSection === "signup" ? "active-section" : ""} onClick={() => handleSectionChange("signup")}>Signup</button>
         </div>
-          {activeSection === "login" && (
-            <div className="login">
+          {activeSection === "login" && 
               <Login />
-            </div>
-          )}
-          {activeSection === "signup" && (
-            <div classname="signup">
+          }
+          {activeSection === "signup" &&
               <Signup />
-            </div>
-          )}
+          }
       </div>) : (
         <div>
           <button className="cancel-button" onClick={() => setShowForgotPassword(false)}>Cancel</button>

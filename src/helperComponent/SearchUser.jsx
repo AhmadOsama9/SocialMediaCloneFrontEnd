@@ -52,7 +52,7 @@ const SearchUser = ({ nickname }) => {
             : null
         }
         alt={`Avatar}`}
-        className="selected-avatar-image"
+        className="selected-other-user-avatar-image"
       />
       </div>
       <span className="span">Nickname: {user.nickname}</span>

@@ -6,16 +6,18 @@
 .searched-community h3 {
     font-size: 1.5rem;
     font-weight: bold;
+    color: var(--header-text);
 }
 
 .searched-community .span {
     font-size: 1.5rem;
+    color: var(--secondary-title);
 }
 
 .searched-community .btn {
     padding: 0.3rem 0.5rem;;
-    border: 0.1rem solid #ccc;
+    border: 0.1rem solid var(--border-color);
     border-radius: 0.5rem;
-    background-color: #434343;
-    color: #fff;
+    background-color: var(--button-bg);
+    color: var(--button-text);
 }

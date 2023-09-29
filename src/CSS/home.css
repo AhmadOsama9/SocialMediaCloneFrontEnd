@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: var(--card-bg);
 }
 
 .form .current-form{
@@ -11,7 +12,7 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 1px 2px var(--border-color);
   border-radius: 0.5rem;
   padding: 0.7rem 1rem;
   margin-bottom: 1rem;
@@ -25,24 +26,25 @@
   padding: 0.3rem 0.7rem;
 }
 
-.group {
+.form .group {
   margin-bottom: 1.5rem;
 }
 
-.group label {
+.form .group label {
   font-size: 16px;
   margin-bottom: 8px;
   display: block;
-  color: #333;
+  color: var(--secondary-title);
 }
 
-.group input {
+.login .group input,
+.signup .group input {
   width: 100%;
   padding: 12px;
   border: none;
-  background-color: #f2f2f2;
+  background-color: var(--input-bg) !important;
   border-radius: 5px;
-  color: #333;
+  color: var(--input-text) !important;
   font-size: 16px;
 }
 
@@ -50,8 +52,8 @@
   width: 100%;
   padding: 0.7rem;
   border: none;
-  background-color: var(--first-primary-color);
-  color: white;
+  background-color: var(--button-bg);
+  color: var(--button-text);
   font-size: 1.2rem;
   border-radius: 0.4rem;
   cursor: pointer;
@@ -60,15 +62,16 @@
 }
   
 .form .submit-btn:hover {
-  background-color: #0056b3;
+  background-color: var(--button-hover-bg);
+  color: var(--button-hover-text);
 }
   
 .form .google-button {
-  background: var(--first-primary-color);
+  background: var(--button-bg);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--button-text);
   border: none;
   border-radius: 0.3rem;
   padding: 0.7rem;
@@ -78,7 +81,8 @@
 }
   
 .form .google-button:hover {
-  background-color: var(--second-primary-color);
+  background-color: var(--button-hover-bg);
+  color: var(--button-hover-text);
 }
   
 .form .google-icon {
@@ -88,15 +92,15 @@
   
 .form .forgot-password-span {
   display: inline-block;
-  color: var(--third-primary-color);
+  color: var(--secondary-title);
   cursor: pointer;
   font-size: 1.3rem;
   margin-top: 0.5rem;
 }
   
 .form .active-section {
-  color: #434343; 
-  background-color: #ffffff;
+  color: var(--secondary-title); 
+  background-color: var(--card-bg);
   top: 2px;
   left: 1px;
 	box-shadow: none;

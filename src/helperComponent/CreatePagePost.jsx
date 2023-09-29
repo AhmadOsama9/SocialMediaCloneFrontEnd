@@ -30,7 +30,7 @@ const CreatePagePost = ({ pageName }) => {
     }
 
     return (
-        <div className="create-post-container">
+        <div className="create-page-post-container">
             <h2 className="create-post-title">Create Post</h2>
             <div className="create-post-input">
                 <label className="create-post-label">Header</label>

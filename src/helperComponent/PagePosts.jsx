@@ -233,7 +233,7 @@ const PagePosts = ({ pageName }) => {
     }
 
     if (pagePosts.length === 0) {
-        return <h3>The Community have no Posts</h3>;
+        return <h3>The Page has no Posts</h3>;
     }
     return (
         <div>

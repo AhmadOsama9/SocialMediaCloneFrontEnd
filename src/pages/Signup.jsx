@@ -61,7 +61,7 @@ const Signup = () => {
   }
 
   return (
-    <div>
+    <div className="signup">
       {!showvalidateOTP && !showSignupForm && (
       <div>
         <div className="group">

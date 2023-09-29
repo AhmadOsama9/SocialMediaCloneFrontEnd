@@ -29,7 +29,7 @@ const CreateCommunityPost = ({ communityId }) => {
     }
 
     return (
-      <div className="create-post">
+      <div className="create-community-post">
         <h2 className="create-post-title">Create Post</h2>
         <div className="input-container">
             <label className="label">Header</label>

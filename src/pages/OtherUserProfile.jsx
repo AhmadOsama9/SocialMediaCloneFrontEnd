@@ -172,7 +172,7 @@ const OtherUserProfile = ({ otherUser, relation }) => {
                     : null
                 }
                 alt={`Avatar}`}
-                className="selected-avatar-image"
+                className="selected-other-user-avatar-image"
               />
             </span>
             <span>Nickname: {otherUser.nickname}</span>

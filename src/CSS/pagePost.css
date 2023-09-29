@@ -7,7 +7,7 @@
     width: 100%;
     padding: 0.3125rem 0.625rem;
     font-size: 1rem;
-    border: 0.0625rem solid #ddd;
+    border: 0.0625rem solid var(--border-color);
     border-radius: 0.1875rem;
     margin-bottom: 1rem;
 }
@@ -20,8 +20,8 @@
 .update-button {
     font-size: 1.125rem;
     padding: 0.3125rem 0.625rem;
-    background-color: #007bff;
-    color: #fff;
+    background-color: var(--button-bg);
+    color: var(--button-text);
     border: none;
     border-radius: 0.1875rem;
     cursor: pointer;
@@ -29,6 +29,7 @@
 }
   
 .update-button:hover {
-    background-color: #0056b3;
+    background-color: var(--button-hover-bg);
+    color: var(--button-hover-text);
 }
   

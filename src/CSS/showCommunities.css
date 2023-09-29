@@ -2,37 +2,47 @@
     margin-top: 1.25rem;
 }
   
-.section-title {
+.joined-communities .section-title {
     font-size: 1.5rem;
     margin-bottom: 0.625rem;
+    color: var(--header-text);
 }
   
-.community-info {
+.joined-communities .community-info {
     padding: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     border-radius: 0.25rem;
     margin-bottom: 0.625rem;
+    color: var(--text-on-card-bg);
 }
   
-.community-name,
-.community-description {
+.joined-communities .community-name,
+.joined-communities .community-description {
     display: block;
     font-size: 1rem;
     margin-bottom: 0.625rem;
 }
   
-.toggle-button {
+.joined-communities .toggle-button {
     font-size: 1rem;
     padding: 0.3125rem 0.625rem;
-    background-color: #007bff;
-    color: #fff;
+    background-color: var(--post-button-bg);
+    color: var(--button-text);
     border: none;
     border-radius: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
 }
   
-.toggle-button:hover {
-    background-color: #0056b3;
+.joined-communities .toggle-button:hover {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+}
+
+.joined-communities .opened-community {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
   

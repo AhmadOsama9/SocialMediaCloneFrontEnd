@@ -1,12 +1,57 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
-  --first-primary-color: #007bff;
-  --second-primary-color: #0056b3;
-  --third-primary-color: #042d59;
+  --main-background: #121212; /* Main background color */
 
-  --first-danger-color: #dc3545;
-  --second-danger-color: #c82333; 
+  /* Text Colors */
+  --text-on-main-bg: #f0eeee; /* Text on main background */
+  --subheader-text: #fafafa; /* Subheaders and secondary text */
+
+  /* Headers and Titles */
+  --header-text: #f8f8f8; /* Headers and primary titles */
+  --secondary-title: #CCCCCC; /* Secondary titles */
+
+  /* Links and Buttons */
+  --link-text: #3498DB; /* Link text color */
+  --button-bg: #4CAF50; /* A shade of green for the button background */
+  --button-text: #FFFFFF; /* White text color for buttons */
+  --button-hover-bg: #388E3C; /* A slightly darker shade of green for button hover background */
+  --button-hover-text: #FFFFFF; /* White text color for button hover state */
+
+  --post-button-bg: #4A90E2; /* A shade of blue for the button background */
+  --post-button-text: #FFFFFF; /* White text color for buttons */
+  --post-button-hover-bg: #357ABD; /* A darker shade of blue for button hover background */
+  --post-button-hover-text: #FFFFFF;
+
+  /* Post and Card Backgrounds */
+  --card-bg: #1E1E1E; /* Card background color */
+  --post-content-bg: #1C1C1C; /* Post content background color */
+
+  /* Icons */
+  --icon-color: #FFFFFF; /* Icon color */
+
+  /* Highlight and Accent Colors */
+  --accent-color: #E74C3C; /* Accent color for notifications, etc. */
+  --success-color: #27AE60; /* Success message color */
+  --error-color: #E74C3C; /* Error message color */
+
+  /* Borders and Dividers */
+  --border-color: #333333; /* Border color */
+
+  /* Input Fields and Forms */
+  --input-bg: #222222; /* Input field background color */
+  --input-text: #FFFFFF; /* Input text color */
+  --placeholder-text: #666666; /* Placeholder text color */
+
+  /* Navigation Bar */
+  --navbar-bg: #181818; /* Navigation bar background color */
+  --navbar-link: #FFFFFF; /* Navigation link text color */
+  --navbar-link-hover: #3498DB; /* Navigation link hover color */
+
+  --text-on-card-bg: #cccccc;
+  --text-on-post-bg: #cccccc;
+
+  --liked-page: #E74C3C;
 }
 
 *,
@@ -23,7 +68,8 @@
 }
 
 body {
-  background-color: #F0F2F5;
+  background-color: var(--main-background);
+  color: var(--text-on-main-bg);
 }
 
 html {
@@ -60,7 +106,7 @@ html {
 }
 
 .error {
-  color: #da2535;
+  color: var(--error-color);
   margin-top: 8px;
 }
 
@@ -68,11 +114,11 @@ html {
 /*Post styles */
 /* Style for the whole post */
 .post {
-  border: 1px solid #ddd;
-  background-color: #fff;
+  border: 1px solid var(--card-bg);
+  background-color: var(--post-content-bg);
   margin: 1rem 2rem;
   padding: 1.25rem;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.125rem 0.25rem var(--card-bg);
 }
 
 @media screen and (min-width: 480px) {
@@ -94,48 +140,49 @@ html {
 }
 
 /* Header Section */
-.post-header {
+.post .post-header {
   margin-bottom: 1rem;
+  color: var(--header-text);
 }
 
 /* Creator's name */
-.post-creator {
+.post .post-creator {
   font-size: 1.2rem;
   font-weight: bold;
 }
 
 .post .clickable {
-  color: #434343;
+  color: var(--link-text);
   cursor: pointer;
   text-decoration: underline;
 }
 
 /* Header text */
-.post-header-text {
+.post .post-header-text {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #333;
+  color: var(--header-text);
 }
 
 /* Content Section */
-.post-content {
+.post .post-content {
   font-size: 1rem;
-  color: #444;
+  color: var(--secondary-title);
 }
 
 /* Button Section */
-.post-buttons {
+.post .post-buttons {
   margin-top: 1rem;
 }
 
 /* Common styles for buttons */
-.post-buttons .basic-buttons {
+.post .post-buttons .basic-buttons {
   display: flex;
   margin-bottom: 0.5rem;
 }
 .post-button {
-  background-color: #007bff;
-  color: #fff;
+  background-color: var(--post-button-bg);
+  color: var(--post-button-text);
   border: none;
   padding: 0.3rem 0.7rem;
   cursor: pointer;
@@ -148,7 +195,8 @@ html {
 
 /* Button hover effect */
 .post-button:hover {
-  background-color: #0056b3;
+  background-color: var(--post-button-hover-bg);
+  color: var(--post-button-hover-text);
 }
 
 /* Button count */
@@ -161,14 +209,14 @@ html {
 .post .post-count .span {
   font-size: 1rem;
   font-weight: bold;
-  color: #434343;
+  color: var(--text-on-post-bg);
   
 }
 
 .post .post-content .content {
   font-size: 1rem;
   font-weight: bold;
-  color: #434343;
+  color: var(--text-on-post-bg);
 }
 
 /* Select Dropdown */
@@ -181,23 +229,25 @@ html {
 }
 
 /* Comment Section */
-.post-comment {
+.post .post-comment {
   margin-top: 1.25rem;
 }
 
 /* Textarea for comments */
-.post-comment-textarea {
+.post .post-comment-textarea {
+  background-color: var(--input-bg);
+  color: var(--input-text);
   width: 100%;
   padding: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--card-bg);
   border-radius: 0.25rem;
   font-size: 0.9rem;
 }
 
 /* Comment button */
-.post-comment-button {
-  background-color: #007bff;
-  color: #fff;
+.post .post-comment-button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
   border: none;
   padding: 0.625rem 1.25rem;
   cursor: pointer;
@@ -208,65 +258,66 @@ html {
 }
 
 /* Comment button hover effect */
-.post-comment-button:hover {
-  background-color: #0056b3;
+.post .post-comment-button:hover {
+  background-color: var(--button-hover-bg);
+  color: var(--button-hover-text);
 }
 
 /* Reactions Section */
-.post-reactions {
+.post .post-reactions {
   margin-top: 1.25rem;
 }
 
 /* Reaction block */
-.post-reaction {
+.post .post-reaction {
   margin-bottom: 0.625rem;
 }
 
 /* Reaction owner's name */
-.post-reaction-owner {
+.post .post-reaction-owner {
   font-weight: bold;
 }
 
 /* Reaction text */
-.post-reaction-text {
-  color: #333;
+.post .post-reaction-text {
+  color: var(--text-on-post-bg);
 }
 
 /* Comments Section */
-.post-comments {
+.post .post-comments {
   margin-top: 1.25rem;
 }
 
 /* Comment block */
-.post-comment {
+.post .post-comment {
   margin-bottom: 1.25rem;
 }
 
 /* Comment owner's name */
-.post-comment-owner {
+.post .post-comment-owner {
   font-weight: bold;
 }
 
 /* Comment content */
-.post-comment-content {
-  color: #444;
+.post .post-comment-content {
+  color: var(--text-on-post-bg);
 }
 
 /* CreatedAt */
-.post-comment-createdat {
+.post .post-comment-createdat {
   font-size: 0.8rem;
-  color: #555;
+  color: var(--text-on-post-bg);
 }
 
 /* Comment Actions */
-.post-comment-actions {
+.post .post-comment-actions {
   margin-top: 0.625rem;
 }
 
 /* Action button */
-.post-comment-action-button {
-  background-color: #d9534f;
-  color: #fff;
+.post .post-comment-action-button {
+  background-color: var(--accent-color) !important;
+  color: var(--button-text);
   border: none;
   padding: 0.625rem 1.25rem;
   cursor: pointer;
@@ -277,24 +328,24 @@ html {
 }
 
 /* Action button hover effect */
-.post-comment-action-button:hover {
+.post .post-comment-action-button:hover {
   background-color: #c9302c;
 }
 
 /* Update textarea */
-.post-comment-update-textarea {
+.post .post-comment-update-textarea {
   width: 100%;
   padding: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--card-bg);
   border-radius: 0.25rem;
   font-size: 0.9rem;
   margin-top: 0.3125rem;
 }
 
 /* Update button */
-.post-comment-update-button {
-  background-color: #5bc0de;
-  color: #fff;
+.post .post-comment-update-button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
   border: none;
   padding: 0.625rem 1.25rem;
   cursor: pointer;
@@ -302,17 +353,18 @@ html {
   border-radius: 0.25rem;
 }
 
-.selected-avatar-image {
+.post .selected-avatar-image {
   margin-top: 0.3rem;
-  width: 5rem; 
-  height: 5rem;
+  margin-right: 0.3rem;
+  width: 4rem; 
+  height: 4rem;
   border-radius: 50%; 
-  
+  background-color: var(--icon-color);
 }
 
-.post-created {
+.post .post-created {
   font-size: 0.8rem;
-  color: #555;
+  color: var(--text-on-post-bg);
   margin-left: auto;
 }
 
@@ -323,8 +375,8 @@ html {
 }
 
 .load-more-btn {
-  background-color: var(--second-primary-color);
-  color: #fff;
+  background-color: var(--post-button-bg);
+  color: var(--post-button-text);
   border: none;
   border-radius: 1rem;
   font-size: 0.9rem;
@@ -335,7 +387,8 @@ html {
 }
 
 .load-more-btn:hover {
-  background-color: var(--first-primary-color); 
+  background-color: var(--post-button-hover-bg);
+  color: var(--post-button-hover-text); 
 }
 
  

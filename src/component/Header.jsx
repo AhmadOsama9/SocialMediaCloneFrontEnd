@@ -53,7 +53,7 @@ const Header = () => {
             <Nav />
             {user && (
               <div className="logout">
-                <span className="nickname">somethingannoyingmighthappenlikethishere</span>
+                <span className="nickname">{userNickname}</span>
                 <div className="logout-btn">
                   <button onClick={handleClick}><LogoutIcon  className="logout-icon"/>Logout</button>
                 </div>

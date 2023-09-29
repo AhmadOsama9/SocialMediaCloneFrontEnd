@@ -9,14 +9,16 @@
     width: 100%;
     padding: 0.5rem;
     margin-bottom: 0.5rem;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     border-radius: 0.5rem;
     font-size: 1rem;
+    background-color: var(--input-bg);
+    color: var(--input-text);
 }
 
 .edit-post-button {
-    background-color: var(--second-primary-color);
-    color: #fff;
+    background-color: var(--button-bg);
+    color: var(--button-text);
     border: none;
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;

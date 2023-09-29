@@ -42,8 +42,13 @@ const ShowChats = () => {
         })
 
         return () => {
-            if (socketRef.current) 
+            if (socketRef.current) {
+                if (newMessage.trim() !== "") {
+                    socket.emit("stop typing", { chatId, userId });
+                }
+                
                 socket.disconnect();
+            }
         }
     }, [])
 

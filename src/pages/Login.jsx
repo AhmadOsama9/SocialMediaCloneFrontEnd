@@ -4,6 +4,7 @@ import { FaGoogle } from "react-icons/fa";
 import { useForgotPasswordContext } from "../context/ForgotPasswordContext";
 
 
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +20,7 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <div className="login">
       <div>
         <div className="group">
         <label>Email</label>

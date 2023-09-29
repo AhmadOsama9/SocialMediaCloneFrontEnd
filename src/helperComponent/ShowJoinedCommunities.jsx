@@ -44,8 +44,10 @@ const ShowJoinedCommunities = () => {
           </button>
         </div>
       ))}
-      {showCommunityProfile && <button className="toggle-button" onClick={() => setShowCommunityProfile(prv => !prv)}>Go back</button>}
-      {showCommunityProfile && <CommunityProfile community={community} />}
+      <div className="opened-community">
+        {showCommunityProfile && <button className="toggle-button" onClick={() => setShowCommunityProfile(prv => !prv)}>Go back</button>}
+        {showCommunityProfile && <CommunityProfile community={community} />}
+      </div>
 </div>
 
   )

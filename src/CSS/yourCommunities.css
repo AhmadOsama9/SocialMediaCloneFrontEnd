@@ -5,11 +5,12 @@
 .section-title {
     font-size: 1.5rem;
     margin-bottom: 0.625rem;
+    color: var(--header-text);
 }
   
 .community-info {
     padding: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     border-radius: 0.25rem;
     margin-bottom: 0.625rem;
 }
@@ -19,15 +20,15 @@
     display: block;
     font-size: 1rem;
     margin-bottom: 0.625rem;
-    color: #434343;
+    color: var(--secondary-title);
     font-weight: bold;
 }
   
 .toggle-button {
     font-size: 1rem;
     padding: 0.3125rem 0.625rem;
-    background-color: #007bff;
-    color: #fff;
+    background-color: var(--button-bg);
+    color: var(--button-text);
     border: none;
     border-radius: 1rem;
     cursor: pointer;
@@ -35,6 +36,7 @@
 }
   
 .toggle-button:hover {
-    background-color: #0056b3;
+    background-color: var(--button-hover-bg);
+    color: var(--button-hover-text);
 }
   
