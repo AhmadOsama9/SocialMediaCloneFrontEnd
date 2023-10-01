@@ -15,9 +15,9 @@ const Login = () => {
     event.preventDefault();
 
     // Hash the password before sending it to the server
-    const hashedPassword = bcrypt.hashSync(password, 10); // You can adjust the salt rounds as needed
+    const hashedPassword = bcrypt.hashSync(password, 10);
 
-    await login(email, hashedPassword); // Send the hashed password to the login function
+    await login(email, hashedPassword);
   }
 
   return (
