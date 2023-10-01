@@ -20,6 +20,12 @@ header .logo {
     color: var(--text-on-main-bg);
 }
 
+@media screen and (max-width: 330px) {
+    header .logo {
+        font-size: 1.1rem;
+    }
+}
+
 .logout {
     display: flex;
     flex-direction: column;

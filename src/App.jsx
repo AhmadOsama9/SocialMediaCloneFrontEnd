@@ -13,6 +13,7 @@ import GoogleLoginCallback from "./component/GoogleLoginCallback";
 
 //hooks
 import { useAuthContext } from "./hooks/useAuthContext";
+import { useNicknameContext } from "./context/NicknameContext";
 import ShowReceivedRequests from "./helperComponent/ShowReceivedRequests";
 import ShowChats from "./helperComponent/ShowChats";
 
@@ -20,6 +21,8 @@ import ShowChats from "./helperComponent/ShowChats";
 function App() {
   
   const { user } = useAuthContext();
+  const { userNickname } = useNicknameContext();
+
 
   return (
     <Browser>
