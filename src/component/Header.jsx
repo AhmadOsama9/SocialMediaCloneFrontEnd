@@ -24,6 +24,10 @@ const Header = () => {
     navigate("/");
   }
 
+  useEffect(() => {
+
+  }, [userNickname])
+
   return (
     <header>
         <nav>
