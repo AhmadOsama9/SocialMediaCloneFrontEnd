@@ -17,28 +17,8 @@ const Header = () => {
   const navigate = useNavigate();
 
 
-  const { userNickname, setUserNickname } = useNicknameContext();
+  const { userNickname } = useNicknameContext();
   const isNicknameFetched = useRef(false);
-
-  const getNickname = async () => {
-    if (user && user.userId && !isNicknameFetched.current) {
-      const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getnickname?userId=${user.userId}`, {
-        method: "GET",
-        headers: {"Content-Type": "application/json"},
-      });
-  
-      const json = await response.json();
-  
-      if (response.ok) {
-        setUserNickname(json.nickname);
-        isNicknameFetched.current = true;
-      }
-    }
-  };
-  
-  useEffect(() => {
-    getNickname();
-  }, [])
 
 
   const handleClick = () => {
