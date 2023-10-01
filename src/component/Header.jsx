@@ -18,8 +18,6 @@ const Header = () => {
 
 
   const { userNickname } = useNicknameContext();
-  const isNicknameFetched = useRef(false);
-
 
   const handleClick = () => {
     logout();
