@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { actions } from '../context/AuthContext';
+import { useNicknameContext } from '../context/NicknameContext';
+
 import Loader from '../helperComponent/Loader';
 
 function GoogleSignupCallback() {
@@ -9,6 +11,22 @@ function GoogleSignupCallback() {
   const [user, setUser] = useState({});
   const [failed, setFailed] = useState(null);
   const {dispatch} = useAuthContext();
+  const { setUserNickname } = useNicknameContext();
+
+  const getNickname = async (userId) => {
+    if (userId) {
+      const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getnickname?userId=${userId}`, {
+        method: "GET",
+        headers: {"Content-Type": "application/json"},
+      });
+  
+      const json = await response.json();
+  
+      if (response.ok) {
+        setUserNickname(json.nickname);
+      }
+    }
+  };
   
 
   const getUserInfoAndValidate = async () => {
@@ -56,6 +74,7 @@ function GoogleSignupCallback() {
 
         localStorage.setItem("user", JSON.stringify(userInfo));
         dispatch({type: actions.login, payload: userInfo});
+        getNickname(user.userId);
       }
       setUserInfoIsLoading(false);
   }
