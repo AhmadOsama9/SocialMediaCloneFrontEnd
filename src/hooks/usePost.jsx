@@ -28,6 +28,8 @@ export const usePost = () => {
             setPostError(json.error);
         } else {
             setUserPosts(json);
+            setPostLoading(false);
+            return json;
         }
         setPostLoading(false);
     }

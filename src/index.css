@@ -180,6 +180,7 @@ html {
   display: flex;
   margin-bottom: 0.5rem;
 }
+
 .post-button {
   background-color: var(--post-button-bg);
   color: var(--post-button-text);
@@ -234,6 +235,12 @@ html {
   color: var(--text-on-post-bg);
 }
 
+.post .post-comments {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
 /* Comment Section */
 .post .post-comment {
   margin-top: 1.25rem;

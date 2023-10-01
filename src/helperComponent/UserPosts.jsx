@@ -10,7 +10,8 @@ import "../CSS/updatePost.css";
 
 
 const UserPosts = () => {
-    const { userPosts } = useUserPostsContext();
+    // const { userPosts } = useUserPostsContext();
+    const [ userPosts, setUserPosts] = useState([]);
     const { getCreatedPosts, postLoading, postError, deletePost, updatePost, } = usePost();
 
     const [showReactions, setShowReactions] = useState({});
@@ -26,14 +27,15 @@ const UserPosts = () => {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            await getCreatedPosts();
+            const result = await getCreatedPosts();
+            setUserPosts(result);
 
-            for (const post of userPosts) {
-                setReactions(post.reactions);
+            for (const post of result) {
+                setReactions(prvState => ({ ...prvState, [post.postId]: post.reactions }));
 
-                setComments(post.comments);
-
-                setShares(post.shares);
+                setComments(prvState => ({ ...prvState, [post.postId]: post.comments }));
+    
+                setShares(prvState => ({ ...prvState, [post.postId]: post.shares }));
             }
 
         }
@@ -111,18 +113,18 @@ const UserPosts = () => {
                         <p className="post-content"><span className="content">Content: </span> {post.content}</p>
                       </div>
                         <button onClick={() => handleShowReactions(post)} className="post-button">Reactions</button>
-                        <span className="post-count">{reactions.length > 0 ? reactions.length : 0}</span>
+                        <span className="post-count">{reactions[post.postId].length > 0 ? reactions[post.postId].length : 0}</span>
                         <button onClick={() => handleShowComments(post)} className="post-button">Comments</button>
-                        <span className="post-count">{comments.length > 0 ? comments.length : 0}</span>
-                        <span className="post-count"><span className="span">Shares</span> {shares.length > 0 ? shares.length : 0}</span>
+                        <span className="post-count">{comments[post.postId].length > 0 ? comments[post.postId].length : 0}</span>
+                        <span className="post-count"><span className="span">Shares</span> {shares[post.postId].length > 0 ? shares.length : 0}</span>
 
                         {showReactions[post.postId] && (
                             <div className="post-reactions">
-                            {reactions > 0 ? (
+                            {reactions[post.postId].length > 0 ? (
                                 post.reactions.map((reaction) => (
                                 <div key={reaction.nickname}>
-                                    <h5>owner: {reaction.nickname}</h5>
-                                    <h5>Reaction: {reaction.reaction}</h5>
+                                    <h5 className="post-reaction-owner">Owner: {reaction.nickname}</h5>
+                                    <h5 className="post-reaction-text">Reaction: {reaction.reaction}</h5>
                                 </div>
                                 ))
                             ) : (
@@ -132,11 +134,11 @@ const UserPosts = () => {
                         )}
                         {showComments[post.postId] && (
                             <div className="post-comments">
-                            {comments > 0 ? (
+                            {comments[post.postId].length > 0 ? (
                                 post.comments.map((comment) => (
                                 <div key={comment.commentId}>
-                                    <h5>owner: {comment.nickname}</h5>
-                                    <h5>content: {comment.content}</h5>
+                                    <h5 className="post-comment-owner">Owner: {comment.nickname}</h5>
+                                    <h5 className="post-comment-content">Content: {comment.content}</h5>
                                 </div>
                                 ))
                             ) : (
