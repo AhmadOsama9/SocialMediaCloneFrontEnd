@@ -25,7 +25,7 @@ const Header = () => {
   }
 
   useEffect(() => {
-
+    
   }, [userNickname])
 
   return (

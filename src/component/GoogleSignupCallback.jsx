@@ -74,7 +74,7 @@ function GoogleSignupCallback() {
 
         localStorage.setItem("user", JSON.stringify(userInfo));
         dispatch({type: actions.login, payload: userInfo});
-        getNickname(user.userId);
+        getNickname(userId);
       }
       setUserInfoIsLoading(false);
   }
