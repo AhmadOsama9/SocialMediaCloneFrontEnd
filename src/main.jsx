@@ -18,6 +18,7 @@ import { OtherUserPostsContextProvider } from './context/OtherUserPosts.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+   <NicknameContextProvider>
     <AuthContextProvider>
       <ProfileContextProvider>
         <ChatContextProvider>
@@ -29,9 +30,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     <CreatePagePostContextProvider>
                       <ActiveSectionContextProvider>
                         <ForgotPasswordContextProvider>
-                          <NicknameContextProvider>
                             <App />
-                          </NicknameContextProvider>
                         </ForgotPasswordContextProvider>
                       </ActiveSectionContextProvider>
                     </CreatePagePostContextProvider>
@@ -43,5 +42,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </ChatContextProvider>
       </ProfileContextProvider>
     </AuthContextProvider>
+   </NicknameContextProvider>
   </React.StrictMode>,
 )

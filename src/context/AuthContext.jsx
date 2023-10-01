@@ -1,4 +1,6 @@
 import { createContext, useReducer, useEffect, useState } from "react";
+import { useNicknameContext } from "./NicknameContext";
+
 import Loader from "../helperComponent/Loader";
 
 
@@ -38,7 +40,25 @@ export const AuthContextProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
 
+    const { setUserNickname } = useNicknameContext();
+
+
     useEffect(() => {
+        const getNickname = async (userId) => {
+            if (userId) {
+              const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getnickname?userId=${userId}`, {
+                method: "GET",
+                headers: {"Content-Type": "application/json"},
+              });
+          
+              const json = await response.json();
+          
+              if (response.ok) {
+                setUserNickname(json.nickname);
+              }
+            }
+          };
+
         const checkUserAuth = async () => {
             const user = JSON.parse(localStorage.getItem("user"));
 
@@ -54,6 +74,7 @@ export const AuthContextProvider = ({ children }) => {
 
                 if (validToken) {
                     dispatch({ type: actions.login, payload: user });
+                    getNickname(user.userId);
                 }
             }
         };

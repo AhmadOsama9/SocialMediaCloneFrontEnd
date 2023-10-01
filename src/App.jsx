@@ -21,7 +21,6 @@ import ShowChats from "./helperComponent/ShowChats";
 function App() {
   
   const { user } = useAuthContext();
-  const { userNickname } = useNicknameContext();
 
 
   return (

@@ -13,30 +13,6 @@ export const useNicknameContext = () => {
 export const NicknameContextProvider = ({ children }) => {
     const [userNickname, setUserNickname] = useState("");
 
-    
-
-    useEffect(() => {
-        const getNickname = async () => {
-            const userString = localStorage.getItem("user");
-            const userId = JSON.parse(userString).userId;
-            
-            if (userId) {
-              const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getnickname?userId=${userId}`, {
-                method: "GET",
-                headers: {"Content-Type": "application/json"},
-              });
-          
-              const json = await response.json();
-          
-              if (response.ok) {
-                setUserNickname(json.nickname);
-              }
-            }
-          };
-
-          getNickname();
-    })
-
     return (
         <NicknameContext.Provider value={{ userNickname, setUserNickname }}>
             { children }
