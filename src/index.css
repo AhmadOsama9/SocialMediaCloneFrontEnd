@@ -241,6 +241,8 @@ html {
   justify-content: center;
   gap: 0.5rem;
 }
+
+
 /* Comment Section */
 .post .post-comment {
   margin-top: 1.25rem;
