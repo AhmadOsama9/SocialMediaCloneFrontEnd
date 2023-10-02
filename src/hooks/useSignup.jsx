@@ -1,11 +1,30 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 import { actions } from "../context/AuthContext";
+import { useNicknameContext } from "../context/NicknameContext";
 
 export const useSignup = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
     const { dispatch } = useAuthContext();
+    const { setUserNickname } = useNicknameContext();
+
+    
+    const getNickname = async (userId) => {
+        if (userId) {
+          const response = await fetch(`https://socialmediaclonebackend.onrender.com/api/user/getnickname?userId=${userId}`, {
+            method: "GET",
+            headers: {"Content-Type": "application/json"},
+          });
+      
+          const json = await response.json();
+      
+          if (response.ok) {
+            setUserNickname(json.nickname);
+          }
+        }
+      };
+
 
     const signup = async (email, password, role) => {
         setIsLoading(true);
@@ -31,6 +50,7 @@ export const useSignup = () => {
 
             localStorage.setItem("user", JSON.stringify(user));
             dispatch({type: actions.login, payload: json});
+            getNickname(user.userId);
         }
         setIsLoading(false);
     }
