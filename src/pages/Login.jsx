@@ -13,7 +13,7 @@ const Login = () => {
 
   function encryptPassword() {
 
-    const encryptedPassword = CryptoJS.AES.encrypt(password, process.env.ENCRYPTION_KEY).toString();
+    const encryptedPassword = CryptoJS.AES.encrypt(password, "H9YTaj6j8r%W*eIX").toString();
     return encryptedPassword;
   }
 
