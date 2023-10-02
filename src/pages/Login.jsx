@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 import { FaGoogle } from "react-icons/fa";
 import { useForgotPasswordContext } from "../context/ForgotPasswordContext";
-import bcrypt from 'bcryptjs'; // Import bcrypt library for password hashing
+import CryptoJS from "crypto-js";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,13 +11,17 @@ const Login = () => {
 
   const { login, googleLogin, error, isLoading } = useLogin();
 
+  function encryptPassword() {
+
+    const encryptedPassword = CryptoJS.AES.encrypt(password, process.env.ENCRYPTION_KEY).toString();
+    return encryptedPassword;
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Hash the password before sending it to the server
-    const hashedPassword = bcrypt.hashSync(password, 10);
-
-    await login(email, hashedPassword);
+    const encryptedPassword = encryptPassword();
+    await login(email, encryptedPassword);
   }
 
   return (
