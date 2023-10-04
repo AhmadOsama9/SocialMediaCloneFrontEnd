@@ -14,13 +14,19 @@
     padding: 1rem;
 }
 
+.friends .above-chat {
+    display: flex;
+    flex-direction: column;
+    
+}
+
 .friends .friend span {
     font-size: 1.5rem;
     color: var(--secondary-title);
 }
 
 .friends .friend button {
-    padding: 0.7rem 1rem;
+    padding: 0.3rem 0.5rem;
     border: 0.1rem solid var(--border-color);
     border-radius: 0.5rem;
     background-color: var(--button-bg);

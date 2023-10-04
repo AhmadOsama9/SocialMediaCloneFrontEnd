@@ -5,7 +5,7 @@ import OtherUserProfilePosts from "../helperComponent/otherUserProfilePosts";
 import OtherUserSharedPosts from "../helperComponent/OtherUserSharedPosts";
 import Loader from "../helperComponent/Loader";
 
-import { avatar1, avatar2, avatar3, avatar4 } from "../assets/avatar";
+import { avatar1, avatar2, avatar3, avatar4, avatar0 } from "../assets/avatar";
 
 
 import "../CSS/otheruserprofile.css";
@@ -169,10 +169,10 @@ const OtherUserProfile = ({ otherUser, relation }) => {
                     ? avatar3
                     : otherUser.image === "4"
                     ? avatar4
-                    : null
+                    : avatar0
                 }
                 alt={`Avatar}`}
-                className="selected-other-user-avatar-image"
+                className={otherUser.image ? "selected-other-user-avatar-image" : ""}
               />
             </span>
             <span>Nickname: {otherUser.nickname}</span>

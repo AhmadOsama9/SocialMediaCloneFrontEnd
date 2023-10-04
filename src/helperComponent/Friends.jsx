@@ -59,8 +59,10 @@ const Friends = () => {
       <h2>Friends</h2>
       {friends.map((friend) => (
         <div key={friend.userId} className="friend">
+          <div className="above-chat">
             <span>{friend.nickname}</span>
             <button onClick={() => searchUserAndReturn(friend.nickname)}>Show Profile</button>
+          </div>
             {showProfile && <OtherUserProfile otherUser={user} relation={"friend"}/>}
         </div>
       ))}

@@ -4,7 +4,7 @@ import { useProfileContext } from "../hooks/useProfileContext";
 
 import Loader from "../helperComponent/Loader";
 
-import { avatar1, avatar2, avatar3, avatar4 } from "../assets/avatar";
+import { avatar1, avatar2, avatar3, avatar4, avatar0 } from "../assets/avatar";
 
 
 import "../CSS/profile.css";
@@ -157,7 +157,7 @@ const Profile = () => {
                   ? avatar3
                   : selectedAvatar === "4"
                   ? avatar4
-                  : null
+                  : avatar0
               }
               alt={`Avatar ${selectedAvatar}`}
               className="selected-avatar-image"

@@ -4,7 +4,7 @@ import { usePost } from "../hooks/usePost";
 
 import Loader from "../helperComponent/Loader";
 
-import { avatar1, avatar2, avatar3, avatar4 } from "../assets/avatar";
+import { avatar1, avatar2, avatar3, avatar4, avatar0 } from "../assets/avatar";
 
 import "../CSS/updatePost.css";
 
@@ -98,7 +98,7 @@ const UserPosts = () => {
                                         ? avatar3
                                         : post.avatar === "4"
                                         ? avatar4
-                                        : null
+                                        : avatar0
                                     }
                                     alt={`Avatar}`}
                                     className="selected-avatar-image"
