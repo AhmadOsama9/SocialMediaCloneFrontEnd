@@ -15,3 +15,8 @@
 
 ### Technologies Used:
 - **Frontend**: React, Tailwind CSS
+
+
+## Quick Update:
+Just removed some unnecessary files and made the repo public,
+I didn't bother to check things I know for sure that I will find it filled with stupid things so I didn't really bother with it, same as for the backend side I will just leave it as it is.
