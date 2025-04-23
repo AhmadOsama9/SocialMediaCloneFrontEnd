@@ -1,6 +1,51 @@
+/* Auth Navigation Component */
 .auth-nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-weight: bold;
-}
+    gap: var(--space-md);
+    padding: var(--space-lg) 0;
+  }
+  
+  .auth-nav-link {
+    position: relative;
+    color: var(--color-text-secondary);
+    font-weight: 600;
+    padding: var(--space-xs) 0;
+    transition: var(--transition-default);
+  }
+  
+  .auth-nav-link:hover {
+    color: var(--color-primary);
+  }
+  
+  .auth-nav-link.active {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+  
+  .auth-nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-primary);
+  }
+  
+  @media (min-width: 768px) {
+    .auth-nav {
+      flex-direction: row;
+      justify-content: center;
+    }
+    
+    .auth-nav-link {
+      padding: 0 var(--space-md);
+    }
+    
+    .auth-nav-link.active::after {
+      width: calc(100% - var(--space-md) * 2);
+      left: var(--space-md);
+    }
+  }

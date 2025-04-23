@@ -1,78 +1,104 @@
+/* All Communities Component */
 .communities-container {
-  margin: 1.25rem;
-  padding: 1.25rem;
-  background-color: var(--card-bg);
-  border: 0.0625rem solid var(--border-color);
-  border-radius: 0.3125rem;
-  box-shadow: 0 0 0.15625rem rgba(0, 0, 0, 0.1);
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin: var(--space-lg) auto;
+  max-width: 1200px;
+  box-shadow: var(--shadow-md);
 }
 
 .communities-title {
-  font-size: 1.5rem;
-  margin-bottom: 0.625rem;
-  color: var(--header-text);
+  font-size: 1.75rem;
+  margin-bottom: var(--space-lg);
+  color: var(--color-text-primary);
+  font-weight: 700;
+  position: relative;
+  padding-bottom: var(--space-sm);
+}
+
+.communities-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: var(--color-primary);
+}
+
+.communities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
 }
 
 .community-card {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 0.9375rem;
-  padding: 0.625rem;
-  background-color: var(--card-bg);
-  border: 0.0625rem solid var(--border-color);
-  border-radius: 0.3125rem;
-  box-shadow: 0 0 0.09375rem var(--border-color);
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  transition: var(--transition-default);
+  border: 1px solid var(--color-border-light);
 }
 
-.community-card .span {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: var(--text-on-card-bg);
+.community-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary-light);
 }
 
 .community-name {
   font-size: 1.125rem;
-  font-weight: bold;
-  color: var(--secondary-title);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-sm);
 }
 
 .community-description {
   font-size: 0.875rem;
-  color: var(--text-on-card-bg);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-md);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.community-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--color-text-tertiary);
 }
 
 .show-community-button {
-  padding: 0.3125rem 0.625rem;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.show-community-button:hover {
-  background-color: var(--button-hover-bg);
-  color: var(--button-hover-text);
+  @extend .btn;
+  @extend .btn-secondary;
+  width: 100%;
+  margin-top: var(--space-sm);
 }
 
 .all-Communities .close {
-  padding: 0.3rem 0.65rem;
-  background-color: var(--post-button-bg) !important;
-  color: var(--button-text);
-  border: none;
-  border-radius: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3 ease-in-out;
-}
-
-.all-Communities .close:hover {
-  background-color:  var(--button-bg) !important;
+  @extend .btn;
+  @extend .btn-primary;
+  margin-top: var(--space-md);
 }
 
 .all-Communities .opened-community {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-top: var(--space-md);
+}
+
+@media (max-width: 768px) {
+  .communities-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .communities-container {
+    padding: var(--space-md);
+    margin: var(--space-md);
+  }
 }

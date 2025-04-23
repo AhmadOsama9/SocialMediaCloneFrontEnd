@@ -1,33 +1,128 @@
-.feed .toggle-buttons {
+/* Feed Component */
+.feed {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-md);
+  }
+  
+  .feed__title {
+    font-size: 1.75rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+    position: relative;
+  }
+  
+  .feed__title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--color-primary);
+    border-radius: var(--radius-full);
+  }
+  
+  /* Tabs */
+  .feed__tabs {
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.feed .toggle-buttons button {
-    padding: 0.3rem 0.5rem;
-    border: 0.1rem solid var(--border-color);
-    border-radius: 0.5rem;
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    transition: 0.3s ease-in-out;
-
-}
-
-.feed .toggle-buttons button:hover {
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    transform: scale(1.1);
-}
-
-.feed .toggle-buttons .active {
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    transform: scale(1.2);
-    box-shadow: 0rem 0rem 0.3rem 0.3rem var(--border-color);
-}
-
-.feed .h3 {
-    padding: 0.3rem 0.7rem;
-    font-size: 1.3rem;
-}
+    background-color: var(--color-bg-tertiary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xs);
+    margin-bottom: var(--space-xl);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .feed__tabs::before {
+    content: '';
+    position: absolute;
+    top: var(--space-xs);
+    bottom: var(--space-xs);
+    left: 0;
+    width: calc(100% / 3);
+    background-color: var(--color-primary);
+    border-radius: var(--radius-md);
+    z-index: 0;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Position the active tab indicator */
+  .feed__tabs[data-active-tab="feed"]::before {
+    transform: translateX(0);
+  }
+  .feed__tabs[data-active-tab="posts"]::before {
+    transform: translateX(100%);
+  }
+  .feed__tabs[data-active-tab="shared"]::before {
+    transform: translateX(200%);
+  }
+  
+  .feed__tab {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    border: none;
+    padding: var(--space-sm) var(--space-md);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+  
+  .feed__tab.active {
+    color: white;
+  }
+  
+  .feed__tab:hover:not(.active) {
+    color: var(--color-text-primary);
+  }
+  
+  /* Content */
+  .feed__content {
+    min-height: 300px;
+  }
+  
+  /* Empty State */
+  .feed__empty {
+    text-align: center;
+    padding: var(--space-xl) 0;
+    color: var(--color-text-secondary);
+  }
+  
+  .feed__empty-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-md);
+    color: var(--color-primary);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .feed {
+      padding: var(--space-md);
+    }
+    
+    .feed__tabs {
+      flex-direction: column;
+      gap: var(--space-xs);
+      background: transparent;
+      padding: 0;
+    }
+    
+    .feed__tabs::before {
+      display: none;
+    }
+    
+    .feed__tab {
+      background-color: var(--color-bg-tertiary);
+      border-radius: var(--radius-md);
+    }
+    
+    .feed__tab.active {
+      background-color: var(--color-primary);
+    }
+  }

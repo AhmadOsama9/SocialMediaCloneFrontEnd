@@ -1,93 +1,103 @@
+/* Header Component */
 header {
-    background-color: var(--navbar-bg);
-    padding: 0.3rem;
-    margin-bottom: 1rem;
-}
-
-header nav {
+    background-color: var(--color-bg-secondary);
+    padding: var(--space-sm) var(--space-lg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+    font-weight: 800;
+    letter-spacing: 0.5px;
+  }
+  
+  header nav {
     display: flex;
-    justify-content: end;
-    margin: 0 auto;
     align-items: center;
-    gap: 1rem;
-}
-
-header .logo {
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin-right: auto;
+    justify-content: space-between;
+    gap: var(--space-md);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .logo {
     text-decoration: none;
-    color: var(--text-on-main-bg);
-}
-
-@media screen and (max-width: 330px) {
-    header .logo {
-        font-size: 1.1rem;
-    }
-}
-
-.logout {
+    color: var(--color-text-primary);
+    margin-right: auto;
+  }
+  
+  .logo h1 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+  
+  .nav-bar {
     display: flex;
-    flex-direction: column;
-    font-weight: bold;
-}
-
-.logout .logout-btn button {
-  box-sizing: border-box;
-  appearance: none;
-  background-color: transparent;
-  border: 0.15rem solid red;
-  border-radius: 0.6em;
-  color: red;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  font-size: 0.9rem;
-  font-weight: 400;
-  line-height: 1;
-  margin: 0.3rem;
-  padding: 0.3rem 0.5rem;
-  text-decoration: none;
-  text-align: center;
-  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
-}
-
-.logout-btn button:hover {
-    box-shadow: 0 0 40px 40px;
-}
-
-@media only screen and (max-width: 480px) {
-    .nickname {
-        max-width: 5rem;
-    
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    
-        color: var(--secondary-title);
+    align-items: center;
+    gap: var(--space-md);
+  }
+  
+  /* Match the class names in your Header.jsx */
+  .logout {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-left: auto;
+  }
+  
+  .nickname {
+    font-weight: 500;
+    color: var(--color-text-primary);
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .logout-btn button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    background-color: var(--color-danger, #dc3545);
+    color: white;
+    border: none;
+    border-radius: var(--radius-default, 4px);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition-default);
+  }
+  
+  .logout-btn button:hover {
+    background-color: var(--color-danger-dark, #bd2130);
+  }
+  
+  .logout-icon {
+    font-size: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    header {
+      padding: var(--space-sm);
     }
-}
-
-@media only screen and ((min-width: 481px) and (max-width: 768px)) {
+    
     .nickname {
-        max-width: 7rem;
-    
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    
-        color: var(--secondary-title);
+      display: none;
     }
-}
-
-@media only screen and (min-width: 769px) {
-    .nickname {
-        max-width: 10rem;
     
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    
-        color: var(--secondary-title);
+    .logout {
+      gap: var(--space-xs);
     }
-}
+    
+    .logout-btn button {
+      padding: var(--space-xs);
+      font-size: 0.875rem;
+      min-width: auto;
+    }
+  }
+  
+  /* Additional breakpoint for very small screens */
+  @media (max-width: 480px) {
+    .logout-btn button {
+      padding: var(--space-xs);
+    }
+  }

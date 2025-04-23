@@ -8,6 +8,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [secretKey, setSecretKey] = useState("");
+  const [passwordStrength, setPasswordStrength] = useState("");
 
   const {signup, createAndSendOTP, validateOTP, error, isLoading} = useSignup();
 
@@ -15,8 +16,39 @@ const Signup = () => {
   const [OTP, setOTP] = useState("");
   const [showSignupForm, setShowSignupForm] = useState(false);
   const [sendError, setSendError] = useState(false);
+  
+  // Password strength checker
+  const checkPasswordStrength = (password) => {
+    if (!password) {
+      setPasswordStrength("");
+      return;
+    }
+    
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasNumbers = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const isLongEnough = password.length >= 8;
+    
+    const score = [hasLowerCase, hasUpperCase, hasNumbers, hasSpecialChar, isLongEnough].filter(Boolean).length;
+    
+    if (score <= 2) {
+      setPasswordStrength("weak");
+    } else if (score <= 4) {
+      setPasswordStrength("medium");
+    } else {
+      setPasswordStrength("strong");
+    }
+  };
 
   const handleSentOTP = async () => {
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setSendError(true);
+      return;
+    }
+    
     const sent = await createAndSendOTP(email);
     setShowValidateOTP(true)
     if (!sent) {
@@ -27,19 +59,14 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    if(secretKey === "")
-      {
-        await signup(email, password, "");
-      }
-      else if(secretKey === process.env.secret_Key)
-      {
-        await signup(email, password, "admin");
-      }
-      else if(secretKey !== process.env.SECRET_KEY)
-      {
-        alert("Wrong Secret Key \n");
-        return;
-      }
+    if (secretKey === "") {
+      await signup(email, password, "");
+    } else if (secretKey === process.env.secret_Key) {
+      await signup(email, password, "admin");
+    } else if (secretKey !== process.env.SECRET_KEY) {
+      notification.error("Wrong Secret Key");
+      return;
+    }
   }
 
   const handleValidateOTP = async () => {
@@ -53,11 +80,13 @@ const Signup = () => {
   if (isLoading) {
     return <Loader />;
   }
+  
   if (error === "That email is already registered") {
-    return <h3 className="error">Error: {error}</h3>
+    return <div className="error">Error: {error}</div>
   }
+  
   if (sendError) {
-    return <h3 className="error">Error: {error}</h3>
+    return <div className="error">Error: {error}</div>
   }
 
   return (
@@ -70,7 +99,7 @@ const Signup = () => {
               type="email" 
               name="Email"
               value={email}
-              placeholder="Enter your Email"
+              placeholder="Enter your email"
               onChange={(event) => {setEmail(event.target.value)}}
           />
         </div>
@@ -80,9 +109,26 @@ const Signup = () => {
               type="password"
               name="password"
               value={password}
-              placeholder="Enter a strong Password"
-              onChange={(event) => {setPassword(event.target.value)}}
+              placeholder="Enter a strong password"
+              onChange={(event) => {
+                setPassword(event.target.value);
+                checkPasswordStrength(event.target.value);
+              }}
           />
+          {password && (
+            <>
+              <div className="password-strength">
+                <div className={`password-strength-bar ${passwordStrength}`}></div>
+              </div>
+              {passwordStrength && (
+                <div className={`password-strength-text ${passwordStrength}`}>
+                  {passwordStrength === "weak" && "Weak password"}
+                  {passwordStrength === "medium" && "Medium strength password"}
+                  {passwordStrength === "strong" && "Strong password"}
+                </div>
+              )}
+            </>
+          )}
         </div>
         <div className="group">
           <label>Admin only</label>
@@ -90,68 +136,102 @@ const Signup = () => {
               type="password"
               name="secretKey"
               value={secretKey}
-              placeholder="Leave it empty if you are not an admin"
+              placeholder="Leave empty if you are not an admin"
               onChange={(event) => {setSecretKey(event.target.value)}}
           />
         </div>
             
-        <button disabled={isLoading} onClick={handleSentOTP} className="submit-btn">Verify Email</button>
+        <button 
+          disabled={isLoading || !email || !password || passwordStrength === "weak"} 
+          onClick={handleSentOTP} 
+          className="submit-btn"
+        >
+          Verify Email
+        </button>
         {error && <div className="error">{error}</div>}
       </div>
       )}
+      
       {(showvalidateOTP && (
         <div className="otp-container">
-          <h3 className="otp-heading">The OTP has been sent</h3>
-          <h4 className="otp-note">NOTE: It'll expire in 5 minutes</h4>
-          <h4 className="otp-note">Also double check the spam</h4>
-          <label className="otp-label">Enter OTP</label>
+          <h3 className="otp-heading">Verification code sent</h3>
+          <div className="otp-note">This code will expire in 5 minutes</div>
+          <div className="otp-note">If you don't see the email, please check your spam folder</div>
+          <label className="otp-label">Enter verification code</label>
           <input
             type="text"
+            inputMode="numeric"
             value={OTP}
             onChange={(e) => setOTP(e.target.value)}
             className="otp-input"
+            placeholder="• • • • • •"
+            maxLength="6"
           />
-          <button onClick={handleValidateOTP} className="otp-button">Validate</button>
+          <button onClick={handleValidateOTP} className="otp-button">Verify Code</button>
           {error && <div className="error">{error}</div>}
-      </div>
-      
+        </div>
       ))}
+      
       {showSignupForm && (
         <div>
-        <div className="group">
-          <label>Email</label>
-          <input 
-              type="email" 
-              name="Email"
-              value={email}
-              placeholder="Enter your Email"
-              onChange={(event) => {setEmail(event.target.value)}}
-          />
+          <div className="group">
+            <label>Email</label>
+            <input 
+                type="email" 
+                name="Email"
+                value={email}
+                placeholder="Enter your email"
+                onChange={(event) => {setEmail(event.target.value)}}
+                disabled
+            />
+          </div>
+          <div className="group">
+            <label>Password</label>
+            <input 
+                type="password"
+                name="password"
+                value={password}
+                placeholder="Enter a strong password"
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                  checkPasswordStrength(event.target.value);
+                }}
+            />
+            {password && (
+              <>
+                <div className="password-strength">
+                  <div className={`password-strength-bar ${passwordStrength}`}></div>
+                </div>
+                {passwordStrength && (
+                  <div className={`password-strength-text ${passwordStrength}`}>
+                    {passwordStrength === "weak" && "Weak password"}
+                    {passwordStrength === "medium" && "Medium strength password"}
+                    {passwordStrength === "strong" && "Strong password"}
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+          <div className="group">
+            <label>Admin only</label>
+            <input 
+                type="password"
+                name="secretKey"
+                value={secretKey}
+                placeholder="Leave empty if you are not an admin"
+                onChange={(event) => {setSecretKey(event.target.value)}}
+            />
+          </div>
+              
+          <button 
+            disabled={isLoading || !email || !password || passwordStrength === "weak"} 
+            onClick={handleSignup} 
+            className="submit-btn"
+          >
+            Create Account
+          </button>
+          {error && <div className="error">{error}</div>}
         </div>
-        <div className="group">
-          <label>Password</label>
-          <input 
-              type="password"
-              name="password"
-              value={password}
-              placeholder="Enter a strong Password"
-              onChange={(event) => {setPassword(event.target.value)}}
-          />
-        </div>
-        <div className="group">
-          <label>Admin only</label>
-          <input 
-              type="password"
-              name="secretKey"
-              value={secretKey}
-              placeholder="Leave it empty if you are not an admin"
-              onChange={(event) => {setSecretKey(event.target.value)}}
-          />
-        </div>
-            
-        <button disabled={isLoading} onClick={handleSignup} className="submit-btn">Submit</button>
-        {error && <div className="error">{error}</div>}
-      </div>
       )}
     </div>
   )

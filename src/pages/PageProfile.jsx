@@ -81,25 +81,57 @@ const PageProfile = ({ page }) => {
   }
 
   return (
-    <div className="page-profile">
-      <h3>Page</h3>
-      <span className="page-name"><span className="span">Name: </span> {page.name}</span>
-      <span className="page-description"><span className="span">Description: </span>{page.description}</span>
-      <span className="page-likes">Likes: {pageLikers.length > 0 ? pageLikers.length : 0}</span>
-      <button onClick={handleToggleLike} className={`like-button ${isLiked ? "liked" : ""}`}>
-        {isLiked ? "Liked" : "Like"}
-      </button>
-      {isAdmin && (
-        <div className="admin-actions">
-          <button onClick={handleDeletePage} className="delete-button">Delete</button>
-          <button onClick={handleToggleCreatePost} className="create-post-button2">Create Post</button>
-          {createPost && <CreatePagePost pageName={page.name} />}
+      <div className="page-profile">
+        <div className="page-header">
+          <h2 className="page-name">{page.name}</h2>
+          <p className="page-description">{page.description}</p>
+          
+          <div className="page-stats">
+            <div className="page-stat">
+              <div className="page-stat-value">{pageLikers.length}</div>
+              <div className="page-stat-label">Likes</div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="page-actions">
+          <button 
+            onClick={handleToggleLike} 
+            className={`page-button like-button ${isLiked ? "liked" : ""}`}
+          >
+            {isLiked ? "Liked" : "Like"}
+          </button>
+          
+          {isAdmin && (
+            <>
+              <button 
+                onClick={handleToggleCreatePost} 
+                className="page-button create-button"
+              >
+                {createPost ? "Cancel" : "Create Post"}
+              </button>
+              
+              <button 
+                onClick={handleDeletePage} 
+                className="page-button delete-button"
+              >
+                Delete Page
+              </button>
+            </>
+          )}
+        </div>
+        {createPost && isAdmin && (
+        <div className="create-post-container">
+          <CreatePagePost pageName={page.name} />
         </div>
       )}
-      <PagePosts pageName={page.name} />
+      
+      <div className="page-posts-container">
+        <PagePosts pageName={page.name} />
+      </div>
     </div>
-
-  )
+  );
 }
+
 
 export default PageProfile

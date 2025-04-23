@@ -3,6 +3,8 @@ import { useUserPostsContext } from "../context/UserPostsContext";
 import { useOtherUserPostsContext } from "../context/OtherUserPosts";
 import { useActiveSectionContext } from "../context/ActiveSectionContext";
 
+import notification from "../helperComponent/notification";
+
 export const usePost = () => {
     const { reactions, setReactions, comments, setComments} = useOtherUserPostsContext();
     const { setActiveSection } = useActiveSectionContext();
@@ -163,7 +165,7 @@ export const usePost = () => {
         if (!response.ok) {
             setPostError(json.error);
         } else {
-            alert(json.message);
+            notification.success(json.message);
             setActiveSection("");
         }
         setPostLoading(false);
@@ -182,7 +184,7 @@ export const usePost = () => {
         if (!response.ok) {
             setPostError(json.error);
         } else {
-            alert(json.message);
+            notification.success(json.message);
         }
         setPostLoading(false);
     }
@@ -200,7 +202,7 @@ export const usePost = () => {
         if (!response.ok) {
             setPostError(json.error);
         } else {
-            alert(json.message);
+            notification.success(json.message);
         }
         setPostLoading(false);
     }
@@ -217,7 +219,7 @@ export const usePost = () => {
         if (!response.ok) {
             setPostError(json.error);
         } else {
-            alert(json.message);
+            notification.success(json.message);
             getCreatedPosts();
         }
 
@@ -236,7 +238,7 @@ export const usePost = () => {
         if (!response.ok) {
             setPostError(json.error);
         } else {
-            alert(json.message);
+            notification.success(json.message);
             getCreatedPosts();
         }
 
@@ -256,7 +258,7 @@ export const usePost = () => {
         if (!response.ok) {
             setPostError(json.error);
         } else {
-            alert(json.message);
+            notification.success(json.message);
         }
 
         setPostLoading(false);
@@ -274,7 +276,7 @@ export const usePost = () => {
         if (!response.ok) {
             setPostError(json.error);
         } else {
-            alert(json.message);
+            notification.success(json.message);
             getCreatedPosts();
         }
 
@@ -353,7 +355,7 @@ export const usePost = () => {
         if (!response.ok) {
             setPostError(json.error);
         } else {
-            alert(json.message);
+            notification.success(json.message);
         }
         setPostLoading(false);
     }
@@ -371,7 +373,7 @@ export const usePost = () => {
         if (!response.ok) {
             setPostError(json.error);
         } else {
-            alert(json.message);
+            notification.success(json.message);
         }
         setPostLoading(false);
     }
@@ -389,7 +391,7 @@ export const usePost = () => {
         if (!response.ok) {
             setPostError(json.error);
         } else {
-            alert(json.message);
+            anotification.successlert(json.message);
         }
         setPostLoading(false);
     }
@@ -425,7 +427,7 @@ export const usePost = () => {
         if (!response.ok) {
             setPostError(json.error);
         } else {
-            alert(json.message);
+            notification.success(json.message);
         }
         setPostLoading(false);
     }
@@ -442,7 +444,7 @@ export const usePost = () => {
         if (!response.ok) {
             setPostError(json.error);
         } else {
-            alert(json.message);
+            alenotification.successrt(json.message);
         }
         setPostLoading(false);
     }
@@ -462,7 +464,7 @@ export const usePost = () => {
         if (!response.ok) {
             setPostError(json.error);
         } else {
-            alert(json.message);
+            notification.success(json.message);
         }
         setPostLoading(false);
     }
@@ -482,7 +484,7 @@ export const usePost = () => {
         if (!response.ok) {
             setPostError(json.error);
         } else {
-            alert(json.message);
+            notification.success(json.message);
         }
         setPostLoading(false);
 

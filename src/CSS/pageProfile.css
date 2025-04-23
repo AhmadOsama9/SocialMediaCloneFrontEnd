@@ -1,59 +1,163 @@
+/* Page Profile Component */
 .page-profile {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 1.25rem;
+  background-color: #1e1e2e;
+  border-radius: 12px;
+  padding: 24px;
+  margin: 24px auto;
+  max-width: 800px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.page-profile .span {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: var(--secondary-title);
+.page-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #313244;
+  padding-bottom: 20px;
 }
-  
-.page-name,
-.page-description,
-.page-likes {
-    display: block;
-    font-size: 1rem;
-    margin-bottom: 0.625rem;
+
+.page-name {
+  font-size: 2rem;
+  color: #cdd6f4;
+  margin-bottom: 12px;
+  font-weight: 700;
 }
-  
+
+.page-description {
+  color: #a6adc8;
+  max-width: 600px;
+  margin: 0 auto 20px;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.page-stats {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 16px;
+}
+
+.page-stat {
+  text-align: center;
+  background-color: #313244;
+  padding: 10px 20px;
+  border-radius: 8px;
+  min-width: 100px;
+}
+
+.page-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #89b4fa;
+}
+
+.page-stat-label {
+  font-size: 0.875rem;
+  color: #a6adc8;
+  margin-top: 4px;
+}
+
+.page-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.page-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+}
+
 .like-button {
-    font-size: 1.125rem;
-    padding: 0.3125rem 0.625rem;
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    border-radius: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+  background-color: #45475a;
+  color: #cdd6f4;
 }
-  
+
+.like-button:hover {
+  background-color: #585b70;
+}
+
 .like-button.liked {
-    background-color: var(--liked-page);
+  background-color: #f38ba8;
+  color: #1e1e2e;
 }
-  
-.admin-actions {
-    margin-top: 1rem;
+
+.create-button {
+  background-color: #89b4fa;
+  color: #1e1e2e;
 }
-  
-.delete-button,
-.create-post-button2 {
-    font-size: 1rem;
-    padding: 0.3125rem 0.625rem;
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    border-radius: 1rem;
-    cursor: pointer;
-    margin-right: 0.625rem;
-    transition: background-color 0.3s ease-in-out;
+
+.create-button:hover {
+  background-color: #a6c1ff;
 }
-  
-.delete-button:hover,
-.create-post-button:hover {
-    background-color: var(--button-hover-bg);
-    color: var(--button-hover-text);
+
+.delete-button {
+  background-color: #f38ba8;
+  color: #1e1e2e;
 }
+
+.delete-button:hover {
+  background-color: #ff98a4;
+}
+
+.create-post-container {
+  background-color: #313244;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.page-posts-container {
+  margin-top: 20px;
+}
+
+.error-message {
+  color: #f38ba8;
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(243, 139, 168, 0.15);
+  border-radius: 8px;
+}
+
+.success-message {
+  color: #a6e3a1;
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(166, 227, 161, 0.15);
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .page-profile {
+    padding: 16px;
+    margin: 16px;
+  }
   
+  .page-stats {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .page-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .page-button {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}

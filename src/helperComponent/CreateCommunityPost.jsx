@@ -3,6 +3,7 @@ import { usePost } from "../hooks/usePost";
 import { useCreateCommunityPostContext } from "../context/createCommunityPostContext";
 
 import "../CSS/createCommunityPost.css";
+import notification from "./notification";
 
 const CreateCommunityPost = ({ communityId }) => {
     const [header, setHeader] = useState("");
@@ -21,7 +22,7 @@ const CreateCommunityPost = ({ communityId }) => {
 
     const handleAddPost = () => {
         if (header === "" || content === "") {
-            alert("The two fields must be filled");
+            notification.error("The two fields must be filled");
             return;
         }
         addPost(header, content, communityId);

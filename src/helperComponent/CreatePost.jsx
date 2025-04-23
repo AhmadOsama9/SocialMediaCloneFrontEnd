@@ -15,7 +15,7 @@ const CreatePost = () => {
   }
 
   if (postError) {
-    return <h3 className=".error">Error: {postError}</h3>;
+    return <h3 className=".error">{postError}</h3>;
   }
 
   return (

@@ -4,6 +4,7 @@ import { useCreatePagePostContext } from "../context/CreatePagePostContext";
 import Loader from "../helperComponent/Loader";
 
 import "../CSS/createPagePost.css";
+import notification from "./notification";
 
 const CreatePagePost = ({ pageName }) => {
     const [header, setHeader] = useState("");
@@ -22,7 +23,7 @@ const CreatePagePost = ({ pageName }) => {
 
     const handleAddPost = () => {
         if (header === "" || content === "") {
-            alert("The two fields must be filled");
+            notification.error("The two fields must be filled");
             return;
         }
         createPagePost(pageName, header, content);

@@ -39,12 +39,12 @@ const UserPages = () => {
             <div className="page-info" key={page._id}>
                 <span className="page-name">Name: {page.name}</span>
                 <span className="page-description">Description: {page.description}</span>
-                <button onClick={() =>handleShowPage(page)} className="toggle-button">
+                <button onClick={() =>handleShowPage(page)} className="btn-action">
                     {showPageProfile ? "Go back" : "Show Page"}
                 </button>
             </div>
         ))}
-        {showPageProfile && <button className="toggle-button" onClick={() => setShowPageProfile(prv => !prv)}>Go back</button>}
+        {showPageProfile && <button className="btn-action" onClick={() => setShowPageProfile(prv => !prv)}>Go back</button>}
       {showPageProfile && <PageProfile page={page} />}
     </div>
 

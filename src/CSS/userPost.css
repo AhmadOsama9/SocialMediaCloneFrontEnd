@@ -1,0 +1,216 @@
+/* Post Styles - Add to userPost.css */
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.post {
+  background-color: var(--color-bg-tertiary, #ffffff);
+  border-radius: var(--radius-lg, 0.5rem);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06));
+}
+
+.post-management {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.post-header {
+  margin-bottom: 1rem;
+}
+
+.post-first-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.post-selected-avatar {
+  flex-shrink: 0;
+}
+
+.selected-avatar-image {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.post-creator {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.post-created {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #6b7280);
+  margin-left: auto;
+}
+
+.post-header-text {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.post-content {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* Reactions & Comments */
+.post-reactions,
+.post-comments {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: var(--color-bg-quaternary, #f9fafb);
+  border-radius: var(--radius-md, 0.375rem);
+  border: 1px solid var(--color-border-light, #e5e7eb);
+}
+
+.reaction-section-title,
+.comment-section-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+  color: var(--color-text-secondary, #6b7280);
+}
+
+.reaction-list,
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.reaction-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-border-light, #e5e7eb);
+}
+
+.reaction-item:last-child {
+  border-bottom: none;
+}
+
+.reaction-owner {
+  font-weight: 500;
+}
+
+.reaction-text {
+  padding: 0.25rem 0.5rem;
+  background-color: var(--color-bg-tertiary, #ffffff);
+  border-radius: var(--radius-md, 0.375rem);
+  font-size: 0.75rem;
+}
+
+.comment-item {
+  padding: 0.75rem;
+  background-color: var(--color-bg-tertiary, #ffffff);
+  border-radius: var(--radius-md, 0.375rem);
+  border: 1px solid var(--color-border-light, #e5e7eb);
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.375rem;
+}
+
+.comment-owner {
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.comment-content {
+  font-size: 0.875rem;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.no-items-message {
+  color: var(--color-text-secondary, #6b7280);
+  font-style: italic;
+  font-size: 0.875rem;
+}
+
+/* Edit Post */
+.edit-post-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.edit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.edit-field label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary, #6b7280);
+}
+
+.edit-post-input,
+.edit-post-textarea {
+  width: 100%;
+  padding: 0.625rem;
+  border: 1px solid var(--color-border-medium, #d1d5db);
+  border-radius: var(--radius-md, 0.375rem);
+  font-size: 0.875rem;
+}
+
+.edit-post-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* For elements with cursor pointer */
+.clickable {
+  cursor: pointer;
+}
+
+.no-posts-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--color-text-secondary, #6b7280);
+  font-style: italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .post-management {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .post-interaction-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .post-interaction-item {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

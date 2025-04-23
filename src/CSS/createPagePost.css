@@ -1,57 +1,78 @@
+/* Create Page Post Component */
 .create-page-post-container {
-    width: 80%;
-    max-width: 30rem;
-    margin: 0 auto;
-    margin-top: 1rem;
-    padding: 1.5rem;
-    background-color: var(--card-bg);
-    color: var(--card-on-card-bg);
-    border-radius: 0.3125rem;
-    box-shadow: 0 0 0.3125rem var(--border-color);;
-}
+    background-color: var(--color-bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    margin: var(--space-lg) auto;
+    max-width: 600px;
+    box-shadow: var(--shadow-md);
+  }
   
-.create-page-post-container .create-post-title {
-    font-size: 1.5rem;
-    margin-bottom: 1.25rem;
+  .create-post-title {
+    font-size: 1.75rem;
+    margin-bottom: var(--space-lg);
+    color: var(--color-text-primary);
     text-align: center;
-    color: var(--secondary-title);
-}
+    position: relative;
+  }
   
-.create-page-post-container .create-post-input {
-    margin-bottom: 1.25rem;
-
-}
+  .create-post-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--color-primary);
+  }
   
-.create-page-post-container .create-post-label {
+  .create-post-input {
+    margin-bottom: var(--space-md);
+  }
+  
+  .create-post-label {
     display: block;
-    font-size: 1rem;
-    margin-bottom: 0.3125rem;
-}
+    margin-bottom: var(--space-xs);
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
   
-.create-page-post-container .create-post-input-field,
-.create-page-post-container .create-post-textarea {
+  .create-post-input-field,
+  .create-post-textarea {
     width: 100%;
-    padding: 0.625rem;
-    font-size: 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 0.25rem;
-    background-color: var(--input-bg);
-    color: var(--input-text);
-}
+    padding: var(--space-sm);
+    border: 1px solid var(--color-border-medium);
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+    transition: var(--transition-default);
+  }
   
-.create-page-post-container .create-post-button {
-    display: block;
+  .create-post-textarea {
+    min-height: 200px;
+    resize: vertical;
+  }
+  
+  .create-post-input-field:focus,
+  .create-post-textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+  }
+  
+  .create-post-button {
+    @extend .btn;
+    @extend .btn-primary;
     width: 100%;
-    padding: 0.625rem;
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    border-radius: 1rem;
-    cursor: pointer;
+    margin-top: var(--space-md);
+    padding: var(--space-sm);
     font-size: 1rem;
-}
+  }
   
-.create-page-post-container .create-post-button:hover {
-    background-color: var(--button-hover-bg);
-    color: var(--button-hover-text);
-}
+  @media (max-width: 768px) {
+    .create-page-post-container {
+      padding: var(--space-md);
+      margin: var(--space-md);
+    }
+  }

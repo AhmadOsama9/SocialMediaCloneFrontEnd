@@ -4,6 +4,7 @@ import PageProfile from "../pages/PageProfile";
 import Loader from "../helperComponent/Loader";
 
 import "../CSS/createPage.css";
+import notification from "./notification";
 
 const CreatePage = () => {
   const { createPage, pageError, pageLoading } = usePage();
@@ -16,7 +17,7 @@ const CreatePage = () => {
 
   const handleCreatePage = async () => {
     if (!name || !description) {
-      alert("All info must be filled");
+      notification.error("All info must be filled");
       return;
     }
     const page = await createPage(name, description);

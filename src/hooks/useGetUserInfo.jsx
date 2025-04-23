@@ -1,4 +1,4 @@
-
+import notification from "../helperComponent/notification";
 
 export const useGetUserInfo = () => {
     
@@ -10,7 +10,7 @@ export const useGetUserInfo = () => {
 
         const json = await response.json();
         if (!response.ok) {
-            alert("Error: ", json.error);
+            notification.error("Error: ", json.error);
         } else {
             return json.nickname;
         }

@@ -38,13 +38,13 @@ const YourCommunities = () => {
             <div className="community-info" key={community._id}>
                 <span className="community-name">Name: {community.name}</span>
                 <span className="community-description">Description: {community.description}</span>
-                <button onClick={() => handleShowCommunity(community)} className="toggle-button">
+                <button onClick={() => handleShowCommunity(community)} className="btn-action">
                     {showCommunityProfile ? "Go back" : "Show Community"}
                 </button>
             </div>
         ))}
         <div className="opened-community">
-          {showCommunityProfile && <button className="toggle-button" onClick={() => setShowCommunityProfile(prv => !prv)}>Go back</button>}
+          {showCommunityProfile && <button className="btn-action" onClick={() => setShowCommunityProfile(prv => !prv)}>Go back</button>}
           {showCommunityProfile && <CommunityProfile community={community} />}
         </div>
     </div>

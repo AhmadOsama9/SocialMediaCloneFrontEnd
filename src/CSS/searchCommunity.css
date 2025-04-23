@@ -1,23 +1,61 @@
+/* Search Community Component */
 .searched-community {
+    background-color: var(--color-bg-tertiary);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+    transition: var(--transition-default);
+  }
+  
+  .searched-community:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .searched-community h3 {
+    font-size: 1.25rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-xs);
+  }
+  
+  .community-meta {
     display: flex;
-    flex-direction: column;
-}
-
-.searched-community h3 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--header-text);
-}
-
-.searched-community .span {
-    font-size: 1.5rem;
-    color: var(--secondary-title);
-}
-
-.searched-community .btn {
-    padding: 0.3rem 0.5rem;;
-    border: 0.1rem solid var(--border-color);
-    border-radius: 0.5rem;
-    background-color: var(--button-bg);
-    color: var(--button-text);
-}
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--space-sm);
+  }
+  
+  .community-stats {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+  
+  .community-actions {
+    display: flex;
+    gap: var(--space-xs);
+  }
+  
+  .searched-community .btn {
+    @extend .btn;
+    @extend .btn-sm;
+  }
+  
+  .searched-community .btn:first-child {
+    @extend .btn-primary;
+  }
+  
+  .searched-community .btn:last-child {
+    @extend .btn-secondary;
+  }
+  
+  .no-results {
+    text-align: center;
+    padding: var(--space-xl) 0;
+    color: var(--color-text-secondary);
+  }
+  
+  .no-results-icon {
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+  }

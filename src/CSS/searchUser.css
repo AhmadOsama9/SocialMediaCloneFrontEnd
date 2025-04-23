@@ -1,39 +1,82 @@
+/* Search User Component */
 .searched-user {
+    background-color: var(--color-bg-tertiary);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+    transition: var(--transition-default);
     display: flex;
-    flex-direction: column;
-}
-
-.searched-user .h3 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--header-text);
-}
-
-.searched-user .span {
-    font-size: 1.5rem;
-    color: var(--secondary-title);
-}
-
-.searched-user .btn {
-    padding: 0.3rem 7rem;
-    margin-bottom: 0.5rem;
-    border: none;
-    border-radius: .5rem;
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    cursor: pointer;
-    font-size: 1.3rem;
-}
-
-.searched-user .btn:hover {
-    background-color: var(--button-hover-bg);
-    color: var(--button-hover-text);
-}
-
-.searched-user .selected-other-user-avatar-image {
-    width: 5.5rem;
-    height: 5.5rem;
-    background-color: var(--secondary-title);
-    border-radius: 50%;
-    border: none;
-}
+    align-items: center;
+    gap: var(--space-md);
+  }
+  
+  .searched-user:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .selected-other-user-avatar-image {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-full);
+    object-fit: cover;
+    border: 2px solid var(--color-primary);
+  }
+  
+  .user-info {
+    flex: 1;
+  }
+  
+  .searched-user .h3 {
+    font-size: 1.125rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-xs);
+  }
+  
+  .user-meta {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+  
+  .user-actions {
+    display: flex;
+    gap: var(--space-xs);
+  }
+  
+  .searched-user .btn {
+    @extend .btn;
+    @extend .btn-sm;
+    white-space: nowrap;
+  }
+  
+  .searched-user .btn:first-child {
+    @extend .btn-primary;
+  }
+  
+  .searched-user .btn:last-child {
+    @extend .btn-secondary;
+  }
+  
+  .no-users-found {
+    text-align: center;
+    padding: var(--space-xl) 0;
+    color: var(--color-text-secondary);
+  }
+  
+  .no-users-found-icon {
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+  }
+  
+  @media (max-width: 480px) {
+    .searched-user {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .user-actions {
+      width: 100%;
+      justify-content: center;
+    }
+  }

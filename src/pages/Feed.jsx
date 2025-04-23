@@ -1,57 +1,39 @@
 import { useState } from "react";
-
-
 import UserPosts from '../helperComponent/UserPosts';
 import UserSharedPosts from '../helperComponent/UserSharedPosts';
 import FeedPosts from "../helperComponent/FeedPosts";
-
 import "../CSS/feed.css";
 
 const Feed = () => {
+  const [activeTab, setActiveTab] = useState("feed");
 
-  const [activePostsType, setActivePostsType] = useState("Feed");
-
-  const handlePostsTypeToggle = (section) => {
-    setActivePostsType(prvType => (prvType === section ? "" : section));
-  }
+  const tabs = [
+    { id: "feed", label: "Feed", component: <FeedPosts /> },
+    { id: "posts", label: "Your Posts", component: <UserPosts /> },
+    { id: "shared", label: "Shared Posts", component: <UserSharedPosts /> }
+  ];
 
   return (
     <div className="feed">
-      <h3 className="h3">Your feed</h3>
-      <div className="toggle-buttons">
-        <button
-          className={activePostsType === "UserPosts" ? "active" : ""}
-          onClick={() => handlePostsTypeToggle("UserPosts")}
-        >
-          Posts
-        </button>
-        <button
-          className={activePostsType === "SharedPosts" ? "active" : ""}
-          onClick={() => handlePostsTypeToggle("SharedPosts")}
-        >
-          SharedPosts
-        </button>
-        <button
-          className={activePostsType === "Feed" ? "active" : ""}
-          onClick={() => handlePostsTypeToggle("Feed")}
-        >
-          Feed
-        </button>
-      </div>
-      <div>
-        {activePostsType === "UserPosts" && (
-          <UserPosts />
-        )}
-        {activePostsType === "SharedPosts" && (
-          <UserSharedPosts />
-        )}
-        {activePostsType === "Feed" && (
-          <FeedPosts />
-        )}
+      <h3 className="feed__title">Your Feed</h3>
+      
+      <div className="feed__tabs" data-active-tab={activeTab}>
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            className={`feed__tab ${activeTab === tab.id ? 'active' : ''}`}
+            onClick={() => setActiveTab(tab.id)}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
 
+      <div className="feed__content">
+        {tabs.find(tab => tab.id === activeTab)?.component}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Feed
+export default Feed;

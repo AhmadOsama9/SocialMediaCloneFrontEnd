@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useCommunityRelationContext } from "../context/CommunityRelationContext";
 
+import notification from "../helperComponent/notification";
 
 export const useCommunity = () => {
     const [error, setError] = useState(null);
@@ -173,7 +174,7 @@ export const useCommunity = () => {
         const json = await response.json();
 
         if (response.ok) {
-            alert("The community has been deleted Successfully");
+            notification.success("The community has been deleted Successfully");
         } else {
             setError(json.error);
         }
@@ -211,7 +212,7 @@ export const useCommunity = () => {
         const json = await response.json();
 
         if (response.ok) {
-            alert("You have left the community Successfully");
+            notification.success("You have left the community Successfully");
         } else {
             setError(json.error);
         }

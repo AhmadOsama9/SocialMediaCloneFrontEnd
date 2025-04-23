@@ -21,13 +21,14 @@ const CommunityProfile = ({ community }) => {
     const [showProfile, setShowProfile] = useState(false);
     const [user, setUser] = useState(null);
     const [otherRelation, setOtherRelation] = useState("");
-    const {createPost, setCreatePost} = useCreateCommunityPostContext();
+    const { createPost, setCreatePost } = useCreateCommunityPostContext();
+    const [confirmDelete, setConfirmDelete] = useState(false);
 
     useEffect(() => {
       getCommunityRelation(communityId);
       getMembers(communityId);
       getMembershipRequests(communityId);
-    }, [])
+    }, []);
 
     const handleSendJoinRequest = () => {
       sendJoinRequest(communityId);
@@ -46,25 +47,28 @@ const CommunityProfile = ({ community }) => {
     };
 
     const handleShowProfile = async (nickname, relation) => {
-      const returnedUser = await searchUserAndReturn(nickname)
+      const returnedUser = await searchUserAndReturn(nickname);
       setUser(returnedUser);
       setOtherRelation(relation);
-      setShowProfile(prv => !prv);
-
+      setShowProfile(true);
     }
 
     const handleBackToCommunity = () => {
       setUser(null);
-      setOtherRelation(null);
-      setShowProfile(prv => !prv);
+      setOtherRelation("");
+      setShowProfile(false);
     }
 
     const handleToggleCreatePost = () => {
-      setCreatePost(prv => !prv)
+      setCreatePost(prev => !prev);
     }
 
     const handleDeleteCommunity = () => {
-      //here I should double check that he's sure he wants to delete the community
+      if (confirmDelete) {
+        deleteCommunity(communityId);
+      } else {
+        setConfirmDelete(true);
+      }
     }
 
     if (isLoading) {
@@ -72,97 +76,215 @@ const CommunityProfile = ({ community }) => {
     }
 
     if (error) {
-        return <h3>Error: {error}</h3>
+        return <div className="error-message">Error: {error}</div>;
     }
 
     return (
-      <div>
-        {showProfile && (
-          <div>
-            <button onClick={handleBackToCommunity} className="back-button">Back to Community</button>
+      <div className="community-container">
+        {showProfile ? (
+          <div className="user-profile-view">
+            <button onClick={handleBackToCommunity} className="back-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+              Back to Community
+            </button>
             <OtherUserProfile otherUser={user} relation={otherRelation} />
           </div>
-        )}
-        {!showProfile && (
+        ) : (
           <div className="community-profile">
-            <div className="community-info">
-              <div className="basic-info">
-                <span className="community-name"><span className="span">Name: </span> {community.name}</span>
-                <span className="community-description"><span className="span">Description: </span> {community.description}</span>
+            <div className="community-header">
+              <h1 className="community-name">{community.name}</h1>
+              <p className="community-description">{community.description}</p>
+              
+              <div className="community-stats">
+                <div className="community-stat">
+                  <div className="stat-value">{members?.length || 0}</div>
+                  <div className="stat-label">Members</div>
+                </div>
+                {relation === "admin" && (
+                  <div className="community-stat">
+                    <div className="stat-value">{membershipRequests?.length || 0}</div>
+                    <div className="stat-label">Pending Requests</div>
+                  </div>
+                )}
               </div>
-              {relation === "None" && (
-                <button onClick={handleSendJoinRequest} className="join-button">Send Join Request</button>
-              )}
-              {relation === "Pending" && 
-                <div>
-                  <p className="request-status">Waiting for the admin to accept your request</p>
-                  <button onClick={handleCancelRequest} className="cancel-button">Cancel Request</button>
-                </div>
-              }
-              {relation === "member" && 
-                <div>
-                  <button onClick={handleLeaveCommunity} className="leave-button">Leave Community</button>
-                  <button onClick={handleToggleCreatePost} className="create-community-post-button">Create Post</button>
-                  <button onClick={() => setShowMembers(prev => !prev)} className="show-members-button">Show Members</button>
-                  {showMembers && 
-                    members.map((member) => (
-                      <div key={member.userId} className="members">
-                        <span>Name: {member.nickname}</span>
-                        <span>State: {member.relation}</span>
-                        <button onClick={() => handleShowProfileCallback(member.nickname, member.relation)} className="show-profile-button">Show Profile</button>
-                      </div>
-                    ))
-                  }
-                </div>
-              }
-              {relation === "admin" && 
-                <div>
-                  <button onClick={handleLeaveCommunity} className="leave-button">Leave Community</button>
-                  <button onClick={handleToggleCreatePost} className="create-community-post-button">Create Post</button>
-                  <button onClick={() => setShowMembers(prev => !prev)} className="show-members-button">Show Members</button>
-                  <button onClick={() => setShowRequests(prev => !prev)} className="show-requests-button">Show Requests</button>
-                  <button onClick={handleDeleteCommunity} className="delete-community-button">Delete Community</button>
-                  {showMembers && (members.length === 0 ? (
-                    <div className="no-members">You have no members.</div>
-                  ) : (
-                    members.map((member) => (
-                      <div key={member.userId} className="members">
-                        <span>Name: {member.nickname}</span>
-                        <span>State: {member.relation}</span>
-                        <button onClick={() => handleShowProfileCallback(member.nickname, member.relation)} className="show-profile-button">Show Profile</button>
-                        <button onClick={() => removeMember(member.userId, communityId)} className="remove-member-button">Remove from community</button>
-                      </div>
-                    ))
-                  ))}
-
-                  {showRequests && (membershipRequests.length === 0 ? (
-                    <div className="no-requests">You have no requests.</div>
-                  ) : (
-                    membershipRequests.map((request) => (
-                      <div key={request.userId} className="members">
-                        <span>Nickname: {request.nickname}</span>
-                        <button onClick={() => handleShowProfileCallback(request.nickname, request.relation)} className="show-profile-button">Show Profile</button>
-                        <button onClick={() => declineJoinRequest(request.userId, communityId)} className="decline-button">Decline</button>
-                        <button onClick={() => acceptJoinRequest(request.userId, communityId)} className="accept-button">Accept</button>
-                      </div>
-                    ))
-                  ))}
-                </div>
-              }
             </div>
-            {createPost && (
-              <CreateCommunityPost communityId={communityId} />
+            
+            <div className="community-actions">
+              {relation === "None" && (
+                <button onClick={handleSendJoinRequest} className="action-button primary-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <line x1="20" y1="8" x2="20" y2="14"></line>
+                    <line x1="23" y1="11" x2="17" y2="11"></line>
+                  </svg>
+                  Send Join Request
+                </button>
+              )}
+              
+              {relation === "Pending" && (
+                <div className="pending-request">
+                  <p className="request-status">Your request is pending approval</p>
+                  <button onClick={handleCancelRequest} className="action-button secondary-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="15" y1="9" x2="9" y2="15"></line>
+                      <line x1="9" y1="9" x2="15" y2="15"></line>
+                    </svg>
+                    Cancel Request
+                  </button>
+                </div>
+              )}
+              
+              {(relation === "member" || relation === "admin") && (
+                <div className="member-actions">
+                  <button onClick={handleToggleCreatePost} className="action-button primary-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                    {createPost ? "Cancel Post" : "Create Post"}
+                  </button>
+                  
+                  <button onClick={() => setShowMembers(prev => !prev)} className="action-button secondary-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    {showMembers ? "Hide Members" : "Show Members"}
+                  </button>
+                  
+                  <button onClick={handleLeaveCommunity} className="action-button danger-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                      <polyline points="16 17 21 12 16 7"></polyline>
+                      <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Leave Community
+                  </button>
+                </div>
+              )}
+              
+              {relation === "admin" && (
+                <div className="admin-actions">
+                  <button onClick={() => setShowRequests(prev => !prev)} className="action-button secondary-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="8.5" cy="7" r="4"></circle>
+                      <line x1="20" y1="8" x2="20" y2="14"></line>
+                      <line x1="23" y1="11" x2="17" y2="11"></line>
+                    </svg>
+                    {showRequests ? "Hide Requests" : "Show Requests"}
+                  </button>
+                  
+                  <button onClick={handleDeleteCommunity} className="action-button danger-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M3 6h18"></path>
+                      <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                      <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                      <line x1="10" y1="11" x2="10" y2="17"></line>
+                      <line x1="14" y1="11" x2="14" y2="17"></line>
+                    </svg>
+                    {confirmDelete ? "Confirm Delete" : "Delete Community"}
+                  </button>
+                </div>
+              )}
+            </div>
+            
+            {showMembers && (
+              <div className="community-section members-section">
+                <h2 className="section-title">Community Members</h2>
+                {members.length === 0 ? (
+                  <p className="empty-message">No members in this community</p>
+                ) : (
+                  <div className="member-list">
+                    {members.map((member) => (
+                      <div key={member.userId} className="member-card">
+                        <div className="member-info">
+                          <h3 className="member-name">{member.nickname}</h3>
+                          <span className={`member-status status-${member.relation}`}>{member.relation}</span>
+                        </div>
+                        <div className="member-actions">
+                          <button 
+                            onClick={() => handleShowProfileCallback(member.nickname, member.relation)} 
+                            className="member-button view-button"
+                          >
+                            View Profile
+                          </button>
+                          {relation === "admin" && member.relation !== "admin" && (
+                            <button 
+                              onClick={() => removeMember(member.userId, communityId)} 
+                              className="member-button remove-button"
+                            >
+                              Remove
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             )}
-            <div className="community-posts">
-              <h3>Posts</h3>
+            
+            {showRequests && relation === "admin" && (
+              <div className="community-section requests-section">
+                <h2 className="section-title">Membership Requests</h2>
+                {membershipRequests.length === 0 ? (
+                  <p className="empty-message">No pending requests</p>
+                ) : (
+                  <div className="request-list">
+                    {membershipRequests.map((request) => (
+                      <div key={request.userId} className="request-card">
+                        <div className="request-info">
+                          <h3 className="request-name">{request.nickname}</h3>
+                          <button 
+                            onClick={() => handleShowProfileCallback(request.nickname, request.relation)} 
+                            className="view-profile-link"
+                          >
+                            View Profile
+                          </button>
+                        </div>
+                        <div className="request-actions">
+                          <button 
+                            onClick={() => acceptJoinRequest(request.userId, communityId)} 
+                            className="request-button accept-button"
+                          >
+                            Accept
+                          </button>
+                          <button 
+                            onClick={() => declineJoinRequest(request.userId, communityId)} 
+                            className="request-button decline-button"
+                          >
+                            Decline
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+            
+            {createPost && (
+              <div className="create-post-section">
+                <CreateCommunityPost communityId={communityId} />
+              </div>
+            )}
+            
+            <div className="community-posts-section">
+              <h2 className="section-title">Community Posts</h2>
               <CommunityPosts communityId={communityId} />
             </div>
           </div>
         )}
       </div>
-
     );   
-
 }
 
 export default CommunityProfile;

@@ -13,11 +13,20 @@ import CreatePage from "../helperComponent/CreatePage";
 import SearchedPage from "../helperComponent/SearchedPage";
 import { useActiveSectionContext } from "../context/ActiveSectionContext";
 
-
-import { FaSearch, FaGlobe} from "react-icons/fa";
-import { Group as GroupIcon, Public as PublicIcon, AccountCircle as AccountCircleIcon } from '@mui/icons-material';
-
-import { IoIosGlobe } from "react-icons/io";
+// Using Lucide icons
+import { 
+  Search, 
+  Users, 
+  Globe, 
+  UserCircle,
+  PlusCircle,
+  FileEdit,
+  FileSpreadsheet,
+  ChevronLeft,
+  ChevronDown,
+  ChevronUp,
+  X
+} from "lucide-react";
 
 import "../CSS/loggedinUser.css";
 
@@ -27,44 +36,62 @@ const LoggedinUser = () => {
 
   const [searchText, setSearchText] = useState("");
   const [searchType, setSearchType] = useState("user");
-  const [showSearch, setShowSearch] = useState(null);
+  const [showSearch, setShowSearch] = useState(false);
 
   const handleSectionToggle = (section) => {
     setActiveSection((prevSection) => (prevSection === section ? "" : section));
   };
 
-  const handleSearchIconClick = () => {
-    setShowSearch(prv => !prv);
+  const handleSearchSubmit = (e) => {
+    e && e.preventDefault();
+    
+    if (searchText.trim() === "") return;
+    
     if (searchType === "user") {
       handleSectionToggle("searchUser");
     } else if (searchType === "community") {
       handleSectionToggle("searchCommunity");
     } else if (searchType === "page") {
       handleSectionToggle("searchPage");
-    } else {
-      handleSectionToggle("")
     }
-  }
+  };
 
   const handleClearActiveSection = () => {
-    handleSectionToggle("");
-  }
+    setActiveSection("");
+    setShowSearch(false);
+  };
 
-  const handleShowSearch = () => {
-    setShowSearch(prv => !prv);
-  }
+  const toggleSearch = () => {
+    setShowSearch(prev => !prev);
+    if (showSearch) {
+      setSearchText("");
+    }
+  };
 
   return (
     <div className="loggedin-user">
       {!activeSection ? (
-        <div className="loggedin-user-choices">
-          {!showSearch && <button onClick={handleShowSearch} className="search-icon"><FaSearch /></button> }
-          {showSearch && (  
-            <div className="search">
+        <>
+          {/* Professional Search Bar at Top */}
+          <div className={`search-container ${showSearch ? 'active' : ''}`}>
+            <div className="search-header">
+              <h3>
+                <Search size={18} strokeWidth={2} /> 
+                Find what you're looking for
+              </h3>
+              <button className="search-toggle-btn" onClick={toggleSearch}>
+                {showSearch ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+              </button>
+            </div>
+            
+            <form 
+              className={`search-form ${showSearch ? 'visible' : ''}`}
+              onSubmit={handleSearchSubmit}
+            >
               <div className="search-input-container">
                 <input
                   type="text"
-                  placeholder="Enter a name"
+                  placeholder="Enter search term..."
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
                 />
@@ -76,62 +103,62 @@ const LoggedinUser = () => {
                   <option value="community">Community</option>
                   <option value="page">Page</option>
                 </select>
-              <button onClick={handleSearchIconClick} className="search-icon"><FaSearch /></button>
               </div>
-            </div>
-          )}
-
-          <button onClick={() => handleSectionToggle("communities")}><GroupIcon  className="icon" /> Joined Communities</button>
-
-          <button onClick={() => handleSectionToggle("showAllCommunities")}><PublicIcon className="icon" /> Show All Communities</button>
-
-          <button onClick={() => handleSectionToggle("YourCommunities")}><FaGlobe className="icon" /> Your Communities</button>
-
-          <button onClick={() => handleSectionToggle("Pages")}><AccountCircleIcon className="icon" /> Your Pages</button>
-
-          <button onClick={() => handleSectionToggle("createCommunity")}>Create Community</button>
+              <button type="submit" className="search-button">
+                <Search size={16} strokeWidth={2} />
+                Search
+              </button>
+            </form>
+          </div>
           
-          <button onClick={() => handleSectionToggle("createPost")}>Create Post</button>
+          {/* Dashboard Options */}
+          <div className="loggedin-user-choices">
+            <button onClick={() => handleSectionToggle("communities")}>
+              <Users size={20} strokeWidth={2} className="icon" /> Joined Communities
+            </button>
 
-          <button onClick={() => handleSectionToggle("createPage")}>Create Page</button>
-        </div>
+            <button onClick={() => handleSectionToggle("showAllCommunities")}>
+              <Globe size={20} strokeWidth={2} className="icon" /> Show All Communities
+            </button>
+
+            <button onClick={() => handleSectionToggle("YourCommunities")}>
+              <Users size={20} strokeWidth={2} className="icon" /> Your Communities
+            </button>
+
+            <button onClick={() => handleSectionToggle("Pages")}>
+              <UserCircle size={20} strokeWidth={2} className="icon" /> Your Pages
+            </button>
+
+            <button onClick={() => handleSectionToggle("createCommunity")}>
+              <PlusCircle size={20} strokeWidth={2} className="icon" /> Create Community
+            </button>
+            
+            <button onClick={() => handleSectionToggle("createPost")}>
+              <FileEdit size={20} strokeWidth={2} className="icon" /> Create Post
+            </button>
+
+            <button onClick={() => handleSectionToggle("createPage")}>
+              <FileSpreadsheet size={20} strokeWidth={2} className="icon" /> Create Page
+            </button>
+          </div>
+        </>
       ) : (
         <div className="active-section-wrapper">
-          <button onClick={handleClearActiveSection} className="close-btn">Close Section</button>
+          <button onClick={handleClearActiveSection} className="close-btn">
+            <ChevronLeft size={18} />
+            Back to Dashboard
+          </button>
 
-          {activeSection === "communities" && (
-            <ShowJoinedCommunities />
-          )}
-          {activeSection === "searchUser" && (
-            <SearchUser nickname={searchText} />
-          )}
-          {activeSection === "searchCommunity" && (
-            <SearchCommunity name={searchText} />
-          )}
-          {activeSection === "searchPage" && (
-            <SearchedPage name={searchText} />
-          )}
-          {activeSection === "showAllCommunities" && (
-            <ShowAllCommunities />
-          )}
-          {activeSection === "YourCommunities" && (
-            <YourCommunities />
-          )}
-          {activeSection === "Pages" && (
-            <UserPages />
-          )}
-          {activeSection === "createCommunity" && (
-            <CreateCommunity />
-          )}
-          {activeSection === "createPost" && (
-            <CreatePost />
-          )}
-          {activeSection === "createPage" && (
-            <CreatePage />
-          )}
-          
-          
-
+          {activeSection === "communities" && <ShowJoinedCommunities />}
+          {activeSection === "searchUser" && <SearchUser nickname={searchText} />}
+          {activeSection === "searchCommunity" && <SearchCommunity name={searchText} />}
+          {activeSection === "searchPage" && <SearchedPage name={searchText} />}
+          {activeSection === "showAllCommunities" && <ShowAllCommunities />}
+          {activeSection === "YourCommunities" && <YourCommunities />}
+          {activeSection === "Pages" && <UserPages />}
+          {activeSection === "createCommunity" && <CreateCommunity />}
+          {activeSection === "createPost" && <CreatePost />}
+          {activeSection === "createPage" && <CreatePage />}
         </div>
       )}
     </div>

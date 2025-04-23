@@ -6,8 +6,8 @@ import Loader from "../helperComponent/Loader";
 
 import { avatar1, avatar2, avatar3, avatar4, avatar0 } from "../assets/avatar";
 
-
 import "../CSS/profile.css";
+import notification from '../helperComponent/notification';
 
 const Profile = () => {
   const { isLoading, error, updateNickname, updateAge, updateGender, updateBio, updateImage, checkPassword, updatePassword } = useProfileInfo();
@@ -77,18 +77,17 @@ const Profile = () => {
   }
 
   const handleSaveNewPassword = async () => {
-      const update = await updatePassword(password);
-      if (update) {
-        alert("The password has been updated");
-        setIsNewPasswordEditing(false);
-      }
+    const update = await updatePassword(password);
+    if (update) {
+      notification.success("The password has been updated");
+      setIsNewPasswordEditing(false);
+    }
   }
 
   const handleCancelUpdatePassword = () => {
     setIsNewPasswordEditing(false);
     setIsPasswordEditing(false);
   }
-
 
   if (isLoading) {
     return <Loader />;
@@ -98,156 +97,218 @@ const Profile = () => {
     return <h3 className="error">Error: {error}</h3>;
   }
 
+  const avatars = [
+    { id: "0", src: avatar0, alt: "Avatar 0" },
+    { id: "1", src: avatar1, alt: "Avatar 1" },
+    { id: "2", src: avatar2, alt: "Avatar 2" },
+    { id: "3", src: avatar3, alt: "Avatar 3" },
+    { id: "4", src: avatar4, alt: "Avatar 4" }
+  ];
 
   return (
     <div className="profile">
       <h3>Profile Page</h3>
-        {showAvatarSelection ? (
-          <div className="avatar-selection">
-            <h3>Select your Avatar:</h3>
-            <div>
-              <label>
-                <input
-                  type="radio"
-                  name="avatar"
-                  value="1"
-                  onClick={() => handleUpdateAvatar("1")}
+      
+      {showAvatarSelection ? (
+        <div className="avatar-selection">
+          <h4>Select your Avatar:</h4>
+          <div className="avatar-grid">
+            {avatars.map((avatar) => (
+              <div 
+                key={avatar.id} 
+                className={`avatar-container ${selectedAvatar === avatar.id ? 'selected' : ''}`}
+                onClick={() => handleUpdateAvatar(avatar.id)}
+              >
+                <img 
+                  src={avatar.src} 
+                  alt={avatar.alt} 
+                  className="avatar-image"
                 />
-                <img src={avatar1} alt="Avatar 1" className="avatar-image"/>
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="avatar"
-                  value="2"
-                  onClick={() => handleUpdateAvatar("2")}
-                />
-                <img src={avatar2} alt="Avatar 2" className="avatar-image"/>
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="avatar"
-                  value="3"
-                  onClick={() => handleUpdateAvatar("3")}
-                />
-                <img src={avatar3} alt="Avatar 3" className="avatar-image"/>
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="avatar"
-                  value="4"
-                  onClick={() => handleUpdateAvatar("4")}
-                />
-                <img src={avatar4} alt="Avatar 4" className="avatar-image"/>
-              </label>
-              
-            </div>
+              </div>
+            ))}
           </div>
-        ) : (
-          <div className="selected-avatar">
-            <img
-              src={
-                selectedAvatar === "1"
-                  ? avatar1
-                  : selectedAvatar === "2"
-                  ? avatar2
-                  : selectedAvatar === "3"
-                  ? avatar3
-                  : selectedAvatar === "4"
-                  ? avatar4
-                  : avatar0
-              }
-              alt={`Avatar ${selectedAvatar}`}
-              className="selected-avatar-image"
-            />
-            <button onClick={() => setShowAvatarSelection(true)}
-            >
-              Update Avatar
-            </button>
-          </div>
-        )}
+        </div>
+      ) : (
+        <div className="selected-avatar">
+          <img
+            src={
+              selectedAvatar === "1"
+                ? avatar1
+                : selectedAvatar === "2"
+                ? avatar2
+                : selectedAvatar === "3"
+                ? avatar3
+                : selectedAvatar === "4"
+                ? avatar4
+                : avatar0
+            }
+            alt={`Avatar ${selectedAvatar}`}
+            className="selected-avatar-image"
+          />
+          <button 
+            className="btn btn-update"
+            onClick={() => setShowAvatarSelection(true)}
+          >
+            Change Avatar
+          </button>
+        </div>
+      )}
+      
       <div className="profile-info">
-        <div key="nickname" className="profile-attribute">
+        <div className="profile-attribute">
           <label>Nickname:</label>
-          {isNicknameEditing ? (
-            <input type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} />
-          ) : (
-            <span>{nickname}</span>
-          )}
-          {isNicknameEditing ? (
-            <button onClick={handleUpdateNickname}>Save</button>
-          ) : (
-            <button onClick={() => setIsNicknameEditing(true)}>Edit</button>
-          )}
-        </div>
-        <div key="age" className="profile-attribute">
-          <label>Age:</label>
-          {isAgeEditing ? (
-            <input type="number" value={age} onChange={(e) => setAge(e.target.value)} />
-          ) : (
-            <span>{age}</span>
-          )}
-          {isAgeEditing ? (
-            <button onClick={handleUpdateAge}>Save</button>
-          ) : (
-            <button onClick={() => setIsAgeEditing(true)}>Edit</button>
-          )}
-        </div>
-        <div key="gender" className="profile-attribute">
-          <label>Gender(male - female):</label>
-          {isGenderEditing ? (
-            <input type="text" value={gender} onChange={(e) => setGender(e.target.value)} />
-          ) : (
-            <span>{gender}</span>
-          )}
-          {isGenderEditing ? (
-            <button onClick={handleUpdateGender}>Save</button>
-          ) : (
-            <button onClick={() => setIsGenderEditing(true)}>Edit</button>
-          )}
-        </div>
-        <div key="bio" className="profile-attribute">
-          <label>Bio:</label>
-          {isBioEditing ? (
-            <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
-          ) : (
-            <span>{bio}</span>
-          )}
-          {isBioEditing ? (
-            <button onClick={handleUpdateBio}>Save</button>
-          ) : (
-            <button onClick={() => setIsBioEditing(true)}>Edit</button>
-          )}
-        </div>
-        <div key="password" className="profile-attribute">
-          <label>Password:</label>
-          {isPasswordEditing ? (
-            <div>
-              <label>Enter the old password</label>
-              <input value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
-              <button onClick={handleCheckOldPassword}>Check</button>
-            </div>
-          ) : (
-            <>
-              {isNewPasswordEditing ? (
-                <div>
-                  <label>Enter the new password</label>
-                  <input value={password} onChange={(e) => setPassword(e.target.value)} />
-                  <button onClick={handleSaveNewPassword}>Save</button>
-                  <button onClick={handleCancelUpdatePassword}>Cancel</button>
-                </div>
-              ) : (
+          <div className="attribute-content">
+            {isNicknameEditing ? (
+              <input type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} />
+            ) : (
+              <span>{nickname}</span>
+            )}
+            <div className="edit-actions">
+              {isNicknameEditing ? (
                 <>
-                  <span>***********</span>
-                  <button onClick={() => setIsPasswordEditing(true)}>Edit</button>
+                  <button className="btn btn-save" onClick={handleUpdateNickname}>Save</button>
+                  <button className="btn btn-cancel" onClick={() => setIsNicknameEditing(false)}>Cancel</button>
                 </>
+              ) : (
+                <button className="btn btn-edit" onClick={() => setIsNicknameEditing(true)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                  </svg>
+                  Edit
+                </button>
               )}
-            </>
-          )}
+            </div>
+          </div>
+        </div>
+        
+        <div className="profile-attribute">
+          <label>Age:</label>
+          <div className="attribute-content">
+            {isAgeEditing ? (
+              <input type="number" value={age} onChange={(e) => setAge(e.target.value)} />
+            ) : (
+              <span>{age}</span>
+            )}
+            <div className="edit-actions">
+              {isAgeEditing ? (
+                <>
+                  <button className="btn btn-save" onClick={handleUpdateAge}>Save</button>
+                  <button className="btn btn-cancel" onClick={() => setIsAgeEditing(false)}>Cancel</button>
+                </>
+              ) : (
+                <button className="btn btn-edit" onClick={() => setIsAgeEditing(true)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                  </svg>
+                  Edit
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+        
+        <div className="profile-attribute">
+          <label>Gender (male - female):</label>
+          <div className="attribute-content">
+            {isGenderEditing ? (
+              <input type="text" value={gender} onChange={(e) => setGender(e.target.value)} />
+            ) : (
+              <span>{gender}</span>
+            )}
+            <div className="edit-actions">
+              {isGenderEditing ? (
+                <>
+                  <button className="btn btn-save" onClick={handleUpdateGender}>Save</button>
+                  <button className="btn btn-cancel" onClick={() => setIsGenderEditing(false)}>Cancel</button>
+                </>
+              ) : (
+                <button className="btn btn-edit" onClick={() => setIsGenderEditing(true)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                  </svg>
+                  Edit
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+        
+        <div className="profile-attribute">
+          <label>Bio:</label>
+          <div className="attribute-content">
+            {isBioEditing ? (
+              <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
+            ) : (
+              <span className="bio-text">{bio}</span>
+            )}
+            <div className="edit-actions">
+              {isBioEditing ? (
+                <>
+                  <button className="btn btn-save" onClick={handleUpdateBio}>Save</button>
+                  <button className="btn btn-cancel" onClick={() => setIsBioEditing(false)}>Cancel</button>
+                </>
+              ) : (
+                <button className="btn btn-edit" onClick={() => setIsBioEditing(true)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                  </svg>
+                  Edit
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+        
+        <div className="profile-attribute">
+          <label>Password:</label>
+          <div className="attribute-content">
+            {isPasswordEditing ? (
+              <div className="password-input">
+                <label>Enter the old password</label>
+                <input 
+                  type="password" 
+                  value={oldPassword} 
+                  onChange={(e) => setOldPassword(e.target.value)} 
+                />
+                <div className="edit-actions">
+                  <button className="btn btn-save" onClick={handleCheckOldPassword}>Verify</button>
+                  <button className="btn btn-cancel" onClick={() => setIsPasswordEditing(false)}>Cancel</button>
+                </div>
+              </div>
+            ) : (
+              <>
+                {isNewPasswordEditing ? (
+                  <div className="password-input">
+                    <label>Enter the new password</label>
+                    <input 
+                      type="password" 
+                      value={password} 
+                      onChange={(e) => setPassword(e.target.value)} 
+                    />
+                    <div className="edit-actions">
+                      <button className="btn btn-save" onClick={handleSaveNewPassword}>Save</button>
+                      <button className="btn btn-cancel" onClick={handleCancelUpdatePassword}>Cancel</button>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <span>••••••••••</span>
+                    <div className="edit-actions">
+                      <button className="btn btn-edit" onClick={() => setIsPasswordEditing(true)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                        </svg>
+                        Change Password
+                      </button>
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+          </div>
         </div>
       </div>
+      
       {error && <h4 className="error">Error: {error}</h4>}
     </div>
   );

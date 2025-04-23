@@ -22,7 +22,7 @@ const SearchedPage = ({ name }) => {
   }
 
   if (pageError) {
-    return <h3 className=".error">Error: {pageError}</h3>
+    return <h3 className=".error">{pageError}</h3>
   }
 
   return (

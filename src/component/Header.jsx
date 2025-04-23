@@ -32,7 +32,7 @@ const Header = () => {
     <header>
         <nav>
           <Link className="logo" to="/">
-            <h1>SMC</h1>
+            <h1>SOCIALITE</h1>
           </Link>
             <Nav />
             {user && (

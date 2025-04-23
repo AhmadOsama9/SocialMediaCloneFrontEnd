@@ -1,16 +1,23 @@
-.nav-bar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
-}
-
-.nav-bar .nav-icon {
-    font-size: 1.5rem;
-    color: var(--navbar-link);
-}
-
-.nav-bar .nav-icon.active{
-    color: var(--border-color);
-}
-
+@media (min-width: 769px) {
+    /* Modify this part */
+    .nav-bar {
+      position: static; /* Remove fixed positioning on desktop */
+      box-shadow: none;
+      padding: 0;
+      flex: 1;
+      justify-content: center;
+    }
+    
+    /* Rest of your media query remains the same */
+    .nav-item {
+      flex-direction: row;
+      gap: var(--space-sm);
+    }
+    .nav-label {
+      font-size: 1rem;
+      margin-bottom: 0;
+    }
+    .nav-item.active::after {
+      display: none;
+    }
+  }

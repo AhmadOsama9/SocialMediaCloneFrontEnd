@@ -37,7 +37,7 @@ const ShowAllCommunities = () => {
     <div className="all-Communities">
       {community._id ? ( 
         <div className="opened-community">
-          <button className="close" onClick={handleCloseShowCommunity}>Close</button>
+          <button className="btn-action" onClick={handleCloseShowCommunity}>Close</button>
           <CommunityProfile community={community} />
         </div>
       ) : (
@@ -47,7 +47,7 @@ const ShowAllCommunities = () => {
             <div key={community._id} className="community-card">
               <span className="community-name"><span className="span">Name: </span> {community.name}</span>
               <span className="community-description"><span className="span">Description: </span> {community.description}</span>
-              <button className="show-community-button" onClick={() => handleShowCommunity(community)}>Show Community</button>
+              <button className="btn-action" onClick={() => handleShowCommunity(community)}>Show Community</button>
             </div>
           ))}
         </div>

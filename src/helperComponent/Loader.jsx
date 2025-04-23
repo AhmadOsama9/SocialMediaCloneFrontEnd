@@ -1,16 +1,19 @@
-import React from 'react'
-
+// Updated Loader.jsx
+import React from 'react';
 import "../CSS/loader.css";
 
-const Loader = () => {
+const Loader = ({ text = "Loading..." }) => {
   return (
-    <section>
-        <div className="loader">
-            <div className="loader-outter"></div>
-            <div className="loader-inner"></div>
+    <div className="loader-container">
+      <div className="loader">
+        <div className="loader__spinner">
+          <div className="loader__spinner-outer"></div>
+          <div className="loader__spinner-inner"></div>
         </div>
-    </section>
-  )
-}
+        {text && <div className="loader__text">{text}</div>}
+      </div>
+    </div>
+  );
+};
 
-export default Loader
+export default Loader;

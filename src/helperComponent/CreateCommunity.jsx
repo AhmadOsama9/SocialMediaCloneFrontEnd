@@ -6,6 +6,7 @@ import Loader from "../helperComponent/Loader";
 
 
 import "../CSS/createCommunity.css";
+import notification from './notification';
 
 const CreateCommunity = () => {
   const { isLoading, error, createCommunity } = useCommunity();
@@ -17,7 +18,7 @@ const CreateCommunity = () => {
 
   const handleCreateCommunity = async () => {
     if (!name || !description) {
-      alert("All info must be filled");
+      notification.error("All info must be filled");
       return;
     }
 

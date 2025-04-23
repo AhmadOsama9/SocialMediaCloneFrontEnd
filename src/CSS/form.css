@@ -1,102 +1,371 @@
-form.login, form.signup {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 18rem;
-    margin: 0 auto;
-    background-color: var(--card-bg);
-    color: var(--text-on-card-bg);
-    border: 0.1rem solid var(--border-color);
-    border-radius: 0.4rem;
-} 
+/* Modern Form Components (Login/Signup) */
 
-form.login h3, form.signup h3 {
-    margin-bottom: 1.5rem;
-    color: var(--header-text);
+/* Base form styles */
+.signup, .login {
+  width: 100%;
+  animation: fadeIn 0.3s ease forwards;
 }
 
-form.login label, form.signup label {
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: var(--secondary-title);
+/* Form groups */
+.group {
+  margin-bottom: 1.25rem;
+  position: relative;
 }
 
-form.login input, form.signup input {
-    width: 100%;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border: 1px solid var(--border-color);
-    background-color: var(--input-bg);
-    color: var(--input-text);
-    border-radius: 0.3rem;
+.group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #cdd6f4;
+  font-weight: 500;
+  font-size: 0.95rem;
 }
 
-form.login button, form.signup button {
-    padding: 1rem 2rem;
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    border-radius: 0.3rem;
-    cursor: pointer;
+.group input {
+  width: 100%;
+  padding: 14px;
+  background-color: #313244;
+  border: 2px solid #45475a;
+  border-radius: 10px;
+  color: #cdd6f4;
+  font-size: 1rem;
+  transition: all 0.2s ease;
 }
 
-form.login button, form.signup button {
-    background-color: var(--button-bg);
-    color: var(--button-text);
+.group input:focus {
+  outline: none;
+  border-color: #89b4fa;
+  box-shadow: 0 0 0 3px rgba(137, 180, 250, 0.2);
 }
 
+.group input::placeholder {
+  color: #6c7086;
+}
+
+/* Submit button */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #89b4fa;
+  color: #1e1e2e;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.submit-btn:hover {
+  background-color: #a6c1ff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(137, 180, 250, 0.2);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+.submit-btn:disabled {
+  background-color: #45475a;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Google Auth Button */
+.google-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: transparent;
+  border: 2px solid #45475a;
+  border-radius: 10px;
+  color: #cdd6f4;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.google-btn:hover {
+  background-color: #313244;
+  border-color: #89b4fa;
+}
+
+/* Divider */
+.divider {
+  text-align: center;
+  position: relative;
+  margin: 1.5rem 0;
+  color: #a6adc8;
+  font-size: 0.9rem;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: calc(50% - 30px);
+  height: 1px;
+  background-color: #45475a;
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+/* Error message */
 .error {
-    color: var(--error-color);
+  background-color: rgba(243, 139, 168, 0.2);
+  color: #f38ba8;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  border-left: 4px solid #f38ba8;
+  text-align: left;
 }
 
+/* OTP Container */
 .otp-container {
-    text-align: center;
-    margin-top: 1rem;
-    background-color: var(--card-bg);
+  text-align: center;
+  animation: fadeIn 0.3s ease forwards;
 }
-  
+
 .otp-heading {
-    font-size: 1.5rem;
-    color: var(--header-text);
-    margin-bottom: 0.625rem; 
+  font-size: 1.5rem;
+  color: #cdd6f4;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
 }
-  
+
 .otp-note {
-    font-size: 1rem;
-    color: var(--secondary-title);
-    margin-bottom: 0.625rem; 
+  background-color: rgba(249, 226, 175, 0.1);
+  color: #f9e2af;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  text-align: left;
+  border-left: 4px solid #f9e2af;
 }
-  
+
 .otp-label {
-    display: block;
-    font-size: 0.875rem; 
-    color: var(--text-on-card-bg);
-    margin-top: 0.3125rem; 
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #cdd6f4;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-align: left;
 }
-  
+
 .otp-input {
-    width: 100%;
-    padding: 0.625rem; 
-    font-size: 1rem;
-    border: 1px solid var(--border-color);
-    background-color: var(--input-bg);
-    color: var(--input-text);
-    border-radius: 0.25rem; 
-    margin-top: 0.3125rem; 
+  width: 100%;
+  padding: 16px;
+  background-color: #313244;
+  border: 2px solid #45475a;
+  border-radius: 10px;
+  color: #cdd6f4;
+  font-size: 1.25rem;
+  transition: all 0.2s ease;
+  text-align: center;
+  letter-spacing: 4px;
+  font-family: monospace;
 }
-  
+
+.otp-input:focus {
+  outline: none;
+  border-color: #89b4fa;
+  box-shadow: 0 0 0 3px rgba(137, 180, 250, 0.2);
+}
+
 .otp-button {
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    padding: 0.625rem 1.25rem; 
-    font-size: 1.125rem; 
-    border: none;
-    border-radius: 0.25rem; 
-    margin-top: 0.625rem; 
-    cursor: pointer;
+  width: 100%;
+  padding: 14px;
+  background-color: #89b4fa;
+  color: #1e1e2e;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
 }
-  
+
 .otp-button:hover {
-    background-color: var(--button-hover-bg);
-    color: var(--button-hover-text) 
+  background-color: #a6c1ff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(137, 180, 250, 0.2);
+}
+
+.otp-button:active {
+  transform: translateY(0);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Password strength indicator */
+.password-strength {
+  margin-top: 0.5rem;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #45475a;
+  overflow: hidden;
+  position: relative;
+}
+
+.password-strength-bar {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.password-strength-bar.weak {
+  background-color: #f38ba8;
+  width: 33%;
+}
+
+.password-strength-bar.medium {
+  background-color: #f9e2af;
+  width: 66%;
+}
+
+.password-strength-bar.strong {
+  background-color: #a6e3a1;
+  width: 100%;
+}
+
+.password-strength-text {
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.password-strength-text.weak {
+  color: #f38ba8;
+}
+
+.password-strength-text.medium {
+  color: #f9e2af;
+}
+
+.password-strength-text.strong {
+  color: #a6e3a1;
+}
+
+/* Replace your current responsive design section with this improved version */
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .group {
+    margin-bottom: 1rem; /* Fixed: was 5rem which was causing massive gaps */
+  }
+  
+  .group input, .submit-btn, .otp-button {
+    padding: 12px;
+  }
+  
+  .otp-input {
+    font-size: 1.1rem;
+    padding: 14px;
+  }
+  
+  /* Make Google button more accessible on small screens */
+  .google-btn {
+    margin-top: 0.5rem;
+    padding: 10px;
+  }
+  
+  /* Adjust divider spacing */
+  .divider {
+    margin: 1rem 0;
+  }
+  
+  .divider::before,
+  .divider::after {
+    width: calc(50% - 40px); /* Shorter lines on small screens */
+  }
+  
+  /* Fix login options layout on very small screens */
+  .login-options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .forgot-password-link {
+    margin-left: 0.5rem;
+  }
+}
+
+/* Add tablet/medium screen breakpoint */
+@media (min-width: 601px) and (max-width: 900px) {
+  .signup, .login {
+    max-width: 450px;
+    margin: 0 auto;
+  }
+  
+  .group {
+    margin-bottom: 1.25rem;
+  }
+  
+  .group input, .submit-btn, .otp-button {
+    padding: 12px;
+  }
+  
+  /* Ensure Google button is properly accessible */
+  .google-btn {
+    padding: 12px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Adjust divider for medium screens */
+  .divider::before,
+  .divider::after {
+    width: calc(50% - 50px);
+  }
+}
+
+/* Add larger screen adjustments */
+@media (min-width: 901px) {
+  .signup, .login {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  
+  /* Slightly larger form elements on big screens */
+  .group input {
+    padding: 14px;
+  }
+  
+  .submit-btn, .otp-button {
+    padding: 14px;
+  }
+  
+  /* Ensure Google button remains accessible */
+  .google-btn {
+    padding: 12px;
+    margin: 1rem 0;
+  }
 }

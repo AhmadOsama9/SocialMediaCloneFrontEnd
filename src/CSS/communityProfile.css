@@ -1,116 +1,351 @@
+/* Community Profile Component */
+.community-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .community-profile {
-    margin: 1.25rem;
-    padding: 1.25rem;
-    background-color: var(--card-bg);
-    border: 0.0625rem solid var(--border-color);
-    border-radius: 0.3125rem;
-    box-shadow: 0 0 0.15625rem var(--border-color);
+  background-color: #1e1e2e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.back-button {
-    font-size: 1.125rem;
-    padding: 0.3125rem 0.625rem;
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    border-radius: 0.1875rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-    margin-bottom: 0.625rem;
-    margin-top: 0.9rem;
-}
-
-.back-button:hover {
-    background-color: var(--button-hover-bg);
-    color: var(--button-hover-text)
-}
-
-.community-info {
-    margin-bottom: 0.9375rem;
-}
-
-.community-profile .basic-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.community-profile .basic-info .span {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: var(--text-on-card-bg);
+.community-header {
+  padding: 32px;
+  text-align: center;
+  background-color: #181825;
+  border-bottom: 1px solid #313244;
 }
 
 .community-name {
-    font-size: 1.125rem;
-    font-weight: bold;
-    color: var(--secondary-title);
+  font-size: 2.25rem;
+  color: #cdd6f4;
+  margin-bottom: 12px;
+  font-weight: 700;
 }
 
 .community-description {
-    font-size: 0.875rem;
-    color: var(--text-on-card-bg);
+  font-size: 1rem;
+  color: #a6adc8;
+  max-width: 600px;
+  margin: 0 auto 24px;
+  line-height: 1.6;
 }
 
-.join-button,
-.cancel-button,
-.leave-button,
-.create-community-post-button,
-.show-members-button,
-.show-requests-button,
-.delete-community-button,
-.decline-button,
-.accept-button {
-    font-size: 1.1rem;
-    padding: 0.3rem 0.5rem;
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    border-radius: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-    margin-right: 0.5rem;
-    margin-bottom: 0.3rem;
+.community-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 24px;
 }
 
-.remove-member-button {
-    padding: 0.3125rem 0.625rem;
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    border-radius: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-    margin-right: 0.625rem;
-    margin-bottom: 0.3125rem;
+.community-stat {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #89b4fa;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #a6adc8;
+}
+
+.community-actions {
+  padding: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  background-color: #313244;
+}
+
+.member-actions, .admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primary-button {
+  background-color: #89b4fa;
+  color: #1e1e2e;
+}
+
+.primary-button:hover {
+  background-color: #a6c1ff;
+  transform: translateY(-2px);
+}
+
+.secondary-button {
+  background-color: #45475a;
+  color: #cdd6f4;
+}
+
+.secondary-button:hover {
+  background-color: #585b70;
+  transform: translateY(-2px);
+}
+
+.danger-button {
+  background-color: #f38ba8;
+  color: #1e1e2e;
+}
+
+.danger-button:hover {
+  background-color: #ff98a4;
+  transform: translateY(-2px);
+}
+
+.action-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.pending-request {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
 
 .request-status {
-    font-size: 0.875rem;
-    color: var(--text-on-card-bg);
+  color: #f9e2af;
+  font-size: 0.9rem;
 }
 
-.community-profile .members {
-    display: flex;
+.community-section {
+  padding: 24px;
+  border-bottom: 1px solid #313244;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  color: #cdd6f4;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.empty-message {
+  text-align: center;
+  color: #a6adc8;
+  padding: 24px;
+  background-color: #313244;
+  border-radius: 8px;
+}
+
+.member-list, .request-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.member-card, .request-card {
+  background-color: #313244;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.member-card:hover, .request-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.member-info, .request-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.member-name, .request-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #cdd6f4;
+  margin: 0;
+}
+
+.member-status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status-admin {
+  background-color: #f5c2e7;
+  color: #1e1e2e;
+}
+
+.status-member {
+  background-color: #89dceb;
+  color: #1e1e2e;
+}
+
+.member-actions, .request-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.member-button, .request-button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-button {
+  background-color: #89b4fa;
+  color: #1e1e2e;
+}
+
+.view-button:hover {
+  background-color: #a6c1ff;
+}
+
+.remove-button, .decline-button {
+  background-color: #f38ba8;
+  color: #1e1e2e;
+}
+
+.remove-button:hover, .decline-button:hover {
+  background-color: #ff98a4;
+}
+
+.accept-button {
+  background-color: #a6e3a1;
+  color: #1e1e2e;
+}
+
+.accept-button:hover {
+  background-color: #b9f4b4;
+}
+
+.view-profile-link {
+  background: none;
+  border: none;
+  color: #89b4fa;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+.view-profile-link:hover {
+  color: #a6c1ff;
+}
+
+.create-post-section {
+  padding: 24px;
+  border-bottom: 1px solid #313244;
+}
+
+.community-posts-section {
+  padding: 24px;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #45475a;
+  color: #cdd6f4;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 16px;
+}
+
+.back-button:hover {
+  background-color: #585b70;
+  transform: translateY(-2px);
+}
+
+.error-message {
+  color: #f38ba8;
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(243, 139, 168, 0.15);
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+@media (max-width: 768px) {
+  .community-profile {
+    border-radius: 8px;
+  }
+
+  .community-header {
+    padding: 24px 16px;
+  }
+
+  .community-name {
+    font-size: 1.75rem;
+  }
+
+  .community-stats {
+    gap: 24px;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .community-actions {
     flex-direction: column;
-    align-items: center;
-    margin-top: 0.625rem;
-    padding: 0.625rem;
-    background-color: var(--card-bg);
-    border: 0.0625rem solid var(--border-color);
-    border-radius: 0.3125rem;
-    box-shadow: 0 0 0.09375rem var(--border-color);
-}
+    align-items: stretch;
+  }
 
-.show-profile-button {
-    font-size: 0.875rem;
-    padding: 0.3125rem 0.625rem;
-    background-color: var(--button-bg);
-    color: var(--button-color);
-    border: none;
-    border-radius: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-    margin-bottom: 0.3125rem;
+  .action-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .member-list, .request-list {
+    grid-template-columns: 1fr;
+  }
+
+  .member-card, .request-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .member-actions, .request-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .member-button, .request-button {
+    width: 100%;
+  }
 }

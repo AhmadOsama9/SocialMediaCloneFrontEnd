@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useActiveSectionContext } from "../context/ActiveSectionContext";
 
+import notification from "../helperComponent/notification";
+
 export const usePage = () => {
   const [pageError, setPageError] = useState(null);
   const [pageLoading, setPageLoading] = useState(false);
@@ -104,7 +106,7 @@ export const usePage = () => {
       setPageError(json.error);
 
     } else {
-      alert(json.message);
+      notification.success(json.message);
     }
     setPageLoading(false);
 
@@ -124,7 +126,7 @@ export const usePage = () => {
     if (!response.ok) {
       setPageError(json.error);
     } else {
-      alert(json.message);
+      notification.success(json.message);
     }
 
     setPageLoading(false);
@@ -145,7 +147,7 @@ export const usePage = () => {
     if (!response.ok) {
       setPageError(json.error);
     } else {
-      alert(json.message);
+      notification.success(json.message);
     }
     setPageLoading(false);
 

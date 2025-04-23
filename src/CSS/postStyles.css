@@ -1,0 +1,488 @@
+/* Post Styles - Unified CSS for all post components */
+
+/* Post Card */
+.post-card {
+    background-color: var(--bg-card, #1e2030);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1.5rem;
+    padding: 1.25rem;
+    position: relative;
+    transition: all 0.2s ease;
+  }
+  
+  .post-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* Post Header */
+  .post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+  
+  .post-author {
+    display: flex;
+    align-items: center;
+  }
+  
+  .avatar-container {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--bg-secondary, #242940);
+    margin-right: 0.75rem;
+  }
+  
+  .avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .author-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .author-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-primary, #f0f4ff);
+  }
+  
+  .author-name.clickable {
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .author-name.clickable:hover {
+    color: var(--accent-primary, #6e7bf2);
+    text-decoration: underline;
+  }
+  
+  .post-date {
+    font-size: 0.8rem;
+    color: var(--text-secondary, #a9b1d6);
+    margin-top: 0.25rem;
+  }
+  
+  /* Post Actions */
+  .post-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .action-button {
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: var(--text-secondary, #a9b1d6);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    transition: all 0.2s ease;
+  }
+  
+  .action-button:hover {
+    background-color: var(--bg-hover, rgba(255, 255, 255, 0.1));
+    color: var(--text-primary, #f0f4ff);
+  }
+  
+  .action-button.edit-button:hover {
+    color: var(--accent-primary, #6e7bf2);
+  }
+  
+  .action-button.delete-button:hover {
+    color: var(--accent-danger, #f7768e);
+  }
+  
+  .action-button span {
+    margin-left: 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  /* Post Content */
+  .post-content {
+    margin-bottom: 1rem;
+  }
+  
+  .post-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem;
+    color: var(--text-primary, #f0f4ff);
+  }
+  
+  .post-body {
+    font-size: 1rem;
+    color: var(--text-primary, #e0e0ff);
+    line-height: 1.5;
+    margin: 0;
+    white-space: pre-wrap;
+  }
+  
+  /* Post Stats */
+  .post-stats {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color, rgba(169, 177, 214, 0.16));
+    margin-bottom: 0.5rem;
+  }
+  
+  .stats-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .reaction-icons {
+    display: flex;
+    margin-right: 0.25rem;
+  }
+  
+  .reaction-icon {
+    font-size: 0.875rem;
+    margin-right: -2px;
+  }
+  
+  .stats-count {
+    font-size: 0.875rem;
+    color: var(--text-secondary, #a9b1d6);
+  }
+  
+  .stats-counters {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary, #a9b1d6);
+  }
+  
+  .stats-counters span {
+    cursor: pointer;
+  }
+  
+  .stats-counters span:hover {
+    text-decoration: underline;
+  }
+  
+  /* Post Interaction Bar */
+  .post-interaction-bar {
+    display: flex;
+    justify-content: space-around;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color, rgba(169, 177, 214, 0.16));
+    margin-bottom: 0.75rem;
+  }
+  
+  .interaction-button {
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: var(--text-secondary, #a9b1d6);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease;
+    flex: 1;
+  }
+  
+  .interaction-button:hover {
+    background-color: var(--bg-hover, rgba(255, 255, 255, 0.1));
+    color: var(--text-primary, #f0f4ff);
+  }
+  
+  .interaction-button.active {
+    color: var(--accent-primary, #6e7bf2);
+  }
+  
+  .interaction-button span {
+    margin-left: 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  /* Reaction Picker */
+  .reaction-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background-color: var(--bg-secondary, #242940);
+    border-radius: 8px;
+    margin: 0.5rem 0 1rem;
+  }
+  
+  .reaction-option {
+    background: var(--bg-tertiary, #1a1b26);
+    border: none;
+    border-radius: 4px;
+    color: var(--text-primary, #f0f4ff);
+    cursor: pointer;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+  }
+  
+  .reaction-option:hover {
+    background-color: var(--bg-hover, rgba(255, 255, 255, 0.1));
+  }
+  
+  .reaction-option.selected {
+    background-color: rgba(110, 123, 242, 0.2);
+    border: 1px solid var(--accent-primary, #6e7bf2);
+  }
+  
+  .reaction-option.remove {
+    background-color: transparent;
+    color: var(--accent-danger, #f7768e);
+  }
+  
+  /* Comment Form */
+  .comment-form {
+    margin: 1rem 0;
+  }
+  
+  .comment-textarea {
+    width: 100%;
+    background-color: var(--bg-tertiary, #1a1b26);
+    border: 1px solid var(--border-color, rgba(169, 177, 214, 0.16));
+    border-radius: 8px;
+    color: var(--text-primary, #f0f4ff);
+    font-family: inherit;
+    font-size: 0.875rem;
+    padding: 0.75rem;
+    resize: vertical;
+    transition: border-color 0.2s ease;
+  }
+  
+  .comment-textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary, #6e7bf2);
+  }
+  
+  .comment-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .comment-submit-button,
+  .comment-cancel-button {
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease;
+  }
+  
+  .comment-submit-button {
+    background-color: var(--accent-primary, #6e7bf2);
+    color: white;
+  }
+  
+  .comment-submit-button:hover {
+    background-color: var(--accent-primary-hover, #5767e0);
+  }
+  
+  .comment-submit-button:disabled {
+    background-color: var(--accent-disabled, #444b6e);
+    cursor: not-allowed;
+  }
+  
+  .comment-cancel-button {
+    background-color: transparent;
+    color: var(--text-secondary, #a9b1d6);
+  }
+  
+  .comment-cancel-button:hover {
+    background-color: var(--bg-hover, rgba(255, 255, 255, 0.1));
+    color: var(--text-primary, #f0f4ff);
+  }
+  
+  /* Reactions List */
+  .reactions-list {
+    margin: 1rem 0;
+    padding: 0.75rem;
+    background-color: var(--bg-tertiary, #1a1b26);
+    border-radius: 8px;
+  }
+  
+  .section-title {
+    font-size: 0.875rem;
+    color: var(--text-secondary, #a9b1d6);
+    margin: 0 0 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .reaction-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+  }
+  
+  .reaction-emoji {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+  }
+  
+  .reaction-name {
+    font-size: 0.875rem;
+    color: var(--text-primary, #f0f4ff);
+  }
+  
+  /* Comments List */
+  .comments-list {
+    margin: 1rem 0;
+  }
+  
+  .comment-item {
+    background-color: var(--bg-tertiary, #1a1b26);
+    border-radius: 8px;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .comment-author {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary, #f0f4ff);
+  }
+  
+  .comment-date {
+    font-size: 0.75rem;
+    color: var(--text-secondary, #a9b1d6);
+  }
+  
+  .comment-text {
+    font-size: 0.875rem;
+    color: var(--text-primary, #e0e0ff);
+    margin: 0;
+    line-height: 1.4;
+    white-space: pre-wrap;
+  }
+  
+  .comment-actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+  
+  .comment-action-button {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary, #a9b1d6);
+    cursor: pointer;
+    font-size: 0.75rem;
+    padding: 0;
+    transition: color 0.2s ease;
+  }
+  
+  .comment-action-button:hover {
+    color: var(--accent-primary, #6e7bf2);
+    text-decoration: underline;
+  }
+  
+  .comment-action-button.delete:hover {
+    color: var(--accent-danger, #f7768e);
+  }
+  
+  /* Comment Edit Form */
+  .comment-edit-form {
+    margin-top: 0.5rem;
+  }
+  
+  .comment-edit-textarea {
+    width: 100%;
+    background-color: var(--bg-quarternary, #24283b);
+    border: 1px solid var(--border-color, rgba(169, 177, 214, 0.16));
+    border-radius: 4px;
+    color: var(--text-primary, #f0f4ff);
+    font-family: inherit;
+    font-size: 0.875rem;
+    padding: 0.5rem;
+    resize: vertical;
+  }
+  
+  .comment-edit-textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary, #6e7bf2);
+  }
+  
+  .comment-edit-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .comment-save-button,
+  .comment-cancel-button {
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease;
+    }
+
+    .reaction-selector {
+      margin: 10px 0;
+      padding: 10px;
+      background-color: var(--background-secondary);
+      border-radius: 8px;
+    }
+    
+    .reaction-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .reaction-button {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 50%;
+      transition: transform 0.2s, background-color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background-color: var(--background-primary);
+    }
+    
+    .reaction-button:hover {
+      transform: scale(1.2);
+      background-color: var(--background-hover);
+    }
+    
+    .delete-reaction {
+      font-size: 18px;
+    }
